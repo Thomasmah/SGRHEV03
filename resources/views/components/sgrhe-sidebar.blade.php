@@ -359,6 +359,14 @@
                               <a href=""  class="nav-link ">
                                 <p class="item-2">
                                 <i class="bi bi-calendar2-range"></i>
+                                Fichas de Avaliação
+                                </p>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a href=""  class="nav-link ">
+                                <p class="item-2">
+                                <i class="bi bi-calendar2-range"></i>
                                 Outros
                                 </p>
                               </a>

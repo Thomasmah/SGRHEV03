@@ -175,7 +175,7 @@
                       <div class="col-md-8">
                           <div class="card">
                             <div class="card-body">               
-                                    <h5 class="card-header text-center bg-primary">Sobre o Funcionário </h5>
+                                    <h5 class="card-header text-center bg-primary">Documentos / Sobre o Funcionário </h5>
                        
                                                     <!--Item Funcionario-->
                                                       <div class="intem-funcionario"> 

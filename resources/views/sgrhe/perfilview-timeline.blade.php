@@ -144,29 +144,6 @@
                                             
                                           <!-- END timeline item -->
 
-
-                                          <!-- timeline item -->
-                                            <div>
-                                              <i class="fas fa-comments bg-warning"></i>
-
-                                              <div class="timeline-item">
-                                                <span class="time"><i class="far fa-clock"></i> 27 mins ago</span>
-
-                                                <h3 class="timeline-header"><a href="#"></a> commented on your post</h3>
-
-                                                <div class="timeline-body">
-                                                  Take me to your leader!
-                                                  Switzerland is small and neutral!
-                                                  We are more like Germany, ambitious and misunderstood!
-                                                </div>
-                                                <div class="timeline-footer">
-                                                  <a href="#" class="btn btn-warning btn-flat btn-sm">View comment</a>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          <!-- END timeline item -->
-
-
                                           <!-- timeline time label -->
                                             <div class="time-label">
                                               <span class="bg-success">
@@ -176,15 +153,18 @@
                                           <!-- /.timeline-label -->
                                           <!-- timeline item -->
                                             <div>
-                                              <i class="fas fa-camera bg-purple"></i>
+                                              <i class="fas fa-comments bg-warning"></i>
 
                                               <div class="timeline-item">
-                                                <span class="time"><i class="far fa-clock"></i> 2 days ago</span>
+                                                <span class="time"><i class="far fa-clock"></i> 27 mins ago</span>
 
-                                                <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
+                                                <h3 class="timeline-header"><a href="#"></a> Item de Linha de Tempo</h3>
 
                                                 <div class="timeline-body">
-                                                  <h4>Corpo</h4>
+                                                 Seja bem vindo. Corpo do post em sua linha de Tempo
+                                                </div>
+                                                <div class="timeline-footer">
+                                                  <a href="#" class="btn btn-warning btn-flat btn-sm">Ver mais...</a>
                                                 </div>
                                               </div>
                                             </div>
