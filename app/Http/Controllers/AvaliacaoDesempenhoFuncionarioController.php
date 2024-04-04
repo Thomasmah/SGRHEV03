@@ -32,7 +32,7 @@ class AvaliacaoDesempenhoFuncionarioController extends Controller
             'periodoAvaliacao' => 'O(A) Funcionário(a) '.$request->nomeCompleto.', já foi avaliado(a) no periodo de '.$request->periodoAvaliacao.'! ',
         ]);
 
-        dd('Passou');
+        //dd('Passou');
         DB::beginTransaction();
         $avaliacaoFuncionario = AvaliacaoDesempenhoFuncionario::create([
             'nomeCompleto' => $request->input('nomeCompleto'),

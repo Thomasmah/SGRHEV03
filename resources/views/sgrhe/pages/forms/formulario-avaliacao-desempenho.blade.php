@@ -122,25 +122,25 @@
                                         </tr>
                                         </thead>
                                         <tr>
-                                          <th class="text-center" scope="row">1</th><td>Competência Profissional</td><td class="text-center"><input class="text-center" type="numeric" name="um" ></td>
+                                          <th class="text-center" scope="row">1</th><td>Competência Profissional</td><td class="text-center"><input class="form-control text-center" type="number" min="10" max="60" name="um"  id="um" oninvalid="this.setCustomValidity('Por favor, insira um valor entre 10 e 60')" oninput="this.setCustomValidity"></td>
                                         </tr>
                                         <tr>
-                                          <th class="text-center" scope="row">2</th><td>Cumprimento de Tarefas</td><td class="text-center"><input class="text-center" type="numeric" name="dois" ></td>
+                                          <th class="text-center" scope="row">2</th><td>Cumprimento de Tarefas</td><td class="text-center"><input class="form-control text-center" type="number" min="10" max="60" name="dois"  id="dois" oninvalid="this.setCustomValidity('Por favor, insira um valor entre 10 e 60')" oninput="this.setCustomValidity"></td>
                                         </tr>
                                         <tr>
-                                          <th class="text-center" scope="row">3</th><td>Adaptação Profissional</td><td class="text-center"><input class="text-center" type="numeric" name="tres" ></td>
+                                          <th class="text-center" scope="row">3</th><td>Adaptação Profissional</td><td class="text-center"><input class="form-control text-center" type="number" min="10" max="60" name="tres"  id="tres" oninvalid="this.setCustomValidity('Por favor, insira um valor entre 10 e 60')" oninput="this.setCustomValidity"></td>
                                         </tr>
                                         <tr>
-                                          <th class="text-center" scope="row">4</th><td>Racionalização do uso e Manutenção dos Meiosa</td><td class="text-center"><input class="text-center" type="numeric" name="quatro" ></td>
+                                          <th class="text-center" scope="row">4</th><td>Racionalização do uso e Manutenção dos Meiosa</td><td class="text-center"><input class="form-control text-center" type="number" min="10" max="60" name="quatro"  id="quatro" oninvalid="this.setCustomValidity('Por favor, insira um valor entre 10 e 60')" oninput="this.setCustomValidity"></td>
                                         </tr>
                                         <tr>
-                                          <th class="text-center" scope="row">5</th><td>Relações Humanas no Trabalho</td><td class="text-center"><input class="text-center" type="numeric" name="cinco" ></td>
+                                          <th class="text-center" scope="row">5</th><td>Relações Humanas no Trabalho</td><td class="text-center"><input class=" form-control text-center" type="number" min="10" max="60" name="cinco"  id="cinco" oninvalid="this.setCustomValidity('Por favor, insira um valor entre 10 e 60')" oninput="this.setCustomValidity"></td>
                                         </tr>
                                         <tr>
-                                          <th class="text-center" scope="row">6</th><td>Capacidade Para Dirigir</td><td class="text-center"><input class="text-center" type="numeric" name="seis" ></td>
+                                          <th class="text-center" scope="row">6</th><td>Capacidade Para Dirigir</td><td class="text-center"><input class=" form-control text-center" type="number" min="10" max="60" name="seis"  id="seis" oninvalid="this.setCustomValidity('Por favor, insira um valor entre 10 e 60')" oninput="this.setCustomValidity"></td>
                                         </tr>
                                         <tr>
-                                          <th class="text-center" scope="row">7</th><td>Pontuação Obtida</td><td class="text-center"><input class="text-center" type="numeric" name="total" ></td>
+                                          <th class="text-center" scope="row">7</th><td>Pontuação Obtida</td><td class="text-center">  <input class="text-center" type="numeric" name="total"  id="total" ></td>
                                         </tr>
                                       </table>
                                     </div>     
@@ -163,5 +163,31 @@
           <!-- /.content-wrapper -->
         @endsection
     @section('scripts')
-    
+    <script>
+        function actualizarAvaliacao() {
+              // Obter os valores dos inputs
+              var um = parseFloat(document.getElementById('um').value) || 0;
+              var dois = parseFloat(document.getElementById('dois').value) || 0;
+              var tres = parseFloat(document.getElementById('tres').value) || 0;
+              var quatro = parseFloat(document.getElementById('quatro').value) || 0;
+              var cinco = parseFloat(document.getElementById('cinco').value) || 0;
+              var seis = parseFloat(document.getElementById('seis').value) || 0;
+              // Calcular o somatório
+              var classificacao = um + dois + tres + quatro + cinco + seis;
+              // Atualizar o campo somatório
+              document.getElementById('total').value = classificacao;
+          }
+          
+          // Adicionar eventos de input aos campos a21, a22, a23, a24, a25, a26
+          document.getElementById('um').addEventListener('input', actualizarAvaliacao);
+          document.getElementById('dois').addEventListener('input', actualizarAvaliacao);
+          document.getElementById('tres').addEventListener('input', actualizarAvaliacao);
+          document.getElementById('quatro').addEventListener('input', actualizarAvaliacao);
+          document.getElementById('cinco').addEventListener('input', actualizarAvaliacao);
+          document.getElementById('seis').addEventListener('input', actualizarAvaliacao);
+
+    </script>
+    <script>
+
+    </script>
     @endsection
