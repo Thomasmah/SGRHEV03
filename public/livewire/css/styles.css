@@ -1,0 +1,12 @@
+#previewContainer {
+    width: 150px;
+    height: 150px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.circular-clip {
+    clip-path: circle(50% at center);
+}
