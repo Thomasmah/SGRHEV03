@@ -65,7 +65,6 @@
                               <ul class="nav nav-pills">
                                 <li class="nav-item"><a class="nav-link active" href="#timeline" data-toggle="tab">Timeline</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#Solicitar" data-toggle="tab">Solicitar</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#Processos" data-toggle="tab">Processos</a></li>
                               </ul>
                             </div><!-- /.card-header -->
                             <div class="card-body">
@@ -176,7 +175,7 @@
                                     </div>
                                   <!-- /tab-pane -->
                                   <!--tab-pane-->
-                                  <div class="tab-pane" id="Solicitar">
+                                   <div class="tab-pane" id="Solicitar">
                                         <!-- CardContet -->
                                             <!--Solicitar Item-->
                                               <div class="col-8 offset-md-2">
@@ -207,7 +206,7 @@
                                                       </div>
                                                       <div class="modal-body">
                                                         <!-- Formulário -->
-                                                        <form action="{{ isset($idFuncionario) ? route('apenso.solicitar', ['idFuncionarioSolicitante' => idFuncionario])  : route('apenso.solicitar', ['idFuncionarioSolicitante' => $funcionario->id])  }}" method="POST" id="fo">                                             @csrf
+                                                        <form action="{{ isset($idFuncionario) ? route('apenso.solicitar', ['idFuncionarioSolicitante' => idFuncionario])  : route('apenso.solicitar', ['idFuncionarioSolicitante' => $funcionario->id])  }}" method="POST" id="for">                                             @csrf
                                                           @method('POST')
                                                           <div class="form-group">
                                                             <input type="hidden" class="form-control" name="categoria" value="Licenca">
@@ -358,140 +357,6 @@
                                         <!-- /.CardContet -->
                                      </div>
                                   <!--/tab-pane-->
-                                  <!--tab-pane-->
-                                    <div class="tab-pane tab-pane" id="Processos">
-                                        <!-- The timeline -->
-                                        <div class="timeline timeline-inverse">
-                                          <!-- timeline item -->
-                                          <div>
-                                            <i class="fas fa-user bg-info"></i>
-
-                                            <div class="timeline-item">
-                                              <span class="time"><i class="far fa-clock"></i> 5 mins ago</span>
-
-                                              <h3 class="timeline-header border-0"><a href="#">{{$pessoa->nomeCompleto}}</a>, Seja bem Vindo a Sua Linha de Tempo
-                                              </h3>
-                                            </div>
-                                          </div>
-                                          <!-- END timeline item -->
-                                          <!-- timeline item -->
-                                           @foreach ($processos as $processo)
-                                                    @php
-                                                      $documento = App\Models\Arquivo::where('id', $processom->idArquivo);
-                                                      $funcionarioSolicitante = App\Models\Funcionario::where('id', $processom->idFuncionarioSolicitante)->first();
-                                                      $pessoaSolicitante = App\Models\Pessoa::where('id', $funcionarioSolicitante->idPessoa)->first();
-                                                      // echo($documento->first()->caminho);    
-                                                    @endphp 
-                                            <!-- timeline time label -->
-                                            <div class="time-label">
-                                              <span class="bg-danger">
-                                                {{ $processo->created_at->format('d F Y')}}
-                                              </span>
-                                            </div>
-                                            <!-- /.timeline-label -->
-                                            <div>         
-                                              <i class="fas fa-envelope bg-primary"></i>
-                                              <div class="timeline-item">
-                                                <span class="time">
-                                                  <i class="far fa-clock"></i> a 4 Meses</span>
-                                                <h3 class="timeline-header"> 
-                                                  Estado: <span  class=" font-weight-bold {{ ($processo->estado == 'Submetido' || $processo->estado == 'Aprovado') ? 'text-success' : 'text-danger'}}"> {{ $processo->estado }} </span>
-                                                </h3>
-                                                
-                                                <div class="timeline-body"> 
-                                                  <p> Nome: {{ $pessoaSolicitante->nomeCompleto }} </p>
-                                                  <p>Natureza: {{ $processom->natureza }}</p>
-                                                  <p>Categoria de Documento:  {{ $processom->categoria }}</p>
-                                                <form class="{{ ($processo->estado == 'Submetido') ? 'd-inline' : 'd-none'}}"  action="{{ route('solicitacao.preview')}}" method="POST" >
-                                                    @csrf
-                                                    @method('POST')
-                                                    <input type="hidden" name="Request" value="{{$processo->Request}}">
-                                                    <input type="hidden" name="idProcesso" value="{{$processo->id}}">
-                                                    <button type="submit" class="btn btn-info">Ver Documento</button>
-                                                  </form>
-                                                </div>
-                                                <div class="timeline-footer">  
-                                                  <form  class="{{ ($processo->estado == 'Submetido' && $processo->natureza == 'N/D' ) ? 'd-inline' : 'd-none'}}" action="{{ route('solicitacao.ratificar')}}" method="POST" id="deleteForm{{ $processo->id }}">
-                                                    @csrf
-                                                    @method('POST')
-                                                    <input type="hidden" name="Request"  value="{{$processo->Request}}">
-                                                    <input type="hidden" name="idProcesso" value="{{$processo->id}}">
-                                                    <button type="submit" class="btn btn-warning" onclick="confirmAndSubmit(event, 'Aprovar a  solicitacao de Licença?', 'Sim, Aprovar!', 'Não, Cancelar Aprovação!')">Aprovar Solicitação</button>
-                                                  </form>
-                                                  <button type="button" class="btn btn-primary {{ ($processo->parecer == 'Favoravel' || $processo->parecer == 'Desfavoravel' || $processo->estado == 'Cancelado' || $processo->estado == 'Aprovado' || $processo->estado == 'Desfavoravel') ? 'd-none' : ' '}} {{ ( $processo->natureza == 'Requerimento') ? ' ' : 'd-none'}}" data-toggle="modal" data-target="#parecer{{ $processo->id}}">
-                                                         Parecer
-                                                  </button>
-
-                                                  <div class="modal fade" id="parecer{{ $processo->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                  <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                      <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Requerimento de {{ $pessoa->nomeCompleto}}</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                          <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                      </div>
-                                                      <div class="modal-body">
-                                                        <!-- Formulário -->
-                                                        <form action="{{ isset($idFuncionario) ? route('solicitacao.parecer')  : route('solicitacao.parecer')  }}" method="POST" id="fo"                                                          @csrf
-                                                          @method('POST')
-                                                          <div class="form-group">
-                                                          
-                                                            <input type="hidden" name="Request"  value="{{$processo->Request}}">
-                                                            <input type="hidden" name="idProcesso"  value="{{$processo->id}}">
-                                                            <!--<label for="motivo">Motivo </label>
-                                                            <textarea class="form-control" name="motivo" id="texto" placeholder="Descreva um motivo..." required></textarea>
-                                                              -->
-                                                              <label for="parecer"></label>
-                                                              <select name="parecer" class="form-control" style="width: 100%;" required>
-                                                                <option class="text-secondary font-weight-bold" value="">Escolha um Parecer</option>
-                                                                <option class="text-success font-weight-bold" value="Favoravel">Parecer Favorável</option>
-                                                                <option class="text-danger font-weight-bold" value="Desfavoravel">Parecer Desfavorálvel</option>
-                                                              </select>
-                                                          </div>
-                                                          <button type="submit" class="btn btn-primary">Submeter</button>
-                                                        </form>
-                                                      </div>
-                                                      <div class="modal-footer">
-                                                        <small id="" class="form-text text-muted">Consulte o Deferimento do Seu pedido na sua Time Line</small>
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                                  @php
-                                                    $documento = App\Models\Arquivo::where('id', $processo->idArquivo);
-                                                    // echo($documento->first()->caminho);    
-                                                    @endphp 
-                                                  @if ($documento->exists()) 
-                                                    <a href="{{ route('Exibir.Imagem', ['imagem' => base64_encode( $documento->first()->caminho )]) }}" class="btn btn-secondary {{ ($processo->estado == 'Aprovado' || $processo->estado == 'Desfavoravel' || $processo->estado == 'Favoravel') ? 'd-inline' : 'd-none'}} ">Baixar Documento</a>
-                                                  @endif
-                                                </div>
-                                              </div>
-                                            </div>
-                                            <!--MODAIS-->
-                                           
-             
-                                            @endforeach
-                                            
-                                          <!-- END timeline item -->
-
-
-
-
-                                          <!-- timeline time label -->
-                                            <div class="time-label">
-                                              <span class="bg-success">
-                                                3 Jan. 2014
-                                              </span>
-                                            </div>
-                                          <!-- /.timeline-label -->
-                                          <div>
-                                            <i class="far fa-clock bg-gray"></i>
-                                          </div>
-                                        </div>
-                                    </div>
-                                  <!-- /tab-pane -->
-                             
                               </div>
                             </div>
                           </div>
@@ -644,7 +509,7 @@
 
 <!--Limitar a Data por 7 dias no Maximo no Formulario Modal Pedido de Licensa-->
   <script>
-    document.getElementById("fo"ddEventListener("submit", function(event) {
+    document.getElementById("for").addEventListener("submit", function(event) {
       event.preventDefault(); // Impede o envio do formulário
       
       // Obtém as datas de início e término
@@ -671,11 +536,10 @@
         document.getElementById("dateError").style.display = "none"; // Oculta a mensagem de erro
         this.submit(); // Envio do formulário se estiver tudo correto
       }
+
     });
   </script>
-<!--Limitar a Data por 7 dias no Maximo no Formulario Modal Pedido de Licensa-->
-<!--Scripts de controolo de caracter da classe Texo-->
-<script>
+  <script>
       // Seleciona o input de texto e o contador de caracteres
     const textoInput = document.getElementById('texto');
     const contadorCaracteres = document.getElementById('contadorCaracteres');

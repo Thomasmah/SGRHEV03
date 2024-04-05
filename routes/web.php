@@ -120,7 +120,6 @@ Route::delete('/delete-endereco/{id}',[EnderecoController::class,'destroy'])->na
 
 Route::PUT('/endereco/editar/{id}',[EnderecoController::class,'edit'])->name('enderecos.edit'); //Corrigir Aplicando o verbo PUT ou PATCH no formulario 
 //Update 
-Route::any('/endereco/update/{id}',[PessoEnderecoControlleraController::class,'update'])->name('enderecos.update');
 
 
 
@@ -242,9 +241,13 @@ Route::any('/solicitacao/parecer/',[ProcessoController::class,'parecer'])->name(
 //Solicitacoes Processo via Request
 Route::any('/solicitar',[ProcessoController::class,'solicitarProcesso'])->name('solicitar'); 
 
+//Requerer a lista de processos de uma determinada seccao
+Route::any('procesos/{seccao}', [ProcessoController::class,'processosSeccao'])->name('processos.seccao');
+
 // Avaliar Desempenho de funcionario
 
-Route::any('index/avaliacao/funcionario/geral/', [AvaliacaoDesempenhoFuncionarioController::class,'indexAvaliacaoDesempenhoFuncionario'])->name('index.avaliacao.geral.funcionario');
+Route::any('index/avaliacao/funcionarios/geral/', [AvaliacaoDesempenhoFuncionarioController::class,'indexAvaliacaoDesempenhoFuncionarios'])->name('index.avaliacao.geral.funcionarios');
+Route::any('index/avaliacao/funcionario/geral/{idFuncionario}', [AvaliacaoDesempenhoFuncionarioController::class,'indexAvaliacaoDesempenhoFuncionario'])->name('index.avaliacao.geral.funcionario');
 Route::any('index/avaliacao/', [AvaliacaoDesempenhoFuncionarioController::class,'indexAvaliacaoDesempenho'])->name('index.avaliacao.funcionario');
 Route::any('formulario/avaliacao/funcionario/', [FuncionarioController::class,'formularioAvaliarDesempenhoFuncionario'])->name('formulario.avaliar.funcionario');
 Route::any('submeter/avaliacao/funcionario/', [AvaliacaoDesempenhoFuncionarioController::class,'avaliarDesempenhoFuncionario'])->name('submeter.avaliar.funcionario');

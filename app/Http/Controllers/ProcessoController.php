@@ -350,4 +350,22 @@ class ProcessoController extends Controller
          }
 
     }
+
+    //Listar os Processo de uma determinada Secao
+    public function processosSeccao(string $seccao)
+    {
+        $idFuncionario = session()->only(['idFuncionario']);
+        $processos = Processo::orderBy('created_at', 'desc')->where('seccao', $seccao)->get();
+        $funcionario = Funcionario::where('id',$idFuncionario)->first();
+        $pessoa = Pessoa::where('id',$funcionario->idPessoa)->first();
+        $cargo = Cargo::where('id',$funcionario->idCargo)->first();
+        $unidadeOrganica = UnidadeOrganica::where('id',$funcionario->idUnidadeOrganica)->first();
+        $categoriaFuncionario = CategoriaFuncionario::where('id',$funcionario->idCategoriaFuncionario)->first();
+        $arquivos = Arquivo::where('idFuncionario',$funcionario->id);
+       // dd($processo);;
+        return view('sgrhe/processos-seccao',compact('funcionario','pessoa','cargo','unidadeOrganica','categoriaFuncionario','arquivos','processos'));
+ 
+    }
+    
+    
 }

@@ -60,6 +60,45 @@
                                   </p>
                                 </a>
                           </li>
+                          @if ($permissoes === 'Admin' || $permissoes >= 5)
+                                    <!--Dashboards-->
+                                      <li class="nav-item">
+                                          <a href="#" class="nav-link {{ request()->routeIs('inicio') ? 'active' : ''}}">
+                                          <i class="bi bi-graph-up-arrow"></i>
+                                            <p class="item-1">
+                                              Dashboards
+                                              <i class="right fas fa-angle-left"></i>
+                                            </p>
+                                          </a>
+                                          <ul class="nav nav-treeview">
+                                            <li class="nav-item">
+                                              <a href="{{ route('inicio') }}"  class="nav-link {{ request()->routeIs('inicio') ? 'active' : ''}}">
+                                                <p class="item-2">
+                                                <i class="bi bi-clipboard-data-fill"></i>
+                                                  DashBoard
+                                                </p>
+                                              </a>
+                                            </li>
+                                            <li class="nav-item">
+                                              <a href="{{ route('processos.seccao', ['seccao' => session()->only(['Seccao'])['Seccao']->codNome ] ) }}" class="nav-link ">
+                                                <p class="item-2">
+                                                <i class="bi bi-grid"></i>
+                                                  Processos/Secção
+                                                </p>
+                                              </a>
+                                            </li>
+                                            <li class="nav-item">
+                                              <a href="#"  class="nav-link ">
+                                                <p class="item-2">
+                                                <i class="bi bi-grid"></i>
+                                                  Outro
+                                                </p>
+                                              </a>
+                                            </li>
+                                          </ul>
+                                      </li>
+                                    <!--Dashboards-->
+                          @endif
                          <li class="nav-item">
                             <a href="#" class="nav-link {{ request()->routeIs('perfil.show') || request()->routeIs('configuracao.perfil') ? 'active' : ''}}">
                               <i class="bi bi-person-lines-fill"></i> 
@@ -127,37 +166,65 @@
                         </li>
                       <!--Dashboards-->
               @endif
-              @if ($permissoes === 'Admin' || $permissoes >= 5)
-                      <!--Dashboards-->
-                        <li class="nav-item">
-                            <a href="#" class="nav-link {{ request()->routeIs('inicio') ? 'active' : ''}}">
-                            <i class="bi bi-graph-up-arrow"></i>
-                              <p class="item-1">
-                                Dashboards
-                                <i class="right fas fa-angle-left"></i>
-                              </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                              <li class="nav-item">
-                                <a href="{{ route('inicio') }}"  class="nav-link {{ request()->routeIs('inicio') ? 'active' : ''}}">
-                                  <p class="item-2">
-                                  <i class="bi bi-clipboard-data-fill"></i>
-                                    DashBoard
-                                  </p>
-                                </a>
-                              </li>
-                              <li class="nav-item">
-                                <a href="#"  class="nav-link ">
-                                  <p class="item-2">
-                                   <i class="bi bi-grid"></i>
-                                    Outro
-                                  </p>
-                                </a>
-                              </li>
-                            </ul>
+                      <!-- Opcoes do Funcionario-->
+                        <li class="nav-item {{ request()->routeIs('habilitacaos.index') || request()->routeIs('habilitacaos.form') ? 'menu-open' : '' }}">
+                          <a href="#" class="nav-link {{ request()->routeIs('habilitacaos.index') || request()->routeIs('habilitacaos.form') ? 'active' : '' }}">
+                          <i class="bi bi-menu-button-fill"></i>
+                            <p class="item-1">
+                            Opções do Funcionário
+                              <i class="right fas fa-angle-left"></i>
+                            </p>
+                          </a>
+                          <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                              <a href="{{ route('index.avaliacao.geral.funcionario', ['idFuncionario' => $funcionarioLog->id ]) }}"  class="nav-link ">
+                                <p class="item-2">
+                                <i class="bi bi-calendar2-range"></i>
+                                Fichas de Avaliação
+                                </p>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a href=""  class="nav-link ">
+                                <p class="item-2">
+                                <i class="bi bi-calendar2-range"></i>
+                                Outros
+                                </p>
+                              </a>
+                            </li>
+                          </ul>
                         </li>
-                      <!--Dashboards-->
-              @endif
+                      <!-- Opcoes do Funcionario-->
+                      <!--Serviços-->
+                        <li class="nav-item {{ request()->routeIs('habilitacaos.index') || request()->routeIs('habilitacaos.form') ? 'menu-open' : '' }}">
+                          <a href="#" class="nav-link {{ request()->routeIs('habilitacaos.index') || request()->routeIs('habilitacaos.form') ? 'active' : '' }}">
+                           <i class="bi bi-subtract"></i>
+                            <p class="item-1">
+                               Serviços
+                              <i class="right fas fa-angle-left"></i>
+                            </p>
+                          </a>
+                          <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                              <a href=""  class="nav-link {{ request()->routeIs('habilitacaos.form') ? 'active' : ''}}">
+                                <p class="item-2">
+                                <i class="bi bi-calendar2-range"></i>
+                                 Solicitar Licença
+                                </p>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a href=""  class="nav-link {{ request()->routeIs('habilitacaos.form') ? 'active' : ''}}">
+                                <p class="item-2">
+                                <i class="bi bi-calendar2-range"></i>
+                                Outros
+                                </p>
+                              </a>
+                            </li>
+
+                          </ul>
+                        </li>
+                      <!--/.Serviços-->
               @if ($permissoes === 'Admin' || $permissoes >= 5 )
                       <!--Funcionários-->
                         <li class="nav-item {{ request()->routeIs('funcionarios.index') || request()->routeIs('funcionarios.form') ? 'menu-open' : '' }}">
@@ -232,7 +299,7 @@
                         </a>
                           <ul class="nav nav-treeview">
                             <li class="nav-item">
-                              <a href="{{route('index.avaliacao.geral.funcionario')}}"  class="nav-link {{ request()->routeIs('index.avaliacao.geral.funcionario') ? 'active' : ''}}">
+                              <a href="{{route('index.avaliacao.geral.funcionarios')}}"  class="nav-link {{ request()->routeIs('index.avaliacao.geral.funcionario') ? 'active' : ''}}">
                                 <p class="item-2">
                                  <i class="bi bi-view-list"></i>
                                   Mapa Geral de Avaliação / Index 
@@ -345,63 +412,7 @@
                         </li>
                       <!--/.CategoriaFuncionario-->
               @endif
-                      <!--Ouros-->
-                      <li class="nav-item {{ request()->routeIs('habilitacaos.index') || request()->routeIs('habilitacaos.form') ? 'menu-open' : '' }}">
-                          <a href="#" class="nav-link {{ request()->routeIs('habilitacaos.index') || request()->routeIs('habilitacaos.form') ? 'active' : '' }}">
-                          <i class="bi bi-menu-button-fill"></i>
-                            <p class="item-1">
-                            Opções
-                              <i class="right fas fa-angle-left"></i>
-                            </p>
-                          </a>
-                          <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                              <a href=""  class="nav-link ">
-                                <p class="item-2">
-                                <i class="bi bi-calendar2-range"></i>
-                                Fichas de Avaliação
-                                </p>
-                              </a>
-                            </li>
-                            <li class="nav-item">
-                              <a href=""  class="nav-link ">
-                                <p class="item-2">
-                                <i class="bi bi-calendar2-range"></i>
-                                Outros
-                                </p>
-                              </a>
-                            </li>
-                          </ul>
-                        </li>
-                        <li class="nav-item {{ request()->routeIs('habilitacaos.index') || request()->routeIs('habilitacaos.form') ? 'menu-open' : '' }}">
-                          <a href="#" class="nav-link {{ request()->routeIs('habilitacaos.index') || request()->routeIs('habilitacaos.form') ? 'active' : '' }}">
-                           <i class="bi bi-subtract"></i>
-                            <p class="item-1">
-                               Serviços
-                              <i class="right fas fa-angle-left"></i>
-                            </p>
-                          </a>
-                          <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                              <a href=""  class="nav-link {{ request()->routeIs('habilitacaos.form') ? 'active' : ''}}">
-                                <p class="item-2">
-                                <i class="bi bi-calendar2-range"></i>
-                                 Solicitar Licença
-                                </p>
-                              </a>
-                            </li>
-                            <li class="nav-item">
-                              <a href=""  class="nav-link {{ request()->routeIs('habilitacaos.form') ? 'active' : ''}}">
-                                <p class="item-2">
-                                <i class="bi bi-calendar2-range"></i>
-                                Outros
-                                </p>
-                              </a>
-                            </li>
-
-                          </ul>
-                        </li>
-                      <!--/.Outros-->
+                    
             </li>
           </ul>
         </nav>
