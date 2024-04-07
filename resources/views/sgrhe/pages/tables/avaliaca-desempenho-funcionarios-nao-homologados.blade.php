@@ -19,12 +19,12 @@
                 <div class="container-fluid">
                   <div class="row mb-2">
                     <div class="col-sm-6">
-                      <h1> Mapa Geral de Avaliação de Desempenho </h1>
+                      <h1> Avaliação de Desempenho  </h1>
                     </div>
                     <div class="col-sm-6">
                       <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Mapa Geral de Avaliação de Desempenho </li>
+                        <li class="breadcrumb-item active">Avaliação de Desempenho</li>
                       </ol>
                     </div>
                   </div>
@@ -39,10 +39,10 @@
                     <div style="background-color: #ffffff;" class="card card-primary">
 
                         <div class="card-header">
-                              <h3 class="card-title">Avaliação de Desempenho dos Funcionários </h3>  
+                              <h3 class="card-title">Avaliações de Desempenho não Homologados </h3>  
                         </div>
                       <!-- /.card-header -->
-                      <div class="card-body">
+                          <div class="card-body">
                             <table id="example1" class="table table-bordered table-striped">
                               <thead>
                               <tr>
@@ -56,16 +56,34 @@
                                                 <td>{{ $avaliacao->numeroAgente }}</td> <td>{{ $avaliacao->nomeCompleto }}</td> <td>{{ $avaliacao->numeroBI }}</td> <td>{{ $avaliacao->eqt }}</td> <td>{{ $avaliacao->categoria }}</td> <td>{{ $avaliacao->total }}</td> <td>{{ $avaliacao->designacao_cargo }}</td>
                                          
                                                 <td>
-                                                    <form action="{{ route('exibir.documento') }}" method="POST" style="display: inline;">
+                                                    <form action="{{ route('ver.avaliacao') }}" method="POST" style="display: inline;">
                                                       @csrf
                                                       @method('PUT')
-                                                      <input type="hidden" name="id" value="{{ $avaliacao->idArquivo }}">
-                                                      <button type="submit" class="btn btn-secondary">Baixar Avaliação</button>
+                                                      <input type="hidden" name="id" value="{{ $avaliacao->id_avaliacao_desempenho }}">
+                                                      <button type="submit" class="btn btn-primary">Ver Avaliação</button>
+                                                    </form>
+                                                    <form action="{{ route('homologar.avaliacao') }}" method="POST" style="display: inline;">
+                                                      @csrf
+                                                      @method('POST')
+                                                      <input type="hidden" name="id" value="{{ $avaliacao->id_avaliacao_desempenho }}">
+                                                      <button type="submit" class="btn btn-warning">Homologar Avaliação</button>
+                                                    </form>
+                                                    <form action="{{ route('eliminar.objecto') }}" method="POST" id="deleteForm{{ $avaliacao->id }}">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <input type="hidden" name="id" value="{{ $avaliacao->id_avaliacao_desempenho }}">
+                                                        <input type="hidden" name="categoria" value="AvaliacaoFuncionario">
+                                                        <button type="submit" class="btn btn-danger" onclick="confirmAndSubmit(event, 'Confirmar deletar Avaliação de Funcionário?', 'Sim, Deletar!', 'Não, Cancelar!')">Deletar</button>
                                                     </form>
                                                 </td>
                                             </tr>
                               @endforeach
                               </tbody>
+                              <tfoot>
+                                <tr>
+                                  <th>Número de Agente</th> <th>Nome Completo</th> <th>Número de BI</th> <th>Unidade Orgânica</th> <th>Categoria</th> <th>Classificação</th> <th>Função</th> <th>Opções</th>
+                                </tr>
+                              </tfoot>
                             </table>
                           </div>
                     </div>

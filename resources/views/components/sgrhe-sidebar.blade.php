@@ -167,8 +167,8 @@
                       <!--Dashboards-->
               @endif
                       <!-- Opcoes do Funcionario-->
-                        <li class="nav-item {{ request()->routeIs('habilitacaos.index') || request()->routeIs('habilitacaos.form') ? 'menu-open' : '' }}">
-                          <a href="#" class="nav-link {{ request()->routeIs('habilitacaos.index') || request()->routeIs('habilitacaos.form') ? 'active' : '' }}">
+                        <li class="nav-item {{ request()->routeIs('fichas.avaliacao.funcionario') ? 'menu-open' : '' }}">
+                          <a href="#" class="nav-link {{ request()->routeIs('fichas.avaliacao.funcionario') ? 'active' : '' }}">
                           <i class="bi bi-menu-button-fill"></i>
                             <p class="item-1">
                             Opções do Funcionário
@@ -177,7 +177,7 @@
                           </a>
                           <ul class="nav nav-treeview">
                             <li class="nav-item">
-                              <a href="{{ route('index.avaliacao.geral.funcionario', ['idFuncionario' => $funcionarioLog->id ]) }}"  class="nav-link ">
+                              <a href="{{ route('fichas.avaliacao.funcionario', ['idFuncionario' => $funcionarioLog->id ]) }}"  class="nav-link {{ request()->routeIs('fichas.avaliacao.funcionario') ? 'active' : ''}}">
                                 <p class="item-2">
                                 <i class="bi bi-calendar2-range"></i>
                                 Fichas de Avaliação
@@ -289,8 +289,8 @@
               @endif
               @if ($permissoes === 'Admin' || $permissoes >= 5 )
                       <!--Avaliacao de Desempenho-->
-                        <li class="nav-item {{ request()->routeIs('index.avaliacao.geral.funcionario') || request()->routeIs('index.avaliacao.funcionario') ? 'menu-open' : '' }}">
-                        <a href="#" class="nav-link {{ request()->routeIs('index.avaliacao.geral.funcionario') || request()->routeIs('index.avaliacao.funcionario') ? 'active' : '' }}">
+                        <li class="nav-item {{ request()->routeIs('avaliacao.nao.homologados') || request()->routeIs('avaliacao.funcionarios.homologados') ? 'menu-open' : '' }}">
+                        <a href="#" class="nav-link {{ request()->routeIs('avaliacao.nao.homologados') || request()->routeIs('avaliacao.funcionarios.homologados') ? 'active' : '' }}">
                           <i class="fas fa-building"></i>
                           <p class="item-1">
                           Avaliação de Desempenho
@@ -299,7 +299,7 @@
                         </a>
                           <ul class="nav nav-treeview">
                             <li class="nav-item">
-                              <a href="{{route('index.avaliacao.geral.funcionarios')}}"  class="nav-link {{ request()->routeIs('index.avaliacao.geral.funcionario') ? 'active' : ''}}">
+                              <a href="{{route('avaliacao.funcionarios.homologados')}}"  class="nav-link {{ request()->routeIs('avaliacao.funcionarios.homologados') ? 'active' : ''}}">
                                 <p class="item-2">
                                  <i class="bi bi-view-list"></i>
                                   Mapa Geral de Avaliação / Index 
@@ -307,7 +307,7 @@
                               </a>
                             </li>
                             <li class="nav-item">
-                              <a href="{{route('index.avaliacao.funcionario')}}" class="nav-link {{ request()->routeIs('index.avaliacao.funcionario') ? 'active' : ''}}">
+                              <a href="{{route('avaliacao.nao.homologados')}}" class="nav-link {{ request()->routeIs('avaliacao.nao.homologados') ? 'active' : ''}}">
                                 <p class="item-2">
                                  <i class="bi bi-building-fill-add"></i>
                                   Por Homologar

@@ -215,7 +215,7 @@ Route::get('/index-arquivo',[ArquivoController::class,'index'])->name('arquivos.
 Route::delete('/delete-arquivo/{id}',[ArquivoController::class,'destroy'])->name('arquivos.delete')->middleware('AcessoAdmin');
 //Foto de Perfil
 //Armazenar foto de Perfil
-Route::post('foto/perfil/actualizar',[ArquivoController::class,'fotoPerfilActualizar'])->name('foto.perfil.actualizar');
+Route::post('/foto/perfil/actualizar',[ArquivoController::class,'fotoPerfilActualizar'])->name('foto.perfil.actualizar');
 //Renderizar IMG
 //Rota para renderizar a imagem user Avatar
 Route::any('/avatar-usuario',[ArquivoController::class,'avatarUsuario'])->name('Avatar.Usuario');
@@ -245,29 +245,30 @@ Route::any('/solicitar',[ProcessoController::class,'solicitarProcesso'])->name('
 Route::any('procesos/{seccao}', [ProcessoController::class,'processosSeccao'])->name('processos.seccao');
 
 // Avaliar Desempenho de funcionario
+Route::get('/avaliacao/funcionarios/homologados', [AvaliacaoDesempenhoFuncionarioController::class,'avaliacaoDesempenhoFuncionariosHomologados'])->name('avaliacao.funcionarios.homologados');
+Route::get('/fichas/avaliacao/funcionarios/', [AvaliacaoDesempenhoFuncionarioController::class,'avaliacaoDesempenhoFuncionariosNaoHomologados'])->name('avaliacao.nao.homologados');
+//Avaliacao de um unico funcionario
+Route::get('/fichas/{idFuncionario}', [AvaliacaoDesempenhoFuncionarioController::class,'indexAvaliacaoDesempenhoFuncionario'])->name('fichas.avaliacao.funcionario');
 
-Route::any('index/avaliacao/funcionarios/geral/', [AvaliacaoDesempenhoFuncionarioController::class,'indexAvaliacaoDesempenhoFuncionarios'])->name('index.avaliacao.geral.funcionarios');
-Route::any('index/avaliacao/funcionario/geral/{idFuncionario}', [AvaliacaoDesempenhoFuncionarioController::class,'indexAvaliacaoDesempenhoFuncionario'])->name('index.avaliacao.geral.funcionario');
-Route::any('index/avaliacao/', [AvaliacaoDesempenhoFuncionarioController::class,'indexAvaliacaoDesempenho'])->name('index.avaliacao.funcionario');
-Route::any('formulario/avaliacao/funcionario/', [FuncionarioController::class,'formularioAvaliarDesempenhoFuncionario'])->name('formulario.avaliar.funcionario');
-Route::any('submeter/avaliacao/funcionario/', [AvaliacaoDesempenhoFuncionarioController::class,'avaliarDesempenhoFuncionario'])->name('submeter.avaliar.funcionario');
-Route::any('ver/avaliacao/funcionario/', [AvaliacaoDesempenhoFuncionarioController::class,'verAvaliacao'])->name('ver.avaliacao');
-Route::post('homologar/avaliacao/funcionario/', [AvaliacaoDesempenhoFuncionarioController::class,'homologar'])->name('homologar.avaliacao');
+Route::any('/formulario/avaliacao/funcionario/', [FuncionarioController::class,'formularioAvaliarDesempenhoFuncionario'])->name('formulario.avaliar.funcionario');
+Route::any('/submeter/avaliacao/funcionario/', [AvaliacaoDesempenhoFuncionarioController::class,'avaliarDesempenhoFuncionario'])->name('submeter.avaliar.funcionario');
+Route::any('/ver/avaliacao/funcionario/', [AvaliacaoDesempenhoFuncionarioController::class,'verAvaliacao'])->name('ver.avaliacao');
+Route::post('/homologar/avaliacao/funcionario/', [AvaliacaoDesempenhoFuncionarioController::class,'homologar'])->name('homologar.avaliacao');
 
 
 //Solicitar autorizacao de gozo de Férias
-Route::any('gozo-ferias/solicitar/{idFuncionarioSolicitante}',[ProcessoController::class,'gozoFeriasSolicitar'])->name('gozo.ferias.solicitar'); 
-Route::any('gozo-ferias/solicitacao/preview/',[ProcessoController::class,'gozoFeriasPreview'])->name('gozo.ferias.preview');
-Route::any('gozo-ferias/solicitacao/ratificar/',[ProcessoController::class,'gozoFeriasRatificar'])->name('gozo.ferias.ratificar');//Os os chefes Direitos tem acesso a essa rota
+Route::any('/gozo-ferias/solicitar/{idFuncionarioSolicitante}',[ProcessoController::class,'gozoFeriasSolicitar'])->name('gozo.ferias.solicitar'); 
+Route::any('/gozo-ferias/solicitacao/preview/',[ProcessoController::class,'gozoFeriasPreview'])->name('gozo.ferias.preview');
+Route::any('/gozo-ferias/solicitacao/ratificar/',[ProcessoController::class,'gozoFeriasRatificar'])->name('gozo.ferias.ratificar');//Os os chefes Direitos tem acesso a essa rota
 
 //Assinaturas / ficheiros
-Route::any('assinatura/update', [AssinaturaController::class,'assinaturaUpdate'])->name('assinatura.update');
-Route::any('file/upload', [AssinaturaController::class,'uploadFile'])->name('file.upload');
+Route::any('/assinatura/update', [AssinaturaController::class,'assinaturaUpdate'])->name('assinatura.update');
+Route::any('/file/upload', [AssinaturaController::class,'uploadFile'])->name('file.upload');
 
 //Gerar Qualquer documento
 Route::any('/gerar/docs/', [ProcessoController::class,'gerarDoc'])->name('gerar.docs');
 //Configuaracoes
-Route::get('configuracao/perfil/', function(){
+Route::get('/configuracao/perfil/', function(){
         return view('sgrhe/perfil-config');
 })->name('configuracao.perfil');
 

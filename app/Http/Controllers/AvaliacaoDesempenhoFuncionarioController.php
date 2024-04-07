@@ -70,27 +70,26 @@ class AvaliacaoDesempenhoFuncionarioController extends Controller
 
      
     //Index de avaliacao de Funcionarios Homologados
-    public function indexAvaliacaoDesempenhoFuncionarios()
+    public function avaliacaoDesempenhoFuncionariosHomologados()
     {
-        //Operacoes de join para varias tabelas relacionadas com funcionarios
-
-        $dados = DB::select('
-        select cargos.designacao as designacao_cargo, cargos.id as id_cargo, arquivos.id As id_arquivo, avaliacao_desempenho_funcionarios.id As id_avaliacao_desempenho, funcionarios.id AS id_funcionario , pessoas.id AS id_pessoa, unidade_organicas.id AS id_unidade_organica, categoria_funcionarios.id AS id_categoria_funcionario, avaliacao_desempenho_funcionarios.*, funcionarios.*, pessoas.*, unidade_organicas.*, categoria_funcionarios.*, arquivos.*
-        From avaliacao_desempenho_funcionarios
-          JOIN funcionarios ON avaliacao_desempenho_funcionarios.idFuncionario = funcionarios.id
-          JOIN cargos  ON cargos.id = funcionarios.idCargo
-          JOIN pessoas ON pessoas.id = funcionarios.idPessoa
-          JOIN unidade_organicas ON unidade_organicas.id = funcionarios.idUnidadeOrganica
-          JOIN categoria_funcionarios ON categoria_funcionarios.id = funcionarios.idCategoriaFuncionario
-		  JOIN arquivos ON arquivos.id = avaliacao_desempenho_funcionarios.idArquivo
-        ');  
-        //dd($dados);
-        return view('sgrhe\pages\tables\avaliacao-desempenho', compact('dados'));
+                //Operacoes de join para varias tabelas relacionadas com funcionarios
+                $dados = DB::select('
+                select cargos.designacao as designacao_cargo, cargos.id as id_cargo, arquivos.id As id_arquivo, avaliacao_desempenho_funcionarios.id As id_avaliacao_desempenho, funcionarios.id AS id_funcionario , pessoas.id AS id_pessoa, unidade_organicas.id AS id_unidade_organica, categoria_funcionarios.id AS id_categoria_funcionario, avaliacao_desempenho_funcionarios.*, funcionarios.*, pessoas.*, unidade_organicas.*, categoria_funcionarios.*, arquivos.*
+                From avaliacao_desempenho_funcionarios
+                  JOIN funcionarios ON avaliacao_desempenho_funcionarios.idFuncionario = funcionarios.id
+                  JOIN cargos  ON cargos.id = funcionarios.idCargo
+                  JOIN pessoas ON pessoas.id = funcionarios.idPessoa
+                  JOIN unidade_organicas ON unidade_organicas.id = funcionarios.idUnidadeOrganica
+                  JOIN categoria_funcionarios ON categoria_funcionarios.id = funcionarios.idCategoriaFuncionario
+                  JOIN arquivos ON arquivos.id = avaliacao_desempenho_funcionarios.idArquivo
+                ');  
+               // dd($dados);
+                return view('sgrhe/pages/tables/avaliaca-desempenho-funcionarios-homologados', compact('dados'));
     }
 
     
     //Index de avaliacao de Funcionarios nao Homologados 
-    public function indexAvaliacaoDesempenho()
+    public function avaliacaoDesempenhoFuncionariosNaoHomologados()
     {
         //Operacoes de join para varias tabelas relacionadas com funcionarios
         $dados = DB::select('
@@ -105,14 +104,15 @@ class AvaliacaoDesempenhoFuncionarioController extends Controller
 		  Where avaliacao_desempenho_funcionarios.estado IS NULL
         ');  
        // dd($dados);
-        return view('sgrhe\pages\tables\avaliacao-desempenho-funcionarios', compact('dados'));
+        return view('sgrhe/pages/tables/avaliaca-desempenho-funcionarios-nao-homologados', compact('dados'));
     }
 
     //Index de avaliacao de um unico funcionario pelo id do funcionario
     public function indexAvaliacaoDesempenhoFuncionario(string $idFuncionario)
     {
-        $dados = DB::select('
-        SELECT 
+         //Operacoes de join para varias tabelas relacionadas com funcionarios
+         $dados = DB::select('
+         SELECT 
         cargos.designacao AS designacao_cargo, 
         cargos.id AS id_cargo, 
         arquivos.id AS id_arquivo, 
@@ -143,39 +143,13 @@ class AvaliacaoDesempenhoFuncionarioController extends Controller
             arquivos ON arquivos.id = avaliacao_desempenho_funcionarios.idArquivo
         WHERE 
             funcionarios.id = '.$idFuncionario.'
-    
-        ');  
-        //dd($dados);
-        return view('sgrhe\pages\tables\avaliacao-desempenho-funcionario', compact('dados'));
+
+
+         ');  
+        // dd($dados);
+         return view('sgrhe/pages/tables/avaliaca-desempenho-funcionario-homologado', compact('dados'));
     }
-    /*
-     Consulta Otimizado das Avaliacoes de Funcionario 
-     SELECT 
-    cargos.designacao AS designacao_cargo, 
-    cargos.id AS id_cargo, 
-    arquivos.id AS id_arquivo, 
-    avaliacao_desempenho_funcionarios.id AS id_avaliacao_desempenho, 
-    funcionarios.id AS id_funcionario, 
-    pessoas.id AS id_pessoa, 
-    unidade_organicas.id AS id_unidade_organica, 
-    categoria_funcionarios.id AS id_categoria_funcionario
-FROM 
-    avaliacao_desempenho_funcionarios
-JOIN 
-    funcionarios ON avaliacao_desempenho_funcionarios.idFuncionario = funcionarios.id
-JOIN 
-    cargos ON cargos.id = funcionarios.idCargo
-JOIN 
-    pessoas ON pessoas.id = funcionarios.idPessoa
-JOIN 
-    unidade_organicas ON unidade_organicas.id = funcionarios.idUnidadeOrganica
-JOIN 
-    categoria_funcionarios ON categoria_funcionarios.id = funcionarios.idCategoriaFuncionario
-JOIN 
-    arquivos ON arquivos.id = avaliacao_desempenho_funcionarios.idArquivo
-WHERE 
-    funcionarios.id = 1
-     */
+//Mostrar avaliacao que ainda nao foi homologado
     public function verAvaliacao(Request $request)
     {
             $D = AvaliacaoDesempenhoFuncionario::find($request->id);
@@ -197,9 +171,4 @@ WHERE
             $idProcesso = $request->id;  
             return view('/sgrhe/pages/forms/upload-file', compact('idProcesso'));
     }
-
-    
-
-
-
 }
