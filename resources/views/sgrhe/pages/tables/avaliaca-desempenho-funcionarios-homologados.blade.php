@@ -53,7 +53,7 @@
                               <!--Gerando a Tabela de forma Dinamica-->
                               @foreach ($dados as $avaliacao)
                                             <tr>
-                                                <td>{{ $avaliacao->numeroAgente }}</td> <td>{{ $avaliacao->nomeCompleto }}</td> <td>{{ $avaliacao->numeroBI }}</td> <td>{{ $avaliacao->eqt }}</td> <td>{{ $avaliacao->categoria }}</td> <td>{{ $avaliacao->total }}</td> <td>{{ $avaliacao->designacao_cargo }}</td>
+                                                <td>{{ $avaliacao->numeroAgente }}</td> <td>{{ $avaliacao->nomeCompleto }}</td> <td>{{ $avaliacao->numeroBI }}</td> <td>{{ $avaliacao->eqt }}</td> <td>{{ $avaliacao->categoriaFuncionario }}</td> <td>{{ $avaliacao->total }}</td> <td>{{ $avaliacao->designacao_cargo }}</td>
                                          
                                                 <td>
                                                     <form action="{{ route('exibir.documento') }}" method="POST" style="display: inline;">
