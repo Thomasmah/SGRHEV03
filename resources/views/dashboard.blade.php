@@ -88,7 +88,6 @@
                   <a href="#" class="small-box-footer">Ver mais <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
               </div>
-
               <div class="col-lg-3 col-6">
                 <!-- small box -->
                 <div class="small-box bg-danger">

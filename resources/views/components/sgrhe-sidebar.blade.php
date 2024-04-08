@@ -45,13 +45,17 @@
                                 <a href="{{ route('perfil.show', ['idFuncionario' => $funcionarioLog->id]) }}" class="d-block">
                                   <div class="text-center ">
                                     <div style="width:100%;" class="info elemento" id="elemento">
-                                      <br>
-                                      <p style="font-weight: bolder;">{{ session()->only(['Cargo'])['Cargo']->designacao.' de(a) '.session()->only(['Seccao'])['Seccao']->designacao }}</p>
-                                      <p>Olá {{ explode(" ", $pessoaLog->nomeCompleto)[0] }}, seja Bem Vindo!</p>
+                                      <p style="font-weight: bolder;">{{ session()->only(['Cargo'])['Cargo']->designacao }}</p> <!--.' de(a) '.session()->only(['Seccao'])['Seccao']->designacao -->
+                                      <p>Olá {{ explode(" ", $pessoaLog->nomeCompleto)[0] }}!</p>
+                                      <p>Seja bem vindo(a)!</p>
                                     </div>
                                   </div>
+                                  <br>
+                                  <hr style="border: 1px solid grey;">
                                 </a>
-                                <br>
+                                
+                               
+                                
                           <li class="nav-item">
                                 <a href="{{ route('timeline.show', ['idFuncionario' => $funcionarioLog->id]) }}"  class="nav-link {{ request()->routeIs('timeline.show') ? 'active' : ''}}">
                                 <i class="bi bi-calendar2-range"></i>  
