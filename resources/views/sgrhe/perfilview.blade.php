@@ -30,6 +30,12 @@
                   /*  border: .5px dotted grey;*/
                     margin:10px;
                   }
+                  .intem-funcionario{
+                    border-radius: 10px;
+                    background-color:rgba(0, 0, 0, 0.05);
+                    margin: 10px;
+                    padding: 10px;
+                  }
 
                 </style>    
               <!-- Scripts -->
@@ -136,7 +142,8 @@
                           <h5 class="profile-username text-center">{{ $pessoa->nomeCompleto}}</h5>
                           <p class="text-muted text-center">Agente: {{ $funcionario->numeroAgente }}</p>
                           <ul class="list-group list-group-unbordered mb-3">
-                            <li class="list-group-item">                          
+                            <li class="list-group-item">
+                              <p><b>Categoria:</b> {{ $categoriaFuncionario->categoria }} </p>                        
                               <p><b>Grau:</b> {{ $categoriaFuncionario->grau }} </p>                            
                               <p><b>Cargo:</b> {{ $cargo->designacao }} </p>                            
                               <p><b>Unidade Orgânica:</b> {{ $unidadeOrganica->designacao }} </p>
@@ -177,7 +184,7 @@
                             <div class="card-body">               
                                     <h5 class="card-header text-center bg-primary">Documentos / Sobre o Funcionário </h5>
                        
-                                                    <!--Item Funcionario-->
+                                                    <!--Item Funcionario Bilhete de Identidade-->
                                                       <div class="intem-funcionario"> 
                                                        <h6 class="card-header"><strong><i class="far fa-file-alt mr-1"></i> Bilhete de Identidade</strong></h6>
                                                             <!--Solicitando a existencia do registro do arquivo no banco de dados-->
@@ -282,57 +289,66 @@
                                                                 </div>
                                                               <!--/Modal de Add Arquivo -->
                                                       </div>
-                                                    <!--/Item Funcionario-->     
-                                                  
-                                                  
-                                                    <!--Item Funcionario Habilitacoes -->
+                                                    <!--/Item Funcionario Bilhete de Identidade-->                         
+                                                    
+                                                    
+                                                    <!--Item Funcionario Habilitações -->
                                                       <div class="intem-funcionario"> 
-                                                        <h6 class="card-header"><strong><i class="far fa-file-alt mr-1"></i> Habilitações</strong></h6>
+                                                        <h6 class="card-header"><strong><i class="far fa-file-alt mr-1"></i> Habilitações Literais</strong></h6>
                                                             <!--Solicitando a existencia do registro do arquivo no banco de dados-->
-                                                              @php
-                                                                $arquivo = App\Models\Arquivo::where('idFuncionario',$funcionario->id)->where('categoria','Habilitacao');
-                                                                $habilitacao = App\Models\Habilitacao::where('idFuncionario',$funcionario->id);
-                                                               // echo($habilitacao->first());
-                                                              @endphp 
-                                                              @if ($arquivo->exists()) 
-                                                          <div class="btn btn-toggle " data-target="item-habilitacao" style="text-align: left;">
-                                                            <p class="atrubutos-intem-funcionario">Curso: <span class="text-muted">{{ $habilitacao->first()->curso}}</span></p>
-                                                            <p class="atrubutos-intem-funcionario">Nível: <span class="text-muted">{{ $habilitacao->first()->nivel}}</span></p>
-                                                            <p class="atrubutos-intem-funcionario">Instituição: <span class="text-muted">{{ $habilitacao->first()->instituicao}}</span></p>
-                                                            <p class="atrubutos-intem-funcionario">Ano de Conclusão: <span class="text-muted">{{ $habilitacao->first()->anoConclusao}}</span></p>
-                                                            <p class="atrubutos-intem-funcionario">Nota : <span class="text-muted">{{ $habilitacao->first()->notaFinal}}</span></p>
-                                                            <small id="" class="form-text text-muted">mais ...</small>                                                          </div>
-                                                          <div id="item-habilitacao" class="info-toggle">
+                                                            @php
+                                                              $arquivo = App\Models\Arquivo::where('idFuncionario',$funcionario->id)->where('categoria','Habilitacoes');
+                                                              $dados = App\Models\Documento::where('idFuncionario',$funcionario->id)->where('categoria','Habilitacoes')->first();
+                                                              parse_str($dados , $documento);
+                                                             
+                                                            @endphp
+                                                             
+                                                              @if ($arquivo->exists())
+                                                          <div class="btn btn-toggle " data-target="item-Habilitacoes" style="text-align: left;">
+                                                            <p class="atrubutos-intem-funcionario">Nivel: <span class="text-muted">{{ $documento['nivel'] }} </span></p>
+                                                            
+                                                            <p class="atrubutos-intem-funcionario">Instituição: <span class="text-muted">{{ $documento['instituicao'] }} </span></p>
+                                                            
+                                                            <p class="atrubutos-intem-funcionario">Curso: <span class="text-muted">{{ $documento['curso'] }} </span></p>
+                                                            
+                                                            <p class="atrubutos-intem-funcionario">Estado: <span class="text-muted">{{ $documento['status'] }} </span></p>
+                                                            
+                                                            <p class="atrubutos-intem-funcionario">Ano de Conclusão: <span class="text-muted">{{ $documento['anoConclusao'] }} </span></p>
+                                                            
+                                                            <p class="atrubutos-intem-funcionario">Nota Final <span class="text-muted">{{ $documento['notaFinal'] }} </span></p>
+                                                            <small id="" class="form-text text-muted">  mais...</small>                                                          
+                                                          </div>
+                                                          <div id="item-Habilitacoes" class="info-toggle">
                                                             <!--BTN Modal de Add Arquivo -->
-                                                              <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addhabilitacao" data-form-action="{{ route('arquivos.store.habilitacao',['idFuncionario' => $funcionario->id, 'categoria' => 'Habilitacao']) }}">
+                                                              <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addHabilitacoes" data-form-action="{{ route('inserir.documento') }} " >
                                                                   <i class="far fa-file-alt mr-1"></i> Actualizar Habilitações
                                                               </button>
                                                             <!--/BTN Modal de Add Arquivo -->
                                                             <!--BTN  de ver Arquivo -->
-                                                              <a class="btn btn-primary" href="{{ route('Exibir.Imagem', ['imagem' => base64_encode($arquivo->first()->caminho)]) }}" target="_blank">
+                                                              <a class="btn btn-primary" href="{{ route('exibir.doc', ['documento' => base64_encode($arquivo->first()->caminho)]) }}" target="_blank">
                                                                 <i class="far fa-file-alt mr-1"></i> Ver Arquivo
                                                               </a>
                                                             <!--/BTN de ver Arquivo -->
                                                           </div>
                                                                 @else
-                                                          <div class="btn btn-toggle " data-target="item-habilitacao" style="text-align: left;">
-                                                            <p class="text-muted">N/D</p>
-                                                            <span style="text-align: right;" class="text-muted"> mais ... pesquisar por icones js variaveis</span>
+                                                          <div class="btn btn-toggle " data-target="item-Habilitacoes" style="text-align: left;">
+                                                            <p class="text-danger">Não Actualizado</p>
+                                                            <span style="text-align: right;" class="text-muted">  mais...</span>
                                                           </div>
-                                                          <div id="item-habilitacao" class="info-toggle">
+                                                          <div id="item-Habilitacoes" class="info-toggle">
                                                             <!--BTN Modal de Add Arquivo -->
-                                                              <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addhabilitacao" data-form-action="{{ route('arquivos.store.habilitacao',['idFuncionario' => $funcionario->id, 'categoria' => 'Habilitacao']) }}">
-                                                                  <i class="fa fa-plus"></i> Adicionar Habilitações
+                                                              <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addHabilitacoes" data-form-action="{{ route('inserir.documento') }}">
+                                                                  <i class="fa fa-plus"></i> Actualizar Habilitações Literais
                                                               </button>
                                                             <!--/BTN Modal de Add Arquivo -->
                                                           </div>
                                                                 @endif
                                                             <!--Modal de Add Arquivo -->
-                                                               <div class="modal fade" id="addhabilitacao" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                                                               <div class="modal fade" id="addHabilitacoes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
-                                                                                <h6 class="modal-title" id="exampleModalLabel">Habilitações</h6>
+                                                                                <h6 class="modal-title" id="exampleModalLabel">Actualização da Habilitações</h6>
                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                     <span aria-hidden="true">&times;</span>
                                                                                 </button>
@@ -342,6 +358,7 @@
                                                                                 <!-- Formulário dentro da modal -->
                                                                                 <form method="POST" enctype="multipart/form-data">
                                                                                     @csrf
+                                                                                    @method('POST')
                                                                                     <div class="form-group">
                                                                                         <label for="instituicao">Nome da Instituição</label>
                                                                                         <input type="text" class="form-control" id="instituicao" name="instituicao" placeholder="Digite o nome da Instituição do cerificado!">
@@ -369,16 +386,16 @@
                                                                                     </div>
                                                                                     <div class="form-group">
                                                                                         <label for="anoConclusao">Ano Conclusão</label>
-                                                                                        <input type="numeric" class="form-control" id="anoConclusao" name="anoConclusao" placeholder="Digite a nota final do certificado!">
+                                                                                        <input type="number" class="form-control" id="anoConclusao" name="anoConclusao" min="1950" max="{{ date('Y') }}" step="1" value="{{ date('Y') }}">
+
                                                                                     </div>
                                                                                     <div class="form-group">
                                                                                         <label for="notaFinal">Nota Final</label>
-                                                                                        <input type="numeric" class="form-control" id="notaFinal" name="notaFinal" placeholder="Digite a nota final do certificado!">
+                                                                                        <input type="number" class="form-control" id="notaFinal" name="notaFinal" min="0" max="20" step="1" value="">
                                                                                     </div>
-                                                                                  
 
                                                                                     <div class="form-group">
-                                                                                        <label for="arquivo">OBS: O Certificado deve estar no formato "pdf"!</label>
+                                                                                        <label for="arquivo">OBS: As Habilitações deve estar no formato "pdf"!</label>
                                                                                         <div class="input-group">
                                                                                             <div class="custom-file">
                                                                                                 <input type="file" class="custom-file-input" name="arquivo">
@@ -387,9 +404,12 @@
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="form-check">
-                                                                                        <input type="checkbox" class="form-check-input">
+                                                                                        <input type="checkbox" class="form-check-input" required>
                                                                                         <label class="form-check-label" for="confirmar">Clique para Confirmar</label>
                                                                                     </div>
+                                                                                    <div class="d-none">
+                                                                                        <input type="text" name="categoria" value="Habilitacoes">
+                                                                                        <input type="text" name="idFuncionario" value="{{ $funcionario->id }}">                                                                                    </div>
                                                                                     <div class="modal-footer">
                                                                                           <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                                                                                           <button type="submit" class="btn btn-primary">Actualizar Habilitações</button>
@@ -400,9 +420,407 @@
                                                                     </div>
                                                                </div>
                                                             <!--/Modal de Add Arquivo -->
-                                                      </div>
-                                                      <hr>
-                                                    <!--/Item Funcionario Habilitacoes-->                              
+                                                        </div>
+                                                        <hr>
+                                                    <!--/Item Funcionario Habilitações--> 
+
+                                                    <!--Item Funcionario Termo de Início de Funcões -->
+                                                      <div class="intem-funcionario"> 
+                                                        <h6 class="card-header"><strong><i class="far fa-file-alt mr-1"></i> Termo de Início de Funcões</strong></h6>
+                                                            <!--Solicitando a existencia do registro do arquivo no banco de dados-->
+                                                            @php
+                                                              $arquivo = App\Models\Arquivo::where('idFuncionario',$funcionario->id)->where('categoria','TermoInicioFuncoes');
+                                                              $dados = App\Models\Documento::where('idFuncionario',$funcionario->id)->where('categoria','TermoInicioFuncoes')->first();
+                                                              parse_str($dados , $documento);
+          
+
+                                                              //echo($documento[]);
+                                                              //dd($documento)
+                                                            @endphp
+                                                             
+                                                              @if ($arquivo->exists()) 
+                                                          <div class="btn btn-toggle " data-target="item-TermoInicioFuncoes" style="text-align: left;">
+                                                            <p class="atrubutos-intem-funcionario">Data de Início de Funções: <span class="text-muted">{{ $documento['dataInicioFuncoes'] }} </span></p>
+                                                            <small id="" class="form-text text-muted">mais ...</small>                                                          
+                                                          </div>
+                                                          <div id="item-TermoInicioFuncoes" class="info-toggle">
+                                                            <!--BTN Modal de Add Arquivo -->
+                                                              <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addTermoInicioFuncoes" data-form-action="{{ route('inserir.documento') }} " >
+                                                                  <i class="far fa-file-alt mr-1"></i> Actualizar Termo de Início de Funcões
+                                                              </button>
+                                                            <!--/BTN Modal de Add Arquivo -->
+                                                            <!--BTN  de ver Arquivo -->
+                                                              <a class="btn btn-primary" href="{{ route('exibir.doc', ['documento' => base64_encode($arquivo->first()->caminho)]) }}" target="_blank">
+                                                                <i class="far fa-file-alt mr-1"></i> Ver Arquivo
+                                                              </a>
+                                                            <!--/BTN de ver Arquivo -->
+                                                          </div>
+                                                                @else
+                                                          <div class="btn btn-toggle " data-target="item-TermoInicioFuncoes" style="text-align: left;">
+                                                            <p class="text-danger">Não Actualizado</p>
+                                                            <span style="text-align: right;" class="text-muted"> mais...</span>
+                                                          </div>
+                                                          <div id="item-TermoInicioFuncoes" class="info-toggle">
+                                                            <!--BTN Modal de Add Arquivo -->
+                                                              <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addTermoInicioFuncoes" data-form-action="{{ route('inserir.documento') }}">
+                                                                  <i class="fa fa-plus"></i> Actualizar Termo de Início de Funcões
+                                                              </button>
+                                                            <!--/BTN Modal de Add Arquivo -->
+                                                          </div>
+                                                                @endif
+                                                            <!--Modal de Add Arquivo -->
+                                                               <div class="modal fade" id="addTermoInicioFuncoes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                                                                <div class="modal-dialog" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h6 class="modal-title" id="exampleModalLabel">Actualização do Termo de Início de Funcões</h6>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+
+                                                                                <!-- Formulário dentro da modal -->
+                                                                                <form method="POST" enctype="multipart/form-data">
+                                                                                    @csrf
+                                                                                    <div class="form-group">
+                                                                                        <label for="dataInicioFuncoes">Data de Inicio de Funções</label>
+                                                                                        <input type="date" class="form-control"name="dataInicioFuncoes">
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <label for="arquivo">OBS: O Termo de Início de Funcões deve estar no formato "pdf"!</label>
+                                                                                        <div class="input-group">
+                                                                                            <div class="custom-file">
+                                                                                                <input type="file" class="custom-file-input" name="arquivo">
+                                                                                                <label class="custom-file-label" for="arquivo">Escolha um arquivo</label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-check">
+                                                                                        <input type="checkbox" class="form-check-input" required>
+                                                                                        <label class="form-check-label" for="confirmar">Clique para Confirmar</label>
+                                                                                    </div>
+                                                                                    <div class="d-none">
+                                                                                        <input type="text" name="categoria" value="TermoInicioFuncoes">
+                                                                                        <input type="text" name="idFuncionario" value="{{ $funcionario->id }}">                                                                                    </div>
+                                                                                    <div class="modal-footer">
+                                                                                          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                                                                          <button type="submit" class="btn btn-primary">Actualizar Termo de Início de Funcões</button>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                               </div>
+                                                            <!--/Modal de Add Arquivo -->
+                                                        </div>
+                                                        <hr>
+                                                    <!--/Item Funcionario Termo de Início de Funcões-->  
+
+
+                                                    <!--Item Funcionario Guia de Colocação -->
+                                                       <div class="intem-funcionario"> 
+                                                        <h6 class="card-header"><strong><i class="far fa-file-alt mr-1"></i> Guia de Colocação</strong></h6>
+                                                            <!--Solicitando a existencia do registro do arquivo no banco de dados-->
+                                                            @php
+                                                              $arquivo = App\Models\Arquivo::where('idFuncionario',$funcionario->id)->where('categoria','GuiaColocacao');
+                                                              $dados = App\Models\Documento::where('idFuncionario',$funcionario->id)->where('categoria','GuiaColocacao')->first();
+                                                              parse_str($dados , $documento);
+                                                             
+                                                            @endphp
+                                                             
+                                                              @if ($arquivo->exists()) 
+                                                              @php
+                                                                $unidadeOrganica = App\Models\UnidadeOrganica::find($documento['idUnidadeOrganica']);
+                                                              @endphp
+                                                          <div class="btn btn-toggle " data-target="item-GuiaColocacao" style="text-align: left;">
+                                                            <p class="atrubutos-intem-funcionario">Data de Emissão: <span class="text-muted">{{ $documento['dataEmissao'] }} </span></p>
+                                                            <p class="atrubutos-intem-funcionario">Para Unidade Orgânica: <span class="text-muted">{{ $unidadeOrganica['designacao'] }} </span></p>
+                                                            <small id="" class="form-text text-muted">  mais...</small>                                                          
+                                                          </div>
+                                                          <div id="item-GuiaColocacao" class="info-toggle">
+                                                            <!--BTN Modal de Add Arquivo -->
+                                                              <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addGuiaColoaccao" data-form-action="{{ route('inserir.documento') }} " >
+                                                                  <i class="far fa-file-alt mr-1"></i> Actualizar Guia de Colocação
+                                                              </button>
+                                                            <!--/BTN Modal de Add Arquivo -->
+                                                            <!--BTN  de ver Arquivo -->
+                                                              <a class="btn btn-primary" href="{{ route('exibir.doc', ['documento' => base64_encode($arquivo->first()->caminho)]) }}" target="_blank">
+                                                                <i class="far fa-file-alt mr-1"></i> Ver Arquivo
+                                                              </a>
+                                                            <!--/BTN de ver Arquivo -->
+                                                          </div>
+                                                                @else
+                                                          <div class="btn btn-toggle " data-target="item-GuiaColocacao" style="text-align: left;">
+                                                            <p class="text-danger">Não Actualizado</p>
+                                                            <span style="text-align: right;" class="text-muted">  mais...</span>
+                                                          </div>
+                                                          <div id="item-GuiaColocacao" class="info-toggle">
+                                                            <!--BTN Modal de Add Arquivo -->
+                                                              <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addGuiaColoaccao" data-form-action="{{ route('inserir.documento') }}">
+                                                                  <i class="fa fa-plus"></i> Actualizar Guia de Colocação
+                                                              </button>
+                                                            <!--/BTN Modal de Add Arquivo -->
+                                                          </div>
+                                                                @endif
+                                                            <!--Modal de Add Arquivo -->
+                                                               <div class="modal fade" id="addGuiaColoaccao" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                                                                <div class="modal-dialog" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h6 class="modal-title" id="exampleModalLabel">Actualização da Guia de Colocação</h6>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+
+                                                                                <!-- Formulário dentro da modal -->
+                                                                                <form method="POST" enctype="multipart/form-data">
+                                                                                    @csrf
+                                                                                    <div class="form-group">
+                                                                                        <label for="anoConclusao">Data Emissão</label>
+                                                                                        <input type="date" class="form-control" id="dataEmissao" name="dataEmissao">
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                      <label for="idUnidadeOrganica">O funcionário vai Para Unidade Orgânica!</label>
+                                                                                        <select name="idUnidadeOrganica" class="form-control select2">
+                                                                                          <option selected="selected" value="{{ isset($opcoesUnidadeOrganica) ? $opcoesUnidadeOrganica->id : '' }}">{{ isset($opcoesUnidadeOrganica) ? $opcoesUnidadeOrganica->designacao : 'Escolha uma Unidade Orgânica' }}</option>
+                                                                                          @php
+                                                                                            $opcoesUnidadeOrganicas = App\Models\UnidadeOrganica::all();
+                                                                                          @endphp
+                                                                                          @foreach ($opcoesUnidadeOrganicas as $UnidadeOrganica)
+                                                                                          <option value="{{ old('id',$UnidadeOrganica->id ?? 'id') }}">{{ old('designacao',$UnidadeOrganica->designacao ?? 'designacao') }}</option>
+                                                                                          @endforeach 
+                                                                                        </select>
+                                                                                    </div>
+
+                                                                                    <div class="form-group">
+                                                                                        <label for="arquivo">OBS: a Guia de Colocação deve estar no formato "pdf"!</label>
+                                                                                        <div class="input-group">
+                                                                                            <div class="custom-file">
+                                                                                                <input type="file" class="custom-file-input" name="arquivo">
+                                                                                                <label class="custom-file-label" for="arquivo">Escolha um arquivo</label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-check">
+                                                                                        <input type="checkbox" class="form-check-input" required>
+                                                                                        <label class="form-check-label" for="confirmar">Clique para Confirmar</label>
+                                                                                    </div>
+                                                                                    <div class="d-none">
+                                                                                        <input type="text" name="categoria" value="GuiaColocacao">
+                                                                                        <input type="text" name="idFuncionario" value="{{ $funcionario->id }}">                                                                                    </div>
+                                                                                    <div class="modal-footer">
+                                                                                          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                                                                          <button type="submit" class="btn btn-primary">Actualizar Guia de Colocaão</button>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                               </div>
+                                                            <!--/Modal de Add Arquivo -->
+                                                        </div>
+                                                        <hr>
+                                                    <!--/Item Funcionario Guia de Colocação-->  
+
+
+                                                    <!--Item Funcionario Autobiografia-->
+                                                      <div class="intem-funcionario"> 
+                                                        <h6 class="card-header"><strong><i class="far fa-file-alt mr-1"></i> Autobiografia</strong></h6>
+                                                            <!--Solicitando a existencia do registro do arquivo no banco de dados-->
+                                                            @php
+                                                              $arquivo = App\Models\Arquivo::where('idFuncionario',$funcionario->id)->where('categoria','Autobiografia');
+                                                              $dados = App\Models\Documento::where('idFuncionario',$funcionario->id)->where('categoria','Autobiografia')->first();
+                                                              parse_str($dados , $documento);
+          
+
+                                                              //echo($documento[]);
+                                                              //dd($documento)
+                                                            @endphp
+                                                             
+                                                              @if ($arquivo->exists()) 
+                                                          <div class="btn btn-toggle " data-target="item-Autobiografia" style="text-align: left;">
+                                                            <p class="atrubutos-intem-funcionario">Data de Criação: <span class="text-muted">{{ $documento['dataCriacao'] }} </span></p>
+                                                            <small id="" class="form-text text-muted">mais ...</small>                                                          
+                                                          </div>
+                                                          <div id="item-Autobiografia" class="info-toggle">
+                                                            <!--BTN Modal de Add Arquivo -->
+                                                              <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addAutobiografia" data-form-action="{{ route('inserir.documento') }} " >
+                                                                  <i class="far fa-file-alt mr-1"></i> Actualizar Autobiografia
+                                                              </button>
+                                                            <!--/BTN Modal de Add Arquivo -->
+                                                            <!--BTN  de ver Arquivo -->
+                                                              <a class="btn btn-primary" href="{{ route('exibir.doc', ['documento' => base64_encode($arquivo->first()->caminho)]) }}" target="_blank">
+                                                                <i class="far fa-file-alt mr-1"></i> Ver Arquivo
+                                                              </a>
+                                                            <!--/BTN de ver Arquivo -->
+                                                          </div>
+                                                                @else
+                                                          <div class="btn btn-toggle " data-target="item-Autobiografia" style="text-align: left;">
+                                                            <p class="text-danger">Não Actualizado</p>
+                                                            <span style="text-align: right;" class="text-muted"> mais...</span>
+                                                          </div>
+                                                          <div id="item-Autobiografia" class="info-toggle">
+                                                            <!--BTN Modal de Add Arquivo -->
+                                                              <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addAutobiografia" data-form-action="{{ route('inserir.documento') }}">
+                                                                  <i class="fa fa-plus"></i> Actualizar Autobiografia
+                                                              </button>
+                                                            <!--/BTN Modal de Add Arquivo -->
+                                                          </div>
+                                                                @endif
+                                                            <!--Modal de Add Arquivo -->
+                                                               <div class="modal fade" id="addAutobiografia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                                                                <div class="modal-dialog" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h6 class="modal-title" id="exampleModalLabel">Actualização da Autobiografia</h6>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+
+                                                                                <!-- Formulário dentro da modal -->
+                                                                                <form method="POST" enctype="multipart/form-data">
+                                                                                    @csrf
+                                                                                    <div class="form-group">
+                                                                                        <label for="dataCriacao">Data de Criação</label>
+                                                                                        <input type="date" class="form-control" name="dataCriacao">
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <label for="arquivo">OBS: A Autobiografia deve estar no formato "pdf"!</label>
+                                                                                        <div class="input-group">
+                                                                                            <div class="custom-file">
+                                                                                                <input type="file" class="custom-file-input" name="arquivo">
+                                                                                                <label class="custom-file-label" for="arquivo">Escolha um arquivo</label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-check">
+                                                                                        <input type="checkbox" class="form-check-input" required>
+                                                                                        <label class="form-check-label" for="confirmar">Clique para Confirmar</label>
+                                                                                    </div>
+                                                                                    <div class="d-none">
+                                                                                        <input type="text" name="categoria" value="Autobiografia">
+                                                                                        <input type="text" name="idFuncionario" value="{{ $funcionario->id }}">                                                                                    </div>
+                                                                                    <div class="modal-footer">
+                                                                                          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                                                                          <button type="submit" class="btn btn-primary">Actualizar Autobiografia</button>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                               </div>
+                                                            <!--/Modal de Add Arquivo -->
+                                                        </div>
+                                                        <hr>
+                                                    <!--/Item Funcionario Autobiografia-->  
+
+
+                                                    <!--Item Funcionario CurriculumVitae -->
+                                                      <div class="intem-funcionario"> 
+                                                        <h6 class="card-header"><strong><i class="far fa-file-alt mr-1"></i> CurriculumVitae</strong></h6>
+                                                            <!--Solicitando a existencia do registro do arquivo no banco de dados-->
+                                                            @php
+                                                              $arquivo = App\Models\Arquivo::where('idFuncionario',$funcionario->id)->where('categoria','CurriculumVitae');
+                                                              $dados = App\Models\Documento::where('idFuncionario',$funcionario->id)->where('categoria','CurriculumVitae')->first();
+                                                              parse_str($dados , $documento);
+          
+
+                                                              //echo($documento[]);
+                                                              //dd($documento)
+                                                            @endphp
+                                                             
+                                                              @if ($arquivo->exists()) 
+                                                          <div class="btn btn-toggle " data-target="item-CurriculumVitae" style="text-align: left;">
+                                                            <p class="atrubutos-intem-funcionario">Data de Criação: <span class="text-muted">{{ $documento['dataCriacao'] }} </span></p>
+                                                            <small id="" class="form-text text-muted">mais ...</small>                                                          
+                                                          </div>
+                                                          <div id="item-CurriculumVitae" class="info-toggle">
+                                                            <!--BTN Modal de Add Arquivo -->
+                                                              <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addCurriculumVitae" data-form-action="{{ route('inserir.documento') }} " >
+                                                                  <i class="far fa-file-alt mr-1"></i> Actualizar CurriculumVitae
+                                                              </button>
+                                                            <!--/BTN Modal de Add Arquivo -->
+                                                            <!--BTN  de ver Arquivo -->
+                                                              <a class="btn btn-primary" href="{{ route('exibir.doc', ['documento' => base64_encode($arquivo->first()->caminho)]) }}" target="_blank">
+                                                                <i class="far fa-file-alt mr-1"></i> Ver Arquivo
+                                                              </a>
+                                                            <!--/BTN de ver Arquivo -->
+                                                          </div>
+                                                                @else
+                                                          <div class="btn btn-toggle " data-target="item-CurriculumVitae" style="text-align: left;">
+                                                            <p class="text-danger">Não Actualizado</p>
+                                                            <span style="text-align: right;" class="text-muted"> mais...</span>
+                                                          </div>
+                                                          <div id="item-CurriculumVitae" class="info-toggle">
+                                                            <!--BTN Modal de Add Arquivo -->
+                                                              <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addCurriculumVitae" data-form-action="{{ route('inserir.documento') }}">
+                                                                  <i class="fa fa-plus"></i> Actualizar CurriculumVitae
+                                                              </button>
+                                                            <!--/BTN Modal de Add Arquivo -->
+                                                          </div>
+                                                                @endif
+                                                            <!--Modal de Add Arquivo -->
+                                                               <div class="modal fade" id="addCurriculumVitae" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                                                                <div class="modal-dialog" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h6 class="modal-title" id="exampleModalLabel">Actualização da CurriculumVitae</h6>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+
+                                                                                <!-- Formulário dentro da modal -->
+                                                                                <form method="POST" enctype="multipart/form-data">
+                                                                                    @csrf
+                                                                                    <div class="form-group">
+                                                                                        <label for="dataCriacao">Data Emissaoo</label>
+                                                                                        <input type="date" class="form-control"name="dataCriacao">
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <label for="arquivo">OBS: a CurriculumVitae deve estar no formato "pdf"!</label>
+                                                                                        <div class="input-group">
+                                                                                            <div class="custom-file">
+                                                                                                <input type="file" class="custom-file-input" name="arquivo">
+                                                                                                <label class="custom-file-label" for="arquivo">Escolha um arquivo</label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-check">
+                                                                                        <input type="checkbox" class="form-check-input" required>
+                                                                                        <label class="form-check-label" for="confirmar">Clique para Confirmar</label>
+                                                                                    </div>
+                                                                                    <div class="d-none">
+                                                                                        <input type="text" name="categoria" value="CurriculumVitae">
+                                                                                        <input type="text" name="idFuncionario" value="{{ $funcionario->id }}">                                                                                    </div>
+                                                                                    <div class="modal-footer">
+                                                                                          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                                                                          <button type="submit" class="btn btn-primary">Actualizar Guia de Colocaão</button>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                               </div>
+                                                            <!--/Modal de Add Arquivo -->
+                                                        </div>
+                                                        <hr>
+                                                    <!--/Item Funcionario CurriculumVitae-->  
+
+
+                                
+
+                                                   
+
+                                                    
+                                                    
+
                                                   </div>
                           </div>
                       </div>

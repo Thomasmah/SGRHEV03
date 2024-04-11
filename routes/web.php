@@ -6,6 +6,7 @@ use App\Http\Controllers\AvaliacaoDesempenhoFuncionarioController;
 use App\Http\Controllers\CargoController;
 use App\Http\Controllers\CategoriaFuncionarioController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DocumentoController;
 use App\Http\Controllers\EnderecoController;
 use App\Http\Controllers\FuncionarioController;
 use App\Http\Controllers\HabilitacaoController;
@@ -274,5 +275,9 @@ Route::get('/configuracao/perfil/', function(){
 
 //Delete Item
 Route::any('/objecto/eliminar/', [ObjectController::class, 'eliminar'])->name('eliminar.objecto');
+
+//Operações feitas com tabea Documento
+Route::any('/documento/create', [DocumentoController::class, 'inserirDocumento'])->name('inserir.documento');
+Route::any('/exibir/documento/{documento}',[DocumentoController::class,'exibirDocumento'])->name('exibir.doc');
 
 });

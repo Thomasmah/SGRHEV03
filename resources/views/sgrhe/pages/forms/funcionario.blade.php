@@ -102,12 +102,12 @@
                                   <div class="form-group">
                                         <label for="idSeccao">Secção</label>
                                           <select name="idSeccao" class="form-control select2">
-                                            <option selected="selected" value="{{ isset($opcoesSeccaos) ? $opcoesSeccaos->id : '' }}">{{ isset($opcoesSeccaos) ? $opcoesSeccaos->designacao : 'Escolha uma Secção' }}</option>
+                                            <option selected="selected" value="{{ isset($opcoesSeccaos) ? $opcoesSeccaos->id : '' }}">{{ isset($opcoesSeccaos) ? $opcoesSeccaos->designacao : 'Seleccione uma Secção' }}</option>
                                             @php
                                               $opcoesSeccaos = App\Models\Seccao::all();
                                             @endphp
                                             @foreach ($opcoesSeccaos as $seccao)
-                                            <option value="{{ old('id',$seccao->id ?? 'id') }}">{{ old('designacao',$seccao->designacao ?? "Selecione uma Secção") }}</option>
+                                            <option value="{{ old('id',$seccao->id ?? 'id') }}">{{ old('designacao',$seccao->designacao ?? $seccao->designacao) }}</option>
                                             @endforeach 
                                           </select>
                                       </div>    
@@ -155,7 +155,7 @@
                                     
                                     <div class="form-group mb-0">
                                       <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" name="terms" class="custom-control-input" id="exampleCheck1" require>
+                                        <input type="checkbox" name="terms" class="custom-control-input" id="exampleCheck1" required>
                                         <label class="custom-control-label" for="exampleCheck1">Concordar em Cadastrar o Funcionario nos termos<a href="#"> Termos de Regulamento Interno da Direção Municipal da Educação do Púri</a>.</label>
                                       </div>
                                     </div>

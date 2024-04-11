@@ -1,6 +1,7 @@
 <?php
 //Dados Requisitos
-
+$parente = App\Models\Parente::where('idPessoa',$pessoa->id)->first();
+$naturalidade = App\Models\Naturalidade::where('idPessoa',$pessoa->id)->first();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -164,20 +165,25 @@
         </div>
         <div class="corpo">
                 <div class="titulo ">
+                        <br>
                         <p>DECLARAÇÃO DE EFECTIVIDADE </p>
+                        <br>
                 </div>
                 <div class="corpo">
                         <p>
-                        ALFREDO JOSÉ MÁRIO Director Municipal da Educaçcão, declaro por minha honra profissional que o senhor {{ 'Nome Completo' }}, solteiro de {{ 'idade' }} anos de idade, filho de  {{ 'Pai' }}, e de {{ 'Mae' }}, nascido aos {{ 'Data de Nascimento' }}, natural de {{ 'Naturalidade Pessoa' }}, Município de  {{ 'Municipio nasc' }}, Província de {{ 'Provincia de' }}, portador do B.I. nº {{ 'numero de BI' }}, passado pelo Sector de Identificação de Uíge aos 28 de Abril de {{ date('Y')}}
+                        ALFREDO JOSÉ MÁRIO Director Municipal da Educaçcão, declaro por minha honra profissional que o senhor {{ $pessoa->nomeCompleto }}, solteiro de {{ $pessoa->dataNascimento }} anos de idade, filho de  {{ $parente->nomePai }}, e de {{ $parente->nomeMae }}, nascido aos {{ $pessoa->dataNascimento }}, natural de {{ $naturalidade->municipio }}, Município de  {{ $naturalidade->municipio }}, Província de {{ $naturalidade->provincia }}, portador do B.I. nº {{ $pessoa->numeroBI }}, passado pelo Sector de Identificação de Uíge aos 28 de Abril de {{ date('Y')}}
                         </p>
                         <p>
-                                É {{ 'Docente/Funcionario'(a) }}, convertido na categoria de {{ 'categoria'.' Grau' }}, salario 252.69510 com o número de agente {{ 'Numero de Agente' }} colocado na Unidade Organica {{ 'Unidade Organica Funcionario' }} 
+                                É {{ $cargo->designacao }}, convertido na categoria de {{ $categoriaFuncionario->categoria.' do '.$categoriaFuncionario->grau }}, salario base de {{ $categoriaFuncionario->salariobase }} com o número de agente {{ $funcionario->numeroAgente }} colocado na Unidade Organica, {{ $unidadeOrganica->designacao }} 
+                        </p>
+                        <div class="preenchimento">
+                       # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # ###  
+                        </div>
+                        <p>
+                                {{ $Request['finalidade'] }}
                         </p>
                         <p>
-                                {{Destino}}
-                        </p>
-                        <p>
-                                Por ser verdade e me ter sido solicitado, mandei passar a presente Declaração que por mim vai assinada e autenticada com carimbo a óleo em uso nessa Direção.
+                                Por ser verdade e me ter sido solicitado, mandei passar a presente Declaração que por mim vai assinada e autenticada com carimbo a óleo em uso nessa Direção. 
                         </p>
                 </div>
                 <div class="data-local">
@@ -198,7 +204,7 @@
                                 </div>
                        @endif
                        <div style="position:absolute; z-index:2; width:100%;">
-                        <p style="font-weight: bold;">O Homologante</p>
+                        <p style="font-weight: bold;">O Director Municipal</p>
                                 <p style="margin: 0; padding:0;">____________________________</p>
                                 <p style="margin: 0; padding:0;">Afredo José Mário</p>
                        </div>

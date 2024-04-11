@@ -180,8 +180,8 @@
                                             <!--Solicitar Item-->
                                               <div class="col-8 offset-md-2">
                                                   <div class="card">
-                                                    <div class="card-body" style="position: relative; z-index:2; padding:100px;">
-                                                     <i class="ion ion-person-add" style="position: absolute; font-size:125px; z-index:1; opacity:0.5; color:green; right:20%;"></i>
+                                                    <div class="card-body" style="position: relative; z-index:2; padding:10px;">
+                                                     <i class="ion ion-person-add" style="position: absolute; font-size:125px; z-index:1; opacity:0.5; color:blue; right:20%;"></i>
                                                       <h5 class="card-title"> Solicitar Licença</h5>
                                                       <br>
                                                         <p class="card'text">Explicacao do que serve essa solicitacao</p>
@@ -243,7 +243,7 @@
 
                                               <div class="col-8 offset-md-2">
                                                   <div class="card">
-                                                    <div class="card-body" style="position: relative; z-index:2; padding:100px;">
+                                                    <div class="card-body" style="position: relative; z-index:2; padding:10px;">
                                                      <i class="ion ion-person-add" style="position: absolute; font-size:125px; z-index:1; opacity:0.5; color:green; right:20%;"></i>
                                                       <h5 class="card-title"> Solicitar Declaração de Efectividade</h5>
                                                       <br>
@@ -274,7 +274,7 @@
                                                           @method('POST')
                                                           <div class="form-group">
                                                             <input type="hidden" class="form-control" name="idFuncionario" value="{{ isset($idFuncionario) ? $idFuncionario :  $funcionario->id }}">
-                                                            <input type="hidden" class="form-control" name="categoria" value="Requerimento">
+                                                            <input type="hidden" class="form-control" name="categoria" value="DeclaracaoEfectividade">
                                                             <input type="hidden" class="form-control" name="natureza" value="Solicitacao">
                                                             <input type="hidden" class="form-control" name="seccao" value="Secretaria">
                                                             <input type="hidden" class="form-control" name="deferimento" value="N/D">    
@@ -282,7 +282,9 @@
                                                           </div>
                                                           <div class="form-group">
                                                               <label for="dataInicio">Para Fim de :</label>
-                                                              <textarea name="finalidade" id="" cols="30" rows="10"></textarea>
+                                                              <p class="text-muted text-color-red">Prencher tal como:</p>
+                                                              <span class="text-muted">OBS: A presente declaração destina-se para efeitos de actualizaçºao de conta bancaria no banco BFA sob número de conta nº 12345678 </span>
+                                                              <textarea name="finalidade" style="width:100%;"></textarea>
                                                               <div class="error-message" id="dateError" style="display: none;"></div>
                                                           </div>
                                                           <button type="submit" class="btn btn-primary">Submeter</button>
@@ -300,7 +302,7 @@
                                              <!--Solicitar Item-->
                                              <div class="col-8 offset-md-2">
                                                   <div class="card">
-                                                    <div class="card-body" style="position: relative; z-index:2; padding:100px;">
+                                                    <div class="card-body" style="position: relative; z-index:2; padding:10px;">
                                                      <i class="ion ion-person-add" style="position: absolute; font-size:125px; z-index:1; opacity:0.5; color:green; right:20%;"></i>
                                                       <h5 class="card-title"> Solicitar Autorização de Gozo de Férias</h5>
                                                       <br>

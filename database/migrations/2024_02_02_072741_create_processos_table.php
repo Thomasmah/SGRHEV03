@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('seccao');
             $table->string('categoria');
             $table->string('natureza');
-            $table->string('Request', 2000);   
+            $table->text('Request', 2000);   
             $table->string('periodo')->nullable();
             $table->string('estado')->nullable();
             $table->string('deferimento')->nullable();   

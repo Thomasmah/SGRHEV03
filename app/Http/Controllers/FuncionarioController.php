@@ -119,6 +119,7 @@ class FuncionarioController extends Controller
     //Update
     public function update(Request $request, string $id)
     { 
+           // dd($request->all());
             $request->validate([
             'numeroAgente' => ['numeric','required','unique:funcionarios,numeroAgente,'.$id],
             'dataAdmissao' => ['date','required','before_or_equal:now'],
@@ -142,6 +143,7 @@ class FuncionarioController extends Controller
             $funcionario->numeroAgente = $request->numeroAgente;
             $funcionario->idCategoriaFuncionario = $request->idCategoriaFuncionario;
             $funcionario->idCargo = $request->idCargo;
+            $funcionario->idSeccao = $request->idSeccao;
             $funcionario->idUnidadeOrganica = $request->idUnidadeOrganica;
             $funcionario->iban = $request->iban;
             $funcionario->email = $request->email;

@@ -8,6 +8,7 @@ use App\Models\Assinatura;
 use App\Models\Cargo;
 use App\Models\categoriaFuncionario;
 use App\Models\Funcionario;
+use App\Models\Parente;
 use App\Models\Pessoa;
 use App\Models\Processo;
 use App\Models\UnidadeOrganica;
@@ -161,6 +162,8 @@ class ProcessoController extends Controller
         //Registro o Processo no Bango de dados e Salvamento do Arquivo Gerado no Banco de Dados 
     }
 
+
+
     /* Previsualizar um documento antes da Ratificação
      */
 
@@ -267,8 +270,8 @@ class ProcessoController extends Controller
 
 
     public function solicitarProcesso(Request $request)
-    {  
-        dd($request->all());
+    {
+        //dd($request->all());
         //Testando a Reconversao de dados 
        //$rec ="_token=sQPx5SutTjKCzSKwf64k3LoeWGmXF0DZRmlxd5Gi&_method=POST&categoria=licenca&natureza=N%2FD&seccao=secretaria&idFuncionarioSolicitante=3&dataInicio=2024-02-08&dataFim=2024-02-10&motivo=Por+motivo+de+Cuidar+da+culher+que+deu+a+luz";
        // parse_str($rec , $array);
@@ -317,7 +320,7 @@ class ProcessoController extends Controller
     //Funcao geradora de Documento Universal via Request
     public function gerarDocFormRequest(Request $request)
     {
-        $
+        
         $Request = $request->all();
         //dd($dados);
         $pdf = PDF::loadView("sgrhe/modelos/$request->categoria",compact('Request'));      
