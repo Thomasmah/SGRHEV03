@@ -1,6 +1,6 @@
 <!--Layout Principal-->
 @extends('layouts.app')
-  @section('titulo' , 'Funcionários / Index')
+  @section('titulo' , 'Mapas de Efectividade')
         @section('header')
         <!--Style Local-->
           <!-- DataTables -->
@@ -19,12 +19,12 @@
                 <div class="container-fluid">
                   <div class="row mb-2">
                     <div class="col-sm-6">
-                      <h1>Funcionários / Força de Trabalho </h1>
+                      <h1>Mapas de Efectividade </h1>
                     </div>
                     <div class="col-sm-6">
                       <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Funcionários Força de Trabalho </li>
+                        <li class="breadcrumb-item active">Mapas de Efectividade </li>
                       </ol>
                     </div>
                   </div>
@@ -39,92 +39,49 @@
                     <div style="background-color: #ffffff;" class="card card-primary">
 
                         <div class="card-header">
-                              <h3 class="card-title">Funcionário / Força de Trabaho</h3>  
+                              <h3 class="card-title">Mapas de Efectividade por cada mês</h3>  
                         </div>
                       <!-- /.card-header -->
                       <div class="card-body">
                             <table id="example1" class="table table-bordered table-striped">
                               <thead>
                               <tr>
+                                <th>Mês / Periódo</th>
                                 <th>Estado</th>
-                                <th>Número de Agente</th>
-                                <th>Nome Completo</th>
-                                <th>Nº de BI</th>
-                                <th>Validade do BI</th>
-                                <th>Unidade Orgânica</th>
-                                <th>Categoria Funcionário</th>
-                                <th>Data de Admissão</th>
-                                <th>Email</th>
-                                <th>IBAN</th>
-                                <th>Data Nascimento</th>
-                                <th>Genêro</th>
-                                <th>Grupo Sanguíneo</th>
-                                <th>Estado Civíl</th>
                                 <th>Opções</th>
                               </tr>
                               </thead>
                               <tbody>
                               <!--Gerando a Tabela de forma Dinamica-->
-                              @foreach ($dados as $funcionario)
+                              @foreach ($dados as $mapas)
                                             <tr>
-                                            <td>{{ $funcionario->estado }}</td>
-                                                <td>{{ $funcionario->numeroAgente }}</td>
-                                                <td>{{ $funcionario->nomeCompleto }}</td>
-                                                <td>{{ $funcionario->numeroBI }}</td>
-                                                <td>{{ $funcionario->validadeBI }}</td>
-                                                <td>{{ $funcionario->designacao }}</td>
-                                                <td>{{ $funcionario->categoria }}</td>
-                                                <td>{{ $funcionario->dataAdmissao }}</td>
-                                                <td>{{ $funcionario->email }}</td>
-                                                <td>{{ $funcionario->iban }}</td>
-                                                <td>{{ $funcionario->dataNascimento }}</td>
-                                                <td>{{ $funcionario->genero }}</td>
-                                                <td>{{ $funcionario->grupoSanguineo }}</td>
-                                                <td>{{ $funcionario->estadoCivil }}</td>
+                                                <td>{{ $mapas->dataPeriodo }}</td>
+                                                <td>{{ $mapas->estado }}</td>
                                                 <td>
-                                                    <form action="{{ route('perfil.show', ['idFuncionario' => $funcionario->id_funcionario]) }}" method="GET" style="display: inline;">
+                                                    <form action="" method="GET" style="display: inline;">
                                                       @csrf
-                                                      <button type="submit" class="btn btn-info">Ver Perfil</button>
+                                                      <button type="submit" class="btn btn-info">Editar</button>
                                                     </form>
                                                     <form action="{{ route('funcionarios.form', ['id' => $funcionario->idPessoa]) }}" method="POST" style="display: inline;">
                                                       @csrf
                                                       @method('PUT')
-                                                      <button type="submit" class="btn btn-primary">Editar</button>
+                                                      <button type="submit" class="btn btn-primary">Ver Mapa</button>
                                                     </form>
-                                                    <form action="{{ route('eliminar.objecto') }}" method="POST" id="deleteForm{{ $funcionario->id_funcionario }}">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <input type="hidden" name="id" value="{{ $funcionario->id_funcionario }}">
-                                                    <input type="hidden" name="categoria" value="Funcionario">
-                                                    <button type="submit" class="btn btn-danger" onclick="confirmAndSubmit(event, 'Confirmar deletar  Funcionário?', 'Sim, Deletar!', 'Não, Cancelar!')">Deletar</button>
-                                                </form>
                                                 </td>
                                             </tr>
                               @endforeach
                               </tbody>
                               <tfoot>
                               <tr>
+                                <th>Mês / Periódo</th>
                                 <th>Estado</th>
-                                <th>Número de Agente</th>
-                                <th>Nome Completo</th>
-                                <th>Nº de BI</th>
-                                <th>Validade do BI</th>
-                                <th>Unidade Orgânica</th>
-                                <th>Categoria Funcionário</th>
-                                <th>Data de Admissão</th>
-                                <th>Email</th>
-                                <th>IBAN</th>
-                                <th>Data Nascimento</th>
-                                <th>Genêro</th>
-                                <th>Grupo Sanguíneo</th>
-                                <th>Estado Civíl</th>
                                 <th>Opções</th>
                               </tr>
                               </tfoot>
                             </table>
                           </div>
                           <div class="card-footer">
-                              <a href="{{route('funcionarios.form')}}" class="btn btn-primary d-block"> Cadastrar Funcionário</a>
+                              <a href="{{ route('form.mapa.efectividade') }}" class="btn btn-primary d-block"> Criar Mapa de Efectividade</a>
                           </div>  <!-- /.card-body -->
                     </div>
                     <!-- /.card -->

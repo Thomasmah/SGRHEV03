@@ -10,6 +10,7 @@ use App\Http\Controllers\DocumentoController;
 use App\Http\Controllers\EnderecoController;
 use App\Http\Controllers\FuncionarioController;
 use App\Http\Controllers\HabilitacaoController;
+use App\Http\Controllers\MapaEfectividadeController;
 use App\Http\Controllers\ObjectController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\PessoaController;
@@ -279,5 +280,12 @@ Route::any('/objecto/eliminar/', [ObjectController::class, 'eliminar'])->name('e
 //Operações feitas com tabea Documento
 Route::any('/documento/create', [DocumentoController::class, 'inserirDocumento'])->name('inserir.documento');
 Route::any('/exibir/documento/{documento}',[DocumentoController::class,'exibirDocumento'])->name('exibir.doc');
+
+
+//Operacoes com Mapas de Efectividades
+Route::any('/index/mapas/efectividades/', [MapaEfectividadeController::class, 'indexMapasEfectividade'])->name('mapas.efectividade');
+Route::any('/form/mapas/efectividades/', [MapaEfectividadeController::class, 'formMapaEfectividade'])->name('form.mapa.efectividade');
+
+
 
 });

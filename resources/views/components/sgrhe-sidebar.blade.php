@@ -70,7 +70,7 @@
                                           <a href="#" class="nav-link {{ request()->routeIs('inicio') ? 'active' : ''}}">
                                           <i class="bi bi-graph-up-arrow"></i>
                                             <p class="item-1">
-                                              Dashboards
+                                              Dashboards & Processos
                                               <i class="right fas fa-angle-left"></i>
                                             </p>
                                           </a>
@@ -87,7 +87,15 @@
                                               <a href="{{ route('processos.seccao', ['seccao' => session()->only(['Seccao'])['Seccao']->codNome ] ) }}" class="nav-link ">
                                                 <p class="item-2">
                                                 <i class="bi bi-grid"></i>
-                                                  Processos/Secção
+                                                  Processos da Secção
+                                                </p>
+                                              </a>
+                                            </li>
+                                            <li class="nav-item">
+                                              <a href="{{ route('mapas.efectividade') }}"  class="nav-link ">
+                                                <p class="item-2">
+                                                <i class="bi bi-grid"></i>
+                                                  Mapas de Efectividade
                                                 </p>
                                               </a>
                                             </li>
