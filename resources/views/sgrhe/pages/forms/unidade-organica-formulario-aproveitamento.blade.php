@@ -63,7 +63,7 @@
               </div><!-- /.container-fluid -->
             </section>
             <!-- Main content -->
-              <!--Formulario-->
+              <!--Formulario -->
                 <section class="content">
                   <div class="container-fluid">
                     <div class="row">
@@ -75,60 +75,57 @@
                                 </div>
                                 <div class="card-body">
                                
-
-
-
-<form action="{{ route('cadastrar.formulario') }}" method="POST" id="deleteForm{{ $unidadeOrganicaSelected->id }}">
-  @csrf
-  @method('POST')
-<div class="table-responsive">
-  <table class="table table-hover table-bordered border-secondary table-striped" style="text-align:center;">
-      <thead class="bg-primary">
-        <tr>
-          <th scope="col" rowspan="2" colspan="1" style=" vertical-align:middle" >Alunos</th><th scope="col" colspan="2" rowspan="2" style="vertical-align: middle;">Matriculados no Início do Ano Lectivo</th><!--<th scope="col">Matriculados</th>--> <th scope="col" colspan="2" rowspan="2" style="vertical-align: middle;">Matriculados no Final do Ano Lectivo</th><!--<th scope="col">Matriculados</th>--><th scope="col" colspan="2" rowspan="2" style="vertical-align: middle;">Aprovados</th><!--<th scope="col">Aprovados</th>--><th scope="col" colspan="2" rowspan="2" style="vertical-align: middle;">Reprovados</th><!--<th scope="col">Reprovados</th>--><th scope="col" colspan="4" rowspan="1" style="vertical-align: middle;">Trasferidos</th><!--<th scope="col">Trasferidos</th><th scope="col">Trasferidos</th><th scope="col">Trasferidos</th> --><th scope="col" colspan="2" rowspan="2" style="vertical-align: middle;">Desistentes</th> <!--<th scope="col">Total</th>-->
-        </tr>
-        <tr>
-          <!--<th scope="col">Alunos</th> --><!--<th scope="col" colspan="2">Matriculados</th><th scope="col">Matriculados</th>--> <!--<th scope="col">Aprovados</th><th scope="col">Aprovados</th>--><!--<th scope="col">Reprovados</th><th scope="col">Reprovados</th>--><th scope="col" colspan="2" rowspan="1" style="vertical-align: middle;">Entrada</th><!--<th scope="col">Entrada</th> --> <th scope="col" colspan="2" rowspan="1" style="vertical-align: middle;">Saida</th><!--<th scope="col">Saida</th>--><!--<th scope="col">Total</th> <th scope="col">Total</th>-->
-        </tr>
-        <tr>
-          <th scope="col">Classe</th><th scope="col">MF</th><th scope="col">F</th> <th scope="col">MF</th><th scope="col">F</th> <th scope="col">MF</th><th scope="col">F</th><th scope="col">MF</th><th scope="col">F</th> <th scope="col">MF</th><th scope="col">F</th><th scope="col">MF</th><th scope="col">F</th><th scope="col">MF</th> <th scope="col">F</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-            <th scope="row">1ª</th>   <td><input type="numeric" class="inputNumeric" name="a11" id="a11" placeholder="*"></td><td><input type="numeric" class="inputNumeric" name="a12" id="a12"  placeholder="*"></td><td><input type="numeric" class="inputNumeric" name="a13" id="a13"></td><td><input type="numeric" class="inputNumeric" name="a14" id="a14"></td><td><input type="numeric" class="inputNumeric" name="a15" id="a15"></td><td><input type="numeric" class="inputNumeric" name="a16" id="a16"></td> <td><input type="numeric" class="inputNumeric" name="a17" id="a17"></td> <td><input type="numeric" class="inputNumeric" name="a18" id="a18"></td> <td><input type="numeric" class="inputNumeric" name="a19" id="a19"></td> <td><input type="numeric" class="inputNumeric" name="a110" id="a110"></td> <td><input type="numeric" class="inputNumeric" name="a111" id="a111"></td> <td><input type="numeric" class="inputNumeric" name="a112" id="a112"></td> <td><input type="numeric" class="inputNumeric" name="a113" id="a113"></td> <td><input type="numeric" class="inputNumeric" name="a114" id="a114"></td>
-        </tr>
-        <tr>
-            <th scope="row">2ª</th>   <td><input type="numeric" class="inputNumeric" name="a21" id="a21" placeholder="*"></td><td><input type="numeric" class="inputNumeric" name="a22" id="a22"  placeholder="*"></td><td><input type="numeric" class="inputNumeric" name="a23" id="a23"></td><td><input type="numeric" class="inputNumeric" name="a24" id="a24"></td><td><input type="numeric" class="inputNumeric" name="a25" id="a25"></td><td><input type="numeric" class="inputNumeric" name="a26" id="a26"></td> <td><input type="numeric" class="inputNumeric" name="a27" id="a27"></td> <td><input type="numeric" class="inputNumeric" name="a28" id="a28"></td> <td><input type="numeric" class="inputNumeric" name="a29" id="a29"></td> <td><input type="numeric" class="inputNumeric" name="a210" id="a210"></td> <td><input type="numeric" class="inputNumeric" name="a211" id="a211"></td> <td><input type="numeric" class="inputNumeric" name="a212" id="a212"></td> <td><input type="numeric" class="inputNumeric" name="a213" id="a213"></td> <td><input type="numeric" class="inputNumeric" name="a214" id="a214"></td>
-        </tr>
-        <tr>
-            <th scope="row">3ª</th>   <td><input type="numeric" class="inputNumeric" name="a31" id="a31" placeholder="*"></td><td><input type="numeric" class="inputNumeric" name="a32" id="a32"  placeholder="*"></td><td><input type="numeric" class="inputNumeric" name="a33" id="a33"></td><td><input type="numeric" class="inputNumeric" name="a34" id="a34"></td><td><input type="numeric" class="inputNumeric" name="a35" id="a35"></td><td><input type="numeric" class="inputNumeric" name="a36" id="a36"></td> <td><input type="numeric" class="inputNumeric" name="a37" id="a37"></td> <td><input type="numeric" class="inputNumeric" name="a38" id="a38"></td> <td><input type="numeric" class="inputNumeric" name="a39" id="a39"></td> <td><input type="numeric" class="inputNumeric" name="a310" id="a310"></td> <td><input type="numeric" class="inputNumeric" name="a311" id="a311"></td> <td><input type="numeric" class="inputNumeric" name="a312" id="a312"></td> <td><input type="numeric" class="inputNumeric" name="a313" id="a313"></td> <td><input type="numeric" class="inputNumeric" name="a314" id="a314"></td>
-        </tr>
-        <tr>
-            <th scope="row">4ª</th>   <td><input type="numeric" class="inputNumeric" name="a41" id="a41" placeholder="*"></td><td><input type="numeric" class="inputNumeric" name="a42" id="a42"  placeholder="*"></td><td><input type="numeric" class="inputNumeric" name="a43" id="a43"></td><td><input type="numeric" class="inputNumeric" name="a44" id="a44"></td><td><input type="numeric" class="inputNumeric" name="a45" id="a45"></td><td><input type="numeric" class="inputNumeric" name="a46" id="a46"></td> <td><input type="numeric" class="inputNumeric" name="a47" id="a47"></td> <td><input type="numeric" class="inputNumeric" name="a48" id="a48"></td> <td><input type="numeric" class="inputNumeric" name="a49" id="a49"></td> <td><input type="numeric" class="inputNumeric" name="a410" id="a410"></td> <td><input type="numeric" class="inputNumeric" name="a411" id="a411"></td> <td><input type="numeric" class="inputNumeric" name="a412" id="a412"></td> <td><input type="numeric" class="inputNumeric" name="a413" id="a413"></td> <td><input type="numeric" class="inputNumeric" name="a414" id="a414"></td>
-        </tr>
-        <tr>
-            <th scope="row">5ª</th>   <td><input type="numeric" class="inputNumeric" name="a51" id="a51" placeholder="*"></td><td><input type="numeric" class="inputNumeric" name="a52" id="a52"  placeholder="*"></td><td><input type="numeric" class="inputNumeric" name="a53" id="a53"></td><td><input type="numeric" class="inputNumeric" name="a54" id="a54"></td><td><input type="numeric" class="inputNumeric" name="a55" id="a55"></td><td><input type="numeric" class="inputNumeric" name="a56" id="a56"></td> <td><input type="numeric" class="inputNumeric" name="a57" id="a57"></td> <td><input type="numeric" class="inputNumeric" name="a58" id="a58"></td> <td><input type="numeric" class="inputNumeric" name="a59" id="a59"></td> <td><input type="numeric" class="inputNumeric" name="a510" id="a510"></td> <td><input type="numeric" class="inputNumeric" name="a511" id="a511"></td> <td><input type="numeric" class="inputNumeric" name="a512" id="a512"></td> <td><input type="numeric" class="inputNumeric" name="a513" id="a513"></td> <td><input type="numeric" class="inputNumeric" name="a514" id="a514"></td>
-        </tr>
-        <tr>
-            <th scope="row">6ª</th>   <td><input type="numeric" class="inputNumeric" name="a61" id="a61" placeholder="*"></td><td><input type="numeric" class="inputNumeric" name="a62" id="a62"  placeholder="*"></td><td><input type="numeric" class="inputNumeric" name="a63" id="a63"></td><td><input type="numeric" class="inputNumeric" name="a64" id="a64"></td><td><input type="numeric" class="inputNumeric" name="a65" id="a65"></td><td><input type="numeric" class="inputNumeric" name="a66" id="a66"></td> <td><input type="numeric" class="inputNumeric" name="a67" id="a67"></td> <td><input type="numeric" class="inputNumeric" name="a68" id="a68"></td> <td><input type="numeric" class="inputNumeric" name="a69" id="a69"></td> <td><input type="numeric" class="inputNumeric" name="a610" id="a610"></td> <td><input type="numeric" class="inputNumeric" name="a611" id="a611"></td> <td><input type="numeric" class="inputNumeric" name="a612" id="a612"></td> <td><input type="numeric" class="inputNumeric" name="a613" id="a613"></td> <td><input type="numeric" class="inputNumeric" name="a614" id="a614"></td>
-        </tr>
-        
-      </tbody>
-      <tfoot>
-        <tr class="bg-warning">
-          <th scope="row">Total</th>    <td><input id="matriculadosIAMF" type="numeric" value="0" readonly></td><td><input id="matriculadosIAF" type="numeric" value="0" readonly></td><td><input id="matriculadosFAMF" type="numeric" value="0" readonly></td><td><input id="matriculadosFAF" type="numeric" value="0" readonly></td><td><input id="aprovadosMF" type="numeric" value="0" readonly></td><td><input id="aprovadosF" type="numeric" value="0" readonly></td> <td><input id="reprovadosMF" type="numeric" value="0" readonly></td> <td><input id="reprovadosF" type="numeric" value="0" readonly></td> <td><input id="transferidosEMF" type="numeric" value="0" readonly></td> <td><input id="transferidosEF" type="numeric" value="0" readonly></td> <td><input id="transferidosSMF" type="numeric" value="0" readonly></td> <td><input id="transferidosSF" type="numeric" value="0" readonly></td> <td><input id="desistentesMF" type="numeric" value="0" readonly></td> <td><input id="desistentesF" type="numeric" value="0" readonly></td>
-        </tr>
-      </tfoot>
-  </table>
-</div>
-<!--Inputs Automaticos com dados da Unidade Organica etc..-->
-<input type="hidden" name="idUnidadeOrganica" value="{{  $unidadeOrganicaSelected->id }}">
-<input type="hidden" name="idDirector" value="{{  session()->only(['idFuncionario'])['idFuncionario'] }}">
-<input type="hidden" name="trimestre" value="I">
-<input type="hidden" name="anoLectivo" value="2023-2024">
-<button type="submit" style="font-weight: bold;" class="btn btn-primary w-100" onclick="confirmAndSubmit(event, 'Confirmar Submeter o Formulário de Aproveitamento?', 'Sim, Confirmar!', 'Não, Cancelar!')"> Verificar e Enviar</button>
-</form>
+                            <form action="{{ route('cadastrar.formulario') }}" method="POST" id="deleteForm{{ $unidadeOrganicaSelected->id }}">
+                              @csrf
+                              @method('POST')
+                            <div class="table-responsive">
+                              <table class="table table-hover table-bordered border-secondary table-striped" style="text-align:center;">
+                                  <thead class="bg-primary">
+                                    <tr>
+                                      <th scope="col" rowspan="2" colspan="1" style=" vertical-align:middle" >Alunos</th><th scope="col" colspan="2" rowspan="2" style="vertical-align: middle;">Matriculados no Início do Ano Lectivo</th><!--<th scope="col">Matriculados</th>--> <th scope="col" colspan="2" rowspan="2" style="vertical-align: middle;">Matriculados no Final do Ano Lectivo</th><!--<th scope="col">Matriculados</th>--><th scope="col" colspan="2" rowspan="2" style="vertical-align: middle;">Aprovados</th><!--<th scope="col">Aprovados</th>--><th scope="col" colspan="2" rowspan="2" style="vertical-align: middle;">Reprovados</th><!--<th scope="col">Reprovados</th>--><th scope="col" colspan="4" rowspan="1" style="vertical-align: middle;">Trasferidos</th><!--<th scope="col">Trasferidos</th><th scope="col">Trasferidos</th><th scope="col">Trasferidos</th> --><th scope="col" colspan="2" rowspan="2" style="vertical-align: middle;">Desistentes</th> <!--<th scope="col">Total</th>-->
+                                    </tr>
+                                    <tr>
+                                      <!--<th scope="col">Alunos</th> --><!--<th scope="col" colspan="2">Matriculados</th><th scope="col">Matriculados</th>--> <!--<th scope="col">Aprovados</th><th scope="col">Aprovados</th>--><!--<th scope="col">Reprovados</th><th scope="col">Reprovados</th>--><th scope="col" colspan="2" rowspan="1" style="vertical-align: middle;">Entrada</th><!--<th scope="col">Entrada</th> --> <th scope="col" colspan="2" rowspan="1" style="vertical-align: middle;">Saida</th><!--<th scope="col">Saida</th>--><!--<th scope="col">Total</th> <th scope="col">Total</th>-->
+                                    </tr>
+                                    <tr>
+                                      <th scope="col">Classe</th><th scope="col">MF</th><th scope="col">F</th> <th scope="col">MF</th><th scope="col">F</th> <th scope="col">MF</th><th scope="col">F</th><th scope="col">MF</th><th scope="col">F</th> <th scope="col">MF</th><th scope="col">F</th><th scope="col">MF</th><th scope="col">F</th><th scope="col">MF</th> <th scope="col">F</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                        <th scope="row">1ª</th>   <td><input type="numeric" class="inputNumeric" name="a11" id="a11" placeholder="*"></td><td><input type="numeric" class="inputNumeric" name="a12" id="a12"  placeholder="*"></td><td><input type="numeric" class="inputNumeric" name="a13" id="a13"></td><td><input type="numeric" class="inputNumeric" name="a14" id="a14"></td><td><input type="numeric" class="inputNumeric" name="a15" id="a15"></td><td><input type="numeric" class="inputNumeric" name="a16" id="a16"></td> <td><input type="numeric" class="inputNumeric" name="a17" id="a17"></td> <td><input type="numeric" class="inputNumeric" name="a18" id="a18"></td> <td><input type="numeric" class="inputNumeric" name="a19" id="a19"></td> <td><input type="numeric" class="inputNumeric" name="a110" id="a110"></td> <td><input type="numeric" class="inputNumeric" name="a111" id="a111"></td> <td><input type="numeric" class="inputNumeric" name="a112" id="a112"></td> <td><input type="numeric" class="inputNumeric" name="a113" id="a113"></td> <td><input type="numeric" class="inputNumeric" name="a114" id="a114"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2ª</th>   <td><input type="numeric" class="inputNumeric" name="a21" id="a21" placeholder="*"></td><td><input type="numeric" class="inputNumeric" name="a22" id="a22"  placeholder="*"></td><td><input type="numeric" class="inputNumeric" name="a23" id="a23"></td><td><input type="numeric" class="inputNumeric" name="a24" id="a24"></td><td><input type="numeric" class="inputNumeric" name="a25" id="a25"></td><td><input type="numeric" class="inputNumeric" name="a26" id="a26"></td> <td><input type="numeric" class="inputNumeric" name="a27" id="a27"></td> <td><input type="numeric" class="inputNumeric" name="a28" id="a28"></td> <td><input type="numeric" class="inputNumeric" name="a29" id="a29"></td> <td><input type="numeric" class="inputNumeric" name="a210" id="a210"></td> <td><input type="numeric" class="inputNumeric" name="a211" id="a211"></td> <td><input type="numeric" class="inputNumeric" name="a212" id="a212"></td> <td><input type="numeric" class="inputNumeric" name="a213" id="a213"></td> <td><input type="numeric" class="inputNumeric" name="a214" id="a214"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3ª</th>   <td><input type="numeric" class="inputNumeric" name="a31" id="a31" placeholder="*"></td><td><input type="numeric" class="inputNumeric" name="a32" id="a32"  placeholder="*"></td><td><input type="numeric" class="inputNumeric" name="a33" id="a33"></td><td><input type="numeric" class="inputNumeric" name="a34" id="a34"></td><td><input type="numeric" class="inputNumeric" name="a35" id="a35"></td><td><input type="numeric" class="inputNumeric" name="a36" id="a36"></td> <td><input type="numeric" class="inputNumeric" name="a37" id="a37"></td> <td><input type="numeric" class="inputNumeric" name="a38" id="a38"></td> <td><input type="numeric" class="inputNumeric" name="a39" id="a39"></td> <td><input type="numeric" class="inputNumeric" name="a310" id="a310"></td> <td><input type="numeric" class="inputNumeric" name="a311" id="a311"></td> <td><input type="numeric" class="inputNumeric" name="a312" id="a312"></td> <td><input type="numeric" class="inputNumeric" name="a313" id="a313"></td> <td><input type="numeric" class="inputNumeric" name="a314" id="a314"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">4ª</th>   <td><input type="numeric" class="inputNumeric" name="a41" id="a41" placeholder="*"></td><td><input type="numeric" class="inputNumeric" name="a42" id="a42"  placeholder="*"></td><td><input type="numeric" class="inputNumeric" name="a43" id="a43"></td><td><input type="numeric" class="inputNumeric" name="a44" id="a44"></td><td><input type="numeric" class="inputNumeric" name="a45" id="a45"></td><td><input type="numeric" class="inputNumeric" name="a46" id="a46"></td> <td><input type="numeric" class="inputNumeric" name="a47" id="a47"></td> <td><input type="numeric" class="inputNumeric" name="a48" id="a48"></td> <td><input type="numeric" class="inputNumeric" name="a49" id="a49"></td> <td><input type="numeric" class="inputNumeric" name="a410" id="a410"></td> <td><input type="numeric" class="inputNumeric" name="a411" id="a411"></td> <td><input type="numeric" class="inputNumeric" name="a412" id="a412"></td> <td><input type="numeric" class="inputNumeric" name="a413" id="a413"></td> <td><input type="numeric" class="inputNumeric" name="a414" id="a414"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">5ª</th>   <td><input type="numeric" class="inputNumeric" name="a51" id="a51" placeholder="*"></td><td><input type="numeric" class="inputNumeric" name="a52" id="a52"  placeholder="*"></td><td><input type="numeric" class="inputNumeric" name="a53" id="a53"></td><td><input type="numeric" class="inputNumeric" name="a54" id="a54"></td><td><input type="numeric" class="inputNumeric" name="a55" id="a55"></td><td><input type="numeric" class="inputNumeric" name="a56" id="a56"></td> <td><input type="numeric" class="inputNumeric" name="a57" id="a57"></td> <td><input type="numeric" class="inputNumeric" name="a58" id="a58"></td> <td><input type="numeric" class="inputNumeric" name="a59" id="a59"></td> <td><input type="numeric" class="inputNumeric" name="a510" id="a510"></td> <td><input type="numeric" class="inputNumeric" name="a511" id="a511"></td> <td><input type="numeric" class="inputNumeric" name="a512" id="a512"></td> <td><input type="numeric" class="inputNumeric" name="a513" id="a513"></td> <td><input type="numeric" class="inputNumeric" name="a514" id="a514"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">6ª</th>   <td><input type="numeric" class="inputNumeric" name="a61" id="a61" placeholder="*"></td><td><input type="numeric" class="inputNumeric" name="a62" id="a62"  placeholder="*"></td><td><input type="numeric" class="inputNumeric" name="a63" id="a63"></td><td><input type="numeric" class="inputNumeric" name="a64" id="a64"></td><td><input type="numeric" class="inputNumeric" name="a65" id="a65"></td><td><input type="numeric" class="inputNumeric" name="a66" id="a66"></td> <td><input type="numeric" class="inputNumeric" name="a67" id="a67"></td> <td><input type="numeric" class="inputNumeric" name="a68" id="a68"></td> <td><input type="numeric" class="inputNumeric" name="a69" id="a69"></td> <td><input type="numeric" class="inputNumeric" name="a610" id="a610"></td> <td><input type="numeric" class="inputNumeric" name="a611" id="a611"></td> <td><input type="numeric" class="inputNumeric" name="a612" id="a612"></td> <td><input type="numeric" class="inputNumeric" name="a613" id="a613"></td> <td><input type="numeric" class="inputNumeric" name="a614" id="a614"></td>
+                                    </tr>
+                                    
+                                  </tbody>
+                                  <tfoot>
+                                    <tr class="bg-warning">
+                                      <th scope="row">Total</th>    <td><input id="matriculadosIAMF" type="numeric" value="0" readonly></td><td><input id="matriculadosIAF" type="numeric" value="0" readonly></td><td><input id="matriculadosFAMF" type="numeric" value="0" readonly></td><td><input id="matriculadosFAF" type="numeric" value="0" readonly></td><td><input id="aprovadosMF" type="numeric" value="0" readonly></td><td><input id="aprovadosF" type="numeric" value="0" readonly></td> <td><input id="reprovadosMF" type="numeric" value="0" readonly></td> <td><input id="reprovadosF" type="numeric" value="0" readonly></td> <td><input id="transferidosEMF" type="numeric" value="0" readonly></td> <td><input id="transferidosEF" type="numeric" value="0" readonly></td> <td><input id="transferidosSMF" type="numeric" value="0" readonly></td> <td><input id="transferidosSF" type="numeric" value="0" readonly></td> <td><input id="desistentesMF" type="numeric" value="0" readonly></td> <td><input id="desistentesF" type="numeric" value="0" readonly></td>
+                                    </tr>
+                                  </tfoot>
+                              </table>
+                            </div>
+                            <!--Inputs Automaticos com dados da Unidade Organica etc..-->
+                            <input type="hidden" name="idUnidadeOrganica" value="{{  $unidadeOrganicaSelected->id }}">
+                            <input type="hidden" name="idDirector" value="{{  session()->only(['idFuncionario'])['idFuncionario'] }}">
+                            <input type="hidden" name="trimestre" value="I">
+                            <input type="hidden" name="anoLectivo" value="2023-2024">
+                            <button type="submit" style="font-weight: bold;" class="btn btn-primary w-100" onclick="confirmAndSubmit(event, 'Confirmar Submeter o Formulário de Aproveitamento?', 'Sim, Confirmar!', 'Não, Cancelar!')"> Verificar e Enviar</button>
+                            </form>
 
 
                                 </div>

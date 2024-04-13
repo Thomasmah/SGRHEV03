@@ -17,8 +17,9 @@ return new class extends Migration
             $table->integer('numeroAgente');
             $table->string('nomeCompleto');
             $table->string('eqt');
-            $table->integer('faltasJustificadas');
-            $table->integer('faltasInjustificadas');
+            $table->string('categoria');
+            $table->integer('faltasJustificadas')->nullable();
+            $table->integer('faltasInjustificadas')->nullable();
             $table->timestamps();
         });
     }

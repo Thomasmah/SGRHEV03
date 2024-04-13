@@ -43,9 +43,10 @@
                         </div>
                       <!-- /.card-header -->
                       <div class="card-body">
-                            <table id="example1" class="table table-bordered table-striped">
+                            <table id="example1" class="table table-bordered table-striped text-center">
                               <thead>
                               <tr>
+                                <th>Número de Ordem</th>
                                 <th>Mês / Periódo</th>
                                 <th>Estado</th>
                                 <th>Opções</th>
@@ -55,17 +56,20 @@
                               <!--Gerando a Tabela de forma Dinamica-->
                               @foreach ($dados as $mapas)
                                             <tr>
+                                                <td>{{ $mapas->numerOrdem }}</td>
                                                 <td>{{ $mapas->dataPeriodo }}</td>
                                                 <td>{{ $mapas->estado }}</td>
                                                 <td>
-                                                    <form action="" method="GET" style="display: inline;">
-                                                      @csrf
-                                                      <button type="submit" class="btn btn-info">Editar</button>
-                                                    </form>
-                                                    <form action="{{ route('funcionarios.form', ['id' => $funcionario->idPessoa]) }}" method="POST" style="display: inline;">
+                                                    <form action="{{ route('form.mapa.efectividade') }}" method="GET" style="display: inline;">
                                                       @csrf
                                                       @method('PUT')
-                                                      <button type="submit" class="btn btn-primary">Ver Mapa</button>
+                                                      <input type="hidden" name="idMapaEfectividade" value="{{ $mapas->id }}">
+                                                      <button type="submit" class="btn btn-info">Editar</button>
+                                                    </form>
+                                                    <form action="" method="POST" style="display: inline;">
+                                                      @csrf
+                                                      @method('PUT')
+                                                      <button type="submit" class="btn btn-primary">Ver / Baixar o Mapa </button>
                                                     </form>
                                                 </td>
                                             </tr>
@@ -73,6 +77,7 @@
                               </tbody>
                               <tfoot>
                               <tr>
+                                <th>Número de Ordem</th>
                                 <th>Mês / Periódo</th>
                                 <th>Estado</th>
                                 <th>Opções</th>
@@ -80,9 +85,53 @@
                               </tfoot>
                             </table>
                           </div>
-                          <div class="card-footer">
-                              <a href="{{ route('form.mapa.efectividade') }}" class="btn btn-primary d-block"> Criar Mapa de Efectividade</a>
-                          </div>  <!-- /.card-body -->
+                          <button class="btn btn-primary d-block" data-toggle="modal" data-target="#addMapaEfectividade">
+                                Criar no Mapa de Efectividade
+                          </button>
+                                                              <div class="modal fade" id="addMapaEfectividade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                                                                <div class="modal-dialog" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h6 class="modal-title" id="exampleModalLabel">Novo Mapa de Efectividade </h6>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+
+                                                                                <!-- Formulário dentro da modal -->
+                                                                              
+                                                                              <form action="{{ route('criar.mapa.efectividade') }}" method="POST">
+                                                                                  @method('POST')
+                                                                                  @csrf
+                                                                                  <label for="mes">Seleccione o Mês para o Plano de Efectividade</label>
+                                                                                  <select name="mes" id="" class="form-control" style="width: 100%;">
+                                                                                    <option value="janeiro">Janeiro</option>
+                                                                                    <option value="fevereiro">Fevereiro</option>
+                                                                                    <option value="marco">Março</option>
+                                                                                    <option value="abril">Abril</option>
+                                                                                    <option value="Janeiro">Maio</option>
+                                                                                    <option value="Janeiro">Junho</option>
+                                                                                    <option value="Janeiro">Julho</option>
+                                                                                    <option value="Janeiro">Agosto</option>
+                                                                                    <option value="Janeiro">Setembro</option>
+                                                                                    <option value="Janeiro">Outubro</option>
+                                                                                    <option value="Janeiro">Novenbro</option>
+                                                                                    <option value="Janeiro">Dezembro</option>
+                                                                                  </select>
+                                                                                  <label for="mes">Seleccione o Ano para o Plano de Efectividade</label>
+                                                                                  <input name="ano" class="form-control d-block" style="width: 100%;" type="number" min="2020" max="{{ date('Y') }}" step="1" value="" placeholder="{{ date('Y') }}"/>
+                                                                                  <label for="data"> Data</label>
+                                                                                  <input type="date" class="form-control" name="data">
+                                                                                  <br>
+                                                                                  <input type="submit" class="form-control btn btn-primary" style="width: 100%;" value="Abrir novo Mapa de Efectividade" >
+                                                                                <br>
+                                                                              </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                               </div>
+                           <!-- /.card-body -->
                     </div>
                     <!-- /.card -->
                   </div>

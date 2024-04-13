@@ -52,7 +52,7 @@
                     <div class="col-sm-6">
                       <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Criar Mapa de Efectividade </li>
+                        <li class="breadcrumb-item active">Mapas de Efectividade </li>
                       </ol>
                     </div>
                   </div>
@@ -61,38 +61,16 @@
 
               <!-- Main content -->
             <!--Formulario Abrir Mapa-->
-              <section class="content">
+              <section class="content d-none">
                 <div class="container-fluid">
                     <div class="row">
                       <div style="padding:10px; border-radius:5px; " class="col-12">
                         <div style="background-color: #ffffff;" class="card card-primary">
                           <div class="card-header">
-                                <h3 class="card-title">Editar Mapa de Efectividade</h3>  
+                                <h3 class="card-title">Novo Mapa de Efectividade</h3>  
                           </div>
                           <div class="card-body">
-                                  <form action="" method="POST">
-                                    @method('POST')
-                                    <label for="mes">Seleccione o Mês para o Plano de Efectividade</label>
-                                    <select name="mes" id="" class="form-control" style="width: 100%;">
-                                      <option value="janeiro">Janeiro</option>
-                                      <option value="fevereiro">Fevereiro</option>
-                                      <option value="marco">Março</option>
-                                      <option value="abril">Abril</option>
-                                      <option value="Janeiro">Maio</option>
-                                      <option value="Janeiro">Junho</option>
-                                      <option value="Janeiro">Julho</option>
-                                      <option value="Janeiro">Agosto</option>
-                                      <option value="Janeiro">Setembro</option>
-                                      <option value="Janeiro">Outubro</option>
-                                      <option value="Janeiro">Novenbro</option>
-                                      <option value="Janeiro">Dezembro</option>
-                                    </select>
-                                    <label for="mes">Seleccione o Ano para o Plano de Efectividade</label>
-                                    <input name="ano" class="form-control d-block" style="width: 100%;" type="number" min="2020" max="{{ date('Y') }}" step="1" value="" placeholder="{{ date('Y') }}" required/>
-                                    <br>
-                                    <input type="submit" class="form-control btn btn-primary" style="width: 100%;" value="Abrir novo Mapa de Efectividade" >
-                                    <br>
-                                  </form>
+                                  Corpo do Card
                           </div>
                         </div>
                       </div>
@@ -137,14 +115,25 @@
                                                   <td>
                                                       <form action="{{ route('perfil.show', ['idFuncionario' => $funcionario->id_funcionario]) }}" method="GET" style="display: inline;">
                                                         @csrf
-                                                        <button type="submit" class="btn btn-danger">Adicionar</button>
+                                                      <button type="submit" class="btn btn-primary w-100 m-1">Ver Perfil</button>
                                                       </form>
                                                       <br>
+                                                      <form action="{{ route('add.funcionario.efectividade') }}" method="POST" style="display: inline;">
+                                                        @csrf
+                                                        @method('POST')
+                                                        <input type="hidden" name="numeroAgente" value="{{ $funcionario->numeroAgente }}">
+                                                        <input type="hidden" name="nomeCompleto" value="{{ $funcionario->nomeCompleto }}">
+                                                        <input type="hidden" name="numeroBI" value="{{ $funcionario->numeroBI }}">
+                                                        <input type="hidden" name="unidadeOrganica" value="{{ $funcionario->designacao }}">
+                                                        <input type="hidden" name="categoria" value="{{ $funcionario->categoria }}">
+                                                        <input type="hidden" name="idMapaEfectividade" value="{{ $idMapaEfectividade }}">
+                                                        <button type="submit" class="btn btn-success w-100 m-1">Adicionar</button>
+                                                      </form>
                                                       <br>
                                                       <form action="{{ route('funcionarios.form', ['id' => $funcionario->idPessoa]) }}" method="POST" style="display: inline;">
                                                         @csrf
-                                                        @method('PUT')
-                                                        <button type="submit" class="btn btn-success">Remover</button>
+                                                        @method('POST')
+                                                        <button type="submit" class="btn btn-danger w-100 m-1">Remover</button>
                                                       </form>
                                                   </td>
                                               </tr>
@@ -190,24 +179,75 @@
                                 @csrf
                                 @method('POST')
                               <div class="table-responsive">
-                                <table class="table table-hover table-bordered border-secondary table-striped" style="text-align:center;">
-                                    <thead class="bg-primary">
-                                      <tr>
-                                        <th scope="col">Nº</th><th scope="col">Nº de Agente</th><th scope="col">Nome Completo</th> <th scope="col">[EQT]</th><th scope="col">Faltas Justificadas</th> <th scope="col">Faltas Injustificadas</th><th scope="col">OBS</th>
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                      <tr>
-                                          <td><input type="numeric" class="inputNumeric"></td> <td><input type="numeric" class="inputNumeric"></td> <td><input type="numeric" class="inputNumeric"></td> <td><input type="numeric" class="inputNumeric"></td> <td><input type="numeric" class="inputNumeric"></td> <td><input type="numeric" class="inputNumeric"></td> <td><input type="numeric" class="inputNumeric"></td>
-                                      </tr>
-                                    
-                                    </tbody>
-                                </table>
+                              <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                  <th>Número de Ordem</th>
+                                  <th>Número de Agente</th>
+                                  <th>Nome Completo</th>
+                                  <th>Unidade Orgânica</th>
+                                  <th>Categoria do Funcionário</th>
+                                  <th>faltasJustificadas</th>
+                                  <th>faltasInjustificadas</th>
+                                  <th>OBS</th>
+                                  <th>Opções</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <!--Gerando a Tabela de forma Dinamica-->
+                                @foreach ($faltas as $funcionario)
+                                              <tr>
+                                                  <td>{{ $funcionario->numerOrdem }}</td>
+                                                  <td>{{ $funcionario->numeroAgente }}</td>
+                                                  <td>{{ $funcionario->nomeCompleto }}</td>
+                                                  <td>{{ $funcionario->eqt }}</td>
+                                                  <td>{{ $funcionario->categoria }}</td>
+                                                  <td><input type="number" class="form-control text-center" name="faltasJustificadas" min="0" max="22" step="1" value=""></td>
+                                                  <td><input type="number" class="form-control text-center" name="faltasInjustificadas" min="0" max="22" step="1" value=""></td>
+                                                  <td><textarea name="obs" class="form-control" cols="300" maxlength="250"></textarea></td>
+
+                                                  <td>
+                                                      <form action="{{ route('aplicar.faltas') }}" method="POST" style="display: inline;">
+                                                        @csrf
+                                                        @method('POST')
+                                                          <input type="hidden" name="numerOrdem" value="{{ $funcionario->numerOrdem }}">
+                                                          <input type="hidden" name="numeroAgente" value="{{ $funcionario->numeroAgente }}">
+                                                          <input type="hidden" name="nomeCompleto" value="{{ $funcionario->nomeCompleto }}">
+                                                          <input type="hidden" name="eqt" value="{{ $funcionario->eqt }}">
+                                                          <input type="hidden" name="categoria" value="{{ $funcionario->categoria }}">
+                                                          <input type="hidden" name="" value="">
+                                                          <input type="hidden" name="" value="">
+                                                          
+                                                        <button type="submit" class="btn btn-success w-100 m-1">Aplicar</button>
+                                                      </form>
+                                                      <form action="" method="POST" style="display: inline;">
+                                                        @csrf
+                                                        @method('POST')
+                                                        <button type="submit" class="btn btn-danger w-100 m-1">Remover</button>
+                                                      </form>
+                                                  </td>
+                                              </tr>
+                                @endforeach
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                  <th>Número de Ordem</th>
+                                  <th>Número de Agente</th>
+                                  <th>Nome Completo</th>
+                                  <th>Unidade Orgânica</th>
+                                  <th>Categoria do Funcionário</th>
+                                  <th>faltasJustificadas</th>
+                                  <th>faltasInjustificadas</th>
+                                  <th>OBS</th>
+                                  <th>Opções</th>
+                                </tr>
+                                </tfoot>
+                              </table>
                               </div>
                               <!--Inputs Automaticos com dados da Unidade Organica etc..-->
                         
                               <input type="hidden" name="anoLectivo" value="2023-2024">
-                              <button type="submit" style="font-weight: bold;" class="btn btn-primary w-100" onclick="confirmAndSubmit(event, 'Confirmar Submeter o Formulário de Aproveitamento?', 'Sim, Confirmar!', 'Não, Cancelar!')"> Efectivar o Mapa de Efectividade</button>
+                              <button type="submit" style="font-weight: bold;" class="btn btn-primary w-100" onclick="confirmAndSubmit(event, 'Confirmar Submeter o Mapa de Efectividade?', 'Sim, Confirmar!', 'Não, Cancelar!')"> Efectivar o Mapa de Efectividade</button>
                             </form>
                           </div>
                         </div>

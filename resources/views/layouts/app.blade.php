@@ -92,6 +92,9 @@ use Illuminate\Support\Facades\Auth;
             .item-2 {
              padding-left: 15px;
             }
+            table tr:hover{
+                background-color: #f5f5f5;
+            }
         </style>
 
 

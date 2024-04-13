@@ -17,5 +17,6 @@ class MapaEfectividadefalta extends Model
         'eqt',
         'faltasJustificadas',
         'faltasInjustificadas',
+        'categoria',
     ];
 }
