@@ -64,7 +64,7 @@
                                                     <form action="{{ route('efectivar.mapa.efectividade') }}">
                                                       <input type="hidden" name="idMapaEfectividade" value="{{ $mapas->id }}">
                                                       <input type="hidden" name="categoria" value="MapaEfectividade">
-                                                      <button type="submit" class="btn btn-primary  w-100 m-1">Ver / Baixar o Mapa </button>
+                                                      <button type="submit" class="btn btn-secondary  w-100 m-1">Ver / Baixar o Mapa </button>
                                                     </form>
                                                 </td>
                                             </tr>

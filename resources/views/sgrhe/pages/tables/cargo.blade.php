@@ -67,14 +67,14 @@
                                                 <form action="{{ route('cargos.form', ['id' => $cargo->id]) }}" method="POST" style="display: inline;">
                                                   @csrf
                                                   @method('PUT')
-                                                    <button type="submit" class="btn btn-primary">Editar</button>
+                                                    <button type="submit" class="btn btn-warning w-100 m-1">Editar</button>
                                                 </form>
                                                 <form action="{{ route('eliminar.objecto') }}" method="POST" id="deleteForm{{ $cargo->id }}">
                                                     @csrf
                                                     @method('DELETE')
                                                     <input type="hidden" name="id" value="{{ $cargo->id }}">
                                                     <input type="hidden" name="categoria" value="Cargo">
-                                                    <button type="submit" class="btn btn-danger" onclick="confirmAndSubmit(event, 'Confirmar deletar Cargo?', 'Sim, Deletar!', 'Não, Cancelar!')">Deletar</button>
+                                                    <button type="submit" class="btn btn-danger w-100 m-1" onclick="confirmAndSubmit(event, 'Confirmar deletar Cargo?', 'Sim, Deletar!', 'Não, Cancelar!')">Deletar</button>
                                                 </form>
                                               </td>
                                           </tr>

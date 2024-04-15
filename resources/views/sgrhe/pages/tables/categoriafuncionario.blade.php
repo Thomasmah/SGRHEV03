@@ -65,12 +65,12 @@
                                                 <form action="{{ route('categoriafuncionarios.form', ['id' => $categoriafuncionario->id]) }}" method="POST" style="display: inline;">
                                                   @csrf
                                                   @method('PUT')
-                                                    <button type="submit" class="btn btn-primary">Editar</button>
+                                                    <button type="submit" class="btn btn-warning w-100 m-1">Editar</button>
                                                 </form>
                                                 <form action="{{ route('categoriafuncionarios.delete', ['id' => $categoriafuncionario->id])}}" method="POST" style="display: inline;">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger">Excluir</button>
+                                                    <button type="submit" class="btn btn-danger w-100 m-1">Excluir</button>
                                                 </form>
                                                 </td>
                                             </tr>

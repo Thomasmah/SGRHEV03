@@ -84,19 +84,19 @@
                                                   <td>
                                                       <form action="{{ route('perfil.show', ['idFuncionario' => $funcionario->id_funcionario]) }}" method="GET" style="display: inline;">
                                                         @csrf
-                                                        <button type="submit" class="btn btn-info">Ver Perfil</button>
+                                                        <button type="submit" class="btn btn-primary w-100 m-1">Ver Perfil</button>
                                                       </form>
                                                       <form action="{{ route('funcionarios.form', ['id' => $funcionario->idPessoa]) }}" method="POST" style="display: inline;">
                                                         @csrf
                                                         @method('PUT')
-                                                        <button type="submit" class="btn btn-primary">Editar</button>
+                                                        <button type="submit" class="btn btn-warning w-100 m-1">Editar</button>
                                                       </form>
                                                       <form action="{{ route('eliminar.objecto') }}" method="POST" id="deleteForm{{ $funcionario->id_funcionario }}">
                                                       @csrf
                                                       @method('DELETE')
                                                       <input type="hidden" name="id" value="{{ $funcionario->id_funcionario }}">
                                                       <input type="hidden" name="categoria" value="Funcionario">
-                                                      <button type="submit" class="btn btn-danger" onclick="confirmAndSubmit(event, 'Confirmar deletar  Funcionário?', 'Sim, Deletar!', 'Não, Cancelar!')">Deletar</button>
+                                                      <button type="submit" class="btn btn-danger w-100 m-1" onclick="confirmAndSubmit(event, 'Confirmar deletar  Funcionário?', 'Sim, Deletar!', 'Não, Cancelar!')">Deletar</button>
                                                   </form>
                                                   </td>
                                               </tr>

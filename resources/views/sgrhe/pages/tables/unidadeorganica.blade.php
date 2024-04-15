@@ -74,19 +74,19 @@
                                                 <form action="{{ route('unidadeOrganica.show', ['idUnidadeOrganica' => $unidadeOrganica->id]) }}" method="POST" style="display: inline;">
                                                   @csrf
                                                   @method('PUT')
-                                                    <button type="submit" class="btn btn-secondary">Ver U-O</button>
+                                                    <button type="submit" class="btn btn-primary w-100 m-1">Ver</button>
                                                 </form>
                                                 <form action="{{ route('unidadeorganicas.form', ['id' => $unidadeOrganica->id]) }}" method="POST" style="display: inline;">
                                                   @csrf
                                                   @method('PUT')
-                                                    <button type="submit" class="btn btn-primary">Editar</button>
+                                                    <button type="submit" class="btn btn-warning w-100 m-1">Editar</button>
                                                 </form>
                                                 <form action="{{ route('eliminar.objecto') }}" method="POST" id="deleteForm{{ $unidadeOrganica->id }}">
                                                     @csrf
                                                     @method('DELETE')
                                                     <input type="hidden" name="id" value="{{ $unidadeOrganica->id }}">
                                                     <input type="hidden" name="categoria" value="UnidadeOrganica">
-                                                    <button type="submit" class="btn btn-danger" onclick="confirmAndSubmit(event, 'Confirmar deletar Unidade Orgânica?', 'Sim, Deletar!', 'Não, Cancelar!')">Deletar</button>
+                                                    <button type="submit" class="btn btn-danger w-100 m-1" onclick="confirmAndSubmit(event, 'Confirmar deletar Unidade Orgânica?', 'Sim, Deletar!', 'Não, Cancelar!')">Deletar</button>
                                                 </form>
                                                 </td>
                                             </tr>

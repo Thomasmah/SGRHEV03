@@ -60,7 +60,7 @@
                                                       @csrf
                                                       @method('PUT')
                                                       <input type="hidden" name="id" value="{{ $avaliacao->idArquivo }}">
-                                                      <button type="submit" class="btn btn-secondary">Baixar Avaliação</button>
+                                                      <button type="submit" class="btn btn-secondary w-100 m-1">Baixar Avaliação</button>
                                                     </form>
                                                 </td>
                                             </tr>

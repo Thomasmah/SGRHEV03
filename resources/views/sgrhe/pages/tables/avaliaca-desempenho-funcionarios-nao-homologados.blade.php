@@ -60,20 +60,20 @@
                                                       @csrf
                                                       @method('PUT')
                                                       <input type="hidden" name="id" value="{{ $avaliacao->id_avaliacao_desempenho }}">
-                                                      <button type="submit" class="btn btn-primary">Ver Avaliação</button>
+                                                      <button type="submit" class="btn btn-primary w-100 m-1">Ver Avaliação</button>
                                                     </form>
                                                     <form action="{{ route('homologar.avaliacao') }}" method="POST" style="display: inline;">
                                                       @csrf
                                                       @method('POST')
                                                       <input type="hidden" name="id" value="{{ $avaliacao->id_avaliacao_desempenho }}">
-                                                      <button type="submit" class="btn btn-warning">Homologar Avaliação</button>
+                                                      <button type="submit" class="btn btn-success w-100 m-1">Homologar Avaliação</button>
                                                     </form>
                                                     <form action="{{ route('eliminar.objecto') }}" method="POST" id="deleteForm{{ $avaliacao->id }}">
                                                         @csrf
                                                         @method('DELETE')
                                                         <input type="hidden" name="id" value="{{ $avaliacao->id_avaliacao_desempenho }}">
                                                         <input type="hidden" name="categoria" value="AvaliacaoFuncionario">
-                                                        <button type="submit" class="btn btn-danger" onclick="confirmAndSubmit(event, 'Confirmar deletar Avaliação de Funcionário?', 'Sim, Deletar!', 'Não, Cancelar!')">Deletar</button>
+                                                        <button type="submit" class="btn btn-danger w-100 m-1" onclick="confirmAndSubmit(event, 'Confirmar deletar Avaliação de Funcionário?', 'Sim, Deletar!', 'Não, Cancelar!')">Deletar</button>
                                                     </form>
                                                 </td>
                                             </tr>

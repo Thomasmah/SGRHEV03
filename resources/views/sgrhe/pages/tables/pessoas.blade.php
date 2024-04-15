@@ -82,19 +82,19 @@
                                                 <form class=" " action="{{ route('funcionarios.verificarPessoa') }}" method="GET" style="display: inline;">
                                                   @csrf
                                                     <input type="hidden" name="numeroBI" id="numeroBI" value="{{$pessoa->numeroBI}}">
-                                                    <button type="submit" class="btn btn-secondary {{ isset($isFuncionario) ? 'd-none' : ''}}"> Cadastrar à Funcionário</button>
+                                                    <button type="submit" class="btn btn-success w-100 m-1 {{ isset($isFuncionario) ? 'd-none' : ''}}"> Cadastrar à Funcionário</button>
                                                 </form>
                                                 <form class=" " action="{{ route('pessoas.form', ['id' => $pessoa->id]) }}" method="POST" style="display: inline;">
                                                   @csrf
                                                   @method('PUT')
-                                                    <button type="submit" class="btn btn-primary">Editar</button>
+                                                    <button type="submit" class="btn btn-warning w-100 m-1">Editar</button>
                                                 </form>
                                                 <form action="{{ route('eliminar.objecto') }}" method="POST" id="deleteForm{{ $pessoa->id }}">
                                                     @csrf
                                                     @method('DELETE')
                                                     <input type="hidden" name="id" value="{{ $pessoa->id }}">
                                                     <input type="hidden" name="categoria" value="Pessoa">
-                                                    <button type="submit" class="btn btn-danger" onclick="confirmAndSubmit(event, 'Confirmar deletar Pessoa?', 'Sim, Deletar!', 'Não, Cancelar!')">Deletar</button>
+                                                    <button type="submit" class="btn btn-danger w-100 m-1" onclick="confirmAndSubmit(event, 'Confirmar deletar Pessoa?', 'Sim, Deletar!', 'Não, Cancelar!')">Deletar</button>
                                                 </form>
                                                 </td>
                                             </tr>
