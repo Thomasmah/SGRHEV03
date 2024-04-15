@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('mapa_efectividadefaltas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('idMapaEfectividade');
+            $table->foreign('idMapaEfectividade')->references('id')->on('mapa_efectividades')->onDelete('cascade'); 
             $table->integer('numeroAgente');
             $table->string('nomeCompleto');
             $table->string('eqt');
             $table->string('categoria');
+            $table->string('obs')->nullable();
             $table->integer('faltasJustificadas')->nullable();
             $table->integer('faltasInjustificadas')->nullable();
             $table->timestamps();

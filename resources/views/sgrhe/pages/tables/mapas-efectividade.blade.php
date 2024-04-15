@@ -60,15 +60,9 @@
                                                 <td>{{ $mapas->dataPeriodo }}</td>
                                                 <td>{{ $mapas->estado }}</td>
                                                 <td>
-                                                    <form action="{{ route('form.mapa.efectividade') }}" method="GET" style="display: inline;">
-                                                      @csrf
-                                                      @method('PUT')
-                                                      <input type="hidden" name="idMapaEfectividade" value="{{ $mapas->id }}">
-                                                      <button type="submit" class="btn btn-info">Editar</button>
-                                                    </form>
+                                                    <a href="{{ route('form.mapa.efectividade', ['idMapaEfectividade' => $mapas->id ]) }}" class="btn btn-success">Editar Mapa</a>
                                                     <form action="" method="POST" style="display: inline;">
                                                       @csrf
-                                                      @method('PUT')
                                                       <button type="submit" class="btn btn-primary">Ver / Baixar o Mapa </button>
                                                     </form>
                                                 </td>

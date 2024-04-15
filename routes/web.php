@@ -284,10 +284,11 @@ Route::any('/exibir/documento/{documento}',[DocumentoController::class,'exibirDo
 
 //Operacoes com Mapas de Efectividades
 Route::any('/index/mapas/efectividades/', [MapaEfectividadeController::class, 'indexMapasEfectividade'])->name('mapas.efectividade');
-Route::any('/criar/mapa/efectividade/', [MapaEfectividadeController::class, 'criarMapaEfectividade'])->name('criar.mapa.efectividade');
-Route::any('/form/mapa/efectividade/', [MapaEfectividadeController::class, 'formMapaEfectividade'])->name('form.mapa.efectividade');
-Route::any('/add/funcionario/efectividade/', [MapaEfectividadeController::class, 'addFuncionarioEfectividade'])->name('add.funcionario.efectividade');
-Route::any('/aplicar/faltas/efectividade/', [MapaEfectividadeController::class, 'aplicarFaltas'])->name('aplicar.faltas');
+Route::any('/mapa/efectividade/', [MapaEfectividadeController::class, 'criarMapaEfectividade'])->name('criar.mapa.efectividade');
+Route::any('/form/efectividade/{idMapaEfectividade}', [MapaEfectividadeController::class, 'formMapaEfectividade'])->name('form.mapa.efectividade');
+Route::any('/add/efectividade/', [MapaEfectividadeController::class, 'addFuncionarioEfectividade'])->name('add.funcionario.efectividade');
+Route::any('/faltas/efectividade/', [MapaEfectividadeController::class, 'aplicarFaltas'])->name('aplicar.faltas');
+Route::any('/remover/efectividade/', [MapaEfectividadeController::class, 'removerDoMapaEfectividade'])->name('remover.do.mapa.efectividade');
 
 
 

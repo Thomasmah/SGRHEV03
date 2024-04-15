@@ -33,109 +33,108 @@
 
               <!-- Main content -->
               <section class="content">
-              <div class="container-fluid">
-                <div class="row">
-                  <div style="padding:10px; border-radius:5px; " class="col-12">
-                    <div style="background-color: #ffffff;" class="card card-primary">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div style="padding:10px; border-radius:5px; " class="col-12">
+                      <div style="background-color: #ffffff;" class="card card-primary">
 
-                        <div class="card-header">
-                              <h3 class="card-title">Funcionário / Força de Trabaho</h3>  
-                        </div>
-                      <!-- /.card-header -->
-                      <div class="card-body">
-                            <table id="example1" class="table table-bordered table-striped">
-                              <thead>
-                              <tr>
-                                <th>Estado</th>
-                                <th>Número de Agente</th>
-                                <th>Nome Completo</th>
-                                <th>Nº de BI</th>
-                                <th>Validade do BI</th>
-                                <th>Unidade Orgânica</th>
-                                <th>Categoria Funcionário</th>
-                                <th>Data de Admissão</th>
-                                <th>Email</th>
-                                <th>IBAN</th>
-                                <th>Data Nascimento</th>
-                                <th>Genêro</th>
-                                <th>Grupo Sanguíneo</th>
-                                <th>Estado Civíl</th>
-                                <th>Opções</th>
-                              </tr>
-                              </thead>
-                              <tbody>
-                              <!--Gerando a Tabela de forma Dinamica-->
-                              @foreach ($dados as $funcionario)
-                                            <tr>
-                                            <td>{{ $funcionario->estado }}</td>
-                                                <td>{{ $funcionario->numeroAgente }}</td>
-                                                <td>{{ $funcionario->nomeCompleto }}</td>
-                                                <td>{{ $funcionario->numeroBI }}</td>
-                                                <td>{{ $funcionario->validadeBI }}</td>
-                                                <td>{{ $funcionario->designacao }}</td>
-                                                <td>{{ $funcionario->categoria }}</td>
-                                                <td>{{ $funcionario->dataAdmissao }}</td>
-                                                <td>{{ $funcionario->email }}</td>
-                                                <td>{{ $funcionario->iban }}</td>
-                                                <td>{{ $funcionario->dataNascimento }}</td>
-                                                <td>{{ $funcionario->genero }}</td>
-                                                <td>{{ $funcionario->grupoSanguineo }}</td>
-                                                <td>{{ $funcionario->estadoCivil }}</td>
-                                                <td>
-                                                    <form action="{{ route('perfil.show', ['idFuncionario' => $funcionario->id_funcionario]) }}" method="GET" style="display: inline;">
-                                                      @csrf
-                                                      <button type="submit" class="btn btn-info">Ver Perfil</button>
-                                                    </form>
-                                                    <form action="{{ route('funcionarios.form', ['id' => $funcionario->idPessoa]) }}" method="POST" style="display: inline;">
-                                                      @csrf
-                                                      @method('PUT')
-                                                      <button type="submit" class="btn btn-primary">Editar</button>
-                                                    </form>
-                                                    <form action="{{ route('eliminar.objecto') }}" method="POST" id="deleteForm{{ $funcionario->id_funcionario }}">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <input type="hidden" name="id" value="{{ $funcionario->id_funcionario }}">
-                                                    <input type="hidden" name="categoria" value="Funcionario">
-                                                    <button type="submit" class="btn btn-danger" onclick="confirmAndSubmit(event, 'Confirmar deletar  Funcionário?', 'Sim, Deletar!', 'Não, Cancelar!')">Deletar</button>
-                                                </form>
-                                                </td>
-                                            </tr>
-                              @endforeach
-                              </tbody>
-                              <tfoot>
-                              <tr>
-                                <th>Estado</th>
-                                <th>Número de Agente</th>
-                                <th>Nome Completo</th>
-                                <th>Nº de BI</th>
-                                <th>Validade do BI</th>
-                                <th>Unidade Orgânica</th>
-                                <th>Categoria Funcionário</th>
-                                <th>Data de Admissão</th>
-                                <th>Email</th>
-                                <th>IBAN</th>
-                                <th>Data Nascimento</th>
-                                <th>Genêro</th>
-                                <th>Grupo Sanguíneo</th>
-                                <th>Estado Civíl</th>
-                                <th>Opções</th>
-                              </tr>
-                              </tfoot>
-                            </table>
+                          <div class="card-header">
+                                <h3 class="card-title">Funcionário / Força de Trabaho</h3>  
                           </div>
-                          <div class="card-footer">
-                              <a href="{{route('funcionarios.form')}}" class="btn btn-primary d-block"> Cadastrar Funcionário</a>
-                          </div>  <!-- /.card-body -->
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                              <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                  <th>Estado</th>
+                                  <th>Número de Agente</th>
+                                  <th>Nome Completo</th>
+                                  <th>Nº de BI</th>
+                                  <th>Validade do BI</th>
+                                  <th>Unidade Orgânica</th>
+                                  <th>Categoria Funcionário</th>
+                                  <th>Data de Admissão</th>
+                                  <th>Email</th>
+                                  <th>IBAN</th>
+                                  <th>Data Nascimento</th>
+                                  <th>Genêro</th>
+                                  <th>Grupo Sanguíneo</th>
+                                  <th>Estado Civíl</th>
+                                  <th>Opções</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <!--Gerando a Tabela de forma Dinamica-->
+                                @foreach ($dados as $funcionario)
+                                              <tr>
+                                              <td>{{ $funcionario->estado }}</td>
+                                                  <td>{{ $funcionario->numeroAgente }}</td>
+                                                  <td>{{ $funcionario->nomeCompleto }}</td>
+                                                  <td>{{ $funcionario->numeroBI }}</td>
+                                                  <td>{{ $funcionario->validadeBI }}</td>
+                                                  <td>{{ $funcionario->designacao }}</td>
+                                                  <td>{{ $funcionario->categoria }}</td>
+                                                  <td>{{ $funcionario->dataAdmissao }}</td>
+                                                  <td>{{ $funcionario->email }}</td>
+                                                  <td>{{ $funcionario->iban }}</td>
+                                                  <td>{{ $funcionario->dataNascimento }}</td>
+                                                  <td>{{ $funcionario->genero }}</td>
+                                                  <td>{{ $funcionario->grupoSanguineo }}</td>
+                                                  <td>{{ $funcionario->estadoCivil }}</td>
+                                                  <td>
+                                                      <form action="{{ route('perfil.show', ['idFuncionario' => $funcionario->id_funcionario]) }}" method="GET" style="display: inline;">
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-info">Ver Perfil</button>
+                                                      </form>
+                                                      <form action="{{ route('funcionarios.form', ['id' => $funcionario->idPessoa]) }}" method="POST" style="display: inline;">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <button type="submit" class="btn btn-primary">Editar</button>
+                                                      </form>
+                                                      <form action="{{ route('eliminar.objecto') }}" method="POST" id="deleteForm{{ $funcionario->id_funcionario }}">
+                                                      @csrf
+                                                      @method('DELETE')
+                                                      <input type="hidden" name="id" value="{{ $funcionario->id_funcionario }}">
+                                                      <input type="hidden" name="categoria" value="Funcionario">
+                                                      <button type="submit" class="btn btn-danger" onclick="confirmAndSubmit(event, 'Confirmar deletar  Funcionário?', 'Sim, Deletar!', 'Não, Cancelar!')">Deletar</button>
+                                                  </form>
+                                                  </td>
+                                              </tr>
+                                @endforeach
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                  <th>Estado</th>
+                                  <th>Número de Agente</th>
+                                  <th>Nome Completo</th>
+                                  <th>Nº de BI</th>
+                                  <th>Validade do BI</th>
+                                  <th>Unidade Orgânica</th>
+                                  <th>Categoria Funcionário</th>
+                                  <th>Data de Admissão</th>
+                                  <th>Email</th>
+                                  <th>IBAN</th>
+                                  <th>Data Nascimento</th>
+                                  <th>Genêro</th>
+                                  <th>Grupo Sanguíneo</th>
+                                  <th>Estado Civíl</th>
+                                  <th>Opções</th>
+                                </tr>
+                                </tfoot>
+                              </table>
+                            </div>
+                            <div class="card-footer">
+                                <a href="{{route('funcionarios.form')}}" class="btn btn-primary d-block"> Cadastrar Funcionário</a>
+                            </div>  <!-- /.card-body -->
+                      </div>
+                      <!-- /.card -->
                     </div>
-                    <!-- /.card -->
+                    <!-- /.col -->
                   </div>
-                  <!-- /.col -->
+                  <!-- /.row -->
                 </div>
-                <!-- /.row -->
-              </div>
-              <!-- /.container-fluid -->
-                </section>
-              <!-- /.content -->
+              </section>
+              <!-- /.Main content -->
      
             </div>
           <!-- /.content-wrapper -->
