@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Funcionario;
 use App\Models\MapaEfectividade;
 use App\Models\MapaEfectividadefalta;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Dompdf\Adapter\PDFLib;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Exists;
+
 
 class MapaEfectividadeController extends Controller
 {
@@ -161,7 +164,18 @@ class MapaEfectividadeController extends Controller
             $funcionario['numerOrdem'] = $numerOrdem ++;
             return [$funcionario->getKey() => $funcionario];
         });
-        dd($funcionarios);
+        $categoria = $request->categoria;
+        $Documento = PDF::loadView("sgrhe/modelos/$categoria",compact('funcionarios'));      
+        //Renderizar a View
+        $Documento->render();
+        //Nomear o Nome do Novo ficheiro PDF
+        $fileName = 'file.pdf';
+        //Retornar o Domunento Gerado 
+       // return view("sgrhe/modelos/$categoria",compact('Request','pessoa','funcionario','cargo','categoriaFuncionario'));
+        return response($Documento->output(), 200, ['Content-Type' => 'application/pdf', 'Content-Disposition' => 'inline; filename="'.$fileName.'"']);
+
+      
+
  
     }
     

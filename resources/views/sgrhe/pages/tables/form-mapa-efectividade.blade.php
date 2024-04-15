@@ -192,6 +192,7 @@
                               <div class="card-footer">
                                 <form action="{{ route('efectivar.mapa.efectividade') }}">
                                   <input type="hidden" name="idMapaEfectividade" value="{{ $idMapaEfectividade }}">
+                                  <input type="hidden" name="categoria" value="MapaEfectividade">
                                   <button type="submit" style="font-weight: bold;" class="btn btn-primary w-100" onclick="confirmAndSubmit(event, 'Confirmar Submeter o Mapa de Efectividade?', 'Sim, Confirmar!', 'Não, Cancelar!')"> Efectivar o Mapa de Efectividade</button>
                                 </form>
                               </div>  <!-- /.card-body -->
