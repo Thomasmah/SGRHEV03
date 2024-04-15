@@ -46,7 +46,7 @@ class MapaEfectividadeController extends Controller
     
     public function addFuncionarioEfectividade(Request $request)
     {
-        dd($request->all());
+        //dd($request->all());
         //Validade de modo a evitar a duplcacao de funcionarios dentro do mesmo mapa de Efectividade
         $request->validate([
    
@@ -121,7 +121,7 @@ class MapaEfectividadeController extends Controller
      */
     public function aplicarFaltas(Request $request)
     {
-        dd($request->all());
+        //dd($request->all());
         DB::beginTransaction();
         $mapaFaltas = MapaEfectividadefalta::where('idMapaEfectividade', $request->idMapaEfectividade)->where('numeroAgente', $request->numeroAgente)->first();
         $mapaFaltas->faltasJustificadas = $request->input('Justificadas');
@@ -149,6 +149,20 @@ class MapaEfectividadeController extends Controller
             DB::rollBack();
             return redirect()->back()->with('success', 'Erro ao excluir o Funcionário(a) '.$request->nomeCompleto.'!');
         }
+    }
+
+    public function efectivarMapaEfectividade(Request $request)
+    {
+        //dd($request->all());
+        $funcionarios = MapaEfectividadefalta::where('idMapaEfectividade', $request->idMapaEfectividade)->get();
+        $numerOrdem = 1;
+        $funcionarios = $funcionarios->mapWithKeys( function($funcionario)
+        use(&$numerOrdem){
+            $funcionario['numerOrdem'] = $numerOrdem ++;
+            return [$funcionario->getKey() => $funcionario];
+        });
+        dd($funcionarios);
+ 
     }
     
 }

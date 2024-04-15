@@ -289,6 +289,7 @@ Route::any('/form/efectividade/{idMapaEfectividade}', [MapaEfectividadeControlle
 Route::any('/add/efectividade/', [MapaEfectividadeController::class, 'addFuncionarioEfectividade'])->name('add.funcionario.efectividade');
 Route::any('/faltas/efectividade/', [MapaEfectividadeController::class, 'aplicarFaltas'])->name('aplicar.faltas');
 Route::any('/remover/efectividade/', [MapaEfectividadeController::class, 'removerDoMapaEfectividade'])->name('remover.do.mapa.efectividade');
+Route::any('/efectivar/mapa/', [MapaEfectividadeController::class, 'efectivarMapaEfectividade'])->name('efectivar.mapa.efectividade');
 
 
 

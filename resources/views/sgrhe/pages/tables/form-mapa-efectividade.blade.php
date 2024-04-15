@@ -190,7 +190,10 @@
                                 </table>
                               </div>
                               <div class="card-footer">
-                                  <a href="{{route('funcionarios.form')}}" class="btn btn-primary d-block"> Cadastrar Funcionário</a>
+                                <form action="{{ route('efectivar.mapa.efectividade') }}">
+                                  <input type="hidden" name="idMapaEfectividade" value="{{ $idMapaEfectividade }}">
+                                  <button type="submit" style="font-weight: bold;" class="btn btn-primary w-100" onclick="confirmAndSubmit(event, 'Confirmar Submeter o Mapa de Efectividade?', 'Sim, Confirmar!', 'Não, Cancelar!')"> Efectivar o Mapa de Efectividade</button>
+                                </form>
                               </div>  <!-- /.card-body -->
                         </div>
                         <!-- /.card -->
