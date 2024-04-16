@@ -190,7 +190,7 @@
               <!-- /.card -->
 
               <!-- Map card -->
-                <div class="card bg-gradient-primary">
+                <div class="card bg-gradient-primary  d-none">
                   <div class="card-header border-0">
                     <h3 class="card-title">
                       <i class="fas fa-map-marker-alt mr-1"></i>

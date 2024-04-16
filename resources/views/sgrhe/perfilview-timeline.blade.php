@@ -146,7 +146,7 @@
                                           <!-- timeline time label -->
                                             <div class="time-label">
                                               <span class="bg-success">
-                                                3 Jan. 2014
+                                                Início
                                               </span>
                                             </div>
                                           <!-- /.timeline-label -->
@@ -163,7 +163,7 @@
                                                  Seja bem vindo. Corpo do post em sua linha de Tempo
                                                 </div>
                                                 <div class="timeline-footer">
-                                                  <a href="#" class="btn btn-warning btn-flat btn-sm">Ver mais...</a>
+                                           
                                                 </div>
                                               </div>
                                             </div>

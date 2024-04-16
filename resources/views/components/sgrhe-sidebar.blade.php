@@ -207,36 +207,39 @@
                           </ul>
                         </li>
                       <!-- Opcoes do Funcionario-->
-                      <!--Serviços-->
-                        <li class="nav-item {{ request()->routeIs('habilitacaos.index') || request()->routeIs('habilitacaos.form') ? 'menu-open' : '' }}">
-                          <a href="#" class="nav-link {{ request()->routeIs('habilitacaos.index') || request()->routeIs('habilitacaos.form') ? 'active' : '' }}">
-                           <i class="bi bi-subtract"></i>
-                            <p class="item-1">
-                               Serviços
-                              <i class="right fas fa-angle-left"></i>
-                            </p>
-                          </a>
+                    
+        
+              @if ($permissoes === 'Admin' || $permissoes >= 5 )
+                      <!--Avaliacao de Desempenho-->
+                        <li class="nav-item {{ request()->routeIs('avaliacao.nao.homologados') || request()->routeIs('avaliacao.funcionarios.homologados') ? 'menu-open' : '' }}">
+                        <a href="#" class="nav-link {{ request()->routeIs('avaliacao.nao.homologados') || request()->routeIs('avaliacao.funcionarios.homologados') ? 'active' : '' }}">
+                          <i class="fas fa-building"></i>
+                          <p class="item-1">
+                          Avaliação de Desempenho
+                            <i class="right fas fa-angle-left"></i>
+                          </p>
+                        </a>
                           <ul class="nav nav-treeview">
                             <li class="nav-item">
-                              <a href=""  class="nav-link {{ request()->routeIs('habilitacaos.form') ? 'active' : ''}}">
+                              <a href="{{route('avaliacao.funcionarios.homologados')}}"  class="nav-link {{ request()->routeIs('avaliacao.funcionarios.homologados') ? 'active' : ''}}">
                                 <p class="item-2">
-                                <i class="bi bi-calendar2-range"></i>
-                                 Solicitar Licença
+                                 <i class="bi bi-view-list"></i>
+                                  Mapa Geral de Avaliação / Index 
                                 </p>
                               </a>
                             </li>
                             <li class="nav-item">
-                              <a href=""  class="nav-link {{ request()->routeIs('habilitacaos.form') ? 'active' : ''}}">
+                              <a href="{{route('avaliacao.nao.homologados')}}" class="nav-link {{ request()->routeIs('avaliacao.nao.homologados') ? 'active' : ''}}">
                                 <p class="item-2">
-                                <i class="bi bi-calendar2-range"></i>
-                                Outros
+                                 <i class="bi bi-building-fill-add"></i>
+                                  Por Homologar
                                 </p>
                               </a>
                             </li>
-
                           </ul>
                         </li>
-                      <!--/.Serviços-->
+                      <!--/.UnidadeOrganica-->
+              @endif
               @if ($permissoes === 'Admin' || $permissoes >= 5 )
                       <!--Funcionários-->
                         <li class="nav-item {{ request()->routeIs('funcionarios.index') || request()->routeIs('funcionarios.form') ? 'menu-open' : '' }}">
@@ -269,66 +272,35 @@
                       <!--/.funcionários-->
               @endif
               @if ($permissoes === 'Admin' || $permissoes >= 5 )
-                      <!--UnidadeOrganica-->
-                        <li class="nav-item {{ request()->routeIs('unidadeorganicas.index') || request()->routeIs('unidadeorganicas.form') ? 'menu-open' : '' }}">
-                        <a href="#" class="nav-link {{ request()->routeIs('unidadeorganicas.index') || request()->routeIs('unidadeorganicas.form') ? 'active' : '' }}">
-                          <i class="fas fa-building"></i>
-                          <p class="item-1">
-                          Unidade Orgânica
-                            <i class="right fas fa-angle-left"></i>
-                          </p>
-                        </a>
+                      <!--CategoriaFuncionario-->
+                        <li class="nav-item {{ request()->routeIs('categoriafuncionarios.index') || request()->routeIs('categoriafuncionarios.form') ? 'menu-open' : '' }}">
+                          <a href="#" class="nav-link {{ request()->routeIs('categoriafuncionarios.index') || request()->routeIs('categoriafuncionarios.form') ? 'active' : '' }}">
+                            <i class="fas fa-user-graduate"></i>
+                            <p class="item-1">
+                            Categoria de Funcionários
+                              <i class="right fas fa-angle-left"></i>
+                            </p>
+                          </a>
                           <ul class="nav nav-treeview">
                             <li class="nav-item">
-                              <a href="{{route('unidadeorganicas.index')}}"  class="nav-link {{ request()->routeIs('unidadeorganicas.index') ? 'active' : ''}}">
+                              <a href="{{route('categoriafuncionarios.index')}}"  class="nav-link {{ request()->routeIs('categoriafuncionarios.index') ? 'active' : ''}}">
                                 <p class="item-2">
-                                 <i class="bi bi-view-list"></i>
-                                  Unidade Orgánica / Index 
+                                <i class="bi bi-view-list"></i>
+                                  Categoria de Funcionários / Index
                                 </p>
                               </a>
                             </li>
                             <li class="nav-item">
-                              <a href="{{route('unidadeorganicas.form')}}" class="nav-link {{ request()->routeIs('unidadeorganicas.form') ? 'active' : ''}}">
+                              <a href="{{route('categoriafuncionarios.form')}}"  class="nav-link {{ request()->routeIs('categoriafuncionarios.form') ? 'active' : ''}}">
                                 <p class="item-2">
-                                 <i class="bi bi-building-fill-add"></i>
-                                  Cadastrar Unidade Orgánica
+                                 <i class="bi bi-node-plus-fill"></i>
+                                  Cadastarar Categoria de Funcionários
                                 </p>
                               </a>
                             </li>
                           </ul>
                         </li>
-                      <!--/.UnidadeOrganica-->
-              @endif
-              @if ($permissoes === 'Admin' || $permissoes >= 5 )
-                      <!--Avaliacao de Desempenho-->
-                        <li class="nav-item {{ request()->routeIs('avaliacao.nao.homologados') || request()->routeIs('avaliacao.funcionarios.homologados') ? 'menu-open' : '' }}">
-                        <a href="#" class="nav-link {{ request()->routeIs('avaliacao.nao.homologados') || request()->routeIs('avaliacao.funcionarios.homologados') ? 'active' : '' }}">
-                          <i class="fas fa-building"></i>
-                          <p class="item-1">
-                          Avaliação de Desempenho
-                            <i class="right fas fa-angle-left"></i>
-                          </p>
-                        </a>
-                          <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                              <a href="{{route('avaliacao.funcionarios.homologados')}}"  class="nav-link {{ request()->routeIs('avaliacao.funcionarios.homologados') ? 'active' : ''}}">
-                                <p class="item-2">
-                                 <i class="bi bi-view-list"></i>
-                                  Mapa Geral de Avaliação / Index 
-                                </p>
-                              </a>
-                            </li>
-                            <li class="nav-item">
-                              <a href="{{route('avaliacao.nao.homologados')}}" class="nav-link {{ request()->routeIs('avaliacao.nao.homologados') ? 'active' : ''}}">
-                                <p class="item-2">
-                                 <i class="bi bi-building-fill-add"></i>
-                                  Por Homologar
-                                </p>
-                              </a>
-                            </li>
-                          </ul>
-                        </li>
-                      <!--/.UnidadeOrganica-->
+                      <!--/.CategoriaFuncionario-->
               @endif
               @if ($permissoes === 'Admin' || $permissoes >= 5 )
 
@@ -363,6 +335,37 @@
                       <!--/.Pessoas-->
               @endif
               @if ($permissoes === 'Admin' || $permissoes >= 5 )
+                      <!--UnidadeOrganica-->
+                        <li class="nav-item {{ request()->routeIs('unidadeorganicas.index') || request()->routeIs('unidadeorganicas.form') ? 'menu-open' : '' }}">
+                        <a href="#" class="nav-link {{ request()->routeIs('unidadeorganicas.index') || request()->routeIs('unidadeorganicas.form') ? 'active' : '' }}">
+                          <i class="fas fa-building"></i>
+                          <p class="item-1">
+                          Unidade Orgânica
+                            <i class="right fas fa-angle-left"></i>
+                          </p>
+                        </a>
+                          <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                              <a href="{{route('unidadeorganicas.index')}}"  class="nav-link {{ request()->routeIs('unidadeorganicas.index') ? 'active' : ''}}">
+                                <p class="item-2">
+                                 <i class="bi bi-view-list"></i>
+                                  Unidade Orgánica / Index 
+                                </p>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="{{route('unidadeorganicas.form')}}" class="nav-link {{ request()->routeIs('unidadeorganicas.form') ? 'active' : ''}}">
+                                <p class="item-2">
+                                 <i class="bi bi-building-fill-add"></i>
+                                  Cadastrar Unidade Orgánica
+                                </p>
+                              </a>
+                            </li>
+                          </ul>
+                        </li>
+                      <!--/.UnidadeOrganica-->
+              @endif
+              @if ($permissoes === 'Admin' || $permissoes >= 5 )
                       <!--Cargos-->
                         <li class="nav-item {{ request()->routeIs('cargos.index') || request()->routeIs('cargos.form') ? 'menu-open' : '' }}">
                           <a href="#" class="nav-link {{ request()->routeIs('cargos.index') || request()->routeIs('cargos.form') ? 'active' : '' }}">
@@ -393,37 +396,36 @@
                         </li>
                       <!--/.Cargos-->
               @endif
-              @if ($permissoes === 'Admin' || $permissoes >= 5 )
-                      <!--CategoriaFuncionario-->
-                        <li class="nav-item {{ request()->routeIs('categoriafuncionarios.index') || request()->routeIs('categoriafuncionarios.form') ? 'menu-open' : '' }}">
-                          <a href="#" class="nav-link {{ request()->routeIs('categoriafuncionarios.index') || request()->routeIs('categoriafuncionarios.form') ? 'active' : '' }}">
-                            <i class="fas fa-user-graduate"></i>
+                <!--Serviços-->
+                <li class="nav-item {{ request()->routeIs('habilitacaos.index') || request()->routeIs('habilitacaos.form') ? 'menu-open' : '' }}">
+                          <a href="#" class="nav-link {{ request()->routeIs('habilitacaos.index') || request()->routeIs('habilitacaos.form') ? 'active' : '' }}">
+                           <i class="bi bi-subtract"></i>
                             <p class="item-1">
-                            Categoria de Funcionários
+                               Serviços
                               <i class="right fas fa-angle-left"></i>
                             </p>
                           </a>
                           <ul class="nav nav-treeview">
                             <li class="nav-item">
-                              <a href="{{route('categoriafuncionarios.index')}}"  class="nav-link {{ request()->routeIs('categoriafuncionarios.index') ? 'active' : ''}}">
+                              <a href=""  class="nav-link {{ request()->routeIs('habilitacaos.form') ? 'active' : ''}}">
                                 <p class="item-2">
-                                <i class="bi bi-view-list"></i>
-                                  Categoria de Funcionários / Index
+                                <i class="bi bi-calendar2-range"></i>
+                                 Solicitar Licença
                                 </p>
                               </a>
                             </li>
                             <li class="nav-item">
-                              <a href="{{route('categoriafuncionarios.form')}}"  class="nav-link {{ request()->routeIs('categoriafuncionarios.form') ? 'active' : ''}}">
+                              <a href=""  class="nav-link {{ request()->routeIs('habilitacaos.form') ? 'active' : ''}}">
                                 <p class="item-2">
-                                 <i class="bi bi-node-plus-fill"></i>
-                                  Cadastarar Categoria de Funcionários
+                                <i class="bi bi-calendar2-range"></i>
+                                Outros
                                 </p>
                               </a>
                             </li>
+
                           </ul>
                         </li>
-                      <!--/.CategoriaFuncionario-->
-              @endif
+                      <!--/.Serviços-->
                     
             </li>
           </ul>

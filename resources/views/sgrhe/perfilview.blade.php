@@ -143,10 +143,14 @@
                           <p class="text-muted text-center">Agente: {{ $funcionario->numeroAgente }}</p>
                           <ul class="list-group list-group-unbordered mb-3">
                             <li class="list-group-item">
+                              <p><b>Nome do Pai:</b> {{ $parente->nomePai }} </p> 
+                              <p><b>Nome da Mãe:</b> {{ $parente->nomeMae }} </p> 
+                              <p><b>Naturalidade (Município):</b> {{ $naturalidade->municipio }} </p> 
                               <p><b>Categoria:</b> {{ $categoriaFuncionario->categoria }} </p>                        
                               <p><b>Grau:</b> {{ $categoriaFuncionario->grau }} </p>                            
                               <p><b>Cargo:</b> {{ $cargo->designacao }} </p>                            
                               <p><b>Unidade Orgânica:</b> {{ $unidadeOrganica->designacao }} </p>
+                              <p><b>Telefone:</b> {{ $funcionario->numeroTelefone }} </p>
                             </li>
                             <li class="list-group-item" style="text-align: center;">
                               <img src="#" alt="">

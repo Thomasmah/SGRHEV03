@@ -67,7 +67,7 @@
                                 <!--Gerando a Tabela de forma Dinamica-->
                                 @foreach ($dados as $funcionario)
                                               <tr>
-                                              <td>{{ $funcionario->estado }}</td>
+                                                  <td class="{{ isset($funcionario->estado) ? 'text-success' : '' }}" style="font-weight: bolder;">{{ $funcionario->estado }}</td>
                                                   <td>{{ $funcionario->numeroAgente }}</td>
                                                   <td>{{ $funcionario->nomeCompleto }}</td>
                                                   <td>{{ $funcionario->numeroBI }}</td>

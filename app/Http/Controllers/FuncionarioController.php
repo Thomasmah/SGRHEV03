@@ -76,6 +76,7 @@ class FuncionarioController extends Controller
     public function store(Request $request) {
             $request->validate([
             'numeroAgente' => ['numeric','required','unique:funcionarios,numeroAgente'],
+            //'numeroBI' => ['required','unique:funcionarios,numeroBI'],
             'dataAdmissao' => ['date','required','before_or_equal:now'],
             'iban' => ['string','required','unique:funcionarios,iban'],
             'email' => ['email','max:255','nullable','unique:funcionarios,email'],
@@ -85,14 +86,15 @@ class FuncionarioController extends Controller
             //'idCargo'=>['numeric'],
             // 'idCategoriaFuncionario' => ['required'],
             ],[
-                'numeroAgente.unique' => 'O Número de agente ja está sendo utilizado por outro usuário!',
+                'numeroAgente.unique' => 'O Número de agente já está sendo utilizado por outro Funcionário!',
+                //'numeroBI.unique' => 'O Número de Bilhete de Identidade já está sendo utilizado por outro Funcionário!',
                 'numeroAgente.required' => 'O Número de Agente é Obrigatório!',
                 'numeroAgente.numeric' => 'O Número de Agente deve ser um numero!',
                 'dataAdmissao.before' => 'A data de Admissão deve ser antes do dia de Hoje!', 
                 'dataAdmissao.required' => 'A data de Admissão é Obrigatória!',
-                'iban.unique' => 'O Iban ja está sendo utilizado por outro usuário!',
-                'email.unique' => 'O Email ja está sendo utilizado por outro usuário!', 
-                'numeroTelefone.unique' => 'O Numero de Telefone já está sendo utilizado por outro usuário!', 
+                'iban.unique' => 'O Iban ja está sendo utilizado por outro Funcionário!',
+                'email.unique' => 'O Email ja está sendo utilizado por outro Funcionário!', 
+                'numeroTelefone.unique' => 'O Numero de Telefone já está sendo utilizado por outro Funcionário!', 
             ]);
             DB::beginTransaction();
             $funcionario = Funcionario::create([
@@ -106,14 +108,15 @@ class FuncionarioController extends Controller
                 'idCategoriaFuncionario' => $request->input('idCategoriaFuncionario'),
                 'numeroTelefone'=> $request->input('numeroTelefone'),
                 'idSeccao'=> $request->input('idSeccao'),
+                'estado'=> "Activo",
 
              ]);
             if ($funcionario) {
                 DB::commit();
-                return redirect()->back()->with('success', 'Funcionário cadastrado com sucesso!');
+                return redirect()->back()->with('success', 'Funcionário Cadastrado com sucesso!');
             }else{
                 DB::rollBack();
-                return redirect()->back()->with('aviso', 'Erro de cadastrado funcionário!')->withErrors($request);
+                return redirect()->back()->with('aviso', 'Erro de Cadastrado Funcionário!')->withErrors($request);
             }
     }
 

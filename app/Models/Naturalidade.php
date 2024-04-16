@@ -15,4 +15,7 @@ class Naturalidade extends Model
         'municipio',
         'idPessoa',
     ];
+    public function pessoa(){
+        return $this->belongsTo(Pessoa::class);
+    }
 }

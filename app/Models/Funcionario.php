@@ -21,6 +21,7 @@ class Funcionario extends Model
         'idCargo', 
         'idCategoriaFuncionario',
         'numeroTelefone',
-        'avaliacaoCorrente'
+        'avaliacaoCorrente',
+        'estado'
     ];
 }

@@ -15,4 +15,8 @@ class Parente extends Model
         'nomeMae',
         'idPessoa',
     ];
+
+    public function pessoa(){
+        return $this->belongsTo(Pessoa::class);
+    }
 }
