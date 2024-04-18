@@ -94,6 +94,7 @@ use Illuminate\Support\Facades\Auth;
             }
             table tr:hover{
                 background-color: #f5f5f5;
+                color: #000000;
             }
         </style>
 

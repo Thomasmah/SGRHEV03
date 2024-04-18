@@ -32,117 +32,112 @@
                   <div class="col-md-8 offset-md-2">
                     <!-- jquery validation -->
                     <div class="card card-primary">
-                      <div class="card-header">
-                            <h3 class="card-title"> {{isset($pessoa)?'Editar Pessoa':'Cadastrar Pessoa'}}</h3>  
+                        <div class="card-header">
+                              <h3 class="card-title"> {{isset($pessoa)?'Editar Pessoa':'Cadastrar Pessoa'}}</h3>  
                         </div>
-                      <!-- /.card-header -->
-                      <!-- form start -->
-                    <form action="{{ isset($pessoa) ? route('pessoas.update',['id' => $pessoa->id]) : route('pessoas.store') }}" method="post">
-                      @csrf
-                      @method('post')
                         <div class="card-body">
-                        <label>Identificação</label>
-                          <div class="form-group">
-                            <label for="nomeCompleto">Nome Completo</label>
-                            <input type="text" name="nomeCompleto" class="form-control" id="nomeCompleto" placeholder="Nome Completo" require value="{{ isset($pessoa) ? $pessoa->nomeCompleto : ''}}">
-                            <label for="dataNascimento">Data de Nascimento</label>
-                            <input type="date" name="dataNascimento" class="form-control" id="dataNascimento" placeholder="12-12-2000" require value="{{ isset($pessoa) ? $pessoa->dataNascimento : ''}}" >
-                          </div>
-                          <div class="form-group">
-                            <label for="numeroBI">Bilhete de Identidade "BI"</label>
-                            <input type="text" name="numeroBI" class="form-control" id="numeroBI" maxlength="24" placeholder="002223421AE042" require value="{{ isset($pessoa) ? $pessoa->numeroBI : ''}}">
-                            <label for="validadeBI"> Validade do Bilhete de Identidade "BI"</label>
-                            <input type="date" name="validadeBI" class="form-control" id="validadeBI" placeholder="12-12-2000" require value="{{ isset($pessoa) ? $pessoa->validadeBI : ''}}">
-                          </div>
+                           <!-- form-->
+                            <form action="{{ isset($pessoa) ? route('pessoas.update',['id' => $pessoa->id]) : route('pessoas.store') }}" method="post">
+                              @csrf
+                              @method('post')
                           
-                          <label>Naturalidade</label>
-                          <div  class="form-group">
-                          <label for="provincia">Escolha uma Província:</label>
-                              <select name="provincia" id="provincia" onchange="carregarMunicipios()" class="form-control select2" style="width: 100%;">
-                                  <option value="{{isset($naturalidade) ? $naturalidade->provincia : ''}}">{{isset($naturalidade) ? $naturalidade->provincia : 'Seleccione Uma Província'}}</option>
-                                  <option value="Bengo">Bengo</option>
-                                  <option value="Benguela">Benguela</option>
-                                  <option value="Bié">Bié</option>
-                                  <option value="Cabinda">Cabinda</option>
-                                  <option value="Cuando Cubango">Cuando Cubango</option>
-                                  <option value="Cuanza Norte">Cuanza Norte</option>
-                                  <option value="Cuanza Sul">Cuanza Sul</option>
-                                  <option value="Cunene">Cunene</option>
-                                  <option value="Huambo">Huambo</option>
-                                  <option value="Huíla">Huíla</option>
-                                  <option value="Luanda">Luanda</option>
-                                  <option value="Lunda Norte">Lunda Norte</option>
-                                  <option value="Lunda Sul">Lunda Sul</option>
-                                  <option value="Malanje">Malanje</option>
-                                  <option value="Moxico">Moxico</option>
-                                  <option value="Namibe">Namibe</option>
-                                  <option value="Uíge">Uíge</option>
-                                  <option value="Zaire">Zaire</option>
+                              <label>Identificação</label>
+                              <div class="form-group">
+                                <label for="nomeCompleto">Nome Completo</label>
+                                <input type="text" name="nomeCompleto" class="form-control" id="nomeCompleto" placeholder="Nome Completo" required value="{{ isset($pessoa) ? $pessoa->nomeCompleto : ''}}">
+                                <label for="dataNascimento">Data de Nascimento</label>
+                                <input type="date" name="dataNascimento" class="form-control" id="dataNascimento" placeholder="12-12-2000" required value="{{ isset($pessoa) ? $pessoa->dataNascimento : ''}}" >
+                              </div>
+                              <div class="form-group">
+                                <label for="numeroBI">Bilhete de Identidade "BI"</label>
+                                <input type="text" name="numeroBI" class="form-control" id="numeroBI" maxlength="24" placeholder="002223421AE042" required value="{{ isset($pessoa) ? $pessoa->numeroBI : ''}}">
+                                <label for="validadeBI"> Validade do Bilhete de Identidade "BI"</label>
+                                <input type="date" name="validadeBI" class="form-control" id="validadeBI" placeholder="12-12-2000" required value="{{ isset($pessoa) ? $pessoa->validadeBI : ''}}">
+                              </div>
                               
-                                  <!-- Adicione mais opções de província aqui -->
+                              <label>Naturalidade</label>
+                              <div  class="form-group">
+                              <label for="provincia">Escolha uma Província:</label>
+                                  <select name="provincia" id="provincia" onchange="carregarMunicipios()" class="form-control select2" style="width: 100%;" required>
+                                      <option value="{{isset($naturalidade) ? $naturalidade->provincia : ''}}">{{isset($naturalidade) ? $naturalidade->provincia : 'Seleccione Uma Província'}}</option>
+                                      <option value="Bengo">Bengo</option>
+                                      <option value="Benguela">Benguela</option>
+                                      <option value="Bié">Bié</option>
+                                      <option value="Cabinda">Cabinda</option>
+                                      <option value="Cuando Cubango">Cuando Cubango</option>
+                                      <option value="Cuanza Norte">Cuanza Norte</option>
+                                      <option value="Cuanza Sul">Cuanza Sul</option>
+                                      <option value="Cunene">Cunene</option>
+                                      <option value="Huambo">Huambo</option>
+                                      <option value="Huíla">Huíla</option>
+                                      <option value="Luanda">Luanda</option>
+                                      <option value="Lunda Norte">Lunda Norte</option>
+                                      <option value="Lunda Sul">Lunda Sul</option>
+                                      <option value="Malanje">Malanje</option>
+                                      <option value="Moxico">Moxico</option>
+                                      <option value="Namibe">Namibe</option>
+                                      <option value="Uíge">Uíge</option>
+                                      <option value="Zaire">Zaire</option>
+                                  
+                                      <!-- Adicione mais opções de província aqui -->
+                              
+                                    </select>
+                                  <label for="municipio">Escolha um Município:</label>
+                                  <select id="municipio" name="municipio" class="form-control select2" style="width: 100%;" required>
+                                      <option value="{{isset($naturalidade) ? $naturalidade->municipio : ''}}">{{isset($naturalidade) ? $naturalidade->municipio : 'Seleccione o Município'}}</option>
+                                  </select>
+                              </div>
+
+
+                              <div class="form-group">
+                                <label for="genero">Genero</label>
+                                  <select name="genero" class="form-control select2" style="width: 100%;" required>
+                                      <option selected="{{isset($pessoa) ? $pessoa->genero : ''}}">{{isset($pessoa) ? $pessoa->genero : 'Seleccione o Sexo'}}</option>
+                                      <option>Feminino</option>
+                                      <option>Masculino</option>
+                                  </select>
+                              </div>
                           
-                                </select>
-                              <label for="municipio">Escolha um Município:</label>
-                              <select id="municipio" name="municipio" class="form-control select2" style="width: 100%;">
-                                  <option value="{{isset($naturalidade) ? $naturalidade->municipio : ''}}">{{isset($naturalidade) ? $naturalidade->municipio : 'Seleccione o Município'}}</option>
-                              </select>
-                          </div>
-
-
-                          <div class="form-group">
-                            <label for="genero">Genero</label>
-                              <select name="genero" class="form-control select2" style="width: 100%;">
-                                  <option selected="{{isset($pessoa) ? $pessoa->genero : ''}}">{{isset($pessoa) ? $pessoa->genero : 'Seleccione o Sexo'}}</option>
-                                  <option>Feminino</option>
-                                  <option>Masculino</option>
-                              </select>
-                          </div>
-                      
-                          <label>Parentesco:</label>
-                          <div class="form-group">
-                            <label for="nomePai">Nome do Pai</label>
-                            <input type="text" name="nomePai" class="form-control" id="nomePai" placeholder="Nome Completo do Pai" value="{{ isset($parente) ? $parente->nomePai : ''}}">
-                            <label for="nomeMae">Nome da Mãe</label>
-                            <input type="text" name="nomeMae" class="form-control" id="nomeMae" placeholder="Nome Completo do Mãe" value="{{ isset($parente) ? $parente->nomeMae : ''}}">
-                          </div>
-                          <div class="form-group">
-                            <label for="grupoSanguineo">Grupo Sanguineo</label>
-                              <select name="grupoSanguineo" class="form-control select2" style="width: 100%;">
-                                  <option value="{{isset($pessoa) ? $pessoa->grupoSanguineo : ''}}"> {{ isset($pessoa) ? $pessoa->grupoSanguineo : 'Seleccione o Grupo Sanguíneo' }} </option>
-                                  <option >O+</option>
-                                  <option >O-</option>
-                                  <option >A+</option>
-                                  <option >A-</option>
-                                  <option >B+</option>
-                                  <option >B-</option>
-                              </select>
-                          </div>
-                          <div class="form-group">
-                            <label for="estadoCivil">Estado Civil</label>
-                              <select name="estadoCivil" class="form-control select2" style="width: 100%;">
-                                  <option value="{{isset($pessoa) ? $pessoa->estadoCivil : ''}}">{{isset($pessoa) ? $pessoa->estadoCivil : 'Seleccione o Estado Cívil'}}</option>
-                                  <option>Casados(a)</option>
-                                  <option>Solteiro(a)</option>
-                              </select>
-                          </div>
+                              <label>Parentesco:</label>
+                              <div class="form-group">
+                                <label for="nomePai">Nome do Pai</label>
+                                <input type="text" name="nomePai" class="form-control" id="nomePai" placeholder="Nome Completo do Pai" value="{{ isset($parente) ? $parente->nomePai : ''}}" required>
+                                <label for="nomeMae">Nome da Mãe</label>
+                                <input type="text" name="nomeMae" class="form-control" id="nomeMae" placeholder="Nome Completo do Mãe" value="{{ isset($parente) ? $parente->nomeMae : ''}}" required>
+                              </div>
+                              <div class="form-group">
+                                <label for="grupoSanguineo">Grupo Sanguineo</label>
+                                  <select name="grupoSanguineo" class="form-control select2" style="width: 100%;" required>
+                                      <option value="{{isset($pessoa) ? $pessoa->grupoSanguineo : ''}}"> {{ isset($pessoa) ? $pessoa->grupoSanguineo : 'Seleccione o Grupo Sanguíneo' }} </option>
+                                      <option >O+</option>
+                                      <option >O-</option>
+                                      <option >A+</option>
+                                      <option >A-</option>
+                                      <option >B+</option>
+                                      <option >B-</option>
+                                  </select>
+                              </div>
+                              <div class="form-group">
+                                <label for="estadoCivil">Estado Civil</label>
+                                  <select name="estadoCivil" class="form-control select2" style="width: 100%;" required>
+                                      <option value="{{isset($pessoa) ? $pessoa->estadoCivil : ''}}">{{isset($pessoa) ? $pessoa->estadoCivil : 'Seleccione o Estado Cívil'}}</option>
+                                      <option>Casados(a)</option>
+                                      <option>Solteiro(a)</option>
+                                  </select>
+                              </div>
+                            </form>
+                            <!-- /form-->
                         </div>
-                        <!-- /.card-body -->
-                        
                         <div class="card-footer">
                           <button type="submit" class="btn btn-primary" style="width: 100%;">{{ isset($pessoa) ? 'Actualizar Dados da Entidade Pessoa ' : 'Cadastrar Entidade Pessoa'}}</button>
                           <br>
                           <br>
                           <a href="{{route('pessoas.index')}}" class="btn btn-primary" style="width: 100%;">Pessoas / Index</a>
                         </div>
-                      </form>
                     </div>
                     <!-- /.card -->
-                    </div>
-                  <!--/.col (left) -->
-                  <!-- right column -->
-                  <div class="col-md-6">
-
                   </div>
+   
                   <!--/.col (right) -->
                 </div>
                 <!-- /.row -->

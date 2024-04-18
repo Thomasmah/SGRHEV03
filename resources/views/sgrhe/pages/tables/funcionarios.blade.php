@@ -67,11 +67,15 @@
                                 <!--Gerando a Tabela de forma Dinamica-->
                                 @foreach ($dados as $funcionario)
                                               <tr>
-                                                  <td class="{{ isset($funcionario->estado) ? 'text-success' : '' }}" style="font-weight: bolder;">{{ $funcionario->estado }}</td>
+                                                  <td class="{{ ($funcionario->estado =='Activo') ? 'text-success' : '' }} {{ ($funcionario->estado =='Inactivo') ? 'text-danger' : '' }} {{ ($funcionario->estado =='Inactivo') ? 'text-danger' : '' }} {{ ($funcionario->estado =='Dispensado') ? 'text-warning' : '' }} {{ ($funcionario->estado =='Ferias') ? 'text-secondary' : '' }}" style="font-weight: bolder;">{{ $funcionario->estado }}</td>
                                                   <td>{{ $funcionario->numeroAgente }}</td>
                                                   <td>{{ $funcionario->nomeCompleto }}</td>
                                                   <td>{{ $funcionario->numeroBI }}</td>
-                                                  <td>{{ $funcionario->validadeBI }}</td>
+                                                  @php
+                                                    $data = \Carbon\Carbon::parse($funcionario->validadeBI);
+                                                    $class = $data->gt(now()) ? 'text-success' : 'text-danger';
+                                                  @endphp
+                                                  <td class="{{ $class }}">{{ $funcionario->validadeBI }}</td>
                                                   <td>{{ $funcionario->designacao }}</td>
                                                   <td>{{ $funcionario->categoria }}</td>
                                                   <td>{{ $funcionario->dataAdmissao }}</td>

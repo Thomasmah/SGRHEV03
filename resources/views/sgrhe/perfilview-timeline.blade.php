@@ -179,20 +179,21 @@
                                         <!-- CardContet -->
                                             <!--Solicitar Item-->
                                               <div class="col-8 offset-md-2">
-                                                  <div class="card">
-                                                    <div class="card-body" style="position: relative; z-index:2; padding:10px;">
-                                                     <i class="ion ion-person-add" style="position: absolute; font-size:125px; z-index:1; opacity:0.5; color:blue; right:20%;"></i>
-                                                      <h5 class="card-title"> Solicitar Licença</h5>
-                                                      <br>
-                                                        <p class="card'text">Explicacao do que serve essa solicitacao</p>
-                                                        <br>
-                                                        <br>
-                                                        <br>
-                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#licenca-dsciplinar">
-                                                          Solicitar Licença
-                                                        </button>
+                                                    <div class="card  card-outline card-info">
+                                                      <div class="card-header">
+                                                        <h3 class="card-title">Licença</h3>
+                                                      </div>
+                                                      <div class="card-body">
+                                                          <div class="card-text">
+                                                            <p>Explicacao do que serve essa solicitacao</p>
+                                                          </div>
+                                                      </div>
+                                                      <div class="card-footer">
+                                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#licenca-dsciplinar">
+                                                              Solicitar Licença
+                                                            </button>
+                                                      </div>
                                                     </div>
-                                                </div>
                                               </div>
                                               <!-- Modal Solicitar Licenca -->
                                                 <div class="modal fade" id="licenca-dsciplinar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -240,21 +241,21 @@
 
 
                                             <!--Solicitar Item-->
-
                                               <div class="col-8 offset-md-2">
-                                                  <div class="card">
-                                                    <div class="card-body" style="position: relative; z-index:2; padding:10px;">
-                                                     <i class="ion ion-person-add" style="position: absolute; font-size:125px; z-index:1; opacity:0.5; color:green; right:20%;"></i>
-                                                      <h5 class="card-title"> Solicitar Declaração de Efectividade</h5>
-                                                      <br>
-                                                        <p class="card'text">Explicação do que serve essa Solicitar Declaração de Efectividade </p>
-                                                        <br>
-                                                        <br>
-                                                        <br>
-                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#DeclaracaoEfectividade">
-                                                          Solicitar Declaração de Efectividade
-                                                        </button>
-                                                    </div>
+                                                    <div class="card  card-outline card-info">
+                                                      <div class="card-header">
+                                                        <h3 class="card-title">Solicitar Declaração de Efectividade</h3>
+                                                      </div>
+                                                      <div class="card-body">
+                                                          <div class="card-text">
+                                                            <p>Explicação do que serve essa Solicitar Declaração de Efectividade </p>
+                                                          </div>
+                                                      </div>  
+                                                      <div class="card-footer">
+                                                              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#DeclaracaoEfectividade">
+                                                                Solicitar Declaração de Efectividade
+                                                              </button>
+                                                      </div>
                                                 </div>
                                               </div>
                                               <!-- Modal Solicitar Licenca -->
@@ -301,15 +302,16 @@
 
                                              <!--Solicitar Item-->
                                              <div class="col-8 offset-md-2">
-                                                  <div class="card">
-                                                    <div class="card-body" style="position: relative; z-index:2; padding:10px;">
-                                                     <i class="ion ion-person-add" style="position: absolute; font-size:125px; z-index:1; opacity:0.5; color:green; right:20%;"></i>
-                                                      <h5 class="card-title"> Solicitar Autorização de Gozo de Férias</h5>
-                                                      <br>
-                                                        <p class="card'text">Explicação do que serve essa solicitacao de Goso de Férias </p>
-                                                        <br>
-                                                        <br>
-                                                        <br>
+                                                  <div class="card  card-outline card-info">
+                                                    <div class="card-header">
+                                                      <h3 class="card-title">Solicitar Autorização de Gozo de Férias</h3>
+                                                    </div>
+                                                    <div class="card-body">
+                                                      <div class="card-text">
+                                                        <p>Explicação do que serve essa solicitacao de Goso de Férias </p>
+                                                      </div>
+                                                    </div>
+                                                    <div class="card-footer">
                                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#autorizacaoGozoFerias">
                                                           Solicitar Gozo de Férias
                                                         </button>

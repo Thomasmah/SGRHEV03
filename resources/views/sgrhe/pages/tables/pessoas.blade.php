@@ -39,19 +39,17 @@
                             <table id="example1" class="table table-bordered table-striped">
                               <thead>
                               <tr>
-                                <th>Pessoa (id)</th>
-                                <th>Estado</th>
                                 <th>Nome Completo</th>
-                                <th>Data Nascimento</th>
                                 <th>Genero</th>
-                                <th>Grupo Sanguíneo</th>
-                                <th>Estado Civil</th>
                                 <th>Nome do Pai</th>
                                 <th>Nome da Mãe</th>
-                                <th>Província Naturalidade</th>
-                                <th>Município Naturalidade</th>
+                                <th>Grupo Sanguíneo</th>
                                 <th>Nº de Bilhete de Identidade (BI)</th>
                                 <th>Data Validade do Bilhete de Identidade</th>
+                                <th>Estado Civil</th>
+                                <th>Data Nascimento</th>
+                                <th>Província Naturalidade</th>
+                                <th>Município Naturalidade</th>
                                 <th>Opções</th>
                               </tr>
                               </thead>
@@ -64,20 +62,22 @@
                                 $naturalidade = app('\App\Models\Naturalidade')::find($pessoa->id);
                                 $isFuncionario = App\Models\Funcionario::where('idPessoa', $pessoa->id)->first();
                               @endphp
-                                            <tr class=" {{ isset($isFuncionario) ? 'font-weight-bold' : 'text-muted'}}">
-                                                <td>{{ $pessoa->id }}</td>
-                                                <td>{{ $pessoa->estado }}</td>
+                                            <tr class=" {{ isset($isFuncionario) ? ' ' : 'font-weight-bold'}}">
                                                 <td>{{ $pessoa->nomeCompleto }}</td>
-                                                <td>{{ $pessoa->dataNascimento }}</td>
                                                 <td>{{ $pessoa->genero }}</td>
-                                                <td>{{ $pessoa->grupoSanguineo }}</td>
-                                                <td>{{ $pessoa->estadoCivil }}</td>
                                                 <td>{{ $parente->nomePai}}</td>
                                                 <td>{{ $parente->nomeMae}}</td>
+                                                <td>{{ $pessoa->grupoSanguineo }}</td>
+                                                <td>{{ $pessoa->numeroBI }}</td>
+                                                @php
+                                                  $data = \Carbon\Carbon::parse($pessoa->validadeBI);
+                                                  $class = $data->gt(now()) ? 'text-success' : 'text-danger';
+                                                @endphp
+                                                <td class="{{ $class }}">{{ $pessoa->validadeBI }}</td>
+                                                <td>{{ $pessoa->estadoCivil }}</td>
+                                                <td>{{ $pessoa->dataNascimento }}</td>
                                                 <td>{{ $naturalidade->provincia}}</td>
                                                 <td>{{ $naturalidade->municipio}}</td>
-                                                <td>{{ $pessoa->numeroBI }}</td>
-                                                <td>{{ $pessoa->validadeBI }}</td>
                                                 <td>
                                                 <form class=" " action="{{ route('funcionarios.verificarPessoa') }}" method="GET" style="display: inline;">
                                                   @csrf
@@ -102,19 +102,17 @@
                               </tbody>
                               <tfoot>
                               <tr>
-                                <th>Pessoa (id)</th>
-                                <th>Estado</th>
                                 <th>Nome Completo</th>
-                                <th>Data Nascimento</th>
                                 <th>Genero</th>
-                                <th>Grupo Sanguíneo</th>
-                                <th>Estado Civil</th>
                                 <th>Nome do Pai</th>
                                 <th>Nome da Mãe</th>
-                                <th>Província Naturalidade</th>
-                                <th>Município Naturalidade</th>
+                                <th>Grupo Sanguíneo</th>
                                 <th>Nº de Bilhete de Identidade (BI)</th>
                                 <th>Data Validade do Bilhete de Identidade</th>
+                                <th>Estado Civil</th>
+                                <th>Data Nascimento</th>
+                                <th>Província Naturalidade</th>
+                                <th>Município Naturalidade</th>
                                 <th>Opções</th>
                               </tr>
                               </tfoot>

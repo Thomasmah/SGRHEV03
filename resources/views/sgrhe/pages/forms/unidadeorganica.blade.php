@@ -31,8 +31,8 @@
                   <!-- left column -->
                   <div class="col-md-8 offset-md-2">
                     <!-- jquery validation -->
-                    <div class="card card-primary">
-                      <div class="card-header">
+                      <div class="card card-primary">
+                        <div class="card-header">
                             <h3 class="card-title"> {{isset($UnidadeOrganica)?'Editar Unidade Orgânica':'Cadastrar Unidade Orgânica'}} </h3>  
                         </div>
                         <form action="{{ isset($UnidadeOrganica) ? route('unidadeorganicas.update',[$UnidadeOrganica->id]) : route('unidadeorganicas.store') }}" method="post">
@@ -41,7 +41,7 @@
                             <div class="card-body">
                               <div class="form-group">
                                 <label for="designacao">Designação da Unidade Ogânica</label>
-                                <input type="text" name="designacao" class="form-control" id="designacao" placeholder="Designaca da Unidade Organica" value="{{isset($UnidadeOrganica) ? $UnidadeOrganica->designacao : '' }}">
+                                <input type="text" name="designacao" class="form-control" id="designacao" placeholder="Designaca da Unidade Organica" value="{{isset($UnidadeOrganica) ? $UnidadeOrganica->designacao : '' }}" required>
                               </div>
                               <div class="form-group">
                                 <label for="descricao">Descrição</label>
@@ -49,7 +49,7 @@
                               </div>
                               <div class="form-group">
                                 <label for="eqt">EQT</label>
-                                <input type="text" name="eqt" class="form-control" id="eqt" placeholder="EQT  da Unidade Orgânica" value="{{isset($UnidadeOrganica) ? $UnidadeOrganica->eqt : '' }}">
+                                <input type="text" name="eqt" class="form-control" id="eqt" placeholder="EQT  da Unidade Orgânica" value="{{isset($UnidadeOrganica) ? $UnidadeOrganica->eqt : '' }}" required>
                               </div>
                               <div class="form-group">
                                 <label for="decretoCriacao">Decreto de Criação</label>
@@ -57,7 +57,7 @@
                               </div>
                               <div class="form-group">
                                 <label for="localidade">Localidade</label>
-                                <input type="text" name="localidade" class="form-control" id="localidade" placeholder="Localidade da Unidade Organica" value="{{isset($UnidadeOrganica) ? $UnidadeOrganica->localidade : '' }}">
+                                <input type="text" name="localidade" class="form-control" id="localidade" placeholder="Localidade da Unidade Organica" value="{{isset($UnidadeOrganica) ? $UnidadeOrganica->localidade : '' }}" required>
                               </div>
                               <div class="form-group">
                                 <label for="telefone">Telefone</label>
@@ -74,11 +74,10 @@
                               <a href="{{route('unidadeorganicas.index')}}" class="btn btn-primary" style="width: 100%;"> Unidades Organicas / Index </a>
                               </div>
                         </form>
-                      </div>
                     </div>
                   </div>
                 </div>
-              </div><!-- /.container-fluid -->
+              </div>
             </section>
             <!-- /.content -->
           </div>

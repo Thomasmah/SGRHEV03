@@ -184,10 +184,11 @@
                   <!--/col -->
                   <!--col -->
                       <div class="col-md-8">
-                          <div class="card">
+                          <div class="card card-primary">
+                            <div class="card-header">
+                              <h3 class="card-title">Documentos / Sobre o Funcionário</h3>
+                            </div>
                             <div class="card-body">               
-                                    <h5 class="card-header text-center bg-primary">Documentos / Sobre o Funcionário </h5>
-                       
                                                     <!--Item Funcionario Bilhete de Identidade-->
                                                       <div class="intem-funcionario"> 
                                                        <h6 class="card-header"><strong><i class="far fa-file-alt mr-1"></i> Bilhete de Identidade</strong></h6>
