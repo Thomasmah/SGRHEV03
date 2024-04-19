@@ -46,11 +46,12 @@
                                   <div class="text-center ">
                                     <div style="width:100%;" class="info elemento" id="elemento">
                                       <p style="font-weight: bolder;">{{ session()->only(['Cargo'])['Cargo']->designacao }}</p> <!--.' de(a) '.session()->only(['Seccao'])['Seccao']->designacao -->
+                                      <p>({{ session()->only(['Seccao'])['Seccao']->codNome }})</p>
                                       <p>Olá {{ explode(" ", $pessoaLog->nomeCompleto)[0] }}!</p>
+                                      
                                       <p>Seja bem vindo(a)!</p>
                                     </div>
                                   </div>
-                                  <br>
                                   <hr style="border: 1px solid grey;">
                                 </a>
                                 
@@ -64,7 +65,7 @@
                                   </p>
                                 </a>
                           </li>
-                          @if ($permissoes === 'Admin' || $permissoes >= 5)
+                          @if ($permissoes === 'Admin' || $permissoes >= 4)
                                     <!--Dashboards-->
                                       <li class="nav-item">
                                           <a href="#" class="nav-link {{ request()->routeIs('inicio') ? 'active' : ''}}">
@@ -209,7 +210,7 @@
                       <!-- Opcoes do Funcionario-->
                     
         
-              @if ($permissoes === 'Admin' || $permissoes >= 5 )
+              @if ($permissoes === 'Admin' || $permissoes >= 4 )
                       <!--Avaliacao de Desempenho-->
                         <li class="nav-item {{ request()->routeIs('avaliacao.nao.homologados') || request()->routeIs('avaliacao.funcionarios.homologados') ? 'menu-open' : '' }}">
                         <a href="#" class="nav-link {{ request()->routeIs('avaliacao.nao.homologados') || request()->routeIs('avaliacao.funcionarios.homologados') ? 'active' : '' }}">
@@ -228,7 +229,7 @@
                                 </p>
                               </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item {{ ($permissoes >= 6) ? '' : 'd-none' }}">
                               <a href="{{route('avaliacao.nao.homologados')}}" class="nav-link {{ request()->routeIs('avaliacao.nao.homologados') ? 'active' : ''}}">
                                 <p class="item-2">
                                  <i class="bi bi-building-fill-add"></i>
@@ -240,7 +241,7 @@
                         </li>
                       <!--/.UnidadeOrganica-->
               @endif
-              @if ($permissoes === 'Admin' || $permissoes >= 5 )
+              @if ($permissoes === 'Admin' || $permissoes >= 4 )
                       <!--Funcionários-->
                         <li class="nav-item {{ request()->routeIs('funcionarios.index') || request()->routeIs('funcionarios.form') ? 'menu-open' : '' }}">
                           <a href="#" class="nav-link {{ request()->routeIs('funcionarios.index') || request()->routeIs('funcionarios.form') ? 'active' : ''}}">
@@ -259,7 +260,7 @@
                                   </p>
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item {{ ($permissoes === 'Admin' || $permissoes >= 5 ) ? '' : 'd-none' }}">
                                 <a href="{{route('funcionarios.form')}}"  class="nav-link {{ request()->routeIs('funcionarios.form') ? 'active' : ''}}">
                                   <p class="item-2">
                                   <i class="bi bi-person-plus-fill"></i>
@@ -271,7 +272,7 @@
                         </li>
                       <!--/.funcionários-->
               @endif
-              @if ($permissoes === 'Admin' || $permissoes >= 5 )
+              @if ($permissoes === 'Admin' || $permissoes >= 4 )
                       <!--CategoriaFuncionario-->
                         <li class="nav-item {{ request()->routeIs('categoriafuncionarios.index') || request()->routeIs('categoriafuncionarios.form') ? 'menu-open' : '' }}">
                           <a href="#" class="nav-link {{ request()->routeIs('categoriafuncionarios.index') || request()->routeIs('categoriafuncionarios.form') ? 'active' : '' }}">
@@ -290,7 +291,7 @@
                                 </p>
                               </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item {{ ($permissoes === 'Admin' || $permissoes >= 5) ? '' : 'd-none' }}">
                               <a href="{{route('categoriafuncionarios.form')}}"  class="nav-link {{ request()->routeIs('categoriafuncionarios.form') ? 'active' : ''}}">
                                 <p class="item-2">
                                  <i class="bi bi-node-plus-fill"></i>
@@ -302,7 +303,7 @@
                         </li>
                       <!--/.CategoriaFuncionario-->
               @endif
-              @if ($permissoes === 'Admin' || $permissoes >= 5 )
+              @if ($permissoes === 'Admin' || $permissoes >= 4 )
 
                       <!--Pessoas-->
                         <li class="nav-item {{ request()->routeIs('pessoas.index') || request()->routeIs('pessoas.form') ? 'menu-open' : '' }}">
@@ -322,7 +323,7 @@
                                 </p>
                               </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item {{ ($permissoes === 'Admin' || $permissoes >= 5) ? '' : 'd-none' }}">
                               <a href="{{route('pessoas.form')}}"  class="nav-link {{ request()->routeIs('pessoas.form') ? 'active' : ''}}">
                                 <p class="item-2">
                                 <i class="bi bi-person-plus"></i>
@@ -334,7 +335,7 @@
                         </li>
                       <!--/.Pessoas-->
               @endif
-              @if ($permissoes === 'Admin' || $permissoes >= 5 )
+              @if ($permissoes === 'Admin' || $permissoes >= 4 )
                       <!--UnidadeOrganica-->
                         <li class="nav-item {{ request()->routeIs('unidadeorganicas.index') || request()->routeIs('unidadeorganicas.form') ? 'menu-open' : '' }}">
                         <a href="#" class="nav-link {{ request()->routeIs('unidadeorganicas.index') || request()->routeIs('unidadeorganicas.form') ? 'active' : '' }}">
@@ -353,7 +354,7 @@
                                 </p>
                               </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item {{ ($permissoes === 'Admin' || $permissoes >= 5) ? '' : 'd-none' }}">
                               <a href="{{route('unidadeorganicas.form')}}" class="nav-link {{ request()->routeIs('unidadeorganicas.form') ? 'active' : ''}}">
                                 <p class="item-2">
                                  <i class="bi bi-building-fill-add"></i>
@@ -365,7 +366,7 @@
                         </li>
                       <!--/.UnidadeOrganica-->
               @endif
-              @if ($permissoes === 'Admin' || $permissoes >= 5 )
+              @if ($permissoes === 'Admin' || $permissoes >= 4 )
                       <!--Cargos-->
                         <li class="nav-item {{ request()->routeIs('cargos.index') || request()->routeIs('cargos.form') ? 'menu-open' : '' }}">
                           <a href="#" class="nav-link {{ request()->routeIs('cargos.index') || request()->routeIs('cargos.form') ? 'active' : '' }}">
@@ -384,7 +385,7 @@
                                 </p>
                               </a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item  {{ ($permissoes === 'Admin' || $permissoes >= 5) ? '' : 'd-none' }}">
                               <a href="{{route('cargos.form')}}" class="nav-link {{ request()->routeIs('cargos.form') ? 'active' : ''}}">
                                 <p class="item-1">
                                 <i class="bi bi-node-plus-fill"></i>

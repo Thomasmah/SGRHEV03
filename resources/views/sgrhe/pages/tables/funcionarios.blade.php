@@ -53,6 +53,7 @@
                                   <th>Validade do BI</th>
                                   <th>Unidade Orgânica</th>
                                   <th>Categoria Funcionário</th>
+                                  <th>Cargo</th>
                                   <th>Data de Admissão</th>
                                   <th>Email</th>
                                   <th>IBAN</th>
@@ -78,6 +79,7 @@
                                                   <td class="{{ $class }}">{{ $funcionario->validadeBI }}</td>
                                                   <td>{{ $funcionario->designacao }}</td>
                                                   <td>{{ $funcionario->categoria }}</td>
+                                                  <td>{{ $funcionario->nomeCargo }}</td>
                                                   <td>{{ $funcionario->dataAdmissao }}</td>
                                                   <td>{{ $funcionario->email }}</td>
                                                   <td>{{ $funcionario->iban }}</td>
@@ -115,6 +117,7 @@
                                   <th>Validade do BI</th>
                                   <th>Unidade Orgânica</th>
                                   <th>Categoria Funcionário</th>
+                                  <th>Cargo</th>
                                   <th>Data de Admissão</th>
                                   <th>Email</th>
                                   <th>IBAN</th>

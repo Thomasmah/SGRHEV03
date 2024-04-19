@@ -24,5 +24,10 @@ class Processo extends Model
         
         //Anexos, Dependencias Tipo Documentos e Outras Imformacoes para se efectivar um determinado processo 
     ];
+
+    public function funcionario()
+    {
+        return $this->belongsTo(Funcionario::class, 'idFuncionarioSolicitante');
+    }
    
 }

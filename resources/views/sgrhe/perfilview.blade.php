@@ -217,14 +217,15 @@
                                                                     @endif
                                                                   @endisset
                                                  
-                                                            <small id="" class="form-text text-muted">mais ...</small>
                                                           </div>
                                                           <div id="item-bi" class="info-toggle">
-                                                            <!--BTN Modal de Add Arquivo -->
-                                                              <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addBI" data-form-action="{{ route('arquivos.store',['idFuncionario' => $funcionario->id, 'categoria' => 'BI', 'idPessoa' => $funcionario->idPessoa ]) }}">
-                                                                  <i class="far fa-file-alt mr-1"></i> Actualizar Bilhete De Identidade
-                                                              </button>
-                                                            <!--/BTN Modal de Add Arquivo -->
+                                                            @if ( session()->only(['Cargo'])['Cargo']->permissoes === 'Admin' || session()->only(['Seccao'])['Seccao']->codNome === 'RHPE' )
+                                                              <!--BTN Modal de Add Arquivo -->
+                                                                <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addBI" data-form-action="{{ route('arquivos.store',['idFuncionario' => $funcionario->id, 'categoria' => 'BI', 'idPessoa' => $funcionario->idPessoa ]) }}">
+                                                                  <i class="fa fa-plus"></i>  Actualizar Bilhete De Identidade
+                                                                </button>
+                                                              <!--/BTN Modal de Add Arquivo -->
+                                                            @endif
                                                             <!--BTN  de ver Arquivo -->
                                                               <a class="btn btn-primary" href="{{ route('Exibir.Imagem', ['imagem' => base64_encode($biArquivo->first()->caminho)]) }}" target="_blank">
                                                                 <i class="far fa-file-alt mr-1"></i> Ver Arquivo
@@ -234,15 +235,16 @@
                                                           </div>
                                                                 @else
                                                           <div class="btn btn-toggle " data-target="item-bi" style="text-align: left;">
-                                                            <p class="text-muted">N/D</p>
-                                                            <small id="" class="form-text text-muted">mais ...</small>                                                         
+                                                          <p class="text-danger">Não Actualizado</p>                                                         
                                                           </div>
                                                           <div id="item-bi" class="info-toggle">
+                                                          @if ( session()->only(['Cargo'])['Cargo']->permissoes === 'Admin' || session()->only(['Seccao'])['Seccao']->codNome === 'RHPE' )
                                                             <!--BTN Modal de Add Arquivo -->
                                                               <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addBI" data-form-action="{{ route('arquivos.store',['idFuncionario' => $funcionario->id, 'categoria' => 'BI',  'idPessoa' => $funcionario->idPessoa ]) }}">
                                                                   <i class="fa fa-plus "></i> Adicionar Bilhete De Identidade
                                                               </button>
                                                             <!--/BTN Modal de Add Arquivo -->
+                                                          @endif
                                                         
                                                           </div>
                                                                 @endif
@@ -294,6 +296,7 @@
                                                                 </div>
                                                               <!--/Modal de Add Arquivo -->
                                                       </div>
+                                                      <hr>
                                                     <!--/Item Funcionario Bilhete de Identidade-->                         
                                                     
                                                     
@@ -320,15 +323,16 @@
                                                             
                                                             <p class="atrubutos-intem-funcionario">Ano de Conclusão: <span class="text-muted">{{ $documento['anoConclusao'] }} </span></p>
                                                             
-                                                            <p class="atrubutos-intem-funcionario">Nota Final <span class="text-muted">{{ $documento['notaFinal'] }} </span></p>
-                                                            <small id="" class="form-text text-muted">  mais...</small>                                                          
+                                                            <p class="atrubutos-intem-funcionario">Nota Final <span class="text-muted">{{ $documento['notaFinal'] }} </span></p>                                                         
                                                           </div>
                                                           <div id="item-Habilitacoes" class="info-toggle">
+                                                            @if ( session()->only(['Cargo'])['Cargo']->permissoes === 'Admin' || session()->only(['Seccao'])['Seccao']->codNome === 'RHPE' )
                                                             <!--BTN Modal de Add Arquivo -->
                                                               <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addHabilitacoes" data-form-action="{{ route('inserir.documento') }} " >
-                                                                  <i class="far fa-file-alt mr-1"></i> Actualizar Habilitações
+                                                              <i class="fa fa-plus"></i>Actualizar Habilitações
                                                               </button>
                                                             <!--/BTN Modal de Add Arquivo -->
+                                                            @endif
                                                             <!--BTN  de ver Arquivo -->
                                                               <a class="btn btn-primary" href="{{ route('exibir.doc', ['documento' => base64_encode($arquivo->first()->caminho)]) }}" target="_blank">
                                                                 <i class="far fa-file-alt mr-1"></i> Ver Arquivo
@@ -338,14 +342,15 @@
                                                                 @else
                                                           <div class="btn btn-toggle " data-target="item-Habilitacoes" style="text-align: left;">
                                                             <p class="text-danger">Não Actualizado</p>
-                                                            <span style="text-align: right;" class="text-muted">  mais...</span>
                                                           </div>
                                                           <div id="item-Habilitacoes" class="info-toggle">
+                                                          @if ( session()->only(['Cargo'])['Cargo']->permissoes === 'Admin' || session()->only(['Seccao'])['Seccao']->codNome === 'RHPE' )
                                                             <!--BTN Modal de Add Arquivo -->
                                                               <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addHabilitacoes" data-form-action="{{ route('inserir.documento') }}">
                                                                   <i class="fa fa-plus"></i> Actualizar Habilitações Literais
                                                               </button>
                                                             <!--/BTN Modal de Add Arquivo -->
+                                                          @endif
                                                           </div>
                                                                 @endif
                                                             <!--Modal de Add Arquivo -->
@@ -445,15 +450,16 @@
                                                              
                                                               @if ($arquivo->exists()) 
                                                           <div class="btn btn-toggle " data-target="item-TermoInicioFuncoes" style="text-align: left;">
-                                                            <p class="atrubutos-intem-funcionario">Data de Início de Funções: <span class="text-muted">{{ $documento['dataInicioFuncoes'] }} </span></p>
-                                                            <small id="" class="form-text text-muted">mais ...</small>                                                          
+                                                            <p class="atrubutos-intem-funcionario">Data de Início de Funções: <span class="text-muted">{{ $documento['dataInicioFuncoes'] }} </span></p>                                                          
                                                           </div>
                                                           <div id="item-TermoInicioFuncoes" class="info-toggle">
+                                                          @if ( session()->only(['Cargo'])['Cargo']->permissoes === 'Admin' || session()->only(['Seccao'])['Seccao']->codNome === 'RHPE' )
                                                             <!--BTN Modal de Add Arquivo -->
                                                               <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addTermoInicioFuncoes" data-form-action="{{ route('inserir.documento') }} " >
-                                                                  <i class="far fa-file-alt mr-1"></i> Actualizar Termo de Início de Funcões
+                                                               <i class="fa fa-plus"></i>  Actualizar Termo de Início de Funcões
                                                               </button>
                                                             <!--/BTN Modal de Add Arquivo -->
+                                                          @endif
                                                             <!--BTN  de ver Arquivo -->
                                                               <a class="btn btn-primary" href="{{ route('exibir.doc', ['documento' => base64_encode($arquivo->first()->caminho)]) }}" target="_blank">
                                                                 <i class="far fa-file-alt mr-1"></i> Ver Arquivo
@@ -463,14 +469,15 @@
                                                                 @else
                                                           <div class="btn btn-toggle " data-target="item-TermoInicioFuncoes" style="text-align: left;">
                                                             <p class="text-danger">Não Actualizado</p>
-                                                            <span style="text-align: right;" class="text-muted"> mais...</span>
                                                           </div>
                                                           <div id="item-TermoInicioFuncoes" class="info-toggle">
+                                                          @if ( session()->only(['Cargo'])['Cargo']->permissoes === 'Admin' || session()->only(['Seccao'])['Seccao']->codNome === 'RHPE' )
                                                             <!--BTN Modal de Add Arquivo -->
                                                               <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addTermoInicioFuncoes" data-form-action="{{ route('inserir.documento') }}">
                                                                   <i class="fa fa-plus"></i> Actualizar Termo de Início de Funcões
                                                               </button>
                                                             <!--/BTN Modal de Add Arquivo -->
+                                                          @endif
                                                           </div>
                                                                 @endif
                                                             <!--Modal de Add Arquivo -->
@@ -540,15 +547,16 @@
                                                               @endphp
                                                           <div class="btn btn-toggle " data-target="item-GuiaColocacao" style="text-align: left;">
                                                             <p class="atrubutos-intem-funcionario">Data de Emissão: <span class="text-muted">{{ $documento['dataEmissao'] }} </span></p>
-                                                            <p class="atrubutos-intem-funcionario">Para Unidade Orgânica: <span class="text-muted">{{ $unidadeOrganica['designacao'] }} </span></p>
-                                                            <small id="" class="form-text text-muted">  mais...</small>                                                          
+                                                            <p class="atrubutos-intem-funcionario">Para Unidade Orgânica: <span class="text-muted">{{ $unidadeOrganica['designacao'] }} </span></p>                                                         
                                                           </div>
                                                           <div id="item-GuiaColocacao" class="info-toggle">
+                                                          @if ( session()->only(['Cargo'])['Cargo']->permissoes === 'Admin' || session()->only(['Seccao'])['Seccao']->codNome === 'RHPE' )
                                                             <!--BTN Modal de Add Arquivo -->
                                                               <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addGuiaColoaccao" data-form-action="{{ route('inserir.documento') }} " >
-                                                                  <i class="far fa-file-alt mr-1"></i> Actualizar Guia de Colocação
+                                                              <i class="fa fa-plus"></i>  Actualizar Guia de Colocação
                                                               </button>
                                                             <!--/BTN Modal de Add Arquivo -->
+                                                          @endif
                                                             <!--BTN  de ver Arquivo -->
                                                               <a class="btn btn-primary" href="{{ route('exibir.doc', ['documento' => base64_encode($arquivo->first()->caminho)]) }}" target="_blank">
                                                                 <i class="far fa-file-alt mr-1"></i> Ver Arquivo
@@ -558,14 +566,15 @@
                                                                 @else
                                                           <div class="btn btn-toggle " data-target="item-GuiaColocacao" style="text-align: left;">
                                                             <p class="text-danger">Não Actualizado</p>
-                                                            <span style="text-align: right;" class="text-muted">  mais...</span>
                                                           </div>
                                                           <div id="item-GuiaColocacao" class="info-toggle">
+                                                          @if ( session()->only(['Cargo'])['Cargo']->permissoes === 'Admin' || session()->only(['Seccao'])['Seccao']->codNome === 'RHPE' )
                                                             <!--BTN Modal de Add Arquivo -->
                                                               <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addGuiaColoaccao" data-form-action="{{ route('inserir.documento') }}">
                                                                   <i class="fa fa-plus"></i> Actualizar Guia de Colocação
                                                               </button>
                                                             <!--/BTN Modal de Add Arquivo -->
+                                                          @endif
                                                           </div>
                                                                 @endif
                                                             <!--Modal de Add Arquivo -->
@@ -647,15 +656,16 @@
                                                              
                                                               @if ($arquivo->exists()) 
                                                           <div class="btn btn-toggle " data-target="item-Autobiografia" style="text-align: left;">
-                                                            <p class="atrubutos-intem-funcionario">Data de Criação: <span class="text-muted">{{ $documento['dataCriacao'] }} </span></p>
-                                                            <small id="" class="form-text text-muted">mais ...</small>                                                          
+                                                            <p class="atrubutos-intem-funcionario">Data de Criação: <span class="text-muted">{{ $documento['dataCriacao'] }} </span></p>                                                          
                                                           </div>
                                                           <div id="item-Autobiografia" class="info-toggle">
+                                                          @if ( session()->only(['Cargo'])['Cargo']->permissoes === 'Admin' || session()->only(['Seccao'])['Seccao']->codNome === 'RHPE' )
                                                             <!--BTN Modal de Add Arquivo -->
                                                               <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addAutobiografia" data-form-action="{{ route('inserir.documento') }} " >
-                                                                  <i class="far fa-file-alt mr-1"></i> Actualizar Autobiografia
+                                                              <i class="fa fa-plus"></i> Actualizar Autobiografia
                                                               </button>
                                                             <!--/BTN Modal de Add Arquivo -->
+                                                          @endif
                                                             <!--BTN  de ver Arquivo -->
                                                               <a class="btn btn-primary" href="{{ route('exibir.doc', ['documento' => base64_encode($arquivo->first()->caminho)]) }}" target="_blank">
                                                                 <i class="far fa-file-alt mr-1"></i> Ver Arquivo
@@ -665,14 +675,15 @@
                                                                 @else
                                                           <div class="btn btn-toggle " data-target="item-Autobiografia" style="text-align: left;">
                                                             <p class="text-danger">Não Actualizado</p>
-                                                            <span style="text-align: right;" class="text-muted"> mais...</span>
                                                           </div>
                                                           <div id="item-Autobiografia" class="info-toggle">
+                                                          @if ( session()->only(['Cargo'])['Cargo']->permissoes === 'Admin' || session()->only(['Seccao'])['Seccao']->codNome === 'RHPE' )
                                                             <!--BTN Modal de Add Arquivo -->
                                                               <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addAutobiografia" data-form-action="{{ route('inserir.documento') }}">
                                                                   <i class="fa fa-plus"></i> Actualizar Autobiografia
                                                               </button>
                                                             <!--/BTN Modal de Add Arquivo -->
+                                                          @endif
                                                           </div>
                                                                 @endif
                                                             <!--Modal de Add Arquivo -->
@@ -741,15 +752,16 @@
                                                              
                                                               @if ($arquivo->exists()) 
                                                           <div class="btn btn-toggle " data-target="item-CurriculumVitae" style="text-align: left;">
-                                                            <p class="atrubutos-intem-funcionario">Data de Criação: <span class="text-muted">{{ $documento['dataCriacao'] }} </span></p>
-                                                            <small id="" class="form-text text-muted">mais ...</small>                                                          
+                                                            <p class="atrubutos-intem-funcionario">Data de Criação: <span class="text-muted">{{ $documento['dataCriacao'] }} </span></p>                                                          
                                                           </div>
                                                           <div id="item-CurriculumVitae" class="info-toggle">
+                                                          @if ( session()->only(['Cargo'])['Cargo']->permissoes === 'Admin' || session()->only(['Seccao'])['Seccao']->codNome === 'RHPE' )
                                                             <!--BTN Modal de Add Arquivo -->
                                                               <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addCurriculumVitae" data-form-action="{{ route('inserir.documento') }} " >
-                                                                  <i class="far fa-file-alt mr-1"></i> Actualizar CurriculumVitae
+                                                                <i class="fa fa-plus"></i>  Actualizar CurriculumVitae
                                                               </button>
                                                             <!--/BTN Modal de Add Arquivo -->
+                                                          @endif
                                                             <!--BTN  de ver Arquivo -->
                                                               <a class="btn btn-primary" href="{{ route('exibir.doc', ['documento' => base64_encode($arquivo->first()->caminho)]) }}" target="_blank">
                                                                 <i class="far fa-file-alt mr-1"></i> Ver Arquivo
@@ -759,14 +771,15 @@
                                                                 @else
                                                           <div class="btn btn-toggle " data-target="item-CurriculumVitae" style="text-align: left;">
                                                             <p class="text-danger">Não Actualizado</p>
-                                                            <span style="text-align: right;" class="text-muted"> mais...</span>
                                                           </div>
                                                           <div id="item-CurriculumVitae" class="info-toggle">
+                                                          @if ( session()->only(['Cargo'])['Cargo']->permissoes === 'Admin' || session()->only(['Seccao'])['Seccao']->codNome === 'RHPE' )
                                                             <!--BTN Modal de Add Arquivo -->
                                                               <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addCurriculumVitae" data-form-action="{{ route('inserir.documento') }}">
                                                                   <i class="fa fa-plus"></i> Actualizar CurriculumVitae
                                                               </button>
                                                             <!--/BTN Modal de Add Arquivo -->
+                                                          @endif
                                                           </div>
                                                                 @endif
                                                             <!--Modal de Add Arquivo -->

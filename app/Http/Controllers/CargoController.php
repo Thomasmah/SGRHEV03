@@ -25,6 +25,7 @@ class CargoController extends Controller
     //Create
     public function store(Request $request)
     {
+       // dd($request->all());
        $request->validate([
             'designacao'=> ['required','string', 'max:255',],
             'descrisao'=> ['string', 'max:255'],
@@ -39,6 +40,7 @@ class CargoController extends Controller
             'designacao'=> $request->input('designacao'),
             'descrisao' => $request->input('descrisao'),
             'permissoes' => $request->input('permissoes'),
+            'codNome' => $request->input('seccao'),
         ]);
        if ($cargo) {
         return redirect()->back()->with('success', 'O cargo, '.$request->designacao.' Cadastrado com sucesso!');

@@ -110,7 +110,7 @@ class MapaEfectividadeController extends Controller
             join pessoas on pessoas.id=funcionarios.idPessoa
             join categoria_funcionarios on categoria_funcionarios.id=funcionarios.idCategoriaFuncionario
             join unidade_organicas on unidade_organicas.id=funcionarios.idUnidadeOrganica 
-       ');  
+       '); 
        return view('sgrhe\pages\tables\form-mapa-efectividade',compact('dados'));
     }
 

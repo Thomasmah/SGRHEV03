@@ -1,6 +1,6 @@
 <!--Layout Principal-->
 @extends('layouts.app')
-  @section('titulo' , 'Processos da Seção de  - '.session()->only(['Seccao'])['Seccao']->codNome )
+  @section('titulo' , 'Processos da Seção de  - '.session()->only(['Seccao'])['Seccao']->designacao )
         @section('header')
         
              <!--Estilizacao do Previw foto de Perfil-->
@@ -42,7 +42,7 @@
               <div class="container-fluid">
                 <div class="row mb-2">
                   <div class="col-sm-6">
-                    <h1> Processos da Secção de(a) {{ session()->only(['Seccao'])['Seccao']->codNome }}</h1>
+                    <h1> Processos da Secção de(a) {{ session()->only(['Seccao'])['Seccao']->designacao }}</h1>
                   </div>
                   <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -130,21 +130,21 @@
                                                     <button type="submit" class="btn btn-warning" onclick="confirmAndSubmit(event, 'Aprovar a  solicitacao de Licença?', 'Sim, Aprovar!', 'Não, Cancelar Aprovação!')">Aprovar Solicitação</button>
                                                   </form>
                                                   <button type="button" class="btn btn-primary {{ ($processo->parecer == 'Favoravel' || $processo->parecer == 'Desfavoravel' || $processo->estado == 'Cancelado' || $processo->estado == 'Aprovado' || $processo->estado == 'Desfavoravel') ? 'd-none' : ' '}} {{ ( $processo->natureza == 'Requerimento') ? ' ' : 'd-none'}}" data-toggle="modal" data-target="#parecer{{ $processo->id}}">
-                                                         Parecer
+                                                         Dar Parecer
                                                   </button>
 
                                                   <div class="modal fade" id="parecer{{ $processo->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                   <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                       <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Requerimento de {{ $pessoa->nomeCompleto}}</h5>
+                                                        <h5 class="modal-title" id="exampleModalLabel">Requerimento de {{ $pessoaSolicitante->nomeCompleto }}</h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                           <span aria-hidden="true">&times;</span>
                                                         </button>
                                                       </div>
                                                       <div class="modal-body">
                                                         <!-- Formulário -->
-                                                        <form action="{{ isset($idFuncionario) ? route('solicitacao.parecer')  : route('solicitacao.parecer')  }}" method="POST" id="fo">                                                       @csrf
+                                                        <form action="{{ isset($idFuncionario) ? route('solicitacao.parecer')  : route('solicitacao.parecer')  }}" method="POST" id="fo"  enctype="multipart/form-data">                                                       @csrf
                                                           @method('POST')
                                                           <div class="form-group">
                                                             <input type="hidden" name="Request"  value="{{$processo->Request}}">
@@ -153,11 +153,25 @@
                                                             <textarea class="form-control" name="motivo" id="texto" placeholder="Descreva um motivo..." required></textarea>
                                                               -->
                                                               <label for="parecer"></label>
-                                                              <select name="parecer" class="form-control" style="width: 100%;" required>
+                                                              <label for="parecer">Forneça um parecer da Solicitação</label>
+                                                              <select name="parecer" class="form-control" style="width: 100%;" onchange="document.getElementById('op').style.display = (this.value === 'Favoravel' || this.value === 'Desfavoravel' ? 'block' : 'block')" required>
                                                                 <option class="text-secondary font-weight-bold" value="">Escolha um Parecer</option>
                                                                 <option class="text-success font-weight-bold" value="Favoravel">Parecer Favorável</option>
                                                                 <option class="text-danger font-weight-bold" value="Desfavoravel">Parecer Desfavorálvel</option>
                                                               </select>
+                                                              <div class="form-group" id="op" style="display: none;">
+                                                                  <label for="arquivo">OBS: O Documento de Ratificado deve estar no formato "pdf"!</label>
+                                                                      <div class="input-group">
+                                                                        <div class="custom-file">
+                                                                          <input type="file" class="custom-file-input" name="arquivo" required>
+                                                                          <label class="custom-file-label" for="arquivo">Escolha um arquivo</label>
+                                                                          </div>
+                                                                      </div>
+                                                              </div>
+                                                              <div class="form-check">
+                                                                      <input type="checkbox" class="form-check-input" required>
+                                                                      <label class="form-check-label" for="confirmar">Clique para Confirmar</label>
+                                                              </div>
                                                           </div>
                                                           <button type="submit" class="btn btn-primary">Submeter</button>
                                                         </form>

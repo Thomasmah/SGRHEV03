@@ -24,6 +24,84 @@ use Symfony\Component\Console\Input\Input;
 class ProcessoController extends Controller
 {
 
+    public function darParecer(Request $request)
+    {
+       // dd($request->all());
+        if ($request->parecer === 'Favoravel') {
+            $D = $request->Request;
+            //Converetr o Request String Em Request Array
+            parse_str($D, $Request);
+            //dd($Request);
+            $Documento = $request->file('arquivo');
+            //Nomear o Nome do Novo ficheiro PDF
+            $fileName = date('dmYHis').'file.pdf';
+            $caminho = 'sgrhe/funcionarios/'.$Request['idFuncionarioSolicitante'].'/'.$Request['categoria'].'/'.$fileName;
+            //dd($Documento);
+            // Armazenar o arquivo no subdiretório dentro da pasta 'local Especifico'
+            $save = Storage::disk('local')->put($caminho, file_get_contents($Documento));
+            DB::beginTransaction();
+            $Arquivo = Arquivo::create([
+                'titulo' => md5($fileName),
+                'categoria' => $Request['categoria'],
+                'descricao' => http_build_query($Request),
+                'arquivo' => $fileName,
+                'caminho' => $caminho,
+                'idFuncionario' => $Request['idFuncionarioSolicitante'],
+            ]);
+            if ($Arquivo) {
+                $idArquivo = Arquivo::where('idFuncionario', $Request['idFuncionarioSolicitante'])->where('categoria', $Request['categoria'] )->latest()->first()->id;
+
+                $Processo = Processo::where('id', $request['idProcesso'])->first();
+                //dd($Processo);
+                if ($save) {
+                    $estado = $request->input('parecer');
+                    if ($request->input('parecer') == 'Favoravel') {
+                        $estado = 'Aprovado';
+                    } 
+                    $Processo->update([
+                        'idArquivo' => $idArquivo,
+                        'ratificador' => session()->only(['funcionario'])['funcionario']->id,
+                        'estado' => $estado,
+                        'deferimento' => $request->input('parecer'),
+                        
+                    ]);
+                    DB::commit();
+                    return redirect()->back()->with('success', 'Ratificado com sucesso!');
+                }
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Erro ao Salvar o registro!');
+            }
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Erro ao Ratificar!');
+
+            }else{
+                DB::commit();
+                $Processo = Processo::where('id', $request['idProcesso'])->first();
+                //dd($Processo);
+                if ($Processo) {
+                    $estado = $request->input('parecer');
+                    if ($request->input('parecer') == 'Desfavoralvel') {
+                        $estado = 'Não Aprovado';
+                    }else {
+                        $Processo->update([
+                            'ratificador' => session()->only(['funcionario'])['funcionario']->id,
+                            'estado' => $estado,
+                            'deferimento' => $request->input('parecer'),
+                            
+                        ]);
+                        DB::commit();
+                        return redirect()->back()->with('success', 'Parecer aplicado com sucesso!');
+                    }
+                   
+                }
+                return redirect()->back()->with('success', 'Parecer aplicado com sucesso!');
+            }
+        
+        
+        
+       
+    }
+
     public function parecer(Request $request)
     {
       // dd($request->all());
@@ -201,58 +279,23 @@ class ProcessoController extends Controller
 
     }
 
-    public function solicitar(Request $request, string $idFuncionarioSolicitante)
-    {  //Testando a Reconversao de dados 
-       //$rec ="_token=sQPx5SutTjKCzSKwf64k3LoeWGmXF0DZRmlxd5Gi&_method=POST&categoria=licenca&natureza=N%2FD&seccao=secretaria&idFuncionarioSolicitante=3&dataInicio=2024-02-08&dataFim=2024-02-10&motivo=Por+motivo+de+Cuidar+da+culher+que+deu+a+luz";
-       // parse_str($rec , $array);
-       // dd($array);
-    
-        //Registro o Processo no Bango de dados e Salvamento do Arquivo Gerado no Banco de Dados 
-        $request->validate([
-           //Validacoes
-        ]);
-        //dd($request->all());
-        $processo = Processo::create([
-            // Recupera o id do funcionario logado pela sessao 
-            'idFuncionario' => session()->only(['funcionario'])['funcionario']->id,
-            'idFuncionarioSolicitante' => $idFuncionarioSolicitante,
-            'seccao' =>  $request->input('seccao'),
-            'categoria' => $request->input('categoria'),
-            'natureza' => $request->input('natureza'),
-            'periodo' => $request->input('dataInicio')." a ".$request->input('dataFim'),
-            'estado' => 'Submetido',
-            'deferimento' => $request->input('deferimento'),
-            'Request' => http_build_query($request->all()) //implode(', ', $request->all()),
-            //Anexos, Dependencias Tipo Documentos e Outras Imformacoes para se efectivar um determinado processo 
-         ]);
-         DB::beginTransaction();
-         if ($processo) {
-            return redirect()->back()->with('success', 'Solicitacao aplicada com Sucesso!');
-            DB::commit();
-         }
-         DB::rollBack();
-         return redirect()->back()->with('error', 'Erro de aplicação');   
-    }
 
-    public function gozoFeriasSolicitar(Request $request, string $idFuncionarioSolicitante)
-    {  //Testando a Reconversao de dados 
-       //$rec ="_token=sQPx5SutTjKCzSKwf64k3LoeWGmXF0DZRmlxd5Gi&_method=POST&categoria=licenca&natureza=N%2FD&seccao=secretaria&idFuncionarioSolicitante=3&dataInicio=2024-02-08&dataFim=2024-02-10&motivo=Por+motivo+de+Cuidar+da+culher+que+deu+a+luz";
-       // parse_str($rec , $array);
-       // dd($array);
-     //  dd($request->all());
-        //Registro o Processo no Bango de dados e Salvamento do Arquivo Gerado no Banco de Dados 
+
+
+//Solicitar Processos Genericos 
+    public function solicitar(Request $request)
+    { 
+       // dd('Solicitar');
         $request->validate([
            //Validacoes
         ]);
-     
         $processo = Processo::create([
             // Recupera o id do funcionario logado pela sessao 
             'idFuncionario' => session()->only(['funcionario'])['funcionario']->id,
-            'idFuncionarioSolicitante' => $idFuncionarioSolicitante,
+            'idFuncionarioSolicitante' => $request->input('idFuncionarioSolicitante'),
             'seccao' =>  $request->input('seccao'),
             'categoria' => $request->input('categoria'),
             'natureza' => $request->input('natureza'),
-            'dataInicio' => $request->input('dataInicio'),
             'estado' => 'Submetido',
             //'deferimento' => $request->input('deferimento'),
             //Dados do Request Arasenados em string no campo Request
@@ -269,39 +312,7 @@ class ProcessoController extends Controller
     }
 
 
-    public function solicitarProcesso(Request $request)
-    {
-        //dd($request->all());
-        //Testando a Reconversao de dados 
-       //$rec ="_token=sQPx5SutTjKCzSKwf64k3LoeWGmXF0DZRmlxd5Gi&_method=POST&categoria=licenca&natureza=N%2FD&seccao=secretaria&idFuncionarioSolicitante=3&dataInicio=2024-02-08&dataFim=2024-02-10&motivo=Por+motivo+de+Cuidar+da+culher+que+deu+a+luz";
-       // parse_str($rec , $array);
-       // dd($array);
-    
-        //Registro o Processo no Bango de dados e Salvamento do Arquivo Gerado no Banco de Dados 
-        $request->validate([
-           //Validacoes
-        ]);
-        //dd($request->all());
-        $processo = Processo::create([
-            // Recupera o id do funcionario logado pela sessao 
-            'idFuncionario' => session()->only(['funcionario'])['funcionario']->id,
-            'idFuncionarioSolicitante' => $request->idFuncionario,
-            'seccao' =>  $request->seccao,
-            'categoria' => $request->categoria,
-            'natureza' => $request->natureza,
-            'estado' => 'Submetido',
-            'deferimento' => $request->input('deferimento'),
-            'Request' => http_build_query($request->all()) //implode(', ', $request->all()),
-            //Anexos, Dependencias Tipo Documentos e Outras Imformacoes para se efectivar um determinado processo 
-         ]);
-         DB::beginTransaction();
-         if ($processo) {
-            return redirect()->back()->with('success', 'Solicitacao aplicada com Sucesso!');
-            DB::commit();
-         }
-         DB::rollBack();
-         return redirect()->back()->with('error', 'Erro de aplicação');   
-    }
+
 
     public function gerarDocumento(Request $request, string $idFuncionarioSolicitante)
     {

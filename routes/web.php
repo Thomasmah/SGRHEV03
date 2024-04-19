@@ -97,17 +97,17 @@ Route::any('/perfil-foto-editor/{idFuncionario}',function(){
 //###############   Operacoes com a Entidade Pessoa  ################
 
 //Formulario Create e Edite the same form
-Route::any('/create-edit-pessoa/{id?}',[PessoaController::class,'formulario'])->name('pessoas.form')->middleware('AcessoAdmin');
+Route::any('/create-edit-pessoa/{id?}',[PessoaController::class,'formulario'])->name('pessoas.form');//->middleware('AcessoAdmin');
 //Mostrar Pessoas
 Route::get('/index-pessoa',[PessoaController::class,'index'])->name('pessoas.index');
 //Armzenar Registros na Entidade Pessoa 
-Route::post('/store-pessoa',[PessoaController::class,'store'])->name('pessoas.store')->middleware('AcessoAdmin');
+Route::post('/store-pessoa',[PessoaController::class,'store'])->name('pessoas.store');//->middleware('AcessoAdmin');
 //Delectar um Registro da Entidade Pessoa
-Route::delete('/delete-pessoa/{id}',[PessoaController::class,'destroy'])->name('pessoas.delete')->middleware('AcessoAdmin'); //Corrigir Aplicando o verbo DELETE no formulario 
+Route::delete('/delete-pessoa/{id}',[PessoaController::class,'destroy'])->name('pessoas.delete');//->middleware('AcessoAdmin'); //Corrigir Aplicando o verbo DELETE no formulario 
 
-Route::PUT('/pessoas/editar/{id}',[PessoaController::class,'edit'])->name('pessoas.edit')->middleware('AcessoAdmin'); //Corrigir Aplicando o verbo PUT ou PATCH no formulario 
+Route::PUT('/pessoas/editar/{id}',[PessoaController::class,'edit'])->name('pessoas.edit');//->middleware('AcessoAdmin'); //Corrigir Aplicando o verbo PUT ou PATCH no formulario 
 //Update 
-Route::any('/pessoas/update/{id}',[PessoaController::class,'update'])->name('pessoas.update')->middleware('AcessoAdmin');;
+Route::any('/pessoas/update/{id}',[PessoaController::class,'update'])->name('pessoas.update');//->middleware('AcessoAdmin');;
 
 //###############   Operacoes com a Entidade/ Tabela Pessoa  ################
 
@@ -132,13 +132,13 @@ Route::any('/create-edit-funcionario/{id?}',[FuncionarioController::class,'formu
 //Rota para o controler Verificar Pessoa para cadastrar novo fucnionario 
 Route::any('/fucionario-verificarPessoa',[FuncionarioController::class,'verificarPessoa'])->name('funcionarios.verificarPessoa');
 //Armzenar Registros na Tabela Unidade Organica 
-Route::any('/store-fucionario',[FuncionarioController::class,'store'])->name('funcionarios.store')->middleware('AcessoAdmin');
+Route::any('/store-fucionario',[FuncionarioController::class,'store'])->name('funcionarios.store');//->middleware('AcessoAdmin');
 //Mostrar Funcionarios
-Route::any('/index-funcionarios',[FuncionarioController::class,'index'])->name('funcionarios.index')->middleware('AcessoAdmin');
+Route::any('/index-funcionarios',[FuncionarioController::class,'index'])->name('funcionarios.index');//->middleware('AcessoAdmin');
 //Actualizar um Registro da Entidade Funcionario
-Route::any('/updade-funcionario{id}',[FuncionarioController::class,'update'])->name('funcionarios.update')->middleware('AcessoAdmin');
+Route::any('/updade-funcionario{id}',[FuncionarioController::class,'update'])->name('funcionarios.update');//->middleware('AcessoAdmin');
 //Delectar um Registro da Entidade Funcionario
-Route::delete('/delete-funcionario{id}',[FuncionarioController::class,'destroy'])->name('funcionarios.delete')->middleware('AcessoAdmin');
+Route::delete('/delete-funcionario{id}',[FuncionarioController::class,'destroy'])->name('funcionarios.delete');//->middleware('AcessoAdmin');
 
 //
 
@@ -169,17 +169,17 @@ Route::delete('/delete-categoriafuncionario{id}',[CategoriaFuncionarioController
 //Formulario Create e Edite the same form
 Route::any('/create-edit-unidadeorganica/{id?}',[UnidadeOrganicaController::class,'formulario'])->name('unidadeorganicas.form');
 //Armzenar Registros na Tabela Unidade Organica 
-Route::any('/store-unidadeorganica',[UnidadeOrganicaController::class,'store'])->name('unidadeorganicas.store')->middleware('AcessoAdmin');
+Route::any('/store-unidadeorganica',[UnidadeOrganicaController::class,'store'])->name('unidadeorganicas.store');//->middleware('AcessoAdmin');
 //Exibir Unidade Organicas
-Route::any('/index-unidadeorganica',[UnidadeOrganicaController::class,'index'])->name('unidadeorganicas.index')->middleware('AcessoAdmin');
+Route::any('/index-unidadeorganica',[UnidadeOrganicaController::class,'index'])->name('unidadeorganicas.index');//->middleware('AcessoAdmin');
 //Ver unidade Organica unidadeOrganica.show 
 Route::any('/sobre-unidadeorganica/{idUnidadeOrganica}/',[UnidadeOrganicaController::class,'show'])->name('unidadeOrganica.show');//Definir Permissoes so para os directores
 Route::any('/dasboard-unidadeorganica/{idUnidadeOrganica}/',[UnidadeOrganicaController::class,'dashboardUnidadeOrganicaShow'])->name('dashboard.unidade.organica.how');//Definir Permissoes so para os directores
 Route::any('/formulario/unidadeorganica/{idUnidadeOrganica}/',[UnidadeOrganicaController::class,'formularioAproveitamentoUnidadeOrganica'])->name('dashboard.unidade.organica.formulario.aproveitamento');//Definir Permissoes so para os directores
 //Actualizar um Registro da Entidade-Tabela Unidade Organica
-Route::any('/updade-uniddeorganica{id}',[UnidadeOrganicaController::class,'update'])->name('unidadeorganicas.update')->middleware('AcessoAdmin');
+Route::any('/updade-uniddeorganica{id}',[UnidadeOrganicaController::class,'update'])->name('unidadeorganicas.update');//->middleware('AcessoAdmin');
 //Delectar um Registro da Tabela Unidade Orgaica
-Route::delete('/delete-unidadeorganica{id}',[UnidadeOrganicaController::class,'destroy'])->name('unidadeorganicas.delete')->middleware('AcessoAdmin');
+Route::delete('/delete-unidadeorganica{id}',[UnidadeOrganicaController::class,'destroy'])->name('unidadeorganicas.delete');//->middleware('AcessoAdmin');
 //UO Funcionarios
 Route::get('/funcionarios/unidade_organica/index/',[UnidadeOrganicaController::class,'funcionariosUnidadeOrganica'])->name('funcionarios.unidade_organica.index');
 
@@ -192,13 +192,13 @@ Route::any('formulario/aproveitamento/', [UnidadeOrganicaDadosController::class,
 //Formulario Create e Edite the same form
 Route::any('/create-edit-cargo/{id?}',[CargoController::class,'formulario'])->name('cargos.form');
 //Armazenar Cargos 
-Route::any('/store-cargo',[CargoController::class,'store'])->name('cargos.store')->middleware('AcessoAdmin');
+Route::any('/store-cargo',[CargoController::class,'store'])->name('cargos.store');//->middleware('AcessoAdmin');
 //Actualizar Cargos 
-Route::any('/update-cargo/{id}',[CargoController::class,'update'])->name('cargos.update')->middleware('AcessoAdmin');
+Route::any('/update-cargo/{id}',[CargoController::class,'update'])->name('cargos.update');//->middleware('AcessoAdmin');
 //Mostrar Cargos 
 Route::get('/index-cargo',[CargoController::class,'index'])->name('cargos.index');
 //Delectar um Registro da Tabela Cargo
-Route::delete('/delete-cargo/{id}',[CargoController::class,'destroy'])->name('cargos.delete')->middleware('AcessoAdmin');
+Route::delete('/delete-cargo/{id}',[CargoController::class,'destroy'])->name('cargos.delete');//->middleware('AcessoAdmin');
 
 
 #######      Operacoes com a Entidade/Tabela Arquivo       #########
@@ -214,7 +214,7 @@ Route::any('/update-arquivo/{id}',[ArquivoController::class,'update'])->name('ar
 //Mostrar arquivos 
 Route::get('/index-arquivo',[ArquivoController::class,'index'])->name('arquivos.index');
 //Delectar um Registro da Tabela arquivo
-Route::delete('/delete-arquivo/{id}',[ArquivoController::class,'destroy'])->name('arquivos.delete')->middleware('AcessoAdmin');
+Route::delete('/delete-arquivo/{id}',[ArquivoController::class,'destroy'])->name('arquivos.delete');//->middleware('AcessoAdmin');
 //Foto de Perfil
 //Armazenar foto de Perfil
 Route::post('/foto/perfil/actualizar',[ArquivoController::class,'fotoPerfilActualizar'])->name('foto.perfil.actualizar');
@@ -237,11 +237,11 @@ Route::any('/solicitar/{idFuncionarioSolicitante}',[ProcessoController::class,'s
 Route::any('/solicitacao/preview/',[ProcessoController::class,'preview'])->name('solicitacao.preview');
 Route::any('/solicitacao/ratificar/',[ProcessoController::class,'ratificar'])->name('solicitacao.ratificar');
 Route::any('/solicitacao/cancelar/{idProcesso}',[ProcessoController::class,'cancelar'])->name('solicitacao.cancelar');
-Route::any('/solicitacao/parecer/',[ProcessoController::class,'parecer'])->name('solicitacao.parecer');
+Route::any('/solicitacao/parecer/',[ProcessoController::class,'darParecer'])->name('solicitacao.parecer');
 
 
 //Solicitacoes Processo via Request
-Route::any('/solicitar',[ProcessoController::class,'solicitarProcesso'])->name('solicitar'); 
+Route::any('/solicitar',[ProcessoController::class,'solicitar'])->name('solicitar'); 
 
 //Requerer a lista de processos de uma determinada seccao
 Route::any('procesos/{seccao}', [ProcessoController::class,'processosSeccao'])->name('processos.seccao');
@@ -258,10 +258,8 @@ Route::any('/ver/avaliacao/funcionario/', [AvaliacaoDesempenhoFuncionarioControl
 Route::post('/homologar/avaliacao/funcionario/', [AvaliacaoDesempenhoFuncionarioController::class,'homologar'])->name('homologar.avaliacao');
 
 
-//Solicitar autorizacao de gozo de Férias
-Route::any('/gozo-ferias/solicitar/{idFuncionarioSolicitante}',[ProcessoController::class,'gozoFeriasSolicitar'])->name('gozo.ferias.solicitar'); 
-Route::any('/gozo-ferias/solicitacao/preview/',[ProcessoController::class,'gozoFeriasPreview'])->name('gozo.ferias.preview');
-Route::any('/gozo-ferias/solicitacao/ratificar/',[ProcessoController::class,'gozoFeriasRatificar'])->name('gozo.ferias.ratificar');//Os os chefes Direitos tem acesso a essa rota
+//Solicitar Processos Genericos
+//Route::any('/solicitar/processo/',[ProcessoController::class, 'solicitarProcesso'])->name('solicitar.processo'); 
 
 //Assinaturas / ficheiros
 Route::any('/assinatura/update', [AssinaturaController::class,'assinaturaUpdate'])->name('assinatura.update');

@@ -89,7 +89,6 @@ class DocumentoController extends Controller
                 ]);
                 $documento->update([
                     'idFuncionario' => $request->idFuncionario,
-                    'funcionario' => $request->funcionario,
                     'Request' => http_build_query($request->all()),
                     'funcionario' => session('idFuncionario'),
                     'categoria' => $categoria,

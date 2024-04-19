@@ -19,7 +19,7 @@ class Cargos extends Seeder
             'codNome' => 'Admin',
             'designacao' =>'Admin',
             'permissoes' => 'Admin',
-            'descrisao' => 'all'
+            'descrisao' => 'Admin'
         ]); 
         DB::table('cargos')->insert([
             'codNome' => 'Professor',
@@ -29,7 +29,7 @@ class Cargos extends Seeder
         ]);  
         DB::table('cargos')->insert([
             'codNome' => 'TecnicoEscola',
-            'designacao' =>'Técnico',
+            'designacao' =>'Técnico da Escola',
             'permissoes' => '2',
             'descrisao' => 'Create Read, "Updade Consultar" , Solicitar, Emitir Documentos Como:'
         ]); 
@@ -46,7 +46,7 @@ class Cargos extends Seeder
             'descrisao' =>'Create, Read, Update, Delete Consultar, Solicitar, Emitir Documentos Como: '
         ]); 
         DB::table('cargos')->insert([
-            'codNome' => 'Chefe',
+            'codNome' => 'ChefeSeccao',
             'designacao' =>'Chefe de Secção',
             'permissoes' => '5',
             'descrisao' => 'Create, Read, Update, Delete Consultar, Solicitar, Emitir, Aprovar Documentos Como:'

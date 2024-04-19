@@ -189,14 +189,14 @@
                                                           </div>
                                                       </div>
                                                       <div class="card-footer">
-                                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#licenca-dsciplinar">
+                                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#licenca">
                                                               Solicitar Licença
                                                             </button>
                                                       </div>
                                                     </div>
                                               </div>
                                               <!-- Modal Solicitar Licenca -->
-                                                <div class="modal fade" id="licenca-dsciplinar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="licenca" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                   <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                       <div class="modal-header">
@@ -207,12 +207,14 @@
                                                       </div>
                                                       <div class="modal-body">
                                                         <!-- Formulário -->
-                                                        <form action="{{ isset($idFuncionario) ? route('apenso.solicitar', ['idFuncionarioSolicitante' => idFuncionario])  : route('apenso.solicitar', ['idFuncionarioSolicitante' => $funcionario->id])  }}" method="POST" id="for">                                             @csrf
+                                                        <form action="{{ route('solicitar') }}" method="POST" id="for">                                             
+                                                          @csrf
                                                           @method('POST')
                                                           <div class="form-group">
+                                                            <input type="hidden" class="form-control" name="idFuncionario" value="{{ isset($idFuncionario) ? $idFuncionario :  $funcionario->id }}">
                                                             <input type="hidden" class="form-control" name="categoria" value="Licenca">
-                                                            <input type="hidden" class="form-control" name="natureza" value="N/D">
-                                                            <input type="hidden" class="form-control" name="seccao" value="secretaria">     
+                                                            <input type="hidden" class="form-control" name="natureza" value="Requerimento">
+                                                            <input type="hidden" class="form-control" name="seccao" value="SecretariaGeral">     
                                                             <input type="hidden" class="form-control" name="idFuncionarioSolicitante" value="{{ isset($idFuncionario) ? $idFuncionario  : $funcionario->id }}">    
                                                           </div>
                                                           <div class="form-group">
@@ -256,7 +258,7 @@
                                                                 Solicitar Declaração de Efectividade
                                                               </button>
                                                       </div>
-                                                </div>
+                                                    </div>
                                               </div>
                                               <!-- Modal Solicitar Licenca -->
                                                 <div class="modal fade" id="DeclaracaoEfectividade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -276,16 +278,16 @@
                                                           <div class="form-group">
                                                             <input type="hidden" class="form-control" name="idFuncionario" value="{{ isset($idFuncionario) ? $idFuncionario :  $funcionario->id }}">
                                                             <input type="hidden" class="form-control" name="categoria" value="DeclaracaoEfectividade">
-                                                            <input type="hidden" class="form-control" name="natureza" value="Solicitacao">
-                                                            <input type="hidden" class="form-control" name="seccao" value="Secretaria">
+                                                            <input type="hidden" class="form-control" name="natureza" value="Requerimento">
+                                                            <input type="hidden" class="form-control" name="seccao" value="SecretariaGeral">
                                                             <input type="hidden" class="form-control" name="deferimento" value="N/D">    
                                                             <input type="hidden" class="form-control" name="idFuncionarioSolicitante" value="{{ isset($idFuncionario) ? $idFuncionario  : $funcionario->id }}">    
                                                           </div>
                                                           <div class="form-group">
                                                               <label for="dataInicio">Para Fim de :</label>
                                                               <p class="text-muted text-color-red">Prencher tal como:</p>
-                                                              <span class="text-muted">OBS: A presente declaração destina-se para efeitos de actualizaçºao de conta bancaria no banco BFA sob número de conta nº 12345678 </span>
-                                                              <textarea name="finalidade" style="width:100%;"></textarea>
+                                                              <span class="text-muted">OBS: A presente declaração destina-se para efeitos de actualização de conta bancaria no banco BFA sob número de conta nº 12345678 </span>
+                                                              <textarea  class="form-control" name="finalidade" style="width:100%;"></textarea>
                                                               <div class="error-message" id="dateError" style="display: none;"></div>
                                                           </div>
                                                           <button type="submit" class="btn btn-primary">Submeter</button>
@@ -330,14 +332,16 @@
                                                       </div>
                                                       <div class="modal-body">
                                                         <!-- Formulário -->
-                                                        <form action="{{ isset($idFuncionario) ? route('gozo.ferias.solicitar', ['idFuncionarioSolicitante' => $idFuncionario])  : route('gozo.ferias.solicitar', ['idFuncionarioSolicitante' => $funcionario->id])  }}" method="POST" id="fo"   >                                                       @csrf
-                                                          @method('POST')
-                                                          <div class="form-group">
+                                                        <form action="{{ route('solicitar') }}" method="POST" id="fo"   >   
+                                                            @csrf
+                                                            @method('POST')
+                                                            <div class="form-group">
+                                                            <input type="hidden" class="form-control" name="idFuncionarioSolicitante" value="{{ isset($idFuncionario) ? $idFuncionario  : $funcionario->id }}">    
                                                             <input type="hidden" class="form-control" name="categoria" value="GozoFerias">
                                                             <input type="hidden" class="form-control" name="natureza" value="Requerimento">
-                                                            <input type="hidden" class="form-control" name="seccao" value="Secretaria">
-                                                            <input type="hidden" class="form-control" name="deferimento" value="N/D">    
-                                                            <input type="hidden" class="form-control" name="idFuncionarioSolicitante" value="{{ isset($idFuncionario) ? $idFuncionario  : $funcionario->id }}">    
+                                                            <input type="hidden" class="form-control" name="seccao" value="SecretariaGeral">
+                                                            <input type="hidden" class="form-control" name="deferimento" value="N/D"> 
+                                                            <input type="hidden" class="form-control" name="idFuncionarioSolicitante" value="{{ isset($idFuncionario) ? $idFuncionario  : $funcionario->id }}">   
                                                           </div>
                                                           <div class="form-group">
                                                               <label for="dataInicio">Data de Início:</label>

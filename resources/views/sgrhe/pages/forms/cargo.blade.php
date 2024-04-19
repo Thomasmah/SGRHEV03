@@ -61,7 +61,7 @@
                                   <select name="seccao" id="seccao"  class="form-control select2" style="width: 100%;">
                                       <option value="{{ old('Selecione Uma Secção',$cargo->seccao ?? '') }}">{{ old('Selecione Uma Secção',$cargo->seccao ?? 'Escolha uma Secção') }}</option>
                                       <option value="Admin">Admin</option>
-                                      <option value="Secretaria">Secretaria</option>
+                                      <option value="SecretariaGeral">SecretariaGeral</option>
                                       <option value="TIC">Tecnologias de Informação e Comunicação</option>
                                       <option value="RHPE">Recursos Humanos, Planeamento e Estatística</option>
                                       <option value="EdEnsino">Direção da Escola</option>

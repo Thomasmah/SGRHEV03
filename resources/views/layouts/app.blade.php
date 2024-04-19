@@ -96,6 +96,10 @@ use Illuminate\Support\Facades\Auth;
                 background-color: #f5f5f5;
                 color: #000000;
             }
+            #elemento > p{
+                margin: 0;
+                padding: 0;
+            }
         </style>
 
 
