@@ -51,6 +51,15 @@
                                 <label for="eqt">EQT</label>
                                 <input type="text" name="eqt" class="form-control" id="eqt" placeholder="EQT  da Unidade Orgânica" value="{{isset($UnidadeOrganica) ? $UnidadeOrganica->eqt : '' }}" required>
                               </div>
+                              <label for="nivelEnsino[]">Níveis de Ensino</label>
+                              <div class="form-group border border-info rounded" style="padding: 5px;">
+                                <span> 1. Jardin de Infância - </span><input  type="checkbox" class=" " name="nivelEnsino[]" value="Jardinm de Infância">
+                                <br><span> 2. Ensio Primário - </span><input  type="checkbox" class=" " name="nivelEnsino[]" value="Primário">
+                                <br><span> 3. I Ciclo do Ensino Secundário- </span><input  type="checkbox" class=" " name="nivelEnsino[]" value="I Ciclo">
+                                <br><span> 4. II Ciclo do Ensino Secundário - </span><input  type="checkbox" class=" " name="nivelEnsino[]" value="II Ciclo">
+                                <br>
+                              </div>
+                              <br>
                               <div class="form-group">
                                 <label for="decretoCriacao">Decreto de Criação</label>
                                 <input type="text" name="decretoCriacao" class="form-control" id="decretoCriacao" placeholder="Decreto de Criação do da Unidade Orgânica" value="{{isset($UnidadeOrganica) ? $UnidadeOrganica->decretoCriacao : '' }}">

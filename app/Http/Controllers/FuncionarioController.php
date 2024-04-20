@@ -69,7 +69,25 @@ class FuncionarioController extends Controller
               join unidade_organicas on unidade_organicas.id=funcionarios.idUnidadeOrganica
               join cargos on cargos.id=funcionarios.idCargo 
           ');
-          return view('sgrhe\pages\tables\funcionarios',compact('dados'));
+          $titulo = "Funcionários / Força de Trabalho";
+          return view('sgrhe\pages\tables\funcionarios',compact('dados','titulo'));
+    }
+    public function indexFuncionariosInativos()
+    {
+          //Operacoes de join para varias tabelas relacionadas com funcionarios
+          $dados = DB::select('
+          select 
+          funcionarios.estado as estado_funcionario, funcionarios.id as id_funcionario, pessoas.id as id_pessoas, unidade_organicas.id as id_unidade_organica, categoria_funcionarios.categoria as categoria_unidade_organica, cargos.designacao as nomeCargo, 
+          funcionarios.*, pessoas.*, categoria_funcionarios.*, unidade_organicas.*, cargos.*
+              from funcionarios
+              join pessoas on pessoas.id=funcionarios.idPessoa
+              join categoria_funcionarios on categoria_funcionarios.id=funcionarios.idCategoriaFuncionario
+              join unidade_organicas on unidade_organicas.id=funcionarios.idUnidadeOrganica
+              join cargos on cargos.id=funcionarios.idCargo 
+            where funcionarios.estado = "Inactivo"
+          ');
+          $titulo = "Funcionários em estado Inactivo";
+          return view('sgrhe\pages\tables\funcionarios',compact('dados','titulo'));
     }
 
   

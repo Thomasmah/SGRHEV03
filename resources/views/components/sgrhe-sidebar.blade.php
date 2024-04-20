@@ -347,7 +347,7 @@
                         </a>
                           <ul class="nav nav-treeview">
                             <li class="nav-item">
-                              <a href="{{route('unidadeorganicas.index')}}"  class="nav-link {{ request()->routeIs('unidadeorganicas.index') ? 'active' : ''}}">
+                              <a href="{{route('unidadeorganicas.index') }}"  class="nav-link {{ request()->routeIs('unidadeorganicas.index') ? 'active' : ''}}">
                                 <p class="item-2">
                                  <i class="bi bi-view-list"></i>
                                   Unidade Orgánica / Index 

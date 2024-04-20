@@ -21,6 +21,7 @@ class UnidadesOrganicasPuri extends Seeder
                 'decretoCriacao' => 'N/D',
                 'localidade' => 'QUIMUSSANDI',
                 'telefone' => 'N/D',
+                'nivelEnsino' => 'Primário',
                 'email' => 'N/D',
             ]);  
 
@@ -31,6 +32,7 @@ class UnidadesOrganicasPuri extends Seeder
                 'decretoCriacao' => 'N/D',
                 'localidade' => 'BENDO',
                 'telefone' => 'N/D',
+                'nivelEnsino' => 'Primário',
                 'email' => 'N/D',
             ]); 
 
@@ -41,6 +43,7 @@ class UnidadesOrganicasPuri extends Seeder
                 'decretoCriacao' => 'N/D',
                 'localidade' => 'BENDO',
                 'telefone' => 'N/D',
+                'nivelEnsino' => 'Primário',
                 'email' => 'N/D',
             ]); 
 
@@ -51,6 +54,7 @@ class UnidadesOrganicasPuri extends Seeder
                 'decretoCriacao' => 'N/D',
                 'localidade' => 'QUINZAMBI',
                 'telefone' => 'N/D',
+                'nivelEnsino' => 'Primário',
                 'email' => 'N/D',
             ]); 
 
@@ -61,6 +65,7 @@ class UnidadesOrganicasPuri extends Seeder
                 'decretoCriacao' => 'N/D',
                 'localidade' => 'QUIMBUNGALAU',
                 'telefone' => 'N/D',
+                'nivelEnsino' => 'Primário',
                 'email' => 'N/D',
             ]); 
 
@@ -71,6 +76,7 @@ class UnidadesOrganicasPuri extends Seeder
                 'decretoCriacao' => 'N/D',
                 'localidade' => 'QUILAMBA',
                 'telefone' => 'N/D',
+                'nivelEnsino' => 'Primário',
                 'email' => 'N/D',
             ]);  
 
@@ -81,6 +87,7 @@ class UnidadesOrganicasPuri extends Seeder
                 'decretoCriacao' => 'N/D',
                 'localidade' => 'PÚRI',
                 'telefone' => 'N/D',
+                'nivelEnsino' => 'Primário',
                 'email' => 'N/D',
             ]); 
 
@@ -91,6 +98,7 @@ class UnidadesOrganicasPuri extends Seeder
                 'decretoCriacao' => 'N/D',
                 'localidade' => 'PÚRI',
                 'telefone' => 'N/D',
+                'nivelEnsino' => 'Primário',
                 'email' => 'N/D',
             ]); 
 
@@ -101,6 +109,7 @@ class UnidadesOrganicasPuri extends Seeder
                 'decretoCriacao' => 'N/D',
                 'localidade' => 'QUINGOZOLO',
                 'telefone' => 'N/D',
+                'nivelEnsino' => 'Primário',
                 'email' => 'N/D',
             ]); 
 
@@ -111,6 +120,7 @@ class UnidadesOrganicasPuri extends Seeder
                 'decretoCriacao' => 'N/D',
                 'localidade' => 'QUIMALUNDO',
                 'telefone' => 'N/D',
+                'nivelEnsino' => 'Primário',
                 'email' => 'N/D',
             ]); 
 
@@ -122,6 +132,7 @@ class UnidadesOrganicasPuri extends Seeder
                 'decretoCriacao' => 'N/D',
                 'localidade' => 'QUISSASSA',
                 'telefone' => 'N/D',
+                'nivelEnsino' => 'Primário',
                 'email' => 'N/D',
             ]);  
 
@@ -132,6 +143,7 @@ class UnidadesOrganicasPuri extends Seeder
                 'decretoCriacao' => 'N/D',
                 'localidade' => 'QUIBABA',
                 'telefone' => 'N/D',
+                'nivelEnsino' => 'Primário',
                 'email' => 'N/D',
             ]); 
 
@@ -142,6 +154,7 @@ class UnidadesOrganicasPuri extends Seeder
                 'decretoCriacao' => 'N/D',
                 'localidade' => 'VISTA ALEGRE',
                 'telefone' => 'N/D',
+                'nivelEnsino' => 'Primário',
                 'email' => 'N/D',
             ]); 
 
@@ -152,6 +165,7 @@ class UnidadesOrganicasPuri extends Seeder
                 'decretoCriacao' => 'N/D',
                 'localidade' => 'PÚRI',
                 'telefone' => 'N/D',
+                'nivelEnsino' => 'Primário',
                 'email' => 'N/D',
             ]); 
 
@@ -162,6 +176,7 @@ class UnidadesOrganicasPuri extends Seeder
                 'decretoCriacao' => 'N/D',
                 'localidade' => 'QUIFUTILA',
                 'telefone' => 'N/D',
+                'nivelEnsino' => 'Primário',
                 'email' => 'N/D',
             ]); 
 
@@ -172,6 +187,7 @@ class UnidadesOrganicasPuri extends Seeder
                 'decretoCriacao' => 'N/D',
                 'localidade' => 'CALUMBO',
                 'telefone' => 'N/D',
+                'nivelEnsino' => 'Primário',
                 'email' => 'N/D',
             ]);  
 
@@ -182,6 +198,7 @@ class UnidadesOrganicasPuri extends Seeder
                 'decretoCriacao' => 'N/D',
                 'localidade' => 'QUINVUTA',
                 'telefone' => 'N/D',
+                'nivelEnsino' => 'Primário',
                 'email' => 'N/D',
             ]); 
 
@@ -192,6 +209,7 @@ class UnidadesOrganicasPuri extends Seeder
                 'decretoCriacao' => 'N/D',
                 'localidade' => 'MALUNDO CASSUMBA',
                 'telefone' => 'N/D',
+                'nivelEnsino' => 'Primário',
                 'email' => 'N/D',
             ]); 
 
@@ -202,6 +220,7 @@ class UnidadesOrganicasPuri extends Seeder
                 'decretoCriacao' => 'N/D',
                 'localidade' => 'ZUNGA',
                 'telefone' => 'N/D',
+                'nivelEnsino' => 'Primário',
                 'email' => 'N/D',
             ]); 
 
@@ -212,6 +231,7 @@ class UnidadesOrganicasPuri extends Seeder
                 'decretoCriacao' => 'N/D',
                 'localidade' => '1º MAIO',
                 'telefone' => 'N/D',
+                'nivelEnsino' => 'Primário',
                 'email' => 'N/D',
             ]); 
 
@@ -222,6 +242,7 @@ class UnidadesOrganicasPuri extends Seeder
                 'decretoCriacao' => 'N/D',
                 'localidade' => 'QUIZEMBA',
                 'telefone' => 'N/D',
+                'nivelEnsino' => 'Primário',
                 'email' => 'N/D',
             ]);  
 
@@ -232,6 +253,7 @@ class UnidadesOrganicasPuri extends Seeder
                 'decretoCriacao' => 'N/D',
                 'localidade' => 'QUISSEQUE LULOVO',
                 'telefone' => 'N/D',
+                'nivelEnsino' => 'Primário',
                 'email' => 'N/D',
             ]); 
 
@@ -242,6 +264,7 @@ class UnidadesOrganicasPuri extends Seeder
                 'decretoCriacao' => 'N/D',
                 'localidade' => 'BENGO',
                 'telefone' => 'N/D',
+                'nivelEnsino' => 'Primário',
                 'email' => 'N/D',
             ]); 
 
@@ -252,6 +275,7 @@ class UnidadesOrganicasPuri extends Seeder
                 'decretoCriacao' => 'N/D',
                 'localidade' => 'QUIMALUNDO',
                 'telefone' => 'N/D',
+                'nivelEnsino' => 'Jardin de Infância',
                 'email' => 'N/D',
             ]); 
             DB::table('unidade_organicas')->insert([
@@ -261,6 +285,7 @@ class UnidadesOrganicasPuri extends Seeder
                 'decretoCriacao' => 'N/D',
                 'localidade' => 'PÚRI',
                 'telefone' => 'N/D',
+                'nivelEnsino' => 'I Ciclo',
                 'email' => 'N/D',
             ]); 
             DB::table('unidade_organicas')->insert([
@@ -270,6 +295,7 @@ class UnidadesOrganicasPuri extends Seeder
                 'decretoCriacao' => 'N/D',
                 'localidade' => 'PÚRI',
                 'telefone' => 'N/D',
+                'nivelEnsino' => 'II Ciclo',
                 'email' => 'N/D',
             ]); 
             DB::table('unidade_organicas')->insert([
@@ -279,6 +305,7 @@ class UnidadesOrganicasPuri extends Seeder
                 'decretoCriacao' => 'N/D',
                 'localidade' => 'PÚRI',
                 'telefone' => 'N/D',
+                'nivelEnsino' => 'I Ciclo',
                 'email' => 'N/D',
             ]); 
             DB::table('unidade_organicas')->insert([
@@ -288,6 +315,7 @@ class UnidadesOrganicasPuri extends Seeder
                 'decretoCriacao' => 'N/D',
                 'localidade' => 'PÚRI',
                 'telefone' => 'N/D',
+                'nivelEnsino' => 'N/D',
                 'email' => 'N/D',
             ]); 
 

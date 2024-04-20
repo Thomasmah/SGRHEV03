@@ -73,9 +73,9 @@
                                                   $data = \Carbon\Carbon::parse($pessoa->validadeBI);
                                                   $class = $data->gt(now()) ? 'text-success' : 'text-danger';
                                                 @endphp
-                                                <td class="{{ $class }}">{{ $pessoa->validadeBI }}</td>
+                                                <td class="{{ $class }}">{{ \Carbon\Carbon::parse($pessoa->validadeBI)->format('d/m/Y')}}</td>
                                                 <td>{{ $pessoa->estadoCivil }}</td>
-                                                <td>{{ $pessoa->dataNascimento }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($pessoa->dataNascimento)->format('d/m/Y') }}</td>
                                                 <td>{{ $naturalidade->provincia}}</td>
                                                 <td>{{ $naturalidade->municipio}}</td>
                                                 <td>

@@ -43,7 +43,9 @@ class MapaEfectividadeController extends Controller
             join unidade_organicas on unidade_organicas.id=funcionarios.idUnidadeOrganica 
         ');  
         $faltas = MapaEfectividadefalta::where('idMapaEfectividade', $idMapaEfectividade)->get();
-        return view('sgrhe\pages\tables\form-mapa-efectividade', compact('funcionarios','idMapaEfectividade','faltas'));
+        $periodo = MapaEfectividade::find($idMapaEfectividade)->first()->dataPeriodo;
+
+        return view('sgrhe\pages\tables\form-mapa-efectividade', compact('funcionarios','idMapaEfectividade','faltas','periodo'));
     }
 
     

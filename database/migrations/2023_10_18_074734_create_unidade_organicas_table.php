@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('designacao');
             $table->string('descricao');
+            $table->string('niveEnsino')->nullable();
             $table->string('eqt')->nullable();
             $table->string('decretoCriacao')->nullable();
             $table->string('localidade')->nullable();

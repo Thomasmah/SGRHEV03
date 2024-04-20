@@ -46,7 +46,7 @@
                   <div class="icon">
                     <i class="ion ion-person-add"></i>
                   </div>
-                  <a href="#" class="small-box-footer">Ver mais <i class="fas fa-arrow-circle-right"></i></a>
+                  <a href="{{ route('funcionarios.index') }}" class="small-box-footer">Ver mais <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
               </div>
               <!-- Unidades Organicas -->
@@ -59,7 +59,7 @@
                   <div class="icon">
                     <i class="ion ion-bag"></i>
                   </div>
-                  <a href="#" class="small-box-footer">Ver mais <i class="fas fa-arrow-circle-right"></i></a>
+                  <a href="{{ route('unidadeorganicas.index') }}" class="small-box-footer">Ver mais <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
               </div>
               <!-- Escolas Primárias -->
@@ -92,14 +92,14 @@
                 <!-- small box -->
                 <div class="small-box bg-danger">
                   <div class="inner">
-                    <h3>10</h3>
+                    <h3>{{ App\Models\Funcionario::all()->where('estado', 'Inactivo')->count() }}</h3>
 
                     <p>Funcionários Inativos</p>
                   </div>
                   <div class="icon">
                     <i class="ion ion-pie-graph"></i>
                   </div>
-                  <a href="#" class="small-box-footer">Ver mais <i class="fas fa-arrow-circle-right"></i></a>
+                  <a href="{{ route('funcionarios.index.inativos') }}" class="small-box-footer">Ver mais <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
               </div>
               

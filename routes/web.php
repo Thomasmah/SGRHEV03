@@ -134,7 +134,9 @@ Route::any('/fucionario-verificarPessoa',[FuncionarioController::class,'verifica
 //Armzenar Registros na Tabela Unidade Organica 
 Route::any('/store-fucionario',[FuncionarioController::class,'store'])->name('funcionarios.store');//->middleware('AcessoAdmin');
 //Mostrar Funcionarios
-Route::any('/index-funcionarios',[FuncionarioController::class,'index'])->name('funcionarios.index');//->middleware('AcessoAdmin');
+Route::any('/index-funcionarios/inativos',[FuncionarioController::class,'index'])->name('funcionarios.index');//->middleware('AcessoAdmin');funcionarios.index.inativos
+
+Route::any('/index-funcionarios',[FuncionarioController::class,'indexFuncionariosInativos'])->name('funcionarios.index.inativos');//->middleware('AcessoAdmin');
 //Actualizar um Registro da Entidade Funcionario
 Route::any('/updade-funcionario{id}',[FuncionarioController::class,'update'])->name('funcionarios.update');//->middleware('AcessoAdmin');
 //Delectar um Registro da Entidade Funcionario
@@ -182,6 +184,11 @@ Route::any('/updade-uniddeorganica{id}',[UnidadeOrganicaController::class,'updat
 Route::delete('/delete-unidadeorganica{id}',[UnidadeOrganicaController::class,'destroy'])->name('unidadeorganicas.delete');//->middleware('AcessoAdmin');
 //UO Funcionarios
 Route::get('/funcionarios/unidade_organica/index/',[UnidadeOrganicaController::class,'funcionariosUnidadeOrganica'])->name('funcionarios.unidade_organica.index');
+//Actualizar Unidade Organica
+//Adicionar Foto a Uma unidade Organica
+Route::any('/add/fotos/uo/',[UnidadeOrganicaController::class,'AddFotosUO'])->name('add.foto.uo');
+//Ver u Listar as Imagens de Uma unidade Organica
+Route::any('/ver/fotos/{idUnidadeOrganica}',[UnidadeOrganicaController::class,'galeriaUnidadeOrganica'])->name('galeria.unidade.organica');
 
 //Dados Estatistios de Unidades Organicas
 Route::any('formulario/aproveitamento/', [UnidadeOrganicaDadosController::class,'cadastrarFormulario'])->name('cadastrar.formulario'); //So directores de Escola Podem Cadastrar dados com as suas contas

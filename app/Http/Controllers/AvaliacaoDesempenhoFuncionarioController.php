@@ -156,13 +156,13 @@ class AvaliacaoDesempenhoFuncionarioController extends Controller
     {
             $D = AvaliacaoDesempenhoFuncionario::find($request->id);
             parse_str($D, $Request);
-            $dataAvaliacao =$D['dataAvaliacao'];
+            $dataAvaliacao = $D['dataAvaliacao'];
            // dd($dataAvaliacao);
             $Documento = PDF::loadView("sgrhe/modelos/Avaliacao-Desempenho", compact('Request','dataAvaliacao'));      
             //Renderizar a View
             $Documento->render();
             //Nomear o Nome do Novo ficheiro PDF
-            $fileName = 'file.pdf';
+            $fileName = $Request['nomeCompleto'].'-'.$dataAvaliacao.'-AvaliacaoDesempenho.pdf';
             //Retornar o Domunento Gerado 
             // return view("sgrhe/modelos/$categoria",compact('Request','pessoa','funcionario','cargo','categoriaFuncionario'));
             return response($Documento->output(), 200, ['Content-Type' => 'application/pdf', 'Content-Disposition' => 'inline; filename="'.$fileName.'"']);

@@ -19,7 +19,7 @@
                 <div class="container-fluid">
                   <div class="row mb-2">
                     <div class="col-sm-6">
-                      <h1>Funcionários / Força de Trabalho </h1>
+                      <h1>Compor Mapa de Efectividade referente à  {{ \Carbon\Carbon::parse($periodo)->format('d F Y') }}</h1>
                     </div>
                     <div class="col-sm-6">
                       <ol class="breadcrumb float-sm-right">
@@ -65,10 +65,10 @@
                                                     <td>{{ $funcionario->numeroAgente }}</td>
                                                     <td>{{ $funcionario->nomeCompleto }}</td>
                                                     <td>{{ $funcionario->numeroBI }}</td>
-                                                    <td>{{ $funcionario->validadeBI }}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($funcionario->validadeBI)->format('d/m/Y') }}</td>
                                                     <td>{{ $funcionario->designacao }}</td>
                                                     <td>{{ $funcionario->categoria }}</td>
-                                                    <td>{{ $funcionario->dataAdmissao }}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($funcionario->dataAdmissao)->format('d/m/Y')  }}</td>
                                                     <td>{{ $funcionario->estado }}</td>
                                                     <td>
                                                       <form action="{{ route('perfil.show', ['idFuncionario' => $funcionario->id_funcionario]) }}" method="GET" style="display: inline;">

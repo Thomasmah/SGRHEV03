@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Arquivo;
 use App\Models\Cargo;
+use App\Models\Documento;
 use App\Models\FormularioAproveitamento;
+use App\Models\FotosUnidadeOrganica;
 use App\Models\Funcionario;
 use App\Models\Pessoa;
 use App\Models\UnidadeOrganica;
 use App\Models\UnidadeOrganicaDado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+
 
 class UnidadeOrganicaController extends Controller
 {
@@ -71,7 +76,23 @@ class UnidadeOrganicaController extends Controller
             $aproveitamentoIITrimestre = FormularioAproveitamento::where('idUnidadeOrganica', $idUnidadeOrganica)->where('trimestre', 'II')->first();
             $aproveitamentoIIITrimestre = FormularioAproveitamento::where('idUnidadeOrganica', $idUnidadeOrganica)->where('trimestre', 'III')->first();
             //dd($aproveitamentoITrimestre);
-            return view('sgrhe/unidade-organica-view',compact('unidadeOrganicaSelected','Funcionarios','aproveitamentoITrimestre','aproveitamentoIITrimestre','aproveitamentoIIITrimestre'));
+            $fotos = Arquivo::where('idFuncionario', 1)->where('categoria', 'FotosUnidadeOrganica')->where('descricao', $idUnidadeOrganica)->get();
+            //dd($fotos);
+            return view('sgrhe/unidade-organica-view',compact('unidadeOrganicaSelected','Funcionarios','aproveitamentoITrimestre','aproveitamentoIITrimestre','aproveitamentoIIITrimestre','fotos'));
+    }
+
+    public function galeriaUnidadeOrganica(string $idUnidadeOrganica)
+    {
+            $unidadeOrganicaSelected = UnidadeOrganica::where('id', $idUnidadeOrganica)->first();
+            $Funcionarios = Funcionario::where('idUnidadeOrganica', $idUnidadeOrganica);
+            $aproveitamento = FormularioAproveitamento::where('idUnidadeOrganica', $idUnidadeOrganica)->where('id', 1)->first();
+            $aproveitamentoITrimestre = FormularioAproveitamento::where('idUnidadeOrganica', $idUnidadeOrganica)->where('trimestre', 'I')->first();
+            $aproveitamentoIITrimestre = FormularioAproveitamento::where('idUnidadeOrganica', $idUnidadeOrganica)->where('trimestre', 'II')->first();
+            $aproveitamentoIIITrimestre = FormularioAproveitamento::where('idUnidadeOrganica', $idUnidadeOrganica)->where('trimestre', 'III')->first();
+            //dd($aproveitamentoITrimestre);
+            $fotos = Arquivo::where('idFuncionario', 1)->where('categoria', 'FotosUnidadeOrganica')->where('descricao', $idUnidadeOrganica)->get();
+            //dd($fotos);
+            return view('sgrhe/galeria-organica',compact('unidadeOrganicaSelected','Funcionarios','aproveitamentoITrimestre','aproveitamentoIITrimestre','aproveitamentoIIITrimestre','fotos'));
     }
 
     //Dashboard Unidade Organica So Para Directores das Escolas
@@ -85,7 +106,11 @@ class UnidadeOrganicaController extends Controller
             //dd($aproveitamentoITrimestre);
             $aproveitamentoIITrimestre = FormularioAproveitamento::where('idUnidadeOrganica', $idUnidadeOrganica)->where('trimestre', 'II')->first();
             $aproveitamentoIIITrimestre = FormularioAproveitamento::where('idUnidadeOrganica', $idUnidadeOrganica)->where('trimestre', 'III')->first();
-            return view('sgrhe/unidade-organica-dashboard',compact('unidadeOrganicaSelected','Funcionarios','aproveitamentoITrimestre','aproveitamentoIITrimestre','aproveitamentoIIITrimestre'));
+            //dd($aproveitamentoITrimestre);
+            
+            $fotos = Arquivo::where('idFuncionario', 1)->where('categoria', 'FotosUnidadeOrganica')->where('descricao', $idUnidadeOrganica)->get();
+            //dd($fotos);
+            return view('sgrhe/unidade-organica-dashboard',compact('unidadeOrganicaSelected','Funcionarios','aproveitamentoITrimestre','aproveitamentoIITrimestre','aproveitamentoIIITrimestre','fotos'));
     }
     //Create
     public function store(Request $request)
@@ -170,5 +195,57 @@ class UnidadeOrganicaController extends Controller
             return view('sgrhe\pages\forms\unidade-organica-formulario-aproveitamento',compact('unidadeOrganicaSelected','Funcionarios','aproveitamento','aproveitamentoITrimestre','aproveitamentoIITrimestre','aproveitamentoIIITrimestre'));
 
     }
+
+    public function AddFotosUO(Request $request)
+    {
+        //dd($request->all());
+       
+        
+        $verificar = $request->validate([
+            //Form Request Pesquisar e implementar
+        ]);
+        $categoria = "FotosUnidadeOrganica";
+        $idUnidadeOrganica = $request->input('idUnidadeOrganica');
+        $foto = $request->file('arquivo');
+        $nomeArquivo = $categoria.'-'.date('d-m-y-H-i-s').'.'.$foto->extension();
+        $caminho = 'sgrhe/unidadeorganicas/'.$idUnidadeOrganica.'/'.$categoria.'/'.$nomeArquivo;
+        // Armazenar o arquivo no subdiretório dentro da pasta 'local Especifico'
+        //Procurar um outro metodo para o put que guarada com nme personalizado
+        $save = Storage::disk('local')->put($caminho, file_get_contents($foto));
+        if ($save) {
+        //DB::beginTransaction();
+        $Arquivo = Arquivo::create([
+            'titulo' => md5($nomeArquivo),
+            'categoria' => $categoria,
+            'descricao' => $idUnidadeOrganica,
+            'arquivo' => $nomeArquivo,
+            'caminho' => $caminho,
+            'idFuncionario' => 1,
+        ]);
+        
+        if ($Arquivo) {
+            $idArquivo = Arquivo::where('idFuncionario', 1)->where('categoria', $categoria)->where('descricao', $idUnidadeOrganica)->latest()->first()->id;
+            //dd($idArquivo);
+            $fotosUnidadeOrganica = FotosUnidadeOrganica::create([
+                'idUnidadeOrganida' => $request->idFuncionario,
+                'idArquivo' => $idArquivo,
+            ]);
+            if ($fotosUnidadeOrganica) {
+              //  DB::commit();
+                return redirect()->back()->with('success', 'Foto Adicionada com sucesso!');
+            }else {
+               // DB::rollBack();
+                return redirect()->back()->with('error', 'Erro ao Adicionar foto!');
+            }
+        }else {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Erro ao Adicionar foto!');
+        }  
+        }
+      
+    }
+
+
+    
 
 }

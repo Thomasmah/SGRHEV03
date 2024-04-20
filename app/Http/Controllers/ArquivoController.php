@@ -376,13 +376,13 @@ class ArquivoController extends Controller
             $processo->idArquivo = $Arquivo->id; //Inserindo o id do Registro arquivo recem criado
             $processo->save();
             DB::commit();
-            return redirect()->route('index.avaliacao.funcionario')->with('success', 'O ficheiro foi salvo com sucesso!');
+            return redirect()->route('avaliacao.nao.homologados')->with('success', 'O ficheiro foi salvo com sucesso!');
         }else{
             DB::rollBack();
-            return redirect()->route('index.avaliacao.funcionario')->with('error', 'Erro ao salvar o documento');
+            return redirect()->route('avaliacao.nao.homologados')->with('error', 'Erro ao salvar o documento');
         }
     }
-    return redirect()->route('index.avaliacao.funcionario')->with('error', 'O documento já existe');
+    return redirect()->route('avaliacao.nao.homologados')->with('error', 'O documento já existe');
 }
 
 

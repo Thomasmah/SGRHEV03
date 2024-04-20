@@ -19,12 +19,12 @@
                 <div class="container-fluid">
                   <div class="row mb-2">
                     <div class="col-sm-6">
-                      <h1>Funcionários / Força de Trabalho </h1>
+                      <h1>{{ $titulo }} </h1>
                     </div>
                     <div class="col-sm-6">
                       <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Funcionários Força de Trabalho </li>
+                        <li class="breadcrumb-item active">{{ $titulo }} </li>
                       </ol>
                     </div>
                   </div>
@@ -76,14 +76,14 @@
                                                     $data = \Carbon\Carbon::parse($funcionario->validadeBI);
                                                     $class = $data->gt(now()) ? 'text-success' : 'text-danger';
                                                   @endphp
-                                                  <td class="{{ $class }}">{{ $funcionario->validadeBI }}</td>
+                                                  <td class="{{ $class }}">{{ \Carbon\Carbon::parse($funcionario->validadeBI)->format('d/m/Y') }}</td>
                                                   <td>{{ $funcionario->designacao }}</td>
                                                   <td>{{ $funcionario->categoria }}</td>
                                                   <td>{{ $funcionario->nomeCargo }}</td>
-                                                  <td>{{ $funcionario->dataAdmissao }}</td>
+                                                  <td>{{ \Carbon\Carbon::parse($funcionario->dataAdmissao)->format('d/m/Y') }}</td>
                                                   <td>{{ $funcionario->email }}</td>
                                                   <td>{{ $funcionario->iban }}</td>
-                                                  <td>{{ $funcionario->dataNascimento }}</td>
+                                                  <td>{{  \Carbon\Carbon::parse( $funcionario->dataNascimento )->format('d F Y')}}</td>
                                                   <td>{{ $funcionario->genero }}</td>
                                                   <td>{{ $funcionario->grupoSanguineo }}</td>
                                                   <td>{{ $funcionario->estadoCivil }}</td>

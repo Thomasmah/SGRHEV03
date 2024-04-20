@@ -144,9 +144,11 @@
                           <ul class="list-group list-group-unbordered mb-3">
                             <li class="list-group-item">
                               <p><b>Nome do Pai:</b> {{ $parente->nomePai }} </p> 
-                              <p><b>Nome da Mãe:</b> {{ $parente->nomeMae }} </p> 
+                              <p><b>Nome da Mãe:</b> {{ $parente->nomeMae }} </p>
+                              <p><b>Naturalidade (Província):</b> {{ $naturalidade->provincia }} </p> 
                               <p><b>Naturalidade (Município):</b> {{ $naturalidade->municipio }} </p> 
-                              <p><b>Categoria:</b> {{ $categoriaFuncionario->categoria }} </p>                        
+                              <p><b>Categoria:</b> {{ $categoriaFuncionario->categoria }} </p>
+                              <p><b>Data de Admissão:</b> {{ \Carbon\Carbon::parse($funcionario->dataAdmissao)->format('d/m/Y') }} </p>                     
                               <p><b>Grau:</b> {{ $categoriaFuncionario->grau }} </p>                            
                               <p><b>Cargo:</b> {{ $cargo->designacao }} </p>                            
                               <p><b>Unidade Orgânica:</b> {{ $unidadeOrganica->designacao }} </p>
@@ -546,7 +548,7 @@
                                                                 $unidadeOrganica = App\Models\UnidadeOrganica::find($documento['idUnidadeOrganica']);
                                                               @endphp
                                                           <div class="btn btn-toggle " data-target="item-GuiaColocacao" style="text-align: left;">
-                                                            <p class="atrubutos-intem-funcionario">Data de Emissão: <span class="text-muted">{{ $documento['dataEmissao'] }} </span></p>
+                                                            <p class="atrubutos-intem-funcionario">Data de Emissão: <span class="text-muted">{{  \Carbon\Carbon::parse($documento['dataEmissao'])->format('d/m/Y') }} </span></p>
                                                             <p class="atrubutos-intem-funcionario">Para Unidade Orgânica: <span class="text-muted">{{ $unidadeOrganica['designacao'] }} </span></p>                                                         
                                                           </div>
                                                           <div id="item-GuiaColocacao" class="info-toggle">
@@ -656,7 +658,7 @@
                                                              
                                                               @if ($arquivo->exists()) 
                                                           <div class="btn btn-toggle " data-target="item-Autobiografia" style="text-align: left;">
-                                                            <p class="atrubutos-intem-funcionario">Data de Criação: <span class="text-muted">{{ $documento['dataCriacao'] }} </span></p>                                                          
+                                                            <p class="atrubutos-intem-funcionario">Data de Criação: <span class="text-muted">{{ \Carbon\Carbon::parse($documento['dataCriacao'])->format('d/m/Y')  }} </span></p>                                                          
                                                           </div>
                                                           <div id="item-Autobiografia" class="info-toggle">
                                                           @if ( session()->only(['Cargo'])['Cargo']->permissoes === 'Admin' || session()->only(['Seccao'])['Seccao']->codNome === 'RHPE' )
@@ -752,7 +754,7 @@
                                                              
                                                               @if ($arquivo->exists()) 
                                                           <div class="btn btn-toggle " data-target="item-CurriculumVitae" style="text-align: left;">
-                                                            <p class="atrubutos-intem-funcionario">Data de Criação: <span class="text-muted">{{ $documento['dataCriacao'] }} </span></p>                                                          
+                                                            <p class="atrubutos-intem-funcionario">Data de Criação: <span class="text-muted">{{  \Carbon\Carbon::parse($documento['dataCriacao'])->format('d/m/Y') }} </span></p>                                                          
                                                           </div>
                                                           <div id="item-CurriculumVitae" class="info-toggle">
                                                           @if ( session()->only(['Cargo'])['Cargo']->permissoes === 'Admin' || session()->only(['Seccao'])['Seccao']->codNome === 'RHPE' )

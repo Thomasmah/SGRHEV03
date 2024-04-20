@@ -46,14 +46,14 @@
                             <table id="example1" class="table table-bordered table-striped">
                               <thead>
                               <tr>
-                                <th>Número de Agente</th> <th>Nome Completo</th> <th>Número de BI</th> <th>Unidade Orgânica</th> <th>Categoria</th> <th>Classificação</th> <th>Função</th> <th>Opções</th>
+                                <th>Número de Agente</th> <th>Nome Completo</th> <th>Número de BI</th> <th>Unidade Orgânica</th> <th>Categoria</th> <th>Classificação</th> <th>Periódo Avaliação</th> <th>Função</th> <th>Opções</th>
                               </tr>
                               </thead>
                               <tbody>
                               <!--Gerando a Tabela de forma Dinamica-->
                               @foreach ($dados as $avaliacao)
                                             <tr>
-                                                <td>{{ $avaliacao->numeroAgente }}</td> <td>{{ $avaliacao->nomeCompleto }}</td> <td>{{ $avaliacao->numeroBI }}</td> <td>{{ $avaliacao->eqt }}</td> <td>{{ $avaliacao->categoriaFuncionario }}</td> <td>{{ $avaliacao->total }}</td> <td>{{ $avaliacao->designacao_cargo }}</td>
+                                                <td>{{ $avaliacao->numeroAgente }}</td> <td>{{ $avaliacao->nomeCompleto }}</td> <td>{{ $avaliacao->numeroBI }}</td> <td>{{ $avaliacao->eqt }}</td> <td>{{ $avaliacao->categoriaFuncionario }}</td> <td>{{ $avaliacao->total }}</td> <td>{{ $avaliacao->periodoAvaliacao }}</td> <td>{{ $avaliacao->designacao_cargo }}</td>
                                          
                                                 <td>
                                                     <form action="{{ route('exibir.documento') }}" method="POST" style="display: inline;">
@@ -68,7 +68,7 @@
                               </tbody>
                               <tfoot>
                                 <tr>
-                                  <th>Número de Agente</th> <th>Nome Completo</th> <th>Número de BI</th> <th>Unidade Orgânica</th> <th>Categoria</th> <th>Classificação</th> <th>Função</th> <th>Opções</th>
+                                  <th>Número de Agente</th> <th>Nome Completo</th> <th>Número de BI</th> <th>Unidade Orgânica</th> <th>Categoria</th> <th>Classificação</th> <th>Periódo Avaliação</th> <th>Função</th> <th>Opções</th>
                                 </tr>
                               </tfoot>
                             </table>
