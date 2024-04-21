@@ -26,7 +26,7 @@
                   <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                       <li class="breadcrumb-item"><a href="#">Home</a></li>
-                      <li class="breadcrumb-item active"> $unidadeOrganicaSelected->designacao </li>
+                      <li class="breadcrumb-item active"> {{$unidadeOrganicaSelected->designacao}} </li>
                     </ol>
                   </div>
                 </div>
@@ -62,8 +62,8 @@
                       <div class="col-lg-3 col-6">
                         <div class="small-box bg-info">
                           <div class="inner">
-                            <h3>Funcionario</h3>
-                            <p>Funcionários Inativos</p>
+                            <h3> {{ isset($ultimoMapaAproveitamento) ? $ultimoMapaAproveitamento->matriculadosIAMF : 'Sem Dados' }} </h3>
+                            <p>Alunos</p>
                           </div>
                           <div class="icon">
                             <i class="ion ion-bag"></i>
@@ -76,8 +76,8 @@
                       <div class="col-lg-3 col-6">
                         <div class="small-box bg-success">
                           <div class="inner">
-                            <h3>Funcionario</h3>
-                            <p>Escolas Primárias</p>
+                            <h3>{{ isset($ultimoMapaAproveitamento) ? $ultimoMapaAproveitamento->matriculadosIAF : 'Sem Dados' }}</h3>
+                            <p>Femininos</p>
                           </div>
                           <div class="icon">
                             <i class="ion ion-stats-bars"></i>
@@ -91,9 +91,8 @@
                         <!-- small box -->
                         <div class="small-box bg-danger">
                           <div class="inner">
-                            <h3>10</h3>
-
-                            <p>Funcionários Inativos</p>
+                            <h3>{{ isset($ultimoMapaAproveitamento) ? $ultimoMapaAproveitamento->matriculadosIAMF-$ultimoMapaAproveitamento->matriculadosIAF : 'Sem Dados' }}</h3>
+                            <p>Masculinos</p>
                           </div>
                           <div class="icon">
                             <i class="ion ion-pie-graph"></i>

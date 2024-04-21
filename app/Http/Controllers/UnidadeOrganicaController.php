@@ -78,7 +78,8 @@ class UnidadeOrganicaController extends Controller
             //dd($aproveitamentoITrimestre);
             $fotos = Arquivo::where('idFuncionario', 1)->where('categoria', 'FotosUnidadeOrganica')->where('descricao', $idUnidadeOrganica)->get();
             //dd($fotos);
-            return view('sgrhe/unidade-organica-view',compact('unidadeOrganicaSelected','Funcionarios','aproveitamentoITrimestre','aproveitamentoIITrimestre','aproveitamentoIIITrimestre','fotos'));
+            $ultimoMapaAproveitamento = FormularioAproveitamento::where('idUnidadeOrganica', $idUnidadeOrganica)->latest()->first();
+            return view('sgrhe/unidade-organica-view',compact('ultimoMapaAproveitamento','unidadeOrganicaSelected','Funcionarios','aproveitamentoITrimestre','aproveitamentoIITrimestre','aproveitamentoIIITrimestre','fotos'));
     }
 
     public function galeriaUnidadeOrganica(string $idUnidadeOrganica)
@@ -107,7 +108,7 @@ class UnidadeOrganicaController extends Controller
             $aproveitamentoIITrimestre = FormularioAproveitamento::where('idUnidadeOrganica', $idUnidadeOrganica)->where('trimestre', 'II')->first();
             $aproveitamentoIIITrimestre = FormularioAproveitamento::where('idUnidadeOrganica', $idUnidadeOrganica)->where('trimestre', 'III')->first();
             //dd($aproveitamentoITrimestre);
-            
+            $ultimoMapaAproveitamento = FormularioAproveitamento::where('idUnidadeOrganica', $idUnidadeOrganica)->latest()->first();
             $fotos = Arquivo::where('idFuncionario', 1)->where('categoria', 'FotosUnidadeOrganica')->where('descricao', $idUnidadeOrganica)->get();
             $dataActual = now();
             //Determinar o Ano Lectivo sabendo que Ele comeca sempre em setembro
@@ -115,8 +116,10 @@ class UnidadeOrganicaController extends Controller
                 $anoLectivo = $dataActual->format('Y').'/'.($dataActual->format('Y') + 1);
             }else {
                 $anoLectivo = ($dataActual->format('Y') - 1).'/'.$dataActual->format('Y');
-            }
-            return view('sgrhe/unidade-organica-dashboard',compact('anoLectivo','unidadeOrganicaSelected','Funcionarios','aproveitamentoITrimestre','aproveitamentoIITrimestre','aproveitamentoIIITrimestre','fotos'));
+            } 
+      
+            return view('sgrhe/unidade-organica-dashboard',compact('ultimoMapaAproveitamento','unidadeOrganicaSelected','Funcionarios','aproveitamentoITrimestre','aproveitamentoIITrimestre','aproveitamentoIIITrimestre','fotos'));
+
     }
     //Create
     public function store(Request $request)

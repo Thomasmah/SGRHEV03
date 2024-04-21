@@ -57,8 +57,8 @@
                       <div class="col-lg-3 col-6">
                         <div class="small-box bg-info">
                           <div class="inner">
-                            <h3>Funcionario</h3>
-                            <p>Funcionários Inativos</p>
+                            <h3> {{ isset($ultimoMapaAproveitamento) ? $ultimoMapaAproveitamento->matriculadosIAMF : 'Sem Dados' }} </h3>
+                            <p>Alunos</p>
                           </div>
                           <div class="icon">
                             <i class="ion ion-bag"></i>
@@ -71,8 +71,8 @@
                       <div class="col-lg-3 col-6">
                         <div class="small-box bg-success">
                           <div class="inner">
-                            <h3>Funcionario</h3>
-                            <p>Escolas Primárias</p>
+                            <h3>{{ isset($ultimoMapaAproveitamento) ? $ultimoMapaAproveitamento->matriculadosIAF : 'Sem Dados' }}</h3>
+                            <p>Femininos</p>
                           </div>
                           <div class="icon">
                             <i class="ion ion-stats-bars"></i>
@@ -86,9 +86,8 @@
                         <!-- small box -->
                         <div class="small-box bg-danger">
                           <div class="inner">
-                            <h3>10</h3>
-
-                            <p>Funcionários Inativos</p>
+                            <h3>{{ isset($ultimoMapaAproveitamento) ? $ultimoMapaAproveitamento->matriculadosIAMF-$ultimoMapaAproveitamento->matriculadosIAF : 'Sem Dados' }}</h3>
+                            <p>Masculinos</p>
                           </div>
                           <div class="icon">
                             <i class="ion ion-pie-graph"></i>
@@ -300,21 +299,20 @@
                                                 </div>
                                               </div>
                                             @else
-                                            <h4 class="text-info"> Não Foram Submetidos Formulário para o I Trimestre. </h4>
-                                            <form action="{{ route('dashboard.unidade.organica.formulario.aproveitamento') }}" method="POST">
-                                              @csrf
-                                              @method('POST')
-                                              <input type="hidden" name="">
-                                              <input type="hidden" name="idFuncionarioLogado" value="{{ session()->only(['idUnidadeOrganica'])['idUnidadeOrganica'] }}">
-                                              <input type="hidden" name="trimestre" value="{{ 'I' }}">
-                                              <!--Determinar Ano Lectivo-->
-                                              @php
-                                                if(1==1){
-                                                  $anoLectivo =2024;
-                                                }
-                                              @endphp
-                                              <input type="hidden" name="anoLectivo" value="{{ $anoLectivo }}">
-                                            </form>
+                                                    <!--Determinar Ano Lectivo-->  
+                                                    <p class="text-center">
+                                                <h3 class="text-info"> Não Foram Submetidos Formulário para o I Trimestre! </h3>
+                                             </p>
+                                             <br>
+                                              <form action="{{ route('dashboard.unidade.organica.formulario.aproveitamento') }}" method="POST">
+                                                @csrf
+                                                @method('POST')
+                                                <input type="hidden" name="">
+                                                <input type="hidden" name="idUnidadeOrganica" value="{{ session()->only(['idUnidadeOrganica'])['idUnidadeOrganica'] }}">
+                                                <input type="hidden" name="trimestre" value="{{ 'I' }}">
+                                                <input type="hidden" name="anoLectivo" value="{{ isset($anoLectivo) ? $anoLectivo : '' }}">
+                                                <button type="submit" class="btn btn-primary w-100">Formulário de Aproveitamento</button>
+                                              </form>
                                             @endif
 
                                             <!-- /.CardContet -->
@@ -378,6 +376,7 @@
                                                 </div>
                                               </div>
                                             @else
+
                                              <!--Determinar Ano Lectivo-->  
                                              <p class="text-center">
                                                 <h3 class="text-info"> Não Foram Submetidos Formulário para o II Trimestre! </h3>
@@ -389,9 +388,10 @@
                                                 <input type="hidden" name="">
                                                 <input type="hidden" name="idUnidadeOrganica" value="{{ session()->only(['idUnidadeOrganica'])['idUnidadeOrganica'] }}">
                                                 <input type="hidden" name="trimestre" value="{{ 'II' }}">
-                                                <input type="hidden" name="anoLectivo" value="{{ $anoLectivo }}">
+                                                <input type="hidden" name="anoLectivo" value="{{ isset($anoLectivo) ? $anoLectivo : '' }}">
                                                 <button type="submit" class="btn btn-primary w-100">Formulário de Aproveitamento</button>
                                               </form>
+
                                             @endif
 
                                             <!-- /.CardContet -->
@@ -456,8 +456,8 @@
                                                 </div>
                                               </div>
                                             @else
-                                              <!--Determinar Ano Lectivo-->  
-                                              <p class="text-center">
+                                                  <!--Determinar Ano Lectivo-->  
+                                                  <p class="text-center">
                                                 <h3 class="text-info"> Não Foram Submetidos Formulário para o III Trimestre! </h3>
                                              </p>
                                              <br>
@@ -467,17 +467,17 @@
                                                 <input type="hidden" name="">
                                                 <input type="hidden" name="idUnidadeOrganica" value="{{ session()->only(['idUnidadeOrganica'])['idUnidadeOrganica'] }}">
                                                 <input type="hidden" name="trimestre" value="{{ 'III' }}">
-                                                <input type="hidden" name="anoLectivo" value="{{ $anoLectivo }}">
+                                                <input type="hidden" name="anoLectivo" value="{{ isset($anoLectivo) ? $anoLectivo : '' }}">
                                                 <button type="submit" class="btn btn-primary w-100">Formulário de Aproveitamento</button>
                                               </form>
-                                            @endif                                    
-                                       
-                                           
+
+                                            @endif
 
                                             <!-- /.CardContet -->
                                         
                                           </div>
-                                  
+                                      <!-- /tab-pane -->
+                        
                                 </div>
                               </div>
                             </div>
