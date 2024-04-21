@@ -14,25 +14,26 @@ class UnidadeOrganicaDadosController extends Controller
     public function cadastrarFormulario(Request $request)
     {
                 // Regras de validação
-            $request->validate([
-                'a11' => ['required'], 'a12' => ['required'],
-                'a21' => ['required'], 'a22' => ['required'],
-                'a31' => ['required'], 'a32' => ['required'],
-                'a41' => ['required'], 'a42' => ['required'],
-                'a51' => ['required'], 'a52' => ['required'],
-                'a61' => ['required'], 'a62' => ['required'],
-            ],[
-                'a11.required' => 'O Campos número de alunos MF para a 1ª classe é obrigatório!', 'a12.required' => 'O Campos número de alunos F para a 1ª classe é obrigatório!',
-                'a21.required' => 'O Campos número de alunos MF para a 2ª classe é obrigatório!', 'a22.required' => 'O Campos número de alunos F para a 2ª classe é obrigatório!',
-                'a31.required' => 'O Campos número de alunos MF para a 3ª classe é obrigatório!', 'a32.required' => 'O Campos número de alunos F para a 3ª classe é obrigatório!',
-                'a41.required' => 'O Campos número de alunos MF para a 4ª classe é obrigatório!', 'a42.required' => 'O Campos número de alunos F para a 4ª classe é obrigatório!',
-                'a51.required' => 'O Campos número de alunos MF para a 5ª classe é obrigatório!', 'a52.required' => 'O Campos número de alunos F para a 5ª classe é obrigatório!',
-                'a61.required' => 'O Campos número de alunos MF para a 6ª classe é obrigatório!', 'a62.required' => 'O Campos número de alunos F para a 6ª classe é obrigatório!',  
-            ] 
-        );
+                $request->validate([
+                        'a11' => ['required'], 'a12' => ['required'],
+                        'a21' => ['required'], 'a22' => ['required'],
+                        'a31' => ['required'], 'a32' => ['required'],
+                        'a41' => ['required'], 'a42' => ['required'],
+                        'a51' => ['required'], 'a52' => ['required'],
+                        'a61' => ['required'], 'a62' => ['required'],
+                    ],[
+                        'a11.required' => 'O Campos número de alunos MF para a 1ª classe é obrigatório!', 'a12.required' => 'O Campos número de alunos F para a 1ª classe é obrigatório!',
+                        'a21.required' => 'O Campos número de alunos MF para a 2ª classe é obrigatório!', 'a22.required' => 'O Campos número de alunos F para a 2ª classe é obrigatório!',
+                        'a31.required' => 'O Campos número de alunos MF para a 3ª classe é obrigatório!', 'a32.required' => 'O Campos número de alunos F para a 3ª classe é obrigatório!',
+                        'a41.required' => 'O Campos número de alunos MF para a 4ª classe é obrigatório!', 'a42.required' => 'O Campos número de alunos F para a 4ª classe é obrigatório!',
+                        'a51.required' => 'O Campos número de alunos MF para a 5ª classe é obrigatório!', 'a52.required' => 'O Campos número de alunos F para a 5ª classe é obrigatório!',
+                        'a61.required' => 'O Campos número de alunos MF para a 6ª classe é obrigatório!', 'a62.required' => 'O Campos número de alunos F para a 6ª classe é obrigatório!',  
+                    ] 
+                );
                 //Verificar se Já Foi Submetido um formulário Referente ao so Trimestre e anoLectivo
                 $aproveitamento = FormularioAproveitamento::where('idUnidadeOrganica', $request->input('idUnidadeOrganica'))->where('anoLectivo', $request->input('anoLectivo'))->where('trimestre', $request->input('trimestre'))->first();
                 if (!$aproveitamento) {
+                   
                         $matriculadosIAMF = $request->input('a11') + $request->input('a21') + $request->input('a31') + $request->input('a41') + $request->input('a51') + $request->input('a61');
                         $matriculadosFAMF = $request->input('a13') + $request->input('a23') + $request->input('a33') + $request->input('a43') + $request->input('a53') + $request->input('a63');
                         $aprovadosMF = $request->input('a15') + $request->input('a25') + $request->input('a35') + $request->input('a45') + $request->input('a55') + $request->input('a65');
@@ -68,23 +69,21 @@ class UnidadeOrganicaDadosController extends Controller
                                 'anoLectivo' => $request->input('anoLectivo'),
                                 'trimestre' => $request->input('trimestre'), 
                             ]);
+                          //  dd($request->all());
                             DB::beginTransaction();
                             if ($funcionario) {
                                 DB::commit();
-                                return redirect()->route('dashboard.unidade.organica.how', ['idUnidadeOrganica' => ''.$request->input('idUnidadeOrganica').''])->with('success', 'Formulário de aproveitamento do '.$request->input('trimestre').' trimenstre do ano lectivo '.$request->input('anoLectivo').' submetido com sucesso!');
+                                return redirect()->route('dashboard.unidade.organica.how', ['idUnidadeOrganica' => $request->input('idUnidadeOrganica')])->with('success', 'Formulário de aproveitamento do '.$request->input('trimestre').' trimenstre do ano lectivo '.$request->input('anoLectivo').' submetido com sucesso!');
                             }else{
-                                dd('Aind Não é possive actualizar os dados de formulrio de aprovetamento');
+                                DB::rollBack();
+                                return back()->with('error', 'Inconsitência nos dados !')->withInput();
                             }
                         }else{
+                            DB::rollBack();
                             return back()->with('error', 'Inconsitência nos dados !')->withInput();
                         }
-                     
                     }   
-                    return back()->with('error', 'Erro ao submeter o formulário de aproveitamento!');
-               
-               
-
-            
+                    return back()->with('error', ' Formulário de Aproveitamento já foi submetido!');
     }
 
     /**

@@ -118,10 +118,10 @@
                           <div class="card-tools">
                             <ul class="nav nav-pills ml-auto">
                               <li class="nav-item">
-                                <a class="nav-link active" href="#revenue-chart" data-toggle="tab">Gráfico</a>
+                                <a class="nav-link active" href="#sales-chart" data-toggle="tab">Gráfico de Barras</a>
                               </li>
                               <li class="nav-item">
-                                <a class="nav-link" href="#sales-chart" data-toggle="tab">Gráfico de Barras</a>
+                                <a class="nav-link " href="#revenue-chart" data-toggle="tab">Gráfico</a>
                               </li>
                             </ul>
                           </div>
@@ -129,10 +129,10 @@
                         <div class="card-body">
                           <div class="tab-content p-0">
                             <!-- Morris chart - Sales -->
-                            <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"> 
+                            <div class="chart tab-pane active" id="sales-chart" style="position: relative; height: 300px;"> 
                             <canvas id="doubleDatasetChart" width="400" height="200"></canvas>
                             </div>
-                            <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;">
+                            <div class="chart tab-pane " id="revenue-chart" style="position: relative; height: 300px;">
                               <canvas id="revenue-chart-canvas" width="400" height="200"></canvas>
                             </div>
                           </div>
@@ -471,7 +471,7 @@
       <script src="{{ asset('plugins/jqvmap/jquery.vmap.min.js') }} "></script>
       <script src="{{ asset('plugins/jqvmap/maps/jquery.vmap.usa.js') }} "></script>
       <script src="{{ asset('plugins/jqvmap/maps/continents/jquery.vmap.africa.js') }} "></script>
-      <!--/Aproveitamento Grafico-->
+        <!--/Aproveitamento Grafico-->
         <!--Grafico de Barras -->
         <script>
               // Sample data
@@ -480,14 +480,15 @@
                   datasets: [
                       {
                           label: 'Aprovados',
-                          data: ["{{   isset($aproveitamentoITrimestre['a11']) ? $aproveitamentoITrimestre['a11'] : '0' }}"*("{{   isset($aproveitamentoITrimestre['a15']) ? $aproveitamentoITrimestre['a15'] : '0' }}"/100), "{{   isset($aproveitamentoIITrimestre['a11']) ? $aproveitamentoIITrimestre['a11'] : '0' }}"*("{{   isset($aproveitamentoIITrimestre['a15']) ? $aproveitamentoIITrimestre['a15'] : '0' }}"/100), "{{   isset($aproveitamentoIIITrimestre['a11']) ? $aproveitamentoIIITrimestre['a11'] : '0' }}"*("{{   isset($aproveitamentoIIITrimestre['a15']) ? $aproveitamentoIIITrimestre['a15'] : '0' }}"/100)],
+                          data: [("{{ isset($aproveitamentoITrimestre['aprovadosMF']) ? $aproveitamentoITrimestre['aprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoITrimestre['matriculadosIAMF']) ? $aproveitamentoITrimestre['matriculadosIAMF'] : '0'}}"), ("{{ isset($aproveitamentoIITrimestre['aprovadosMF']) ? $aproveitamentoIITrimestre['aprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoIITrimestre['matriculadosIAMF']) ? $aproveitamentoIITrimestre['matriculadosIAMF'] : '0'}}"), ("{{ isset($aproveitamentoIIITrimestre['aprovadosMF']) ? $aproveitamentoIIITrimestre['aprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoIIITrimestre['matriculadosIAMF']) ? $aproveitamentoIIITrimestre['matriculadosIAMF'] : '0'}}")],
                           backgroundColor: 'rgba(75, 192, 192, 0.6)',
                           borderColor: 'rgba(75, 192, 192, 1)',
                           borderWidth: 2,
                       },
                       {
                           label: 'Reprovados',
-                          data: [ "{{   isset($aproveitamentoITrimestre['a11']) ? $aproveitamentoITrimestre['a11'] : '0' }}"*("{{   isset($aproveitamentoITrimestre['a17']) ? $aproveitamentoITrimestre['a17'] : '0' }}"/100), "{{   isset($aproveitamentoIITrimestre['a11']) ? $aproveitamentoIITrimestre['a11'] : '0' }}"*("{{   isset($aproveitamentoIITrimestre['a17']) ? $aproveitamentoIITrimestre['a17'] : '0' }}"/100), "{{   isset($aproveitamentoIIITrimestre['a11']) ? $aproveitamentoIIITrimestre['a11'] : '0' }}"*("{{   isset($aproveitamentoIIITrimestre['a17']) ? $aproveitamentoIIITrimestre['a17'] : '0' }}"/100)],
+                          
+                          data: [("{{ isset($aproveitamentoITrimestre['reprovadosMF']) ? $aproveitamentoITrimestre['reprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoITrimestre['matriculadosIAMF']) ? $aproveitamentoITrimestre['matriculadosIAMF'] : '0'}}"), ("{{ isset($aproveitamentoIITrimestre['reprovadosMF']) ? $aproveitamentoIITrimestre['reprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoIITrimestre['matriculadosIAMF']) ? $aproveitamentoIITrimestre['matriculadosIAMF'] : '0'}}"), ("{{ isset($aproveitamentoIIITrimestre['reprovadosMF']) ? $aproveitamentoIIITrimestre['reprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoIIITrimestre['matriculadosIAMF']) ? $aproveitamentoIIITrimestre['matriculadosIAMF'] : '0'}}")],
                           backgroundColor: 'rgba(255, 99, 132, 0.6)',
                           borderColor: 'rgba(255, 99, 132, 1)',
                           borderWidth: 2,
@@ -502,10 +503,10 @@
                   options: {
                       scales: {
                           x: {
-                              stacked: false,
+                              stacked: true,
                           },
                           y: {
-                              stacked: false,
+                              stacked: true,
                               beginAtZero: true,
                           },
                       },
@@ -531,29 +532,29 @@
                   label: 'Aprovados',
                   backgroundColor: 'rgba(60,141,188,0.9)',
                   borderColor: 'rgba(60,141,188,0.8)',
-                  pointRadius: false,
+                  pointRadius: true,
                   pointColor: '#3b8bba',
                   pointStrokeColor: 'rgba(60,141,188,1)',
                   pointHighlightFill: '#fff',
                   pointHighlightStroke: 'rgba(60,141,188,1)',
-                  data: ["{{   isset($aproveitamentoITrimestre['a11']) ? $aproveitamentoITrimestre['a11'] : '0' }}"*("{{   isset($aproveitamentoITrimestre['a15']) ? $aproveitamentoITrimestre['a15'] : '0' }}"/100), "{{   isset($aproveitamentoIITrimestre['a11']) ? $aproveitamentoIITrimestre['a11'] : '0' }}"*("{{   isset($aproveitamentoIITrimestre['a15']) ? $aproveitamentoIITrimestre['a15'] : '0' }}"/100), "{{   isset($aproveitamentoIIITrimestre['a11']) ? $aproveitamentoIIITrimestre['a11'] : '0' }}"*("{{   isset($aproveitamentoIIITrimestre['a15']) ? $aproveitamentoIIITrimestre['a15'] : '0' }}"/100)]
+                  data: [("{{ isset($aproveitamentoITrimestre['aprovadosMF']) ? $aproveitamentoITrimestre['aprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoITrimestre['matriculadosIAMF']) ? $aproveitamentoITrimestre['matriculadosIAMF'] : '0'}}"), ("{{ isset($aproveitamentoIITrimestre['aprovadosMF']) ? $aproveitamentoIITrimestre['aprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoIITrimestre['matriculadosIAMF']) ? $aproveitamentoIITrimestre['matriculadosIAMF'] : '0'}}"), ("{{ isset($aproveitamentoIIITrimestre['aprovadosMF']) ? $aproveitamentoIIITrimestre['aprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoIIITrimestre['matriculadosIAMF']) ? $aproveitamentoIIITrimestre['matriculadosIAMF'] : '0'}}")],
                 },
                 {
                   label: 'Reprovados',
                   backgroundColor: 'rgba(210, 214, 222, 1)',
                   borderColor: 'rgba(210, 214, 222, 1)',
-                  pointRadius: false,
+                  pointRadius: true,
                   pointColor: 'rgba(210, 214, 222, 1)',
                   pointStrokeColor: '#c1c7d1',
                   pointHighlightFill: '#fff',
                   pointHighlightStroke: 'rgba(220,220,220,1)',
-                  data: [ "{{   isset($aproveitamentoITrimestre['a11']) ? $aproveitamentoITrimestre['a11'] : '0' }}"*("{{   isset($aproveitamentoITrimestre['a17']) ? $aproveitamentoITrimestre['a17'] : '0' }}"/100), "{{   isset($aproveitamentoIITrimestre['a11']) ? $aproveitamentoIITrimestre['a11'] : '0' }}"*("{{   isset($aproveitamentoIITrimestre['a17']) ? $aproveitamentoIITrimestre['a17'] : '0' }}"/100), "{{   isset($aproveitamentoIIITrimestre['a11']) ? $aproveitamentoIIITrimestre['a11'] : '0' }}"*("{{   isset($aproveitamentoIIITrimestre['a17']) ? $aproveitamentoIIITrimestre['a17'] : '0' }}"/100)]
+                  data: [("{{ isset($aproveitamentoITrimestre['reprovadosMF']) ? $aproveitamentoITrimestre['reprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoITrimestre['matriculadosIAMF']) ? $aproveitamentoITrimestre['matriculadosIAMF'] : '0'}}"), ("{{ isset($aproveitamentoIITrimestre['reprovadosMF']) ? $aproveitamentoIITrimestre['reprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoIITrimestre['matriculadosIAMF']) ? $aproveitamentoIITrimestre['matriculadosIAMF'] : '0'}}"), ("{{ isset($aproveitamentoIIITrimestre['reprovadosMF']) ? $aproveitamentoIIITrimestre['reprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoIIITrimestre['matriculadosIAMF']) ? $aproveitamentoIIITrimestre['matriculadosIAMF'] : '0'}}")],
                 }
               ]
             }
 
             var salesChartOptions = {
-              maintainAspectRatio: false,
+              maintainAspectRatio: true,
               responsive: true,
               legend: {
                 display: true
@@ -581,5 +582,4 @@
             })
           </script>
       <!--/Aproveitamento Grafico-->
-      <!--Estrutura dinamica da Galeria -->
     @endsection

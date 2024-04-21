@@ -109,8 +109,14 @@ class UnidadeOrganicaController extends Controller
             //dd($aproveitamentoITrimestre);
             
             $fotos = Arquivo::where('idFuncionario', 1)->where('categoria', 'FotosUnidadeOrganica')->where('descricao', $idUnidadeOrganica)->get();
-            //dd($fotos);
-            return view('sgrhe/unidade-organica-dashboard',compact('unidadeOrganicaSelected','Funcionarios','aproveitamentoITrimestre','aproveitamentoIITrimestre','aproveitamentoIIITrimestre','fotos'));
+            $dataActual = now();
+            //Determinar o Ano Lectivo sabendo que Ele comeca sempre em setembro
+            if ($dataActual->format('n') > 9) {
+                $anoLectivo = $dataActual->format('Y').'/'.($dataActual->format('Y') + 1);
+            }else {
+                $anoLectivo = ($dataActual->format('Y') - 1).'/'.$dataActual->format('Y');
+            }
+            return view('sgrhe/unidade-organica-dashboard',compact('anoLectivo','unidadeOrganicaSelected','Funcionarios','aproveitamentoITrimestre','aproveitamentoIITrimestre','aproveitamentoIIITrimestre','fotos'));
     }
     //Create
     public function store(Request $request)
@@ -185,14 +191,12 @@ class UnidadeOrganicaController extends Controller
 
     }
 
-    public function formularioAproveitamentoUnidadeOrganica(string $idUnidadeOrganica){
+    public function formularioAproveitamentoUnidadeOrganica(Request $request){
+            $idUnidadeOrganica = $request->input('idUnidadeOrganica');
             $unidadeOrganicaSelected = UnidadeOrganica::where('id', $idUnidadeOrganica)->first();
-            $Funcionarios = Funcionario::where('idUnidadeOrganica', $idUnidadeOrganica);
-            $aproveitamento = FormularioAproveitamento::where('idUnidadeOrganica', $idUnidadeOrganica)->where('id', 1)->first();
-            $aproveitamentoITrimestre = FormularioAproveitamento::where('idUnidadeOrganica', $idUnidadeOrganica)->where('trimestre', 'I')->get();
-            $aproveitamentoIITrimestre = FormularioAproveitamento::where('idUnidadeOrganica', $idUnidadeOrganica)->where('trimestre', 'II')->get();
-            $aproveitamentoIIITrimestre = FormularioAproveitamento::where('idUnidadeOrganica', $idUnidadeOrganica)->where('trimestre', 'III')->get();
-            return view('sgrhe\pages\forms\unidade-organica-formulario-aproveitamento',compact('unidadeOrganicaSelected','Funcionarios','aproveitamento','aproveitamentoITrimestre','aproveitamentoIITrimestre','aproveitamentoIIITrimestre'));
+            $anoLectivo = $request->input('anoLectivo');
+            $trimestre = $request->input('trimestre');
+            return view('sgrhe\pages\forms\unidade-organica-formulario-aproveitamento',compact('anoLectivo','unidadeOrganicaSelected','trimestre'));
 
     }
 

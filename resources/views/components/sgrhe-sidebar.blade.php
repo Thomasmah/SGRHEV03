@@ -160,14 +160,6 @@
                                 </a>
                               </li>
                               <li class="nav-item">
-                                <a href="{{ route('dashboard.unidade.organica.formulario.aproveitamento', ['idUnidadeOrganica' => session()->only(['idUnidadeOrganica'])['idUnidadeOrganica'] ]) }}"  class="nav-link {{ request()->routeIs('inicio') ? 'active' : ''}}">
-                                  <p class="item-2">
-                                    <i class="fa fa-th-list nav-icon"></i>
-                                    Formulário de Aproveitamento Escolar
-                                  </p>
-                                </a>
-                              </li>
-                              <li class="nav-item">
                                 <a href="#"  class="nav-link {{ request()->routeIs('inicio') ? 'active' : ''}}">
                                   <p class="item-2">
                                     <i class="fa fa-th-list nav-icon"></i>

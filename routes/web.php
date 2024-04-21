@@ -175,9 +175,9 @@ Route::any('/store-unidadeorganica',[UnidadeOrganicaController::class,'store'])-
 //Exibir Unidade Organicas
 Route::any('/index-unidadeorganica',[UnidadeOrganicaController::class,'index'])->name('unidadeorganicas.index');//->middleware('AcessoAdmin');
 //Ver unidade Organica unidadeOrganica.show 
-Route::any('/sobre-unidadeorganica/{idUnidadeOrganica}/',[UnidadeOrganicaController::class,'show'])->name('unidadeOrganica.show');//Definir Permissoes so para os directores
-Route::any('/dasboard-unidadeorganica/{idUnidadeOrganica}/',[UnidadeOrganicaController::class,'dashboardUnidadeOrganicaShow'])->name('dashboard.unidade.organica.how');//Definir Permissoes so para os directores
-Route::any('/formulario/unidadeorganica/{idUnidadeOrganica}/',[UnidadeOrganicaController::class,'formularioAproveitamentoUnidadeOrganica'])->name('dashboard.unidade.organica.formulario.aproveitamento');//Definir Permissoes so para os directores
+Route::any('/sobre/unidadeorganica/{idUnidadeOrganica}',[UnidadeOrganicaController::class,'show'])->name('unidadeOrganica.show');//Definir Permissoes so para os directores
+Route::any('/dasboard/unidadeorganica/{idUnidadeOrganica}',[UnidadeOrganicaController::class,'dashboardUnidadeOrganicaShow'])->name('dashboard.unidade.organica.how');//Definir Permissoes so para os directores
+Route::any('/formulario/unidadeorganica/',[UnidadeOrganicaController::class,'formularioAproveitamentoUnidadeOrganica'])->name('dashboard.unidade.organica.formulario.aproveitamento');//Definir Permissoes so para os directores
 //Actualizar um Registro da Entidade-Tabela Unidade Organica
 Route::any('/updade-uniddeorganica{id}',[UnidadeOrganicaController::class,'update'])->name('unidadeorganicas.update');//->middleware('AcessoAdmin');
 //Delectar um Registro da Tabela Unidade Orgaica
