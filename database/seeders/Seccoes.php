@@ -39,7 +39,7 @@ class Seccoes extends Seeder
                 'designacao' => 'Tecnologias de Informação e Comunicação',
                 'idChefe' => '',
                 'email' => '',
-            ]); 
+            ]);
             DB::table('seccaos')->insert([
                 'codNome' =>'EdEnsino',
                 'designacao' => 'Educação e Ensino',
@@ -47,8 +47,20 @@ class Seccoes extends Seeder
                 'email' => '',
             ]); 
             DB::table('seccaos')->insert([
-                'codNome' =>'SecretariaGeral',
-                'designacao' => 'Direção Municipal',
+                'codNome' =>'Inspenccao',
+                'designacao' => 'Inspecção',
+                'idChefe' => '',
+                'email' => '',
+            ]); 
+            DB::table('seccaos')->insert([
+                'codNome' =>'Juridico',
+                'designacao' => 'Acessoria Jurídica',
+                'idChefe' => '',
+                'email' => '',
+            ]); 
+            DB::table('seccaos')->insert([
+                'codNome' =>'Escola',
+                'designacao' => 'Escola',
                 'idChefe' => '',
                 'email' => '',
             ]); 

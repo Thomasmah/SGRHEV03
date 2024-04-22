@@ -2,8 +2,6 @@
 @extends('layouts.app')
   @section('titulo' , 'DashBoard')
         @section('header')
-        <!--JS e CSS do LivWare Integrado -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
         <!-- Styles -->
         @livewireStyles
         @endsection
@@ -38,10 +36,36 @@
             <div class="row">
              <!-- Funcionário -->
              <div class="col-lg-3 col-6">
+                <div class="small-box bg-primary">
+                  <div class="inner">
+                    <h3>{{ $funcionarios->where('estado', 'Activo')->count() }}</h3>
+                    <p>Funcionários </p>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                  </div>
+                  <a href="{{ route('funcionarios.index') }}" class="small-box-footer">Ver mais <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+              </div>
+            <!-- Funcionários Ativos-->
+             <div class="col-lg-3 col-6">
                 <div class="small-box bg-danger">
                   <div class="inner">
-                    <h3>{{ $funcionarios->count() }}</h3>
-                    <p>Funcionários</p>
+                    <h3>{{ $funcionarios->where('estado', 'Inativos')->count() }}</h3>
+                    <p>Funcionários Inactivos</p>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                  </div>
+                  <a href="{{ route('funcionarios.index') }}" class="small-box-footer">Ver mais <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+              </div>
+               <!-- Funcionários Ativos-->
+             <div class="col-lg-3 col-6">
+                <div class="small-box bg-warning">
+                  <div class="inner">
+                    <h3>{{ $funcionarios->where('estado', 'Licenca')->count() }}</h3>
+                    <p>Funcionários Licenca</p>
                   </div>
                   <div class="icon">
                     <i class="ion ion-person-add"></i>
@@ -64,9 +88,9 @@
               </div>
               <!-- Escolas Primárias -->
               <div class="col-lg-3 col-6">
-                <div class="small-box bg-success">
+                <div class="small-box bg-info">
                   <div class="inner">
-                    <h3>{{ $unidadesOrganicas->where('descricao','ESCOLA')->count() }}</h3>
+                    <h3>{{ $unidadesOrganicas->where('nivelEnsino','Primário')->count() }}</h3>
                     <p>Escolas Primárias</p>
                   </div>
                   <div class="icon">
@@ -75,12 +99,12 @@
                   <a href="#" class="small-box-footer">Ver mais <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
               </div>
-              <!--Escola do 2º Ciclo do Ensino Secundário -->
+              <!--Escola do 1º Ciclo do Ensino Secundário -->
               <div class="col-lg-3 col-6">
-                <div class="small-box bg-success">
+                <div class="small-box bg-info">
                   <div class="inner">
-                    <h3>1<sup style="font-size: 20px">%</sup></h3>
-                    <p>Escola Secundária</p>
+                    <h3>{{ $unidadesOrganicas->where('nivelEnsino','I Ciclo')->count() }}</h3>
+                    <p>Escolas do I Ciclo Secundário</p>
                   </div>
                   <div class="icon">
                     <i class="ion ion-stats-bars"></i>
@@ -88,21 +112,19 @@
                   <a href="#" class="small-box-footer">Ver mais <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
               </div>
-              <div class="col-lg-3 col-6">
-                <!-- small box -->
-                <div class="small-box bg-danger">
+             <!--Escola do 2º Ciclo do Ensino Secundário -->
+             <div class="col-lg-3 col-6">
+                <div class="small-box bg-secondary">
                   <div class="inner">
-                    <h3>{{ App\Models\Funcionario::all()->where('estado', 'Inactivo')->count() }}</h3>
-
-                    <p>Funcionários Inativos</p>
+                    <h3>{{ $unidadesOrganicas->where('nivelEnsino','II Ciclo')->count() }}</h3>
+                    <p>Escolas do II Ciclo Secundário(Liceu)</p>
                   </div>
                   <div class="icon">
-                    <i class="ion ion-pie-graph"></i>
+                    <i class="ion ion-stats-bars"></i>
                   </div>
-                  <a href="{{ route('funcionarios.index.inativos') }}" class="small-box-footer">Ver mais <i class="fas fa-arrow-circle-right"></i></a>
+                  <a href="#" class="small-box-footer">Ver mais <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
               </div>
-              
               <!-- ./col -->
             </div>
             <!-- /.row -->

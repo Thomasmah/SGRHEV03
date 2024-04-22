@@ -7,6 +7,7 @@ use App\Models\Arquivo;
 use App\Models\Cargo;
 use App\Models\categoriaFuncionario;
 use App\Models\Endereco;
+use App\Models\FormularioAproveitamento;
 use App\Models\Funcionario;
 use App\Models\Naturalidade;
 use App\Models\Parente;
@@ -44,6 +45,8 @@ class DashboardController extends Controller
                      //Carregando os Dados do Dashboard
                 $unidadesOrganicas = UnidadeOrganica::all();
                 $funcionarios = Funcionario::all();
+                $mapaAproveitamento = FormularioAproveitamento::where('anoLectivo', '2023/2024')->get();
+
                 //dd(session()->only(['idFuncionario']));
                 return view('/dashboard',compact('unidadesOrganicas','funcionarios'));
             }else{

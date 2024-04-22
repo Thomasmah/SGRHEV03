@@ -148,7 +148,7 @@ use Illuminate\Support\Facades\Auth;
         <script src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }} "></script>
         <!-- AdminLTE App -->
         <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
-        <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    
         <script src="{{ asset('dist/js/pages/dashboard.js') }} "></script>
         <!--Alertas Menssagens de erros com Sweet Alerts Lib-->
         <script src="{{ asset('dist/js/sweet-alertt2.js') }}"></script>

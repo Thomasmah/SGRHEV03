@@ -53,7 +53,7 @@ class Cargos extends Seeder
         ]); 
         DB::table('cargos')->insert([
             'codNome' => 'DirectorDM',
-            'designacao' =>'Direção Municipal',
+            'designacao' =>'Director Municipal',
             'permissoes' => '6',
             'descrisao' => 'Create, Read, Update, Delete Consultar, Solicitar, Emitir, Aprovar Documentos Como: '
         ]); 

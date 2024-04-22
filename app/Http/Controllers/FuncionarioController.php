@@ -95,16 +95,19 @@ class FuncionarioController extends Controller
   
 //Create
     public function store(Request $request) {
-        
+       // dd($request->all());
+       if ($request->idCargo == 4) {
+        $funcionario = Funcionario::where('idUnidadeOrganica', $request->idUnidadeOrganica)->where('idCargo', 4)->exists();
+        if ($funcionario) {
+            return redirect()->back()->with('error', 'O Cargo à Director para essa Escola não se encontra Disponível ');
+        }else{
             $request->validate([
                 'idCargo' => [
                     Rule::unique('funcionarios')->where( function($query) {
                         $query->where('idCargo', 7);
                     })->ignore($request->idCargo),
                 ],
-            'idcargo' =>  ['numeric','required','unique:funcionarios,idcargo'],
             'numeroAgente' => ['numeric','required','unique:funcionarios,numeroAgente'],
-            'idCargo' => ['numeric','required','unique:funcionarios,idCargo'],
             //'numeroBI' => ['required','unique:funcionarios,numeroBI'],
             'dataAdmissao' => ['date','required','before_or_equal:now'],
             'iban' => ['string','required','unique:funcionarios,iban'],
@@ -115,6 +118,7 @@ class FuncionarioController extends Controller
             //'idCargo'=>['numeric'],
             // 'idCategoriaFuncionario' => ['required'],
             ],[
+                'idCargo.unique' => 'O Cargo de Director Muninipal não está Disponível!',
                 'numeroAgente.unique' => 'O Número de agente já está sendo utilizado por outro Funcionário!',
                 //'numeroBI.unique' => 'O Número de Bilhete de Identidade já está sendo utilizado por outro Funcionário!',
                 'numeroAgente.required' => 'O Número de Agente é Obrigatório!',
@@ -124,7 +128,6 @@ class FuncionarioController extends Controller
                 'iban.unique' => 'O Iban ja está sendo utilizado por outro Funcionário!',
                 'email.unique' => 'O Email ja está sendo utilizado por outro Funcionário!', 
                 'numeroTelefone.unique' => 'O Numero de Telefone já está sendo utilizado por outro Funcionário!',
-                'idCargo.unique' => 'O Cargo de Director Muninipal não está disponível!',
             ]);
             DB::beginTransaction();
             $funcionario = Funcionario::create([
@@ -148,6 +151,61 @@ class FuncionarioController extends Controller
                 DB::rollBack();
                 return redirect()->back()->with('aviso', 'Erro de Cadastrado Funcionário!')->withErrors($request);
             }
+        }
+    }else{
+        
+        $request->validate([
+            'idCargo' => [
+                Rule::unique('funcionarios')->where( function($query) {
+                    $query->where('idCargo', 7);
+                })->ignore($request->idCargo),
+            ],
+        'numeroAgente' => ['numeric','required','unique:funcionarios,numeroAgente'],
+        //'numeroBI' => ['required','unique:funcionarios,numeroBI'],
+        'dataAdmissao' => ['date','required','before_or_equal:now'],
+        'iban' => ['string','required','unique:funcionarios,iban'],
+        'email' => ['email','max:255','nullable','unique:funcionarios,email'],
+        'numeroTelefone' => ['between:9,14','unique:funcionarios,numeroTelefone'],    
+        //'idPessoa'=> ['numeric','required','unique:funcionarios,idPessoa,except'.''],
+        //'idUnidadeOrganica'=> ['numeric'],
+        //'idCargo'=>['numeric'],
+        // 'idCategoriaFuncionario' => ['required'],
+        ],[
+            'idCargo.unique' => 'O Cargo de Director Muninipal não está Disponível!',
+            'numeroAgente.unique' => 'O Número de agente já está sendo utilizado por outro Funcionário!',
+            //'numeroBI.unique' => 'O Número de Bilhete de Identidade já está sendo utilizado por outro Funcionário!',
+            'numeroAgente.required' => 'O Número de Agente é Obrigatório!',
+            'numeroAgente.numeric' => 'O Número de Agente deve ser um numero!',
+            'dataAdmissao.before' => 'A data de Admissão deve ser antes do dia de Hoje!', 
+            'dataAdmissao.required' => 'A data de Admissão é Obrigatória!',
+            'iban.unique' => 'O Iban ja está sendo utilizado por outro Funcionário!',
+            'email.unique' => 'O Email ja está sendo utilizado por outro Funcionário!', 
+            'numeroTelefone.unique' => 'O Numero de Telefone já está sendo utilizado por outro Funcionário!',
+        ]);
+        DB::beginTransaction();
+        $funcionario = Funcionario::create([
+            'numeroAgente' => $request->input('numeroAgente'),
+            'dataAdmissao' => $request->input('dataAdmissao'),
+            'iban' => $request->input('iban'),
+            'email' => $request->input('email'),
+            'idPessoa' => $request->input('idPessoa'),
+            'idUnidadeOrganica' => $request->input('idUnidadeOrganica'),
+            'idCargo' => $request->input('idCargo'), 
+            'idCategoriaFuncionario' => $request->input('idCategoriaFuncionario'),
+            'numeroTelefone'=> $request->input('numeroTelefone'),
+            'idSeccao'=> $request->input('idSeccao'),
+            'estado'=> "Activo",
+
+         ]);
+        if ($funcionario) {
+            DB::commit();
+            return redirect()->back()->with('success', 'Funcionário Cadastrado com sucesso!');
+        }else{
+            DB::rollBack();
+            return redirect()->back()->with('aviso', 'Erro de Cadastrado Funcionário!')->withErrors($request);
+        }
+    }
+        
     }
 
 
@@ -155,13 +213,70 @@ class FuncionarioController extends Controller
     public function update(Request $request, string $id)
     { 
            // dd($request->all());
+           //Verificar se o Cargo de Director da Escla esta Elegivel
+           if ($request->idCargo == 4) {
+                $funcionario = Funcionario::where('idUnidadeOrganica', $request->idUnidadeOrganica)->where('idCargo', 4)->exists();
+                if ($funcionario) {
+                    return redirect()->back()->with('error', 'O Cargo à Director para essa Escola não se encontra Disponível ');
+                }else{
+                    $request->validate([
+                        'idCargo' => [
+                            Rule::unique('funcionarios')->where( function($query) {
+                                $query->where('idCargo', 7);
+                            })->ignore($request->idCargo),
+                        ],
+                    'numeroAgente' => ['numeric','required','unique:funcionarios,numeroAgente,'.$id],
+                    'dataAdmissao' => ['date','required','before_or_equal:now'],
+                    'iban' => ['string','required','unique:funcionarios,iban,'.$id], 
+                    'email' => ['email','max:255','nullable','unique:funcionarios,email,'.$id],
+                    'numeroTelefone' => ['between:9,14','unique:funcionarios,numeroTelefone,'.$id],    
+                    ], [
+                        'idCargo.unique' => 'O Cargo de Director Muninipal não está Disponível!',
+                        'numeroAgente.unique' => 'O Número de agente ja está sendo utilizado por outro usuário!',
+                        'numeroAgente.required' => 'O Número de Agente é Obrigatório!',
+                        'numeroAgente.numeric' => 'O Número de Agente deve ser um numero!',
+                        'dataAdmissao.before_or_equal' => 'A data de Admissão deve ser antes do dia de Hoje!', 
+                        'dataAdmissao.required' => 'A data de Admissão é Obrigatória!',
+                        'iba.unique' => 'O Iban ja está sendo utilizado por outro usuário!',
+                        'email.unique' => 'O Email ja está sendo utilizado por outro usuário!', 
+                        'numeroTelefone.unique' => 'O Numero de Telefone já está sendo utilizado por outro usuário!', 
+                    ]);
+                    DB::beginTransaction();
+                    //Isolar ou identificar o Registro a Ser Alterado
+                    $funcionario = Funcionario::where('id', $id)->first();
+                    // $funcionario->dataAdmissao = $request->dataAdmissao;
+                    $funcionario->numeroAgente = $request->numeroAgente;
+                    $funcionario->idCategoriaFuncionario = $request->idCategoriaFuncionario;
+                    $funcionario->idCargo = $request->idCargo;
+                    $funcionario->idSeccao = $request->idSeccao;
+                    $funcionario->idUnidadeOrganica = $request->idUnidadeOrganica;
+                    $funcionario->iban = $request->iban;
+                    $funcionario->email = $request->email;
+                    $funcionario->dataAdmissao = $request->dataAdmissao;
+                    $funcionario->numeroTelefone = $request->numeroTelefone;
+                        // iniciando a transacao para as alterações no registro
+                        if ($funcionario->save()) {
+                            DB::commit();
+                            return redirect()->route('funcionarios.index')->with('success', 'Registro atualizado com sucesso.');
+                        }else {
+                            DB::rollBack();
+                            return redirect()->back()->with('error', 'Erro de Acualização nda Entidade Funionário! ')->withErrors($request);
+                        }
+                }
+           }else{
             $request->validate([
+                'idCargo' => [
+                    Rule::unique('funcionarios')->where( function($query) {
+                        $query->where('idCargo', 7);
+                    })->ignore($request->idCargo),
+                ],
             'numeroAgente' => ['numeric','required','unique:funcionarios,numeroAgente,'.$id],
             'dataAdmissao' => ['date','required','before_or_equal:now'],
             'iban' => ['string','required','unique:funcionarios,iban,'.$id], 
             'email' => ['email','max:255','nullable','unique:funcionarios,email,'.$id],
             'numeroTelefone' => ['between:9,14','unique:funcionarios,numeroTelefone,'.$id],    
             ], [
+                'idCargo.unique' => 'O Cargo de Director Muninipal não está Disponível!',
                 'numeroAgente.unique' => 'O Número de agente ja está sendo utilizado por outro usuário!',
                 'numeroAgente.required' => 'O Número de Agente é Obrigatório!',
                 'numeroAgente.numeric' => 'O Número de Agente deve ser um numero!',
@@ -192,6 +307,8 @@ class FuncionarioController extends Controller
                     DB::rollBack();
                     return redirect()->back()->with('error', 'Erro de Acualização nda Entidade Funionário! ')->withErrors($request);
                 }
+           }
+           
     }
 
     //Delete

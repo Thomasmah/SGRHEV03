@@ -2,8 +2,6 @@
 @extends('layouts.app')
   @section('titulo' , 'DashBoard Unidade Orgânica')
         @section('header')
-        <!--JS e CSS do LivWare Integrado -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
         <!-- Styles -->
         @livewireStyles
         @endsection
@@ -308,7 +306,7 @@
                                                 @csrf
                                                 @method('POST')
                                                 <input type="hidden" name="">
-                                                <input type="hidden" name="idUnidadeOrganica" value="{{ session()->only(['idUnidadeOrganica'])['idUnidadeOrganica'] }}">
+                                                <input type="hidden" name="idUnidadeOrganica" value="{{ $unidadeOrganicaSelected->id }}">
                                                 <input type="hidden" name="trimestre" value="{{ 'I' }}">
                                                 <input type="hidden" name="anoLectivo" value="{{ isset($anoLectivo) ? $anoLectivo : '' }}">
                                                 <button type="submit" class="btn btn-primary w-100">Formulário de Aproveitamento</button>
@@ -386,7 +384,7 @@
                                                 @csrf
                                                 @method('POST')
                                                 <input type="hidden" name="">
-                                                <input type="hidden" name="idUnidadeOrganica" value="{{ session()->only(['idUnidadeOrganica'])['idUnidadeOrganica'] }}">
+                                                <input type="hidden" name="idUnidadeOrganica" value="{{ $unidadeOrganicaSelected->id }}">
                                                 <input type="hidden" name="trimestre" value="{{ 'II' }}">
                                                 <input type="hidden" name="anoLectivo" value="{{ isset($anoLectivo) ? $anoLectivo : '' }}">
                                                 <button type="submit" class="btn btn-primary w-100">Formulário de Aproveitamento</button>
@@ -465,7 +463,7 @@
                                                 @csrf
                                                 @method('POST')
                                                 <input type="hidden" name="">
-                                                <input type="hidden" name="idUnidadeOrganica" value="{{ session()->only(['idUnidadeOrganica'])['idUnidadeOrganica'] }}">
+                                                <input type="hidden" name="idUnidadeOrganica" value="{{ $unidadeOrganicaSelected->id }}">
                                                 <input type="hidden" name="trimestre" value="{{ 'III' }}">
                                                 <input type="hidden" name="anoLectivo" value="{{ isset($anoLectivo) ? $anoLectivo : '' }}">
                                                 <button type="submit" class="btn btn-primary w-100">Formulário de Aproveitamento</button>

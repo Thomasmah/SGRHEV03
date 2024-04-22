@@ -55,12 +55,16 @@ class UnidadeOrganicaController extends Controller
     }
 
     public function funcionariosUnidadeOrganica(Request $request){
+
         $dados = DB::select('
-        Select pessoas.*, parentes.*, naturalidades.*, funcionarios.*
-        From pessoas
-          JOIN parentes ON pessoas.id=parentes.idPessoa
-          JOIN naturalidades ON pessoas.id=naturalidades.idPessoa
-          JOIN funcionarios ON pessoas.id=funcionarios.idPessoa
+        select 
+          funcionarios.id as id_funcionario, pessoas.id as id_pessoas, unidade_organicas.id as id_unidade_organica, categoria_funcionarios.categoria as categoria_unidade_organica, cargos.designacao as nomeCargo, 
+          funcionarios.*, pessoas.*, categoria_funcionarios.*, unidade_organicas.*, cargos.*
+              from funcionarios
+              join pessoas on pessoas.id=funcionarios.idPessoa
+              join categoria_funcionarios on categoria_funcionarios.id=funcionarios.idCategoriaFuncionario
+              join unidade_organicas on unidade_organicas.id=funcionarios.idUnidadeOrganica
+              join cargos on cargos.id=funcionarios.idCargo 
           Where idUnidadeOrganica = '.$request->idUnidadeOrganica );
           $designacaoUnidadeOrganica = $request->input('designacao');
         return view('sgrhe/pages/tables/funcionarios-unidade_organica',compact('dados','designacaoUnidadeOrganica'));

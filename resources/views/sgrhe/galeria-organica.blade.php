@@ -60,11 +60,6 @@
                                                 </div>
                                             
                                             </div>
-                                            <div class="card-footer">
-                                               <button class="btn btn-primary w-100" data-toggle="modal" data-target="#addfotosUnidadeOrganica" >
-                                                  <i class="fa fa-plus "></i> Adicionar Fotos da Escola
-                                                </button>
-                                            </div>
                                           </div>
                         </div>
                     <!--/col -->        

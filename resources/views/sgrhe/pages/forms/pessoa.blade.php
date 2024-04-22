@@ -44,13 +44,13 @@
                               <label>Identificação</label>
                               <div class="form-group">
                                 <label for="nomeCompleto">Nome Completo</label>
-                                <input type="text" name="nomeCompleto" class="form-control" id="nomeCompleto" placeholder="Nome Completo" required value="{{ isset($pessoa) ? $pessoa->nomeCompleto : ''}}">
+                                <input type="text" name="nomeCompleto" class="form-control" id="nomeCompleto" placeholder="Nome Completo" maxlength="250" required value="{{ isset($pessoa) ? $pessoa->nomeCompleto : ''}}">
                                 <label for="dataNascimento">Data de Nascimento</label>
                                 <input type="date" name="dataNascimento" class="form-control" id="dataNascimento" placeholder="12-12-2000" required value="{{ isset($pessoa) ? $pessoa->dataNascimento : ''}}" >
                               </div>
                               <div class="form-group">
                                 <label for="numeroBI">Bilhete de Identidade "BI"</label>
-                                <input type="text" name="numeroBI" class="form-control" id="numeroBI" maxlength="24" placeholder="002223421AE042" required value="{{ isset($pessoa) ? $pessoa->numeroBI : ''}}">
+                                <input type="text" name="numeroBI" class="form-control" id="numeroBI" maxlength="14" placeholder="002223421AE042" required value="{{ isset($pessoa) ? $pessoa->numeroBI : ''}}">
                                 <label for="validadeBI"> Validade do Bilhete de Identidade "BI"</label>
                                 <input type="date" name="validadeBI" class="form-control" id="validadeBI" placeholder="12-12-2000" required value="{{ isset($pessoa) ? $pessoa->validadeBI : ''}}">
                               </div>
@@ -101,20 +101,22 @@
                               <label>Parentesco:</label>
                               <div class="form-group">
                                 <label for="nomePai">Nome do Pai</label>
-                                <input type="text" name="nomePai" class="form-control" id="nomePai" placeholder="Nome Completo do Pai" value="{{ isset($parente) ? $parente->nomePai : ''}}" required>
+                                <input type="text" name="nomePai" class="form-control" id="nomePai" maxlength="250" placeholder="Nome Completo do Pai" value="{{ isset($parente) ? $parente->nomePai : ''}}" required>
                                 <label for="nomeMae">Nome da Mãe</label>
-                                <input type="text" name="nomeMae" class="form-control" id="nomeMae" placeholder="Nome Completo do Mãe" value="{{ isset($parente) ? $parente->nomeMae : ''}}" required>
+                                <input type="text" name="nomeMae" class="form-control" id="nomeMae" maxlength="250" placeholder="Nome Completo do Mãe" value="{{ isset($parente) ? $parente->nomeMae : ''}}" required>
                               </div>
                               <div class="form-group">
                                 <label for="grupoSanguineo">Grupo Sanguineo</label>
                                   <select name="grupoSanguineo" class="form-control select2" style="width: 100%;" required>
                                       <option value="{{isset($pessoa) ? $pessoa->grupoSanguineo : ''}}"> {{ isset($pessoa) ? $pessoa->grupoSanguineo : 'Seleccione o Grupo Sanguíneo' }} </option>
-                                      <option >O+</option>
-                                      <option >O-</option>
                                       <option >A+</option>
                                       <option >A-</option>
                                       <option >B+</option>
                                       <option >B-</option>
+                                      <option >AB+</option>
+                                      <option >AB-</option>
+                                      <option >O+</option>
+                                      <option >O-</option>
                                   </select>
                               </div>
                               <div class="form-group">
@@ -125,13 +127,11 @@
                                       <option>Solteiro(a)</option>
                                   </select>
                               </div>
+                              <button type="submit" class="btn btn-primary" style="width: 100%;">{{ isset($pessoa) ? 'Actualizar Dados da Entidade Pessoa ' : 'Cadastrar Entidade Pessoa'}}</button>
                             </form>
                             <!-- /form-->
                         </div>
                         <div class="card-footer">
-                          <button type="submit" class="btn btn-primary" style="width: 100%;">{{ isset($pessoa) ? 'Actualizar Dados da Entidade Pessoa ' : 'Cadastrar Entidade Pessoa'}}</button>
-                          <br>
-                          <br>
                           <a href="{{route('pessoas.index')}}" class="btn btn-primary" style="width: 100%;">Pessoas / Index</a>
                         </div>
                     </div>

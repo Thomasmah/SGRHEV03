@@ -46,20 +46,21 @@
                             <table id="example1" class="table table-bordered table-striped">
                               <thead>
                               <tr>
-                                <th>Pessoa (id)</th>
-                                <th>Nome Completo</th>
-                                <th>Data Nascimento</th>
-                                <th>Genero</th>
-                                <th>Grupo Sanguíneo</th>
-                                <th>Estado Civil</th>
-                                <th>Nº de Bilhete de Identidade (BI)</th>
-                                <th>Data Validade do Bilhete de Identidade</th>
-                                <th>Data de Admissao</th>
-                                <th>Email</th>
-                                <th>IBAN</th>
-                                <th>Numero de Agente</th>
-                                <th>Nome do Pai</th>
-                                <th>Nome da Mãe</th>
+                                  <th>Estado</th>
+                                  <th>Número de Agente</th>
+                                  <th>Nome Completo</th>
+                                  <th>Nº de BI</th>
+                                  <th>Validade do BI</th>
+                                  <th>Unidade Orgânica</th>
+                                  <th>Categoria Funcionário</th>
+                                  <th>Cargo</th>
+                                  <th>Data de Admissão</th>
+                                  <th>Email</th>
+                                  <th>IBAN</th>
+                                  <th>Data Nascimento</th>
+                                  <th>Genêro</th>
+                                  <th>Grupo Sanguíneo</th>
+                                  <th>Estado Civíl</th>
                                 <th>Opções</th>
                               </tr>
                               </thead>
@@ -67,20 +68,25 @@
                               <!--Gerando a Tabela de forma Dinamica-->
                               @foreach ($dados as $funcionario)
                                             <tr>
-                                                <td>{{ $funcionario->id }}</td>
-                                                <td>{{ $funcionario->nomeCompleto }}</td>
-                                                <td>{{ $funcionario->dataNascimento }}</td>
-                                                <td>{{ $funcionario->genero }}</td>
-                                                <td>{{ $funcionario->grupoSanguineo }}</td>
-                                                <td>{{ $funcionario->estadoCivil }}</td>
-                                                <td>{{ $funcionario->numeroBI }}</td>
-                                                <td>{{ $funcionario->validadeBI }}</td>
-                                                <td>{{$funcionario->dataAdmissao}}</td>
-                                                <td>{{$funcionario->email}}</td>
-                                                <td>{{$funcionario->iban}}</td>
-                                                <td>{{$funcionario->numeroAgente}}</td>
-                                                <td>{{ $funcionario->nomePai }}</td>
-                                                <td>{{ $funcionario->nomeMae }}</td>
+                                                  <td class="{{ ($funcionario->estado =='Activo') ? 'text-success' : '' }} {{ ($funcionario->estado =='Inactivo') ? 'text-danger' : '' }} {{ ($funcionario->estado =='Inactivo') ? 'text-danger' : '' }} {{ ($funcionario->estado =='Dispensado') ? 'text-warning' : '' }} {{ ($funcionario->estado =='Ferias') ? 'text-secondary' : '' }}" style="font-weight: bolder;">{{ $funcionario->estado }}</td>
+                                                  <td class="{{ ($funcionario->nomeCargo =='Director da Escola') ? 'font-weight-bolder' : '' }}" >{{ $funcionario->numeroAgente }}</td>
+                                                  <td class="{{ ($funcionario->nomeCargo =='Director da Escola') ? 'font-weight-bolder' : '' }}" >{{ $funcionario->nomeCompleto }}</td>
+                                                  <td>{{ $funcionario->numeroBI }}</td>
+                                                  @php
+                                                    $data = \Carbon\Carbon::parse($funcionario->validadeBI);
+                                                    $class = $data->gt(now()) ? 'text-success' : 'text-danger';
+                                                  @endphp
+                                                  <td class="{{ $class }}">{{ \Carbon\Carbon::parse($funcionario->validadeBI)->format('d/m/Y') }}</td>
+                                                  <td>{{ $funcionario->designacao }}</td>
+                                                  <td>{{ $funcionario->categoria }}</td>
+                                                  <td class="{{ ($funcionario->nomeCargo =='Director da Escola') ? 'font-weight-bolder' : '' }}" >{{ $funcionario->nomeCargo }}</td>
+                                                  <td>{{ \Carbon\Carbon::parse($funcionario->dataAdmissao)->format('d/m/Y') }}</td>
+                                                  <td>{{ $funcionario->email }}</td>
+                                                  <td>{{ $funcionario->iban }}</td>
+                                                  <td>{{  \Carbon\Carbon::parse( $funcionario->dataNascimento )->format('d F Y')}}</td>
+                                                  <td>{{ $funcionario->genero }}</td>
+                                                  <td>{{ $funcionario->grupoSanguineo }}</td>
+                                                  <td>{{ $funcionario->estadoCivil }}</td>
                                                 <td>
                                                     <form action="{{ route('perfil.show', ['idFuncionario' => $funcionario->id]) }}" method="GET" style="display: inline;">
                                                       @csrf
@@ -109,20 +115,21 @@
                               </tbody>
                               <tfoot>
                               <tr>
-                                <th>Pessoa (id)</th>
-                                <th>Nome Completo</th>
-                                <th>Data Nascimento</th>
-                                <th>Genero</th>
-                                <th>Grupo Sanguíneo</th>
-                                <th>Estado Civil</th>
-                                <th>Nº de Bilhete de Identidade (BI)</th>
-                                <th>Data Validade do Bilhete de Identidade</th>
-                                <th>Data de Admissao</th>
-                                <th>Email</th>
-                                <th>IBAN</th>
-                                <th>Numero de Agente</th>
-                                <th>Nome do Pai</th>
-                                <th>Nome da Mãe</th>
+                                  <th>Estado</th>
+                                  <th>Número de Agente</th>
+                                  <th>Nome Completo</th>
+                                  <th>Nº de BI</th>
+                                  <th>Validade do BI</th>
+                                  <th>Unidade Orgânica</th>
+                                  <th>Categoria Funcionário</th>
+                                  <th>Cargo</th>
+                                  <th>Data de Admissão</th>
+                                  <th>Email</th>
+                                  <th>IBAN</th>
+                                  <th>Data Nascimento</th>
+                                  <th>Genêro</th>
+                                  <th>Grupo Sanguíneo</th>
+                                  <th>Estado Civíl</th>
                                 <th>Opções</th>
                               </tr>
                               </tfoot>

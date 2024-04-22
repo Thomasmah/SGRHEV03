@@ -18,7 +18,7 @@ class UnidadeOrganica extends Model
         'localidade',
         'telefone',
         'email',
-        //'niveEnsino'
+        'nivelEnsino'
     ];
         // Relacionamento com a tabela Parentes
         public function funcionarios()
