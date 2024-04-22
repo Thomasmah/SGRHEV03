@@ -17,6 +17,8 @@ use App\Models\UnidadeOrganica;
 use Illuminate\Http\Request;
 use Symfony\Component\Console\Input\Input;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+
 
 
 class FuncionarioController extends Controller
@@ -93,8 +95,16 @@ class FuncionarioController extends Controller
   
 //Create
     public function store(Request $request) {
+        
             $request->validate([
+                'idCargo' => [
+                    Rule::unique('funcionarios')->where( function($query) {
+                        $query->where('idCargo', 7);
+                    })->ignore($request->idCargo),
+                ],
+            'idcargo' =>  ['numeric','required','unique:funcionarios,idcargo'],
             'numeroAgente' => ['numeric','required','unique:funcionarios,numeroAgente'],
+            'idCargo' => ['numeric','required','unique:funcionarios,idCargo'],
             //'numeroBI' => ['required','unique:funcionarios,numeroBI'],
             'dataAdmissao' => ['date','required','before_or_equal:now'],
             'iban' => ['string','required','unique:funcionarios,iban'],
@@ -113,7 +123,8 @@ class FuncionarioController extends Controller
                 'dataAdmissao.required' => 'A data de Admissão é Obrigatória!',
                 'iban.unique' => 'O Iban ja está sendo utilizado por outro Funcionário!',
                 'email.unique' => 'O Email ja está sendo utilizado por outro Funcionário!', 
-                'numeroTelefone.unique' => 'O Numero de Telefone já está sendo utilizado por outro Funcionário!', 
+                'numeroTelefone.unique' => 'O Numero de Telefone já está sendo utilizado por outro Funcionário!',
+                'idCargo.unique' => 'O Cargo de Director Muninipal não está disponível!',
             ]);
             DB::beginTransaction();
             $funcionario = Funcionario::create([
