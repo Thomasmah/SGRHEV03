@@ -181,99 +181,346 @@
 
    
 
-                <!-- /.card -->
-              </section>
-              <!-- /.Left col -->
-              <!-- right col (We are only adding the ID to make the widgets sortable)-->
-              <section class="col-lg-5 connectedSortable">
-              <!-- Calendar -->
-                <div class="card bg-gradient-success">
-                  <div class="card-header border-0">
+              <!-- /. -->
+                </section>
+                  <!-- /.Left col -->
+                  <!-- right col (We are only adding the ID to make the widgets sortable)-->
+                  <section class="col-lg-5 connectedSortable">
+                    <!-- Calendar -->
+                    <div class="card bg-gradient-success">
+                      <div class="card-header border-0">
 
-                    <h3 class="card-title">
-                      <i class="far fa-calendar-alt"></i>
-                      Calendario
-                    </h3>
-                    <!-- tools card -->
-                    <div class="card-tools">
-                      <!-- button with a dropdown -->
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" data-offset="-52">
-                          <i class="fas fa-bars"></i>
-                        </button>
-                        <div class="dropdown-menu" role="menu">
-                          <a href="#" class="dropdown-item">Adicionar novo evento</a>
-                          <a href="#" class="dropdown-item">Limpar eventos</a>
-                          <div class="dropdown-divider"></div>
-                          <a href="#" class="dropdown-item">Ver calendário</a>
+                        <h3 class="card-title">
+                          <i class="far fa-calendar-alt"></i>
+                          Calendario
+                        </h3>
+                        <!-- tools card -->
+                        <div class="card-tools">
+                          <!-- button with a dropdown -->
+                          <div class="btn-group">
+                            <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" data-offset="-52">
+                              <i class="fas fa-bars"></i>
+                            </button>
+                            <div class="dropdown-menu" role="menu">
+                              <a href="#" class="dropdown-item">Adicionar novo evento</a>
+                              <a href="#" class="dropdown-item">Limpar eventos</a>
+                              <div class="dropdown-divider"></div>
+                              <a href="#" class="dropdown-item">Ver calendário</a>
+                            </div>
+                          </div>
+                          <button type="button" class="btn btn-success btn-sm" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                          </button>
+                          <button type="button" class="btn btn-success btn-sm" data-card-widget="remove">
+                            <i class="fas fa-times"></i>
+                          </button>
                         </div>
+                        <!-- /. tools -->
                       </div>
-                      <button type="button" class="btn btn-success btn-sm" data-card-widget="collapse">
-                        <i class="fas fa-minus"></i>
-                      </button>
-                      <button type="button" class="btn btn-success btn-sm" data-card-widget="remove">
-                        <i class="fas fa-times"></i>
-                      </button>
+                      <!-- /.card-header -->
+                      <div class="card-body pt-0">
+                        <!--The calendar -->
+                        <div id="calendar" style="width: 100%"></div>
+                      </div>
+                      <!-- /.card-body -->
                     </div>
-                    <!-- /. tools -->
-                  </div>
-                  <!-- /.card-header -->
-                  <div class="card-body pt-0">
-                    <!--The calendar -->
-                    <div id="calendar" style="width: 100%"></div>
-                  </div>
-                  <!-- /.card-body -->
-                </div>
-              <!-- /.card -->
+                  <!-- /.card -->
 
-              <!-- Map card -->
-                <div class="card bg-gradient-primary  d-none">
-                  <div class="card-header border-0">
-                    <h3 class="card-title">
-                      <i class="fas fa-map-marker-alt mr-1"></i>
-                      Visitantes
-                    </h3>
-                    <!-- card tools -->
-                    <div class="card-tools">
-                      <button type="button" class="btn btn-primary btn-sm daterange" title="Date range">
-                        <i class="far fa-calendar-alt"></i>
-                      </button>
-                      <button type="button" class="btn btn-primary btn-sm" data-card-widget="collapse" title="Collapse">
-                        <i class="fas fa-minus"></i>
-                      </button>
+                  <!-- Map card -->
+                    <div class="card bg-gradient-primary  d-none">
+                      <div class="card-header border-0">
+                        <h3 class="card-title">
+                          <i class="fas fa-map-marker-alt mr-1"></i>
+                          Visitantes
+                        </h3>
+                        <!-- card tools -->
+                        <div class="card-tools">
+                          <button type="button" class="btn btn-primary btn-sm daterange" title="Date range">
+                            <i class="far fa-calendar-alt"></i>
+                          </button>
+                          <button type="button" class="btn btn-primary btn-sm" data-card-widget="collapse" title="Collapse">
+                            <i class="fas fa-minus"></i>
+                          </button>
+                        </div>
+                        <!-- /.card-tools -->
+                      </div>
+                      <div class="card-body">
+                        <div id="world-map" style="height: 250px; width: 100%;"></div>
+                      </div>
+                      <!-- /.card-body-->
+                      <div class="card-footer bg-transparent">
+                        <div class="row">
+                          <div class="col-4 text-center">
+                            <div id="sparkline-1"></div>
+                            <div class="text-white">Visitantes</div>
+                          </div>
+                          <!-- ./col -->
+                          <div class="col-4 text-center">
+                            <div id="sparkline-2"></div>
+                            <div class="text-white">Online</div>
+                          </div>
+                          <!-- ./col -->
+                          <div class="col-4 text-center">
+                            <div id="sparkline-3"></div>
+                            <div class="text-white">Solicitações</div>
+                          </div>
+                          <!-- ./col -->
+                        </div>
+                        <!-- /.row -->
+                      </div>
                     </div>
-                    <!-- /.card-tools -->
-                  </div>
-                  <div class="card-body">
-                    <div id="world-map" style="height: 250px; width: 100%;"></div>
-                  </div>
-                  <!-- /.card-body-->
-                  <div class="card-footer bg-transparent">
-                    <div class="row">
-                      <div class="col-4 text-center">
-                        <div id="sparkline-1"></div>
-                        <div class="text-white">Visitantes</div>
-                      </div>
-                      <!-- ./col -->
-                      <div class="col-4 text-center">
-                        <div id="sparkline-2"></div>
-                        <div class="text-white">Online</div>
-                      </div>
-                      <!-- ./col -->
-                      <div class="col-4 text-center">
-                        <div id="sparkline-3"></div>
-                        <div class="text-white">Solicitações</div>
-                      </div>
-                      <!-- ./col -->
-                    </div>
-                    <!-- /.row -->
-                  </div>
-                </div>
-              <!-- Map card -->
+                  <!-- Map card -->
 
-           
-              </section>
+              
+                </section>
               <!-- right col -->
+
+              <section class="content">
+                <div class="container-fluid">
+                  <div class="row">
+                    <!--col -->
+                        <div class="col-md-12">
+                            <div class="card">
+                              <div class="card-header p-2">
+                                <ul class="nav nav-pills">
+                                  <li class="nav-item"><a class="nav-link active" href="#I" data-toggle="tab">I Trimestre</a></li>
+                                  <li class="nav-item"><a class="nav-link" href="#II" data-toggle="tab"> II Trimestre</a></li>
+                                  <li class="nav-item"><a class="nav-link" href="#III" data-toggle="tab"> III Trimestre</a></li>
+                                  <li class="nav-item"><a class="nav-link" href="#F" data-toggle="tab">Final</a></li>
+                                </ul>
+                              </div><!-- /.card-header -->
+                              <div class="card-body">
+                                <div class="tab-content">
+                                        <div class="tab-pane active" id="I">
+                                          <div class="card-info">
+                                            <div class="card-header">
+                                              <h3 class="car-title">
+                                                Status de Submisão de Formuário por Unidade Orgânica 
+                                              </h3>
+                                            </div>
+                                            <div class="card-body w-100">
+                                              <table class="table table-hover  table-striped">
+                                                <thead>
+                                                  <tr>
+                                                    <th>Unidade Organica</th>
+                                                    <th>Localidade</th>
+                                                    <th>Director</th>
+                                                    <th>Status</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+                                                  @foreach($SubControlInIs as $SubControlInI)
+                                                    <tr>
+                                                      <td>
+                                                        {{$SubControlInI->designacao}}
+                                                      </td>
+                                                      <td>
+                                                        {{$SubControlInI->localidade}}
+                                                      </td>
+                                                      <td>
+                                                        {{'N/D'}}
+                                                      </td>
+                                                      <td class=" text-success">
+                                                        Formulário Submetido
+                                                      </td>
+                                                    </tr>
+                                                  @endforeach
+                                                  @foreach($SubControlNonIs as $SubControlNonI)
+                                                    <tr>
+                                                      <td>
+                                                        {{$SubControlNonI->designacao}}
+                                                      </td>
+                                                      <td>
+                                                        {{$SubControlNonI->localidade}}
+                                                      </td>
+                                                      <td>
+                                                        {{'N/D'}}
+                                                      </td>
+                                                      <td class=" text-danger">
+                                                        Não Submeteu o Formulário
+                                                      </td>
+                                                    </tr>
+                                                  @endforeach
+                                                </tbody>
+                                              </table>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="tab-pane" id="II">
+                                          <div class="card-info">
+                                            <div class="card-header">
+                                              <h3 class="car-title">
+                                                Status de Submisão de Formuário por Unidade Orgânica 
+                                              </h3>
+                                            </div>
+                                            <div class="card-body w-100">
+                                              <table class="table table-hover  table-striped">
+                                                <thead>
+                                                  <tr>
+                                                    <th>Unidade Organica</th>
+                                                    <th>Localidade</th>
+                                                    <th>Director</th>
+                                                    <th>Status</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+                                                  @foreach($SubControlInIs as $SubControlInII)
+                                                    <tr>
+                                                      <td>
+                                                        {{$SubControlInII->designacao}}
+                                                      </td>
+                                                      <td>
+                                                        {{$SubControlInII->localidade}}
+                                                      </td>
+                                                      <td>
+                                                        {{'N/D'}}
+                                                      </td>
+                                                      <td class=" text-success">
+                                                        Formulário Submetido
+                                                      </td>
+                                                    </tr>
+                                                  @endforeach
+                                                  @foreach($SubControlNonIIs as $SubControlNonII)
+                                                    <tr>
+                                                      <td>
+                                                        {{$SubControlNonII->designacao}}
+                                                      </td>
+                                                      <td>
+                                                        {{$SubControlNonII->localidade}}
+                                                      </td>
+                                                      <td>
+                                                        {{'N/D'}}
+                                                      </td>
+                                                      <td class=" text-danger">
+                                                        Não Submeteu o Formulário
+                                                      </td>
+                                                    </tr>
+                                                  @endforeach
+                                                </tbody>
+                                              </table>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="tab-pane" id="III">
+                                          <div class="card-info">
+                                            <div class="card-header">
+                                              <h3 class="car-title">
+                                                Status de Submisão de Formuário por Unidade Orgânica 
+                                              </h3>
+                                            </div>
+                                            <div class="card-body w-100">
+                                              <table class="table table-hover  table-striped">
+                                                <thead>
+                                                  <tr>
+                                                    <th>Unidade Organica</th>
+                                                    <th>Localidade</th>
+                                                    <th>Director</th>
+                                                    <th>Status</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+                                                  @foreach($SubControlInIIIs as $SubControlInIII)
+                                                    <tr>
+                                                      <td>
+                                                        {{$SubControlInIII->designacao}}
+                                                      </td>
+                                                      <td>
+                                                        {{$SubControlInIII->localidade}}
+                                                      </td>
+                                                      <td>
+                                                        {{'N/D'}}
+                                                      </td>
+                                                      <td class=" text-success">
+                                                        Formulário Submetido
+                                                      </td>
+                                                    </tr>
+                                                  @endforeach
+                                                  @foreach($SubControlNonIIIs as $SubControlNonIII)
+                                                    <tr>
+                                                      <td>
+                                                        {{$SubControlNonIII->designacao}}
+                                                      </td>
+                                                      <td>
+                                                        {{$SubControlNonIII->localidade}}
+                                                      </td>
+                                                      <td>
+                                                        {{'N/D'}}
+                                                      </td>
+                                                      <td class=" text-danger">
+                                                        Não Submeteu o Formulário
+                                                      </td>
+                                                    </tr>
+                                                  @endforeach
+                                                </tbody>
+                                              </table>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="tab-pane" id="F">
+                                          <div class="card-info">
+                                            <div class="card-header">
+                                              <h3 class="car-title">
+                                                Status de Submisão de Formuário por Unidade Orgânica 
+                                              </h3>
+                                            </div>
+                                            <div class="card-body w-100">
+                                              <table class="table table-hover  table-striped">
+                                                <thead>
+                                                  <tr>
+                                                    <th>Unidade Organica</th>
+                                                    <th>Localidade</th>
+                                                    <th>Director</th>
+                                                    <th>Status</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+                                                  @foreach($SubControlInFinals as $SubControlInFinal)
+                                                    <tr>
+                                                      <td>
+                                                        {{$SubControlInFinal->designacao}}
+                                                      </td>
+                                                      <td>
+                                                        {{$SubControlInFinal->localidade}}
+                                                      </td>
+                                                      <td>
+                                                        {{'N/D'}}
+                                                      </td>
+                                                      <td class=" text-success">
+                                                        Formulário Submetido
+                                                      </td>
+                                                    </tr>
+                                                  @endforeach
+                                                  @foreach($SubControlNonFinals as $SubControlNonFinal)
+                                                    <tr>
+                                                      <td>
+                                                        {{$SubControlNonFinal->designacao}}
+                                                      </td>
+                                                      <td>
+                                                        {{$SubControlNonFinal->localidade}}
+                                                      </td>
+                                                      <td>
+                                                        {{'N/D'}}
+                                                      </td>
+                                                      <td class=" text-danger">
+                                                        Não Submeteu o Formulário
+                                                      </td>
+                                                    </tr>
+                                                  @endforeach
+                                                </tbody>
+                                              </table>
+                                            </div>
+                                          </div>
+                                        </div>
+                                
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                    <!--/col -->        
+                  </div>
+                </div>
+                  <!-- /.row -->
+              </section>
             </div>
             <!-- /.row (main row) -->
           </div><!-- /.container-fluid -->
