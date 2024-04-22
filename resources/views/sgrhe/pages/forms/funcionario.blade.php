@@ -88,7 +88,7 @@
                                     <!--Consultas para preencher o combobox do banco de dados de forma automatica para a tabela Categoria Funcionario-->
                                       <div class="form-group">
                                         <label for="idCategoriaFuncionario">Categoria Funcionário</label>
-                                          <select name="idCategoriaFuncionario" class="form-control select2">
+                                          <select name="idCategoriaFuncionario" class="form-control select2" required>
                                             <option selected="selected" value="{{ isset($opcoesCategoriaFuncionario) ? $opcoesCategoriaFuncionario->id : '' }}">{{ isset($opcoesCategoriaFuncionario) ? $opcoesCategoriaFuncionario->categoria.' do '.$opcoesCategoriaFuncionario->grau : 'Escolha uma Categoria de Funcionário' }}</option>
                                             @php
                                               $opcoesCategoriaFuncionario = App\Models\CategoriaFuncionario::all();
@@ -101,7 +101,7 @@
                                   <!--Consultas para preencher o combobox do banco de dados de forma automatica para a tabela cargo-->
                                   <div class="form-group">
                                         <label for="idSeccao">Secção</label>
-                                          <select name="idSeccao" class="form-control select2">
+                                          <select name="idSeccao" class="form-control select2" required>
                                             <option selected="selected" value="{{ isset($opcoesSeccaos) ? $opcoesSeccaos->id : '' }}">{{ isset($opcoesSeccaos) ? $opcoesSeccaos->designacao : 'Seleccione uma Secção' }}</option>
                                             @php
                                               $opcoesSeccaos = App\Models\Seccao::all();
@@ -114,7 +114,7 @@
                                   
                                   <div class="form-group">
                                         <label for="idCargo">Cargo</label>
-                                          <select name="idCargo" class="form-control select2">
+                                          <select name="idCargo" class="form-control select2" required>
                                             <option selected="selected" value="{{ isset($opcoesCargo) ? $opcoesCargo->id : '' }}">{{ isset($opcoesCargo) ? $opcoesCargo->designacao : 'Selecione um Cargo' }}</option>
                                             @php
                                               $opcoesCargos = App\Models\Cargo::all();
@@ -128,8 +128,8 @@
                                       <!--Consultas para preencher o combobox do banco de dados de forma automatica para a tabela Unidade Organica-->
                                       <div class="form-group">
                                         <label for="idUnidadeOrganica">Unidade Orgânica</label>
-                                          <select name="idUnidadeOrganica" class="form-control select2">
-                                            <option selected="selected" value="{{ isset($opcoesUnidadeOrganica) ? $opcoesUnidadeOrganica->id : '' }}">{{ isset($opcoesUnidadeOrganica) ? $opcoesUnidadeOrganica->designacao : 'Escolha uma Unidade Orgânica' }}</option>
+                                          <select name="idUnidadeOrganica" class="form-control select2" required>
+                                            <option selected="selected" value="{{ isset($opcoesUnidadeOrganica) ? $opcoesUnidadeOrganica->id : '' }}" >{{ isset($opcoesUnidadeOrganica) ? $opcoesUnidadeOrganica->designacao : 'Escolha uma Unidade Orgânica' }}</option>
                                             @php
                                               $opcoesUnidadeOrganicas = App\Models\UnidadeOrganica::all();
                                             @endphp
@@ -143,7 +143,7 @@
                                       <label for="iban">Coodenadas Bancarias (IBAN)</label>
                                       <br>
                                       <span class="text-danger"> OBS: Não incluir o indicativo (AO06) </span>
-                                      <input type="text" name="iban" class="form-control" id="iban" value="{{ old('iban',$funcionario->iban ?? '') }}" maxlength="26" placeholder="0000.0000.0000.0000.0000.0" oninput="this.value = this.value.replace(/[^0-9]/g,'')">
+                                      <input type="text" name="iban" class="form-control" id="iban" value="{{ old('iban',$funcionario->iban ?? '') }}" maxlength="26" placeholder="0000.0000.0000.0000.0000.0" oninput="this.value = this.value.replace(/[^0-9]/g,'')" required>
                                     </div>
 
                                     <div class="form-group">

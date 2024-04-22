@@ -34,7 +34,7 @@ class PessoaController extends Controller
             'nomeCompleto' => ['string', 'max:255','required'],
             'dataNascimento' => ['date','required','before:' .now()->subYears(18)->format('Y-m-d')],
             'genero'=> ['string', 'max:9','required'],
-            'grupoSanguineo' => ['string','max:2'],
+            'grupoSanguineo' => ['string','max:3'],
             'estadoCivil' => ['string'],
             'numeroBI' => ['required', 'string', 'max:14', 'unique:pessoas,numeroBI'],
             'validadeBI' => ['date','required','after_or_equal:'.now()],
@@ -89,21 +89,21 @@ class PessoaController extends Controller
 
                     }else {
                         DB::rollBack();
-                        return redirect()->back()->with('error','Erro ao Adicionar Endereço')->withErrors($validardados)->withInput();
+                        return redirect()->back()->with('error','Erro ao Adicionar Endereço');
 
                     }
                 }else {
                     DB::rollBack();
-                    return redirect()->back()->with('error','Erro ao Adicionar Naturalidade')->withErrors($validardados)->withInput();
+                    return redirect()->back()->with('error','Erro ao Adicionar Naturalidade');
 
                 }
              }else {
                 DB::rollBack();
-                return redirect()->back()->with('error','Erro ao Adicionar Parentesco')->withErrors($validardados)->withInput();
+                return redirect()->back()->with('error','Erro ao Adicionar Parentesco');
             }
         }else {
             DB::rollBack();
-            return redirect()->back()->with('error','Erro ao Cadastrar Pessoa')->withErrors($validardados)->withInput();
+            return redirect()->back()->with('error','Erro ao Cadastrar Pessoa');
         }
     }
 
@@ -114,7 +114,7 @@ class PessoaController extends Controller
             'nomeCompleto' => ['string', 'max:255','required'],
             'dataNascimento' => ['date','required','before:' .now()->subYears(18)->format('Y-m-d')],
             'genero'=> ['string', 'max:9','required'],
-            'grupoSanguineo' => ['string','max:2'],
+            'grupoSanguineo' => ['string','max:3'],
             'estadoCivil' => ['string'],
             'numeroBI' => ['required', 'string', 'max:14', 'unique:pessoas,numeroBI,'.$id],
             'validadeBI' => ['date','required','after_or_equal:'.now()],

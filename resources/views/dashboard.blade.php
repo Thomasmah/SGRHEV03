@@ -125,6 +125,21 @@
                   <a href="#" class="small-box-footer">Ver mais <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
               </div>
+            <!--Tota de Alunos -->
+             <div class="col-lg-3 col-6">
+                <div class="small-box bg-light">
+                  <div class="inner">
+                    <h3>{{ $matriculadosIAMF }} Alunos</h3>
+                    <p><span style="font-size: 30px;"> {{ round(($matriculadosIAF*100)/$matriculadosIAMF, 2) }}%</span> Femininos: {{ $matriculadosIAF}} Alunas</p>
+                    <p><span style="font-size: 30px;"> {{ round((($matriculadosIAMF-$matriculadosIAF)*100)/$matriculadosIAMF, 2) }}%</span> Mascilinos: {{ $matriculadosIAMF-$matriculadosIAF}} Alunas</p>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-stats-bars"></i>
+                  </div>
+                  <a href="#" class="small-box-footer d-none">Ver mais <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+              </div>
+
               <!-- ./col -->
             </div>
             <!-- /.row -->
@@ -141,11 +156,11 @@
                     </h3>
                     <div class="card-tools d-block">
                       <ul class="nav nav-pills ml-auto">
-                        <li class="nav-item">
-                          <a class="nav-link active" href="#revenue-chart" data-toggle="tab">Gráfico</a>
+                        <li class="nav-item ">
+                          <a class="nav-link active" href="#sales-chart" data-toggle="tab">Gráfico de Barras</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="#sales-chart" data-toggle="tab">Gráfico de Barras</a>
+                          <a class="nav-link " href="#revenue-chart" data-toggle="tab">Gráfico</a>
                         </li>
                       </ul>
                     </div>
@@ -153,10 +168,10 @@
                   <div class="card-body">
                     <div class="tab-content p-0">
                       <!-- Morris chart - Sales -->
-                      <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"> 
+                      <div class="chart tab-pane active" id="sales-chart" style="position: relative; height: 300px;"> 
                       <canvas id="doubleDatasetChart" width="400" height="200"></canvas>
                       </div>
-                      <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;">
+                      <div class="chart tab-pane " id="revenue-chart" style="position: relative; height: 300px;">
                         <canvas id="revenue-chart-canvas" width="400" height="200" ></canvas>
                       </div>
                     </div>
@@ -281,23 +296,24 @@
       <script src="{{ asset('plugins/jqvmap/jquery.vmap.min.js') }} "></script>
       <script src="{{ asset('plugins/jqvmap/maps/jquery.vmap.usa.js') }} "></script>
       <script src="{{ asset('plugins/jqvmap/maps/continents/jquery.vmap.africa.js') }} "></script>
-      <!--/Aproveitamento Grafico-->
+          <!--/Aproveitamento Grafico-->
         <!--Grafico de Barras -->
         <script>
               // Sample data
               const data = {
-                  labels: ['I Trimestre', 'II Trimestre', 'III Trimestre'],
+                  labels: ['I Trimestre', 'II Trimestre', 'III Trimestre', 'Final'],
                   datasets: [
                       {
                           label: 'Aprovados',
-                          data: [65, 35, 73],
+                          data: [("{{ isset($aprovadosMFI) ? $aprovadosMFI : '0' }}"*100)/("{{ isset($matriculadosIAMFI) ? $matriculadosIAMFI : '0'}}"), ("{{ isset($aprovadosMFII) ? $aprovadosMFII : '0' }}"*100)/("{{ isset($matriculadosIAMFII) ? $matriculadosIAMFII : '0'}}"), ("{{ isset($aprovadosMFIII) ? $aprovadosMFIII : '0' }}"*100)/("{{ isset($matriculadosIAMFIII) ? $matriculadosIAMFIII : '0'}}") , ("{{ isset($aprovadosMFFinal) ? $aprovadosMFFinal : '0' }}"*100)/("{{ isset($matriculadosIAMFFinal) ? $matriculadosIAMFFinal : '0'}}")],
                           backgroundColor: 'rgba(75, 192, 192, 0.6)',
                           borderColor: 'rgba(75, 192, 192, 1)',
                           borderWidth: 2,
                       },
                       {
                           label: 'Reprovados',
-                          data: [35, 65, 17],
+                          
+                          data: [("{{ isset($reprovadosMFI) ? $reprovadosMFI : '0' }}"*100)/("{{ isset($matriculadosIAMFI) ? $matriculadosIAMFI : '0'}}"), ("{{ isset($reprovadosMFII) ? $reprovadosMFII : '0' }}"*100)/("{{ isset($matriculadosIAMFII) ? $matriculadosIAMFII : '0'}}"), ("{{ isset($reprovadosMFIII) ? $reprovadosMFIII : '0' }}"*100)/("{{ isset($matriculadosIAMFIII) ? $matriculadosIAMFIII : '0'}}") , ("{{ isset($reprovadosMFFinal) ? $reprovadosMFFinal : '0' }}"*100)/("{{ isset($matriculadosIAMFFinal) ? $matriculadosIAMFFinal : '0'}}")],
                           backgroundColor: 'rgba(255, 99, 132, 0.6)',
                           borderColor: 'rgba(255, 99, 132, 1)',
                           borderWidth: 2,
@@ -312,10 +328,10 @@
                   options: {
                       scales: {
                           x: {
-                              stacked: false,
+                              stacked: true,
                           },
                           y: {
-                              stacked: false,
+                              stacked: true,
                               beginAtZero: true,
                           },
                       },
@@ -335,35 +351,35 @@
             // $('#revenue-chart').get(0).getContext('2d');
 
             var salesChartData = {
-              labels: ['I Trimestre', 'II Trimestre', 'III Trimestre'],
+              labels: ['I Trimestre', 'II Trimestre', 'III Trimestre', 'Final'],
               datasets: [
                 {
                   label: 'Aprovados',
                   backgroundColor: 'rgba(60,141,188,0.9)',
                   borderColor: 'rgba(60,141,188,0.8)',
-                  pointRadius: false,
+                  pointRadius: true,
                   pointColor: '#3b8bba',
                   pointStrokeColor: 'rgba(60,141,188,1)',
                   pointHighlightFill: '#fff',
                   pointHighlightStroke: 'rgba(60,141,188,1)',
-                  data: [35, 100, 100]
+                  data: [("{{ isset($aprovadosMFI) ? $aprovadosMFI : '0' }}"*100)/("{{ isset($matriculadosIAMFI) ? $matriculadosIAMFI : '0'}}"), ("{{ isset($aprovadosMFII) ? $aprovadosMFII : '0' }}"*100)/("{{ isset($matriculadosIAMFII) ? $matriculadosIAMFII : '0'}}"), ("{{ isset($aprovadosMFIII) ? $aprovadosMFIII : '0' }}"*100)/("{{ isset($matriculadosIAMFIII) ? $matriculadosIAMFIII : '0'}}") , ("{{ isset($aprovadosMFFinal) ? $aprovadosMFFinal : '0' }}"*100)/("{{ isset($matriculadosIAMFFinal) ? $matriculadosIAMFFinal : '0'}}")],
                 },
                 {
                   label: 'Reprovados',
                   backgroundColor: 'rgba(210, 214, 222, 1)',
                   borderColor: 'rgba(210, 214, 222, 1)',
-                  pointRadius: false,
+                  pointRadius: true,
                   pointColor: 'rgba(210, 214, 222, 1)',
                   pointStrokeColor: '#c1c7d1',
                   pointHighlightFill: '#fff',
                   pointHighlightStroke: 'rgba(220,220,220,1)',
-                  data: [65, 100, 100]
+                  data: [("{{ isset($reprovadosMFI) ? $reprovadosMFI : '0' }}"*100)/("{{ isset($matriculadosIAMFI) ? $matriculadosIAMFI : '0'}}"), ("{{ isset($reprovadosMFII) ? $reprovadosMFII : '0' }}"*100)/("{{ isset($matriculadosIAMFII) ? $matriculadosIAMFII : '0'}}"), ("{{ isset($reprovadosMFIII) ? $reprovadosMFIII : '0' }}"*100)/("{{ isset($matriculadosIAMFIII) ? $matriculadosIAMFIII : '0'}}") , ("{{ isset($reprovadosMFFinal) ? $reprovadosMFFinal : '0' }}"*100)/("{{ isset($matriculadosIAMFFinal) ? $matriculadosIAMFFinal : '0'}}")],
                 }
               ]
             }
 
             var salesChartOptions = {
-              maintainAspectRatio: false,
+              maintainAspectRatio: true,
               responsive: true,
               legend: {
                 display: true
@@ -391,4 +407,5 @@
             })
           </script>
       <!--/Aproveitamento Grafico-->
+
     @endsection

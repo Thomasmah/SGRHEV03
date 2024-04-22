@@ -21,7 +21,7 @@
               <div class="container-fluid">
                 <div class="row mb-2">
                   <div class="col-sm-6">
-                    <h1>{{  $unidadeOrganicaSelected->designacao  }}</h1>
+                    <h1>{{  $unidadeOrganicaSelected->designacao  }} Ano Lectivo {{$anoLectivo}}</h1>
                   </div>
                   <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -161,6 +161,7 @@
                                   <li class="nav-item"><a class="nav-link" href="#ITrimestre" data-toggle="tab">Aproveitamento I Trimestre</a></li>
                                   <li class="nav-item"><a class="nav-link" href="#IITrimestre" data-toggle="tab">Aproveitamento II Trimestre</a></li>
                                   <li class="nav-item"><a class="nav-link" href="#IIITrimestre" data-toggle="tab">Aproveitamento III Trimestre</a></li>
+                                  <li class="nav-item"><a class="nav-link" href="#Final" data-toggle="tab">Final</a></li>
                                 </ul>
                               </div><!-- /.card-header -->
                               <div class="card-body">
@@ -441,6 +442,74 @@
                                             <!-- /.CardContet -->
                                         
                                           </div>
+                                      <!-- /tab-pane -->
+                                            <!--tab-pane -->
+                                          <div class="tab-pane" id="Final">
+                                            <!-- Formulario Ginal -->
+                                            @if (isset($aproveitamentoFinal))
+                                              <div class="card card-primary">
+                                                <div class="card-header">
+                                                  <h3 class="card-title">
+                                                    Aproveitamento escolar Final
+                                                  </h3>
+                                                </div>
+                                                <div class="card-body">
+                                                  <div class="table-responsive">
+                                                    <table class="table table-hover table-bordered border-secondary table-striped" style="text-align:center;">
+                                                        <thead class="bg-primary">
+                                                          <tr>
+                                                            <th scope="col" rowspan="2" colspan="1" style=" vertical-align:middle" >Alunos</th><th scope="col" colspan="2" rowspan="2" style="vertical-align: middle;">Matriculados no Início do Ano Lectivo</th><!--<th scope="col">Matriculados</th>--> <th scope="col" colspan="2" rowspan="2" style="vertical-align: middle;">Matriculados no Final do Ano Lectivo</th><!--<th scope="col">Matriculados</th>--><th scope="col" colspan="2" rowspan="2" style="vertical-align: middle;">Aprovados</th><!--<th scope="col">Aprovados</th>--><th scope="col" colspan="2" rowspan="2" style="vertical-align: middle;">Reprovados</th><!--<th scope="col">Reprovados</th>--><th scope="col" colspan="4" rowspan="1" style="vertical-align: middle;">Trasferidos</th><!--<th scope="col">Trasferidos</th><th scope="col">Trasferidos</th><th scope="col">Trasferidos</th> --><th scope="col" colspan="2" rowspan="2" style="vertical-align: middle;">Desistentes</th> <!--<th scope="col">Total</th>-->
+                                                          </tr>
+                                                          <tr>
+                                                            <!--<th scope="col">Alunos</th> --><!--<th scope="col" colspan="2">Matriculados</th><th scope="col">Matriculados</th>--> <!--<th scope="col">Aprovados</th><th scope="col">Aprovados</th>--><!--<th scope="col">Reprovados</th><th scope="col">Reprovados</th>--><th scope="col" colspan="2" rowspan="1" style="vertical-align: middle;">Entrada</th><!--<th scope="col">Entrada</th> --> <th scope="col" colspan="2" rowspan="1" style="vertical-align: middle;">Saida</th><!--<th scope="col">Saida</th>--><!--<th scope="col">Total</th> <th scope="col">Total</th>-->
+                                                          </tr>
+                                                          <tr>
+                                                            <th scope="col">Classe</th><th scope="col">MF</th><th scope="col">F</th> <th scope="col">MF</th><th scope="col">F</th> <th scope="col">MF</th><th scope="col">F</th><th scope="col">MF</th><th scope="col">F</th> <th scope="col">MF</th><th scope="col">F</th><th scope="col">MF</th><th scope="col">F</th><th scope="col">MF</th> <th scope="col">F</th>
+                                                          </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                          <tr>
+                                                              <th scope="row">1ª</th>   <td class="col-1" id="Ta11"> {{ isset($aproveitamentoFinal['a11']) ? $aproveitamentoFinal['a11'] : '0' }} </td> <td class="col-1" id="Ta12"> {{  isset($aproveitamentoFinal['a12']) ? $aproveitamentoFinal['a12'] : '0' }}  </td> <td class="col-1" id="Ta13"> {{  isset($aproveitamentoFinal['a13']) ? $aproveitamentoFinal['a13'] : '0' }}  </td> <td class="col-1" id="Ta14"> {{ isset($aproveitamentoFinal['a14']) ? $aproveitamentoFinal['a14'] : '0' }}  </td> <td class="col-1" id="Ta15"> {{   isset($aproveitamentoFinal['a15']) ? $aproveitamentoFinal['a15'] : '0' }}  </td> <td class="col-1" id="Ta16"> {{  isset($aproveitamentoFinal['a16']) ? $aproveitamentoFinal['a16'] : '0' }}  </td> <td class="col-1" id="Ta17"> {{  isset($aproveitamentoFinal['a17']) ? $aproveitamentoFinal['a17'] : '0' }}  </td> <td class="col-1" id="Ta18"> {{ isset($aproveitamentoFinal['a18']) ? $aproveitamentoFinal['a18'] : '0' }}  </td> <td class="col-1" id="Ta19"> {{   isset($aproveitamentoFinal['a19']) ? $aproveitamentoFinal['a19'] : '0' }}  </td> <td class="col-1" id="Ta110"> {{   isset($aproveitamentoFinal['a110']) ? $aproveitamentoFinal['a110'] : '0' }}   </td> <td class="col-1" id="Ta111"> {{  isset($aproveitamentoFinal['a111']) ? $aproveitamentoFinal['a111'] : '0' }}   </td> <td class="col-1" id="Ta112"> {{  isset($aproveitamentoFinal['a112']) ? $aproveitamentoFinal['a112'] : '0' }}   </td> <td class="col-1" id="Ta113"> {{ isset($aproveitamentoFinal['a113']) ? $aproveitamentoFinal['a113'] : '0' }}  </td> <td class="col-1" id="Ta114"> {{  isset($aproveitamentoFinal['a114']) ? $aproveitamentoFinal['a114'] : '0' }}  </td>
+                                                          </tr>
+                                                          <tr>
+                                                              <th scope="row">2ª</th>   <td class="col-1" id="Ta21"> {{ isset($aproveitamentoFinal['a21']) ? $aproveitamentoFinal['a21'] : '0' }}  </td> <td class="col-1" id="Ta22"> {{   isset($aproveitamentoFinal['a22']) ? $aproveitamentoFinal['a22'] : '0' }}  </td> <td class="col-1" id="Ta23"> {{  isset($aproveitamentoFinal['a23']) ? $aproveitamentoFinal['a23'] : '0' }}  </td> <td class="col-1" id="Ta24"> {{  isset($aproveitamentoFinal['a24']) ? $aproveitamentoFinal['a24'] : '0' }}  </td> <td class="col-1" id="Ta25"> {{ isset($aproveitamentoFinal['a25']) ? $aproveitamentoFinal['a25'] : '0' }}  </td> <td class="col-1" id="Ta26"> {{   isset($aproveitamentoFinal['a26']) ? $aproveitamentoFinal['a26'] : '0' }}  </td> <td class="col-1" id="Ta27"> {{  isset($aproveitamentoFinal['a27']) ? $aproveitamentoFinal['a27'] : '0' }}  </td> <td class="col-1" id="Ta28"> {{  isset($aproveitamentoFinal['a28']) ? $aproveitamentoFinal['a28'] : '0' }}  </td> <td class="col-1" id="Ta29"> {{ isset($aproveitamentoFinal['a29']) ? $aproveitamentoFinal['a29'] : '0' }}  </td> <td class="col-1" id="Ta210"> {{  isset($aproveitamentoFinal['a210']) ? $aproveitamentoFinal['a210'] : '0' }}   </td> <td class="col-1" id="Ta211"> {{  isset($aproveitamentoFinal['a211']) ? $aproveitamentoFinal['a211'] : '0' }}   </td> <td class="col-1" id="Ta212"> {{ isset($aproveitamentoFinal['a212']) ? $aproveitamentoFinal['a212'] : '0' }}   </td> <td class="col-1" id="Ta213"> {{   isset($aproveitamentoFinal['a213']) ? $aproveitamentoFinal['a213'] : '0' }}  </td> <td class="col-1" id="Ta214"> {{   isset($aproveitamentoFinal['a214']) ? $aproveitamentoFinal['a214'] : '0' }}  </td>
+                                                          </tr>
+                                                          <tr>
+                                                              <th scope="row">3ª</th>   <td class="col-1" id="Ta31"> {{ isset($aproveitamentoFinal['a31']) ? $aproveitamentoFinal['a31'] : '0' }}  </td> <td class="col-1" id="Ta32"> {{   isset($aproveitamentoFinal['a32']) ? $aproveitamentoFinal['a32'] : '0' }}  </td> <td class="col-1" id="Ta33"> {{  isset($aproveitamentoFinal['a33']) ? $aproveitamentoFinal['a33'] : '0' }}  </td> <td class="col-1" id="Ta34"> {{  isset($aproveitamentoFinal['a34']) ? $aproveitamentoFinal['a34'] : '0' }}  </td> <td class="col-1" id="Ta35"> {{ isset($aproveitamentoFinal['a35']) ? $aproveitamentoFinal['a35'] : '0' }}  </td> <td class="col-1" id="Ta36"> {{   isset($aproveitamentoFinal['a36']) ? $aproveitamentoFinal['a36'] : '0' }}  </td> <td class="col-1" id="Ta37"> {{  isset($aproveitamentoFinal['a37']) ? $aproveitamentoFinal['a37'] : '0' }}  </td> <td class="col-1" id="Ta38"> {{  isset($aproveitamentoFinal['a38']) ? $aproveitamentoFinal['a38'] : '0' }}  </td> <td class="col-1" id="Ta39"> {{ isset($aproveitamentoFinal['a39']) ? $aproveitamentoFinal['a39'] : '0' }}  </td> <td class="col-1" id="Ta310"> {{  isset($aproveitamentoFinal['a310']) ? $aproveitamentoFinal['a310'] : '0' }}   </td> <td class="col-1" id="Ta311"> {{  isset($aproveitamentoFinal['a311']) ? $aproveitamentoFinal['a311'] : '0' }}   </td> <td class="col-1" id="Ta312"> {{ isset($aproveitamentoFinal['a312']) ? $aproveitamentoFinal['a312'] : '0' }}   </td> <td class="col-1" id="Ta313"> {{   isset($aproveitamentoFinal['a313']) ? $aproveitamentoFinal['a313'] : '0' }}  </td> <td class="col-1" id="Ta314"> {{   isset($aproveitamentoFinal['a314']) ? $aproveitamentoFinal['a314'] : '0' }}  </td>
+                                                          </tr>
+                                                          <tr>
+                                                              <th scope="row">4ª</th>   <td class="col-1" id="Ta41"> {{ isset($aproveitamentoFinal['a41']) ? $aproveitamentoFinal['a41'] : '0' }}  </td> <td class="col-1" id="Ta42"> {{   isset($aproveitamentoFinal['a42']) ? $aproveitamentoFinal['a42'] : '0' }}  </td> <td class="col-1" id="Ta43"> {{  isset($aproveitamentoFinal['a43']) ? $aproveitamentoFinal['a43'] : '0' }}  </td> <td class="col-1" id="Ta44"> {{  isset($aproveitamentoFinal['a44']) ? $aproveitamentoFinal['a44'] : '0' }}  </td> <td class="col-1" id="Ta45"> {{ isset($aproveitamentoFinal['a45']) ? $aproveitamentoFinal['a45'] : '0' }}  </td> <td class="col-1" id="Ta46"> {{   isset($aproveitamentoFinal['a46']) ? $aproveitamentoFinal['a46'] : '0' }}  </td> <td class="col-1" id="Ta47"> {{  isset($aproveitamentoFinal['a47']) ? $aproveitamentoFinal['a47'] : '0' }}  </td> <td class="col-1" id="Ta48"> {{  isset($aproveitamentoFinal['a48']) ? $aproveitamentoFinal['a48'] : '0' }}  </td> <td class="col-1" id="Ta49"> {{ isset($aproveitamentoFinal['a49']) ? $aproveitamentoFinal['a49'] : '0' }}  </td> <td class="col-1" id="Ta410"> {{  isset($aproveitamentoFinal['a410']) ? $aproveitamentoFinal['a410'] : '0' }}   </td> <td class="col-1" id="Ta411"> {{  isset($aproveitamentoFinal['a411']) ? $aproveitamentoFinal['a411'] : '0' }}   </td> <td class="col-1" id="Ta412"> {{ isset($aproveitamentoFinal['a412']) ? $aproveitamentoFinal['a412'] : '0' }}   </td> <td class="col-1" id="Ta413"> {{   isset($aproveitamentoFinal['a413']) ? $aproveitamentoFinal['a413'] : '0' }}  </td> <td class="col-1" id="Ta414"> {{   isset($aproveitamentoFinal['a414']) ? $aproveitamentoFinal['a414'] : '0' }}  </td>
+                                                          </tr>
+                                                          <tr>
+                                                              <th scope="row">5ª</th>   <td class="col-1" id="Ta51"> {{ isset($aproveitamentoFinal['a51']) ? $aproveitamentoFinal['a51'] : '0' }}  </td> <td class="col-1" id="Ta52"> {{   isset($aproveitamentoFinal['a52']) ? $aproveitamentoFinal['a52'] : '0' }}  </td> <td class="col-1" id="Ta53"> {{  isset($aproveitamentoFinal['a53']) ? $aproveitamentoFinal['a53'] : '0' }}  </td> <td class="col-1" id="Ta54"> {{  isset($aproveitamentoFinal['a54']) ? $aproveitamentoFinal['a54'] : '0' }}  </td> <td class="col-1" id="Ta55"> {{ isset($aproveitamentoFinal['a55']) ? $aproveitamentoFinal['a55'] : '0' }}  </td> <td class="col-1" id="Ta56"> {{   isset($aproveitamentoFinal['a56']) ? $aproveitamentoFinal['a56'] : '0' }}  </td> <td class="col-1" id="Ta57"> {{  isset($aproveitamentoFinal['a57']) ? $aproveitamentoFinal['a57'] : '0' }}  </td> <td class="col-1" id="Ta58"> {{  isset($aproveitamentoFinal['a58']) ? $aproveitamentoFinal['a58'] : '0' }}  </td> <td class="col-1" id="Ta59"> {{ isset($aproveitamentoFinal['a59']) ? $aproveitamentoFinal['a59'] : '0' }}  </td> <td class="col-1" id="Ta510"> {{  isset($aproveitamentoFinal['a510']) ? $aproveitamentoFinal['a510'] : '0' }}   </td> <td class="col-1" id="Ta511"> {{  isset($aproveitamentoFinal['a511']) ? $aproveitamentoFinal['a511'] : '0' }}   </td> <td class="col-1" id="Ta512"> {{ isset($aproveitamentoFinal['a512']) ? $aproveitamentoFinal['a512'] : '0' }}   </td> <td class="col-1" id="Ta513"> {{   isset($aproveitamentoFinal['a513']) ? $aproveitamentoFinal['a513'] : '0' }}  </td> <td class="col-1" id="Ta514"> {{   isset($aproveitamentoFinal['a514']) ? $aproveitamentoFinal['a514'] : '0' }}  </td>
+                                                          </tr>
+                                                          <tr>
+                                                              <th scope="row">6ª</th>   <td class="col-1" id="Ta61"> {{ isset($aproveitamentoFinal['a61']) ? $aproveitamentoFinal['a61'] : '0' }}  </td> <td class="col-1" id="Ta62"> {{   isset($aproveitamentoFinal['a62']) ? $aproveitamentoFinal['a62'] : '0' }}  </td> <td class="col-1" id="Ta63"> {{  isset($aproveitamentoFinal['a63']) ? $aproveitamentoFinal['a63'] : '0' }}  </td> <td class="col-1" id="Ta64"> {{  isset($aproveitamentoFinal['a64']) ? $aproveitamentoFinal['a64'] : '0' }}  </td> <td class="col-1" id="Ta65"> {{ isset($aproveitamentoFinal['a65']) ? $aproveitamentoFinal['a65'] : '0' }}  </td> <td class="col-1" id="Ta66"> {{   isset($aproveitamentoFinal['a66']) ? $aproveitamentoFinal['a66'] : '0' }}  </td> <td class="col-1" id="Ta67"> {{  isset($aproveitamentoFinal['a67']) ? $aproveitamentoFinal['a67'] : '0' }}  </td> <td class="col-1" id="Ta68"> {{  isset($aproveitamentoFinal['a68']) ? $aproveitamentoFinal['a68'] : '0' }}  </td> <td class="col-1" id="Ta69"> {{ isset($aproveitamentoFinal['a69']) ? $aproveitamentoFinal['a69'] : '0' }}  </td> <td class="col-1" id="Ta610"> {{  isset($aproveitamentoFinal['a610']) ? $aproveitamentoFinal['a610'] : '0' }}   </td> <td class="col-1" id="Ta611"> {{  isset($aproveitamentoFinal['a611']) ? $aproveitamentoFinal['a611'] : '0' }}   </td> <td class="col-1" id="Ta612"> {{ isset($aproveitamentoFinal['a612']) ? $aproveitamentoFinal['a612'] : '0' }}   </td> <td class="col-1" id="Ta613"> {{   isset($aproveitamentoFinal['a613']) ? $aproveitamentoFinal['a613'] : '0' }}  </td> <td class="col-1" id="Ta614"> {{   isset($aproveitamentoFinal['a614']) ? $aproveitamentoFinal['a614'] : '0' }}  </td>
+                                                          </tr>
+                                                          
+                                                        </tbody>
+                                                        <tfoot>
+                                                          <tr class="bg-warning">
+                                                            <th scope="row">Total</th>    <td id="TmatriculadosIAMF"> {{ isset($aproveitamentoFinal['matriculadosIAMF']) ? $aproveitamentoFinal['matriculadosIAMF'] : '0'}}   </td><td id="TmatriculadosIAF"> {{ isset($aproveitamentoFinal['matriculadosIAF']) ? $aproveitamentoFinal['matriculadosIAF'] : '0'}}   </td><td id="TmatriculadosFAMF">  {{ isset($aproveitamentoFinal['matriculadosFAMF']) ? $aproveitamentoFinal['matriculadosFAMF'] : '0'}}   </td><td id="TmatriculadosFAF">  {{ isset($aproveitamentoFinal['matriculadosFAF']) ? $aproveitamentoFinal['matriculadosFAF'] : '0'}}  </td><td id="TaprovadosMF"> {{ isset($aproveitamentoFinal['aprovadosMF']) ? $aproveitamentoFinal['aprovadosMF'] : '0'}}    </td><td id="TaprovadosF"> {{ isset($aproveitamentoFinal['aprovadosF']) ? $aproveitamentoFinal['aprovadosF'] : '0'}}    </td> <td id="TreprovadosMF">  {{ isset($aproveitamentoFinal['reprovadosMF']) ? $aproveitamentoFinal['reprovadosMF'] : '0'}}   </td> <td id="TreprovadosF"> {{ isset($aproveitamentoFinal['reprovadosF']) ? $aproveitamentoFinal['reprovadosF'] : '0'}}  </td> <td id="TtransferidosEMF"> {{ isset($aproveitamentoFinal['transferidosEMF']) ? $aproveitamentoFinal['transferidosEMF'] : '0'}}   </td> <td id="TtransferidosEF"> {{ isset($aproveitamentoFinal['transferidosEF']) ? $aproveitamentoFinal['transferidosEF'] : '0'}}   </td> <td id="TtransferidosSMF">  {{ isset($aproveitamentoFinal['transferidosSMF']) ? $aproveitamentoFinal['transferidosSMF'] : '0'}}   </td> <td id="TtransferidosSF">  {{ isset($aproveitamentoFinal['transferidosSF']) ? $aproveitamentoFinal['transferidosSF'] : '0'}}  </td> <td id="TdesistentesMF">  {{ isset($aproveitamentoFinal['desistentesMF']) ? $aproveitamentoFinal['desistentesMF'] : '0'}}   </td> <td id="TdesistentesF">  {{ isset($aproveitamentoFinal['desistentesF']) ? $aproveitamentoFinal['desistentesF'] : '0'}}   </td>
+                                                          </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                  </div>
+                                                </div>
+                                                <div class="card-footer">
+
+                                                </div>
+                                              </div>
+                                            @else
+                                            <h4 class="text-info"> Não Foram Submetidos o Formulário Final. </h4>
+                                            @endif                                    
+                                       
+                                           
+
+                                            <!-- /.CardContet -->
+                                        
+                                          </div>
+                                      <!-- /tab-pane -->
                                   
                                 </div>
                               </div>
@@ -470,16 +539,16 @@
       <script src="{{ asset('plugins/jqvmap/jquery.vmap.min.js') }} "></script>
       <script src="{{ asset('plugins/jqvmap/maps/jquery.vmap.usa.js') }} "></script>
       <script src="{{ asset('plugins/jqvmap/maps/continents/jquery.vmap.africa.js') }} "></script>
-        <!--/Aproveitamento Grafico-->
+       <!--/Aproveitamento Grafico-->
         <!--Grafico de Barras -->
         <script>
               // Sample data
               const data = {
-                  labels: ['I Trimestre', 'II Trimestre', 'III Trimestre'],
+                  labels: ['I Trimestre', 'II Trimestre', 'III Trimestre', 'Final'],
                   datasets: [
                       {
                           label: 'Aprovados',
-                          data: [("{{ isset($aproveitamentoITrimestre['aprovadosMF']) ? $aproveitamentoITrimestre['aprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoITrimestre['matriculadosIAMF']) ? $aproveitamentoITrimestre['matriculadosIAMF'] : '0'}}"), ("{{ isset($aproveitamentoIITrimestre['aprovadosMF']) ? $aproveitamentoIITrimestre['aprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoIITrimestre['matriculadosIAMF']) ? $aproveitamentoIITrimestre['matriculadosIAMF'] : '0'}}"), ("{{ isset($aproveitamentoIIITrimestre['aprovadosMF']) ? $aproveitamentoIIITrimestre['aprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoIIITrimestre['matriculadosIAMF']) ? $aproveitamentoIIITrimestre['matriculadosIAMF'] : '0'}}")],
+                          data: [("{{ isset($aproveitamentoITrimestre['aprovadosMF']) ? $aproveitamentoITrimestre['aprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoITrimestre['matriculadosIAMF']) ? $aproveitamentoITrimestre['matriculadosIAMF'] : '0'}}"), ("{{ isset($aproveitamentoIITrimestre['aprovadosMF']) ? $aproveitamentoIITrimestre['aprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoIITrimestre['matriculadosIAMF']) ? $aproveitamentoIITrimestre['matriculadosIAMF'] : '0'}}"), ("{{ isset($aproveitamentoIIITrimestre['aprovadosMF']) ? $aproveitamentoIIITrimestre['aprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoIIITrimestre['matriculadosIAMF']) ? $aproveitamentoIIITrimestre['matriculadosIAMF'] : '0'}}"), ("{{ isset($aproveitamentoFinal['aprovadosMF']) ? $aproveitamentoFinal['aprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoFinal['matriculadosIAMF']) ? $aproveitamentoFinal['matriculadosIAMF'] : '0'}}")],
                           backgroundColor: 'rgba(75, 192, 192, 0.6)',
                           borderColor: 'rgba(75, 192, 192, 1)',
                           borderWidth: 2,
@@ -487,7 +556,7 @@
                       {
                           label: 'Reprovados',
                           
-                          data: [("{{ isset($aproveitamentoITrimestre['reprovadosMF']) ? $aproveitamentoITrimestre['reprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoITrimestre['matriculadosIAMF']) ? $aproveitamentoITrimestre['matriculadosIAMF'] : '0'}}"), ("{{ isset($aproveitamentoIITrimestre['reprovadosMF']) ? $aproveitamentoIITrimestre['reprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoIITrimestre['matriculadosIAMF']) ? $aproveitamentoIITrimestre['matriculadosIAMF'] : '0'}}"), ("{{ isset($aproveitamentoIIITrimestre['reprovadosMF']) ? $aproveitamentoIIITrimestre['reprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoIIITrimestre['matriculadosIAMF']) ? $aproveitamentoIIITrimestre['matriculadosIAMF'] : '0'}}")],
+                          data: [("{{ isset($aproveitamentoITrimestre['reprovadosMF']) ? $aproveitamentoITrimestre['reprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoITrimestre['matriculadosIAMF']) ? $aproveitamentoITrimestre['matriculadosIAMF'] : '0'}}"), ("{{ isset($aproveitamentoIITrimestre['reprovadosMF']) ? $aproveitamentoIITrimestre['reprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoIITrimestre['matriculadosIAMF']) ? $aproveitamentoIITrimestre['matriculadosIAMF'] : '0'}}"), ("{{ isset($aproveitamentoIIITrimestre['reprovadosMF']) ? $aproveitamentoIIITrimestre['reprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoIIITrimestre['matriculadosIAMF']) ? $aproveitamentoIIITrimestre['matriculadosIAMF'] : '0'}}"), ("{{ isset($aproveitamentoFinal['reprovadosMF']) ? $aproveitamentoFinal['reprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoFinal['matriculadosIAMF']) ? $aproveitamentoFinal['matriculadosIAMF'] : '0'}}")],
                           backgroundColor: 'rgba(255, 99, 132, 0.6)',
                           borderColor: 'rgba(255, 99, 132, 1)',
                           borderWidth: 2,
@@ -525,7 +594,7 @@
             // $('#revenue-chart').get(0).getContext('2d');
 
             var salesChartData = {
-              labels: ['I Trimestre', 'II Trimestre', 'III Trimestre'],
+              labels: ['I Trimestre', 'II Trimestre', 'III Trimestre', 'Final'],
               datasets: [
                 {
                   label: 'Aprovados',
@@ -536,7 +605,7 @@
                   pointStrokeColor: 'rgba(60,141,188,1)',
                   pointHighlightFill: '#fff',
                   pointHighlightStroke: 'rgba(60,141,188,1)',
-                  data: [("{{ isset($aproveitamentoITrimestre['aprovadosMF']) ? $aproveitamentoITrimestre['aprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoITrimestre['matriculadosIAMF']) ? $aproveitamentoITrimestre['matriculadosIAMF'] : '0'}}"), ("{{ isset($aproveitamentoIITrimestre['aprovadosMF']) ? $aproveitamentoIITrimestre['aprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoIITrimestre['matriculadosIAMF']) ? $aproveitamentoIITrimestre['matriculadosIAMF'] : '0'}}"), ("{{ isset($aproveitamentoIIITrimestre['aprovadosMF']) ? $aproveitamentoIIITrimestre['aprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoIIITrimestre['matriculadosIAMF']) ? $aproveitamentoIIITrimestre['matriculadosIAMF'] : '0'}}")],
+                  data: [("{{ isset($aproveitamentoITrimestre['aprovadosMF']) ? $aproveitamentoITrimestre['aprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoITrimestre['matriculadosIAMF']) ? $aproveitamentoITrimestre['matriculadosIAMF'] : '0'}}"), ("{{ isset($aproveitamentoIITrimestre['aprovadosMF']) ? $aproveitamentoIITrimestre['aprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoIITrimestre['matriculadosIAMF']) ? $aproveitamentoIITrimestre['matriculadosIAMF'] : '0'}}"), ("{{ isset($aproveitamentoIIITrimestre['aprovadosMF']) ? $aproveitamentoIIITrimestre['aprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoIIITrimestre['matriculadosIAMF']) ? $aproveitamentoIIITrimestre['matriculadosIAMF'] : '0'}}"), ("{{ isset($aproveitamentoFinal['aprovadosMF']) ? $aproveitamentoFinal['aprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoFinal['matriculadosIAMF']) ? $aproveitamentoFinal['matriculadosIAMF'] : '0'}}")],
                 },
                 {
                   label: 'Reprovados',
@@ -547,7 +616,7 @@
                   pointStrokeColor: '#c1c7d1',
                   pointHighlightFill: '#fff',
                   pointHighlightStroke: 'rgba(220,220,220,1)',
-                  data: [("{{ isset($aproveitamentoITrimestre['reprovadosMF']) ? $aproveitamentoITrimestre['reprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoITrimestre['matriculadosIAMF']) ? $aproveitamentoITrimestre['matriculadosIAMF'] : '0'}}"), ("{{ isset($aproveitamentoIITrimestre['reprovadosMF']) ? $aproveitamentoIITrimestre['reprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoIITrimestre['matriculadosIAMF']) ? $aproveitamentoIITrimestre['matriculadosIAMF'] : '0'}}"), ("{{ isset($aproveitamentoIIITrimestre['reprovadosMF']) ? $aproveitamentoIIITrimestre['reprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoIIITrimestre['matriculadosIAMF']) ? $aproveitamentoIIITrimestre['matriculadosIAMF'] : '0'}}")],
+                  data: [("{{ isset($aproveitamentoITrimestre['reprovadosMF']) ? $aproveitamentoITrimestre['reprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoITrimestre['matriculadosIAMF']) ? $aproveitamentoITrimestre['matriculadosIAMF'] : '0'}}"), ("{{ isset($aproveitamentoIITrimestre['reprovadosMF']) ? $aproveitamentoIITrimestre['reprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoIITrimestre['matriculadosIAMF']) ? $aproveitamentoIITrimestre['matriculadosIAMF'] : '0'}}"), ("{{ isset($aproveitamentoIIITrimestre['reprovadosMF']) ? $aproveitamentoIIITrimestre['reprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoIIITrimestre['matriculadosIAMF']) ? $aproveitamentoIIITrimestre['matriculadosIAMF'] : '0'}}"), ("{{ isset($aproveitamentoFinal['reprovadosMF']) ? $aproveitamentoFinal['reprovadosMF'] : '0' }}"*100)/("{{ isset($aproveitamentoFinal['matriculadosIAMF']) ? $aproveitamentoFinal['matriculadosIAMF'] : '0'}}")],
                 }
               ]
             }

@@ -12,7 +12,7 @@ class UnidadeOrganicaDadosController extends Controller
      * Display a listing of the resource.
      */
     public function cadastrarFormulario(Request $request)
-    {
+    {          // dd($request->all());
                 // Regras de validação
                 $request->validate([
                         'a11' => ['required'], 'a12' => ['required'],
