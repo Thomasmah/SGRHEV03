@@ -154,11 +154,11 @@
                               <p><b>Unidade Orgânica:</b> {{ $unidadeOrganica->designacao }} </p>
                               <p><b>Telefone:</b> {{ $funcionario->numeroTelefone }} </p>
                             </li>
-                            <li class="list-group-item" style="text-align: center;">
+                            <li class="list-group-item d-none" style="text-align: center;">
                               <img src="#" alt="">
                               <small class="text-muted">Assinatura Digital</small>
                             </li>
-                            <li class="list-group-item">
+                            <li class="list-group-item d-none">
                               <form  method="POST" action="{{ route('assinatura.update') }}" enctype="multipart/form-data" >
                                 @csrf
                                 @method('POST')
@@ -177,7 +177,7 @@
                               </form>
                             </li>
                           </ul>
-                          <a href="#" class="btn btn-primary btn-block"><b>Enviar Mensagem</b></a>
+                          <a href="#" class="btn btn-primary d-none"><b>Enviar Mensagem</b></a>
                         </div>
                         <!-- /.card-body -->
                       </div>

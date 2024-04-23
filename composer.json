@@ -16,6 +16,7 @@
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.0",
         "realrashid/sweet-alert": "^7.1",
+        "spatie/laravel-backup": "^8.6",
         "twbs/bootstrap-icons": "^1.11"
     },
     "require-dev": {
