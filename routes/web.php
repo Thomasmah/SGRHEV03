@@ -142,7 +142,8 @@ Route::any('/updade-funcionario{id}',[FuncionarioController::class,'update'])->n
 //Delectar um Registro da Entidade Funcionario
 Route::delete('/delete-funcionario{id}',[FuncionarioController::class,'destroy'])->name('funcionarios.delete');//->middleware('AcessoAdmin');
 
-//
+//Alterar estado do Funcionario
+Route::any('/funcionario/estado/', [FuncionarioController::class, 'estado'])->name('estado.funcionario');
 
 
 

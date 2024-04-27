@@ -2,24 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Middleware\DadosUsuario;
 use App\Models\Arquivo;
-use App\Models\Assinatura;
 use App\Models\Cargo;
 use App\Models\categoriaFuncionario;
 use App\Models\Funcionario;
-use App\Models\Parente;
 use App\Models\Pessoa;
 use App\Models\Processo;
 use App\Models\UnidadeOrganica;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Carbon\Carbon;
-use Dompdf\Dompdf;
-use Dompdf\Options;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Symfony\Component\Console\Input\Input;
+use Illuminate\Validation\Rule;
+
 
 class ProcessoController extends Controller
 {
@@ -247,17 +242,22 @@ class ProcessoController extends Controller
 
     public function preview(Request $request)
     {
-        
+    
         //Reconversao do Submit do ormularo armazenado no banco de dados
         $D = $request->Request;
         parse_str($D, $Request);
         //dd($Request['seccao']);
+        $categoria = $Request['categoria'];
+        //Verificar se nao [e uma requisicao para imprimir um documento como guia de colocacao de marcha ou um outro documanto solicitado via requerimento
+        if (isset($request->imprimir)) {
+            $categoria = $request->imprimir;
+        }
         $funcionario = Funcionario::where('id', $Request['idFuncionarioSolicitante'])->first();
         $pessoa = Pessoa::where('id', $funcionario->idPessoa)->first();
         $cargo =  Cargo::where('id', $funcionario->idCargo)->first();
         $categoriaFuncionario = categoriaFuncionario::where('id', $funcionario->idCategoriaFuncionario)->first();
         $unidadeOrganica = UnidadeOrganica::where('id', $funcionario->idUnidadeOrganica)->first();
-        $categoria = $Request['categoria'];
+      
         $idProcesso = $request['idProcesso'];
         //Carregar a View
         $Documento = PDF::loadView("sgrhe/modelos/$categoria",compact('Request','pessoa','funcionario','cargo','categoriaFuncionario','unidadeOrganica','idProcesso'));      
@@ -285,9 +285,19 @@ class ProcessoController extends Controller
 //Solicitar Processos Genericos 
     public function solicitar(Request $request)
     { 
-       // dd('Solicitar');
+        //dd('Solicitar');
         $request->validate([
-           //Validacoes
+            'categoria' => [
+                Rule::unique('processos')->where( function($query) use ($request){
+                    return $query->where('categoria', $request->categoria)
+                    ->where('idFuncionarioSolicitante', $request->idFuncionarioSolicitante)
+                    ->where('estado', 'Submetido');
+                }), 
+            ],
+        ],[
+            //Menssagem personalizada 
+            'categoria' => 'Já tens uma solicitação da mesma natureza pendente, Cancele para submisão de uma nova ou aguarde o deferimento!',
+
         ]);
         $processo = Processo::create([
             // Recupera o id do funcionario logado pela sessao 

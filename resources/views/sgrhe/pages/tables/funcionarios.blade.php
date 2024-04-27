@@ -98,12 +98,25 @@
                                                         <button type="submit" class="btn btn-warning w-100 m-1">Editar</button>
                                                       </form>
                                                       <form action="{{ route('eliminar.objecto') }}" method="POST" id="deleteForm{{ $funcionario->id_funcionario }}">
-                                                      @csrf
-                                                      @method('DELETE')
-                                                      <input type="hidden" name="id" value="{{ $funcionario->id_funcionario }}">
-                                                      <input type="hidden" name="categoria" value="Funcionario">
-                                                      <button type="submit" class="btn btn-danger w-100 m-1" onclick="confirmAndSubmit(event, 'Confirmar deletar  Funcionário?', 'Sim, Deletar!', 'Não, Cancelar!')">Deletar</button>
-                                                  </form>
+                                                          @csrf
+                                                          @method('DELETE')
+                                                          <input type="hidden" name="id" value="{{ $funcionario->id_funcionario }}">
+                                                          <input type="hidden" name="categoria" value="Funcionario">
+                                                          <button type="submit" class="btn btn-danger w-100 m-1" onclick="confirmAndSubmit(event, 'Confirmar deletar  Funcionário?', 'Sim, Deletar!', 'Não, Cancelar!')">Deletar</button>
+                                                      </form>
+                                                      <form action="{{ route('estado.funcionario') }}" method="POST" id="deleteForm{{ $funcionario->id_funcionario }}">
+                                                          @csrf
+                                                          @method('POST')
+                                                          <input type="hidden" name="id" value="{{ $funcionario->id_funcionario }}">
+                                                          <select name="estado" id="" class="form-control select2">
+                                                            <option selected value="">Alterar o Estado do Funcionário</option>
+                                                            <option class="text-success font-weight-bold" value="Activo">Activo</option>
+                                                            <option class="text-info font-weight-bold" value="Licenca">Licença</option>
+                                                            <option class="text-secondary font-weight-bold" value="Aposentado">Aposentado</option>
+                                                            <option class="text-danger font-weight-bold" value="Inactivo">Inactivo</option>
+                                                          </select>
+                                                          <button type="submit" class="btn btn-secondary w-100 m-1" onclick="confirmAndSubmit(event, 'Confirmar Alterar o Estado do Funcionário?', 'Sim, Alterar!', 'Não, Cancelar!')">Alterar Stado</button>
+                                                      </form>
                                                   </td>
                                               </tr>
                                 @endforeach

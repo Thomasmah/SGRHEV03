@@ -342,5 +342,15 @@ class FuncionarioController extends Controller
 
     }
 
+    public function estado(Request $request){
+        $funcionario = Funcionario::find($request->id);
+        $funcionario->estado = $request->estado;
+        if ($funcionario->save()) {
+            return redirect()->back()->with('success', 'Estado do Funcionário Alterado com Sucesso!');
+        }else {
+            return redirect()->back()->with('error', 'Erro ao alterar o Estado do Funcionário!');
+        }
+    }
+
 
 }

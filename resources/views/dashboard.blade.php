@@ -303,8 +303,10 @@
                                                 <thead>
                                                   <tr>
                                                     <th>Unidade Organica</th>
+                                                    <th>Nível de Ensino</th>
                                                     <th>Localidade</th>
                                                     <th>Director</th>
+                                                    <th>Telefone</th>
                                                     <th>Status</th>
                                                   </tr>
                                                 </thead>
@@ -315,10 +317,16 @@
                                                         {{$SubControlInI->designacao}}
                                                       </td>
                                                       <td>
+                                                        {{$SubControlInI->nivelEnsino}}
+                                                      </td>
+                                                      <td>
                                                         {{$SubControlInI->localidade}}
                                                       </td>
                                                       <td>
                                                         {{'N/D'}}
+                                                      </td>
+                                                      <td>
+                                                        {{$SubControlInI->telefone}}
                                                       </td>
                                                       <td class=" text-success">
                                                         Formulário Submetido
@@ -331,10 +339,16 @@
                                                         {{$SubControlNonI->designacao}}
                                                       </td>
                                                       <td>
+                                                        {{$SubControlNonI->nivelEnsino}}
+                                                      </td>
+                                                      <td>
                                                         {{$SubControlNonI->localidade}}
                                                       </td>
                                                       <td>
                                                         {{'N/D'}}
+                                                      </td>
+                                                      <td>
+                                                        {{$SubControlNonI->telefone}}
                                                       </td>
                                                       <td class=" text-danger">
                                                         Não Submeteu o Formulário
@@ -358,8 +372,10 @@
                                                 <thead>
                                                   <tr>
                                                     <th>Unidade Organica</th>
+                                                    <th>Nível de Ensino</th>
                                                     <th>Localidade</th>
                                                     <th>Director</th>
+                                                    <th>Telefone</th>
                                                     <th>Status</th>
                                                   </tr>
                                                 </thead>
@@ -370,10 +386,16 @@
                                                         {{$SubControlInII->designacao}}
                                                       </td>
                                                       <td>
+                                                        {{$SubControlInII->nivelEnsino}}
+                                                      </td>
+                                                      <td>
                                                         {{$SubControlInII->localidade}}
                                                       </td>
                                                       <td>
                                                         {{'N/D'}}
+                                                      </td>
+                                                      <td>
+                                                        {{$SubControlInII->telefone}}
                                                       </td>
                                                       <td class=" text-success">
                                                         Formulário Submetido
@@ -386,10 +408,16 @@
                                                         {{$SubControlNonII->designacao}}
                                                       </td>
                                                       <td>
+                                                        {{$SubControlNonII->nivelEnsino}}
+                                                      </td>
+                                                      <td>
                                                         {{$SubControlNonII->localidade}}
                                                       </td>
                                                       <td>
                                                         {{'N/D'}}
+                                                      </td>
+                                                      <td>
+                                                        {{$SubControlNonII->telefone}}
                                                       </td>
                                                       <td class=" text-danger">
                                                         Não Submeteu o Formulário
@@ -413,8 +441,10 @@
                                                 <thead>
                                                   <tr>
                                                     <th>Unidade Organica</th>
+                                                    <th>Nível de Ensino</th>
                                                     <th>Localidade</th>
                                                     <th>Director</th>
+                                                    <th>Telefone</th>
                                                     <th>Status</th>
                                                   </tr>
                                                 </thead>
@@ -425,10 +455,16 @@
                                                         {{$SubControlInIII->designacao}}
                                                       </td>
                                                       <td>
+                                                        {{$SubControlInIII->nivelEnsino}}
+                                                      </td>
+                                                      <td>
                                                         {{$SubControlInIII->localidade}}
                                                       </td>
                                                       <td>
                                                         {{'N/D'}}
+                                                      </td>
+                                                      <td>
+                                                        {{$SubControlInIII->telefone}}
                                                       </td>
                                                       <td class=" text-success">
                                                         Formulário Submetido
@@ -441,10 +477,16 @@
                                                         {{$SubControlNonIII->designacao}}
                                                       </td>
                                                       <td>
+                                                        {{$SubControlNonIII->nivelEnsino}}
+                                                      </td>
+                                                      <td>
                                                         {{$SubControlNonIII->localidade}}
                                                       </td>
                                                       <td>
                                                         {{'N/D'}}
+                                                      </td>
+                                                      <td>
+                                                        {{$SubControlNonIII->telefone}}
                                                       </td>
                                                       <td class=" text-danger">
                                                         Não Submeteu o Formulário
@@ -468,8 +510,10 @@
                                                 <thead>
                                                   <tr>
                                                     <th>Unidade Organica</th>
+                                                    <th>Nível de Ensino</th>
                                                     <th>Localidade</th>
                                                     <th>Director</th>
+                                                    <th>Telefone</th>
                                                     <th>Status</th>
                                                   </tr>
                                                 </thead>
@@ -480,10 +524,16 @@
                                                         {{$SubControlInFinal->designacao}}
                                                       </td>
                                                       <td>
+                                                        {{$SubControlInFinal->nivelEnsino}}
+                                                      </td>
+                                                      <td>
                                                         {{$SubControlInFinal->localidade}}
                                                       </td>
                                                       <td>
                                                         {{'N/D'}}
+                                                      </td>
+                                                      <td>
+                                                        {{$SubControlInFinal->telefone}}
                                                       </td>
                                                       <td class=" text-success">
                                                         Formulário Submetido
@@ -496,10 +546,16 @@
                                                         {{$SubControlNonFinal->designacao}}
                                                       </td>
                                                       <td>
+                                                        {{$SubControlNonFinal->nivelEnsino}}
+                                                      </td>
+                                                      <td>
                                                         {{$SubControlNonFinal->localidade}}
                                                       </td>
                                                       <td>
                                                         {{'N/D'}}
+                                                      </td>
+                                                      <td>
+                                                        {{$SubControlNonFinal->telefone}}
                                                       </td>
                                                       <td class=" text-danger">
                                                         Não Submeteu o Formulário

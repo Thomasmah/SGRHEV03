@@ -181,6 +181,78 @@
                                               <div class="col-8 offset-md-2">
                                                     <div class="card  card-outline card-info">
                                                       <div class="card-header">
+                                                        <h3 class="card-title">Solicitar Trasnferência</h3>
+                                                      </div>
+                                                      <div class="card-body">
+                                                          <div class="card-text">
+                                                            <p>Poupe esforços e dê início ao seu processo de Transferencia </p>
+                                                          </div>
+                                                      </div>
+                                                      <div class="card-footer">
+                                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Transferencia">
+                                                              Solicitar Trasferência
+                                                            </button>
+                                                      </div>
+                                                    </div>
+                                              </div>
+                                              <!-- Modal Solicitar Transferencia -->
+                                                <div class="modal fade" id="Transferencia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                  <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                      <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Licença de {{ $pessoa->nomeCompleto}}</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                          <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                      </div>
+                                                      <div class="modal-body">
+                                                        <!-- Formulário -->
+                                                        <form action="{{ route('solicitar') }}" method="POST" id="for">                                             
+                                                          @csrf
+                                                          @method('POST')
+                                                          <div class="form-group">
+                                                            <label for="idUnidadeOrganica">Para qual Unidade Organica deseja ser Trasnferido</label>
+                                                            <select name="idUnidadeOrganica" class="form-control select2" required>
+                                                              <option selected="selected" value="{{ isset($opcoesUnidadeOrganica) ? $opcoesUnidadeOrganica->id : '' }}" >{{ isset($opcoesUnidadeOrganica) ? $opcoesUnidadeOrganica->designacao : 'Escolha uma Unidade Orgânica' }}</option>
+                                                              @php
+                                                                $opcoesUnidadeOrganicas = App\Models\UnidadeOrganica::all();
+                                                              @endphp
+                                                              @foreach ($opcoesUnidadeOrganicas as $UnidadeOrganica)
+                                                              <option value="{{ old('id',$UnidadeOrganica->id ?? 'id') }}">{{ old('designacao',$UnidadeOrganica->designacao ?? 'designacao') }}</option>
+                                                              @endforeach 
+                                                            </select>
+                                                          </div>
+                                                 
+                                                          <div class="form-group">
+                                                            <label for="motivo">Motivo da Trasnferência</label>
+                                                            <textarea class="form-control" name="motivo" id="texto" placeholder="Descreva um motivo... Começando 'Por motivos de ...' por Exemplo" required></textarea>
+                                                            <small class="text-muted"id="contadorCaracteres" > </small>
+                                                          </div>
+                                                          <div class="form-group">
+                                                            <input type="hidden" class="form-control" name="idFuncionario" value="{{ isset($idFuncionario) ? $idFuncionario :  $funcionario->id }}">
+                                                            <input type="hidden" class="form-control" name="categoria" value="Transferencia">
+                                                            <input type="hidden" class="form-control" name="natureza" value="Requerimento">
+                                                            <input type="hidden" class="form-control" name="seccao" value="RHPE">     
+                                                            <input type="hidden" class="form-control" name="idFuncionarioSolicitante" value="{{ isset($idFuncionario) ? $idFuncionario  : $funcionario->id }}">    
+                                                          </div>
+                                                          <button type="submit" class="btn btn-primary">Submeter</button>
+                                                        </form>
+                                                      </div>
+                                                      <div class="modal-footer">
+                                                        <small id="" class="form-text text-muted">Consulte o Deferimento do Seu pedido na sua Time Line</small>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              <!-- Modal Solicitar Licenca -->
+                                            <!--Solicitar Item-->
+
+
+
+                                            <!--Solicitar Item-->
+                                              <div class="col-8 offset-md-2">
+                                                    <div class="card  card-outline card-info">
+                                                      <div class="card-header">
                                                         <h3 class="card-title">Licença</h3>
                                                       </div>
                                                       <div class="card-body">

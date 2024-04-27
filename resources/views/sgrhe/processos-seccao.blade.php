@@ -113,13 +113,24 @@
                                                   <p> Nome: {{ $pessoaSolicitante->nomeCompleto }} </p>
                                                   <p>Natureza: {{ $processo->natureza }}</p>
                                                   <p>Categoria de Documento:  {{ $processo->categoria }}</p>
-                                                <form class="{{ ($processo->estado == 'Submetido') ? 'd-inline' : 'd-none'}}"  action="{{ route('solicitacao.preview')}}" method="POST" >
+                                                 <form class="{{ ($processo->estado == 'Submetido') ? 'd-inline' : 'd-none'}}"  action="{{ route('solicitacao.preview')}}" method="POST" >
                                                     @csrf
                                                     @method('POST')
                                                     <input type="hidden" name="Request" value="{{$processo->Request}}">
                                                     <input type="hidden" name="idProcesso" value="{{$processo->id}}">
                                                     <button type="submit" class="btn btn-info">Ver Documento</button>
                                                   </form>
+                                                  @if($processo->categoria === "Transferencia")
+                                                    <form class="{{ ($processo->estado == 'Submetido') ? 'd-inline' : 'd-none'}}"  action="{{ route('solicitacao.preview')}}" method="POST" >
+                                                      @csrf
+                                                      @method('POST')
+                                                      <input type="hidden" name="Request" value="{{$processo->Request}}">
+                                                      <input type="hidden" name="idProcesso" value="{{$processo->id}}">
+                                                      <input type="hidden" name="imprimir" value="GuiaColocacao">
+                                                      <button type="submit" class="btn btn-info">Imprimir uma Guia de Colocação</button>
+                                                    </form>
+                                                  @endif
+
                                                 </div>
                                                 <div class="timeline-footer">  
                                                   <form  class="{{ ($processo->estado == 'Submetido' && $processo->natureza == 'N/D' ) ? 'd-inline' : 'd-none'}}" action="{{ route('solicitacao.ratificar')}}" method="POST" id="deleteForm{{ $processo->id }}">
