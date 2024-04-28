@@ -28,7 +28,13 @@
           </div><!-- /.container-fluid -->
         </div>
         <!-- /.content-header -->
-
+                      <!-- Carregando tipos de Ciclos de Ensino -->
+                      @php
+                        $ICiclo = "I Ciclo";
+                        $IICiclo = "II Ciclo";
+                        $primario = "Primário";
+                        $infancia = "Jardin de Infância";
+                      @endphp
         <!-- Main content -->
         <section class="content">
           <div class="container-fluid">
@@ -86,11 +92,24 @@
                   <a href="{{ route('unidadeorganicas.index') }}" class="small-box-footer">Ver mais <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
               </div>
+                   <!-- Escolas Primárias -->
+                   <div class="col-lg-3 col-6">
+                <div class="small-box bg-success">
+                  <div class="inner">
+                    <h3>{{ App\Models\UnidadeOrganica::where('nivelEnsino','like',"%{$infancia}%")->count() }}</h3>
+                    <p>Jardin de Infância</p>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-stats-bars"></i>
+                  </div>
+                  <a href="#" class="small-box-footer">Ver mais <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+              </div>
               <!-- Escolas Primárias -->
               <div class="col-lg-3 col-6">
                 <div class="small-box bg-info">
                   <div class="inner">
-                    <h3>{{ $unidadesOrganicas->where('nivelEnsino','Primário')->count() }}</h3>
+                    <h3>{{ App\Models\UnidadeOrganica::where('nivelEnsino','like',"%{$primario}%")->count() }}</h3>
                     <p>Escolas Primárias</p>
                   </div>
                   <div class="icon">
@@ -103,8 +122,8 @@
               <div class="col-lg-3 col-6">
                 <div class="small-box bg-info">
                   <div class="inner">
-                    <h3>{{ $unidadesOrganicas->where('nivelEnsino','I Ciclo')->count() }}</h3>
-                    <p>Escolas do I Ciclo Secundário</p>
+                    <h3>{{ App\Models\UnidadeOrganica::where('nivelEnsino','like',"%{$ICiclo}%")->count() }}</h3>
+                    <p>Escolas com I Ciclo Secundário</p>
                   </div>
                   <div class="icon">
                     <i class="ion ion-stats-bars"></i>
@@ -116,8 +135,8 @@
              <div class="col-lg-3 col-6">
                 <div class="small-box bg-secondary">
                   <div class="inner">
-                    <h3>{{ $unidadesOrganicas->where('nivelEnsino','II Ciclo')->count() }}</h3>
-                    <p>Escolas do II Ciclo Secundário(Liceu)</p>
+                    <h3>{{ App\Models\UnidadeOrganica::where('nivelEnsino','like',"%{$IICiclo}%")->count() }}</h3>
+                    <p>Escolas com II Ciclo Secundário(Liceu)</p>
                   </div>
                   <div class="icon">
                     <i class="ion ion-stats-bars"></i>

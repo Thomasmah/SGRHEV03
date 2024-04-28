@@ -180,7 +180,7 @@
                                                 <li class="list-group-item">
                                                   <p><b>EQT:</b> {{ $unidadeOrganicaSelected->eqt }} </p> 
                                                   <p><b>Decreto de Criação:</b> {{ $unidadeOrganicaSelected->decretoCriacao }} </p>
-                                                  <p><b>Nível de Ensino:</b> {{ 'Nivel de Ensino' }} </p>  
+                                                  <p><b>Nível de Ensino:</b> {{ $unidadeOrganicaSelected->nivelEnsino }} </p>  
                                                   <p><b>Telefone:</b> {{ $unidadeOrganicaSelected->telefone }} </p>
                                                   <p><b>E-mail:</b> {{ $unidadeOrganicaSelected->email }} </p>
                                                   <p><b>Localidade:</b> {{ $unidadeOrganicaSelected->localidade }} </p>

@@ -170,15 +170,15 @@ class UnidadeOrganicaController extends Controller
     }
     //Update 
     public function update(Request $request, string $id)
-    {   
+    {   //dd($request->all());
         $request->validate([
             'designacao' => ['required','string', 'max:255'],
             'descricao' => ['required','string', 'max:255'],
-            'eqt' => ['required', 'string', 'max:255', 'unique:unidade_organicas,eqt'.$id],
+            'eqt' => ['required', 'string', 'max:255', 'unique:unidade_organicas,eqt,'.$id.''],
             'decretoCriacao' => ['string', 'max:255'],
             'localidade' => ['required','string', 'max:255'],
-            'telefone' => ['string', 'max:255','unique:unidade_organicas,telefone'.$id],
-            'email' => ['email', 'max:255','unique:unidade_organicas,email'.$id],
+          //  'telefone' => ['string', 'max:255','unique:unidade_organicas,telefone,'.$id.''],
+           // 'email' => ['email', 'max:255','unique:unidade_organicas,email,'.$id.''],
         ], [
             'eqt.unique' => 'A Unidade Orgânica '.$request->input('eqt').' já foi definida no Sistema!',
             'telefone.unique' => 'Telefone em uso por outra Instituição!',
@@ -194,6 +194,15 @@ class UnidadeOrganicaController extends Controller
         $UnidadeOrganica->localidade = $request->localidade;
         $UnidadeOrganica->telefone = $request->telefone;
         $UnidadeOrganica->email = $request->email;
+        //Converter antes o array de nivel de ensino
+        $niveldeEnsino = "";
+        $decodedQueryString = urldecode(http_build_query($request->nivelEnsino));
+        foreach (explode("&", $decodedQueryString) as $pair) {
+            list($key, $value) = explode("=", $pair);
+            $niveldeEnsino .= $value.", ";
+        }
+        //dd($niveldeEnsino);
+        $UnidadeOrganica->nivelEnsino = $niveldeEnsino;
         // Salvando as Alteracoes do Registro
         if ($UnidadeOrganica->save()) {
             return redirect()->route('unidadeorganicas.index')->with('success', 'Unidade Orgânica, '.$request->designacao.' foi atualizada com sucesso.');

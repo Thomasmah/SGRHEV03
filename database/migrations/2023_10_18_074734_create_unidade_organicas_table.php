@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('designacao');
             $table->string('descricao');
             $table->string('nivelEnsino')->nullable();
+            $table->string('coordenadasGeograficas')->nullable();
             $table->string('eqt')->nullable();
             $table->string('decretoCriacao')->nullable();
             $table->string('localidade')->nullable();

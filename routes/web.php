@@ -180,7 +180,7 @@ Route::any('/sobre/unidadeorganica/{idUnidadeOrganica}',[UnidadeOrganicaControll
 Route::any('/dasboard/unidadeorganica/{idUnidadeOrganica}',[UnidadeOrganicaController::class,'dashboardUnidadeOrganicaShow'])->name('dashboard.unidade.organica.how');//Definir Permissoes so para os directores
 Route::any('/formulario/unidadeorganica/',[UnidadeOrganicaController::class,'formularioAproveitamentoUnidadeOrganica'])->name('dashboard.unidade.organica.formulario.aproveitamento');//Definir Permissoes so para os directores
 //Actualizar um Registro da Entidade-Tabela Unidade Organica
-Route::any('/updade-uniddeorganica{id}',[UnidadeOrganicaController::class,'update'])->name('unidadeorganicas.update');//->middleware('AcessoAdmin');
+Route::any('/updade-uniddeorganica/{id}',[UnidadeOrganicaController::class,'update'])->name('unidadeorganicas.update');//->middleware('AcessoAdmin');
 //Delectar um Registro da Tabela Unidade Orgaica
 Route::delete('/delete-unidadeorganica{id}',[UnidadeOrganicaController::class,'destroy'])->name('unidadeorganicas.delete');//->middleware('AcessoAdmin');
 //UO Funcionarios

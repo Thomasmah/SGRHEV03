@@ -85,6 +85,7 @@
                                                         <input type="hidden" name="unidadeOrganica" value="{{ $funcionario->designacao }}">
                                                         <input type="hidden" name="categoria" value="{{ $funcionario->categoria }}">
                                                         <input type="hidden" name="idMapaEfectividade" value="{{ $idMapaEfectividade }}">
+                                                        <input type="hidden" name="estado" value="{{ $funcionario->estado }}">
                                                         <button type="submit" class="btn btn-success w-100 m-1">Adicionar Funcionário</button>
                                                       </form>
                                                     </td>

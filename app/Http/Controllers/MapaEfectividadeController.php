@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Exists;
-
+use Symfony\Contracts\Service\Attribute\Required;
 
 class MapaEfectividadeController extends Controller
 {
@@ -54,7 +54,11 @@ class MapaEfectividadeController extends Controller
         //dd($request->all());
         //Validade de modo a evitar a duplcacao de funcionarios dentro do mesmo mapa de Efectividade
         $request->validate([
-   
+            'estado' => ['sometimes', 'string', function ($attribute, $value, $fail) {
+                if ($value !== 'Activo') {
+                    $fail('Não é possivel adicionar o funcionário que não está activo! Possivelmente está em dispensa ou inactivo.');
+                }
+            }]
         ]);
         $funcionario = MapaEfectividadefalta::where('idMapaEfectividade', $request->input('idMapaEfectividade'))->where('numeroAgente', $request->input('numeroAgente'))->first();
         if ($funcionario == NULL) {
