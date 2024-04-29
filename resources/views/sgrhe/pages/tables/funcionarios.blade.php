@@ -1,6 +1,9 @@
+@php
+  setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'portuguese');
+@endphp
 <!--Layout Principal-->
 @extends('layouts.app')
-  @section('titulo' , 'Funcionários / Index')
+  @section('titulo' , $titulo )
         @section('header')
         <!--Style Local-->
           <!-- DataTables -->
@@ -39,7 +42,7 @@
                       <div style="background-color: #ffffff;" class="card card-primary">
 
                           <div class="card-header">
-                                <h3 class="card-title">Funcionário / Força de Trabaho</h3>  
+                                <h3 class="card-title">{{ $titulo }} </h3>  
                           </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -83,7 +86,7 @@
                                                   <td>{{ \Carbon\Carbon::parse($funcionario->dataAdmissao)->format('d/m/Y') }}</td>
                                                   <td>{{ $funcionario->email }}</td>
                                                   <td>{{ $funcionario->iban }}</td>
-                                                  <td>{{  \Carbon\Carbon::parse( $funcionario->dataNascimento )->format('d F Y')}}</td>
+                                                  <td>{{ strftime('%d de %B de %Y', strtotime(\Carbon\Carbon::parse( $funcionario->dataNascimento ))) }} </td>
                                                   <td>{{ $funcionario->genero }}</td>
                                                   <td>{{ $funcionario->grupoSanguineo }}</td>
                                                   <td>{{ $funcionario->estadoCivil }}</td>

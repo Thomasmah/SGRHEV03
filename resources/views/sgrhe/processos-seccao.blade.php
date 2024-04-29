@@ -1,3 +1,6 @@
+@php
+  setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'portuguese');
+@endphp
 <!--Layout Principal-->
 @extends('layouts.app')
   @section('titulo' , 'Processos da Seção de  - '.session()->only(['Seccao'])['Seccao']->designacao )
@@ -96,7 +99,7 @@
                                             <!-- timeline time label -->
                                             <div class="time-label">
                                               <span class="bg-danger">
-                                                {{ $processo->created_at->format('d F Y')}}
+                                                {{ strftime('%d de %B de %Y', strtotime($processo->created_at)) }}
                                               </span>
                                             </div>
                                             <!-- /.timeline-label -->

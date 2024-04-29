@@ -1,3 +1,6 @@
+@php
+  setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'portuguese');
+@endphp
 <!--Layout Principal-->
 @extends('layouts.app')
   @section('titulo' , 'Funcionários / Index')
@@ -19,7 +22,7 @@
                 <div class="container-fluid">
                   <div class="row mb-2">
                     <div class="col-sm-6">
-                      <h1>Compor Mapa de Efectividade referente à  {{ \Carbon\Carbon::parse($periodo)->format('d F Y') }}</h1>
+                      <h1>Compor Mapa de Efectividade referente à  {{ strftime('%d de %B de %Y', strtotime(\Carbon\Carbon::parse($periodo))) }}</h1>
                     </div>
                     <div class="col-sm-6">
                       <ol class="breadcrumb float-sm-right">
@@ -40,7 +43,7 @@
                         <div style="background-color: #ffffff;" class="card card-primary">
 
                             <div class="card-header">
-                                  <h3 class="card-title">Funcionário / Força de Trabaho</h3>  
+                                  <h3 class="card-title">Compor Mapa de Efectividade</h3>  
                             </div>
                           <!-- /.card-header -->
                           <div class="card-body">

@@ -1,3 +1,6 @@
+@php
+  setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'portuguese');
+@endphp
 <!--Layout Principal-->
 @extends('layouts.app')
   @section('titulo' , 'Linha de Tempo - '.$pessoa->nomeCompleto )
@@ -95,7 +98,7 @@
                                             <!-- timeline time label -->
                                             <div class="time-label">
                                               <span class="bg-danger">
-                                                {{ $processom->created_at->format('d F Y')}}
+                                                {{ strftime('%d de %B de %Y', strtotime($processom->created_at)) }}
                                               </span>
                                             </div>
                                             <!-- /.timeline-label -->
