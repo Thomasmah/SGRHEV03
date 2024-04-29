@@ -1,28 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Arquivo;
 use App\Models\AvaliacaoDesempenhoFuncionario;
 use App\Models\BI;
-use App\Models\Cargo;
-use App\Models\categoriaFuncionario;
-use App\Models\Funcionario;
 use App\Models\Habilitacao;
 use App\Models\Pessoa;
-use App\Models\Processo;
-use App\Models\UnidadeOrganica;
-use Barryvdh\DomPDF\Facade\Pdf;
-use Faker\Core\File;
-use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Drivers\Gd\Driver;
-use Intervention\Image\ImageManager;
-use Livewire\Attributes\Validate;
-use PhpParser\Node\Expr\Cast\String_;
-use Symfony\Component\Mailer\Transport\Dsn;
 
 //Biblioteca para Manipular imagens 
 
@@ -140,10 +126,13 @@ class ArquivoController extends Controller
     {
            // dd($request->all());
             $verificar = $request->validate([
-                'numeroBI' => 'required','unique:funcionarios,numeroBI,except,$dFuncionario',
-                'validadeBI' => 'required',
+                'numeroBI' => ['required', 'string', 'max:14', 'unique:pessoas,numeroBI'],
+                'validadeBI' => ['date','required','after_or_equal:'.now()],
                 'arquivo' => 'required|file|mimes:png,jpg,pdf|max:2048',
                 'confirmar' => 'required|accepted',
+            ], [
+                'numeroBI.unique' => 'O número de BI inserido ja está sendo utilizado por outro usuário!',
+                'validadeBI.after_or_equal' => 'Bilhete de Identidade com data de validade expirada!',
             ]);
 
             $arquivo = $request->file('arquivo');
