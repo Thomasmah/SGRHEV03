@@ -1,3 +1,6 @@
+@php
+  setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'portuguese');
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,7 +53,7 @@
                         E para que não haja impedimento, passou-se o presente apenso que vai devidamente assinado e autenticado com carimbo a óleo em uso nesta Instituição.
                 </div>
                 <div class="data-local">
-                        Púri, 21 de Novembro de 2024
+                        Púri, {{ strftime('%d de %B de %Y', now()) }}
                 </div>
                 <div class="autenticacao">
                         <p>Direcção Municipal da Educação</p> 

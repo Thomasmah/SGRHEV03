@@ -1,3 +1,6 @@
+@php
+  setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'portuguese');
+@endphp
 <?php
 //Dados Requisitos
 $parente = App\Models\Parente::where('idPessoa',$pessoa->id)->first();
@@ -169,9 +172,9 @@ $naturalidade = App\Models\Naturalidade::where('idPessoa',$pessoa->id)->first();
                         <p>DECLARAÇÃO DE EFECTIVIDADE </p>
                         <br>
                 </div>
-                <div class="corpo">
-                        <p>
-                        ALFREDO JOSÉ MÁRIO Director Municipal da Educaçcão, declaro por minha honra profissional que o senhor {{ $pessoa->nomeCompleto }}, solteiro de {{ $pessoa->dataNascimento }} anos de idade, filho de  {{ $parente->nomePai }}, e de {{ $parente->nomeMae }}, nascido aos {{ $pessoa->dataNascimento }}, natural de {{ $naturalidade->municipio }}, Município de  {{ $naturalidade->municipio }}, Província de {{ $naturalidade->provincia }}, portador do B.I. nº {{ $pessoa->numeroBI }}, passado pelo Sector de Identificação de Uíge aos 28 de Abril de {{ date('Y')}}
+                <div class="corpo"> 
+                        <p> 
+                        ALFREDO JOSÉ MÁRIO Director Municipal da Educaçcão, declaro por minha honra profissional que o senhor {{ $pessoa->nomeCompleto }}, solteiro de {{ date('Y')-strftime('%Y', strtotime(\Carbon\Carbon::parse($pessoa->dataNascimento))) }} anos de idade, filho de  {{ $parente->nomePai }}, e de {{ $parente->nomeMae }}, nascido aos {{ strftime('%d de %B de %Y', strtotime(\Carbon\Carbon::parse($pessoa->dataNascimento))) }}, natural de {{ $naturalidade->municipio }}, Município de  {{ $naturalidade->municipio }}, Província de {{ $naturalidade->provincia }}, portador do B.I. nº {{ $pessoa->numeroBI }}, passado pelo Sector de Identificação de Uíge aos 28 de Abril de {{ date('Y')}}
                         </p>
                         <p>
                                 É {{ $cargo->designacao }}, convertido na categoria de {{ $categoriaFuncionario->categoria.' do '.$categoriaFuncionario->grau }}, salario base de {{ $categoriaFuncionario->salariobase }} com o número de agente {{ $funcionario->numeroAgente }} colocado na Unidade Organica, {{ $unidadeOrganica->designacao }} 
@@ -187,11 +190,8 @@ $naturalidade = App\Models\Naturalidade::where('idPessoa',$pessoa->id)->first();
                         </p>
                 </div>
                 <div class="data-local">
-                        <?php
-                        setlocale(LC_TIME, 'pt_BR' , 'pt_BR.utf-8', 'portuguese' );
-                        //Lembrar de Implementar  Arquivos de Localizacao em portugues no servidor PHP
-                        ?>
-                        <p>Direcção Municipal da Educação do Púri, _____/_______________/_______ </p>
+                  
+                        <p>Direcção Municipal da Educação do Púri, {{ strftime('%d de %B de %Y', strtotime(\Carbon\Carbon::parse(date('d F Y')))) }}</p>
                 </div>
                 <div class="autenticacao" style="position:relative; text-align:center;" >
                 <!--Importar a Imagem de assinatura do Funionario e posteriomente aolicar mecanismos de assinatura digital com verifcacao com codigo QR-->

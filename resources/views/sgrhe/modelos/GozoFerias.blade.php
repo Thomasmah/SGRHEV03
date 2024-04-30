@@ -1,3 +1,6 @@
+@php
+  setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'portuguese');
+@endphp
 <?php
 //Dados Requisitos
 $dataI= new DateTime($Request['dataInicio']);
@@ -162,7 +165,7 @@ $dataI= new DateTime($Request['dataInicio']);
                         @endphp
                         <span style="font-weight: bold;">{{$pessoa->nomeCompleto}}</span>, Professoar(a) <span>convertido(a) na função de {{$cargo->designacao}} na {{ $unidadeOrganica->designacao}}</span>.
                         <p>Tendo em conta os dispostos vertidos na alinea <span class="artigo">h) do artigo 9º</span>. concatenando com o <span class="artigo">nº 1 </span> dos artigos <span class="artigos">77º, 78º, 79 e 83º</span> todos da Lei <span class="artigo">nº 26/22 de Agosto</span>;</p>
-                        <p>A funcionária supracitada vem mui respeitosamente requerer a Sua Excelência Senhor Director Municipal da Educação, se digne autorizar as suas férias no periódo {{$dataI->format('d  F Y')}} até {{ $Proximos30->format('d F Y') }}, de formas a recuperar as suas condições físicas e psíquicas de desgaste, provocadas pela prestação da sua actividadelaboral em conformidade com o plano de férias gizado pela Secretaria da Direcção Municipal.</p>
+                        <p>A funcionária supracitada vem mui respeitosamente requerer a Sua Excelência Senhor Director Municipal da Educação, se digne autorizar as suas férias no periódo  {{strftime('%d %B de %Y', strtotime(\Carbon\Carbon::parse($dataI))) }} até {{strftime('%d %B de %Y', strtotime(\Carbon\Carbon::parse($Proximos30))) }}, de formas a recuperar as suas condições físicas e psíquicas de desgaste, provocadas pela prestação da sua actividadelaboral em conformidade com o plano de férias gizado pela Secretaria da Direcção Municipal.</p>
                         <p>Espera Deferimento.</p>
 
                 </div>
@@ -177,7 +180,7 @@ $dataI= new DateTime($Request['dataInicio']);
                         setlocale(LC_TIME, 'pt_BR' , 'pt_BR.utf-8', 'portuguese' );
                         //Lembrar de Implementar  Arquivos de Localizacao em portugues no servidor PHP
                         ?>
-                        <p>Direcção Municipal da Educação do Púri, {{ date('d').' de '.date('F').' de '.date('Y') }} </p>
+                        <p>Direcção Municipal da Educação do Púri, {{ strftime('%d de %B de %Y', strtotime(\Carbon\Carbon::parse(date('d F Y')))) }}</p>
                 </div>
                 <div class="autenticacao" style="position:relative; text-align:center;" >
                 <!--Importar a Imagem de assinatura do Funionario e posteriomente aolicar mecanismos de assinatura digital com verifcacao com codigo QR-->

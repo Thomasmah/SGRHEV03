@@ -1,3 +1,6 @@
+@php
+  setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'portuguese');
+@endphp
 <?php
 $dataI= new DateTime($Request['dataInicio']);
 $dataF= new DateTime($Request['dataFim']);
@@ -156,7 +159,7 @@ $dataF= new DateTime($Request['dataFim']);
                         <p>Licença Nº 500 #### DMEP / ano</p>
                 </div>
                 <div class="introducao">
-                        {{$pessoa->nomeCompleto}}, funcionári(a) desta Direcção, vem por meio deste, solicitar ao Senhor Director Municipal da Educação do Púri, se digne dispensá-lo num período de {{ ($dataI->diff($dataF))->format('%a') }} dias úteis, a partir de {{ $dataI->format('d').' de '.$dataI->format('F').' de '.$dataI->format('Y') }} à  {{ $dataF->format('d').' de '.$dataF->format('F').' de '.$dataF->format('Y') }}, {{ $Request['motivo']}}
+                        {{$pessoa->nomeCompleto}}, funcionári(a) desta Direcção, vem por meio deste, solicitar ao Senhor Director Municipal da Educação do Púri, se digne dispensá-lo num período de {{ ($dataI->diff($dataF))->format('%a') }} dias úteis, a partir de {{strftime('%d %B de %Y', strtotime(\Carbon\Carbon::parse($dataI))) }} à  {{strftime('%d %B de %Y', strtotime(\Carbon\Carbon::parse($dataF))) }}, {{ $Request['motivo']}}
                 </div>
                 <div class="preenchimento">
                        # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # ###
@@ -165,11 +168,8 @@ $dataF= new DateTime($Request['dataFim']);
                      
                 </div>
                 <div class="data-local">
-                        <?php
-                        setlocale(LC_TIME, 'pt_BR' , 'pt_BR.utf-8', 'portuguese' );
-                        //Lembrar de Implementar  Arquivos de Localizacao em portugues no servidor PHP
-                        ?>
-                        <p>Direcção Municipal da Educação do Púri, {{ date('d').' de '.date('F').' de '.date('Y') }} </p>
+                     
+                        <p>Direcção Municipal da Educação do Púri, {{ strftime('%d de %B de %Y', strtotime(\Carbon\Carbon::parse(date('d F Y')))) }}</p>
                 </div>
                 <div class="autenticacao" style="position:relative; text-align:center;" >
                 <!--Importar a Imagem de assinatura do Funionario e posteriomente aolicar mecanismos de assinatura digital com verifcacao com codigo QR-->
