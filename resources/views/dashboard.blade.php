@@ -149,8 +149,8 @@
                 <div class="small-box bg-light">
                   <div class="inner">
                     <h3>{{ $matriculadosIAMF }} Alunos</h3>
-                    <p><span style="font-size: 30px;"> {{ round(($matriculadosIAF*100)/$matriculadosIAMF, 2) }}%</span> Femininos: {{ $matriculadosIAF}} Alunas</p>
-                    <p><span style="font-size: 30px;"> {{ round((($matriculadosIAMF-$matriculadosIAF)*100)/$matriculadosIAMF, 2) }}%</span> Mascilinos: {{ $matriculadosIAMF-$matriculadosIAF}} Alunas</p>
+                    <p><span style="font-size: 30px;"> {{ $matriculadosIAMF == 0 ? 'Sem Dados' : round(($matriculadosIAF*100)/$matriculadosIAMF, 2).'%' }} </span> Femininos: {{ $matriculadosIAF}} Alunas</p>
+                    <p><span style="font-size: 30px;"> {{ $matriculadosIAMF == 0 ? 'Sem Dados' : round((($matriculadosIAMF-$matriculadosIAF)*100)/$matriculadosIAMF, 2).'%' }}</span> Mascilinos: {{ $matriculadosIAMF-$matriculadosIAF}} Alunas</p>
                   </div>
                   <div class="icon">
                     <i class="ion ion-stats-bars"></i>
@@ -161,10 +161,8 @@
 
               <!-- ./col -->
             </div>
-            <!-- /.row -->
-            <!-- Main row -->
-            <div class="row">
-              <!-- Left col -->
+   
+   
               <section class="col-lg-7 connectedSortable">
                 <!-- Custom tabs (Charts with tabs)-->
                 <div class="card">
@@ -201,7 +199,7 @@
    
 
               <!-- /. -->
-                </section>
+              </section>
                   <!-- /.Left col -->
                   <!-- right col (We are only adding the ID to make the widgets sortable)-->
                   <section class="col-lg-5 connectedSortable">
@@ -291,9 +289,11 @@
                   <!-- Map card -->
 
               
-                </section>
-              <!-- right col -->
-
+              </section>
+          
+          </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
               <section class="content">
                 <div class="container-fluid">
                   <div class="row">
@@ -317,65 +317,67 @@
                                                 Status de Submisão de Formuário por Unidade Orgânica 
                                               </h3>
                                             </div>
-                                            <div class="card-body w-100">
-                                              <table class="table table-hover  table-striped">
-                                                <thead>
-                                                  <tr>
-                                                    <th>Unidade Organica</th>
-                                                    <th>Nível de Ensino</th>
-                                                    <th>Localidade</th>
-                                                    <th>Director</th>
-                                                    <th>Telefone</th>
-                                                    <th>Status</th>
-                                                  </tr>
-                                                </thead>
-                                                <tbody>
-                                                  @foreach($SubControlInIs as $SubControlInI)
+                                            <div class="card-body">
+                                              <div class="table-responsive">
+                                                <table class="table table-hover table-bordered border-secondary table-striped" style="text-align:center;">
+                                                  <thead>
                                                     <tr>
-                                                      <td>
-                                                        {{$SubControlInI->designacao}}
-                                                      </td>
-                                                      <td>
-                                                        {{$SubControlInI->nivelEnsino}}
-                                                      </td>
-                                                      <td>
-                                                        {{$SubControlInI->localidade}}
-                                                      </td>
-                                                      <td>
-                                                        {{'N/D'}}
-                                                      </td>
-                                                      <td>
-                                                        {{$SubControlInI->telefone}}
-                                                      </td>
-                                                      <td class=" text-success">
-                                                        Formulário Submetido
-                                                      </td>
+                                                      <th>Unidade Organica</th>
+                                                      <th>Nível de Ensino</th>
+                                                      <th>Localidade</th>
+                                                      <th>Director</th>
+                                                      <th>Telefone</th>
+                                                      <th>Status</th>
                                                     </tr>
-                                                  @endforeach
-                                                  @foreach($SubControlNonIs as $SubControlNonI)
-                                                    <tr>
-                                                      <td>
-                                                        {{$SubControlNonI->designacao}}
-                                                      </td>
-                                                      <td>
-                                                        {{$SubControlNonI->nivelEnsino}}
-                                                      </td>
-                                                      <td>
-                                                        {{$SubControlNonI->localidade}}
-                                                      </td>
-                                                      <td>
-                                                        {{'N/D'}}
-                                                      </td>
-                                                      <td>
-                                                        {{$SubControlNonI->telefone}}
-                                                      </td>
-                                                      <td class=" text-danger">
-                                                        Não Submeteu o Formulário
-                                                      </td>
-                                                    </tr>
-                                                  @endforeach
-                                                </tbody>
-                                              </table>
+                                                  </thead>
+                                                  <tbody>
+                                                    @foreach($SubControlInIs as $SubControlInI)
+                                                      <tr>
+                                                        <td>
+                                                          {{$SubControlInI->designacao}}
+                                                        </td>
+                                                        <td>
+                                                          {{$SubControlInI->nivelEnsino}}
+                                                        </td>
+                                                        <td>
+                                                          {{$SubControlInI->localidade}}
+                                                        </td>
+                                                        <td>
+                                                          {{'N/D'}}
+                                                        </td>
+                                                        <td>
+                                                          {{$SubControlInI->telefone}}
+                                                        </td>
+                                                        <td class=" text-success">
+                                                          Formulário Submetido
+                                                        </td>
+                                                      </tr>
+                                                    @endforeach
+                                                    @foreach($SubControlNonIs as $SubControlNonI)
+                                                      <tr>
+                                                        <td>
+                                                          {{$SubControlNonI->designacao}}
+                                                        </td>
+                                                        <td>
+                                                          {{$SubControlNonI->nivelEnsino}}
+                                                        </td>
+                                                        <td>
+                                                          {{$SubControlNonI->localidade}}
+                                                        </td>
+                                                        <td>
+                                                          {{'N/D'}}
+                                                        </td>
+                                                        <td>
+                                                          {{$SubControlNonI->telefone}}
+                                                        </td>
+                                                        <td class=" text-danger">
+                                                          Não Submeteu o Formulário
+                                                        </td>
+                                                      </tr>
+                                                    @endforeach
+                                                  </tbody>
+                                                </table>
+                                              </div>
                                             </div>
                                           </div>
                                         </div>
@@ -386,65 +388,67 @@
                                                 Status de Submisão de Formuário por Unidade Orgânica 
                                               </h3>
                                             </div>
-                                            <div class="card-body w-100">
-                                              <table class="table table-hover  table-striped">
-                                                <thead>
-                                                  <tr>
-                                                    <th>Unidade Organica</th>
-                                                    <th>Nível de Ensino</th>
-                                                    <th>Localidade</th>
-                                                    <th>Director</th>
-                                                    <th>Telefone</th>
-                                                    <th>Status</th>
-                                                  </tr>
-                                                </thead>
-                                                <tbody>
-                                                  @foreach($SubControlInIs as $SubControlInII)
+                                            <div class="card-body">
+                                              <div class="table-responsive">
+                                                <table class="table table-hover table-bordered border-secondary table-striped" style="text-align:center;">
+                                                  <thead>
                                                     <tr>
-                                                      <td>
-                                                        {{$SubControlInII->designacao}}
-                                                      </td>
-                                                      <td>
-                                                        {{$SubControlInII->nivelEnsino}}
-                                                      </td>
-                                                      <td>
-                                                        {{$SubControlInII->localidade}}
-                                                      </td>
-                                                      <td>
-                                                        {{'N/D'}}
-                                                      </td>
-                                                      <td>
-                                                        {{$SubControlInII->telefone}}
-                                                      </td>
-                                                      <td class=" text-success">
-                                                        Formulário Submetido
-                                                      </td>
+                                                      <th>Unidade Organica</th>
+                                                      <th>Nível de Ensino</th>
+                                                      <th>Localidade</th>
+                                                      <th>Director</th>
+                                                      <th>Telefone</th>
+                                                      <th>Status</th>
                                                     </tr>
-                                                  @endforeach
-                                                  @foreach($SubControlNonIIs as $SubControlNonII)
-                                                    <tr>
-                                                      <td>
-                                                        {{$SubControlNonII->designacao}}
-                                                      </td>
-                                                      <td>
-                                                        {{$SubControlNonII->nivelEnsino}}
-                                                      </td>
-                                                      <td>
-                                                        {{$SubControlNonII->localidade}}
-                                                      </td>
-                                                      <td>
-                                                        {{'N/D'}}
-                                                      </td>
-                                                      <td>
-                                                        {{$SubControlNonII->telefone}}
-                                                      </td>
-                                                      <td class=" text-danger">
-                                                        Não Submeteu o Formulário
-                                                      </td>
-                                                    </tr>
-                                                  @endforeach
-                                                </tbody>
-                                              </table>
+                                                  </thead>
+                                                  <tbody>
+                                                    @foreach($SubControlInIIs as $SubControlInII)
+                                                      <tr>
+                                                        <td>
+                                                          {{$SubControlInII->designacao}}
+                                                        </td>
+                                                        <td>
+                                                          {{$SubControlInII->nivelEnsino}}
+                                                        </td>
+                                                        <td>
+                                                          {{$SubControlInII->localidade}}
+                                                        </td>
+                                                        <td>
+                                                          {{'N/D'}}
+                                                        </td>
+                                                        <td>
+                                                          {{$SubControlInII->telefone}}
+                                                        </td>
+                                                        <td class=" text-success">
+                                                          Formulário Submetido
+                                                        </td>
+                                                      </tr>
+                                                    @endforeach
+                                                    @foreach($SubControlNonIIs as $SubControlNonII)
+                                                      <tr>
+                                                        <td>
+                                                          {{$SubControlNonII->designacao}}
+                                                        </td>
+                                                        <td>
+                                                          {{$SubControlNonII->nivelEnsino}}
+                                                        </td>
+                                                        <td>
+                                                          {{$SubControlNonII->localidade}}
+                                                        </td>
+                                                        <td>
+                                                          {{'N/D'}}
+                                                        </td>
+                                                        <td>
+                                                          {{$SubControlNonII->telefone}}
+                                                        </td>
+                                                        <td class=" text-danger">
+                                                          Não Submeteu o Formulário
+                                                        </td>
+                                                      </tr>
+                                                    @endforeach
+                                                  </tbody>
+                                                </table>
+                                              </div>
                                             </div>
                                           </div>
                                         </div>
@@ -455,65 +459,67 @@
                                                 Status de Submisão de Formuário por Unidade Orgânica 
                                               </h3>
                                             </div>
-                                            <div class="card-body w-100">
-                                              <table class="table table-hover  table-striped">
-                                                <thead>
-                                                  <tr>
-                                                    <th>Unidade Organica</th>
-                                                    <th>Nível de Ensino</th>
-                                                    <th>Localidade</th>
-                                                    <th>Director</th>
-                                                    <th>Telefone</th>
-                                                    <th>Status</th>
-                                                  </tr>
-                                                </thead>
-                                                <tbody>
-                                                  @foreach($SubControlInIIIs as $SubControlInIII)
+                                            <div class="card-body">
+                                              <div class="table-responsive">
+                                                <table class="table table-hover table-bordered border-secondary table-striped" style="text-align:center;">
+                                                  <thead>
                                                     <tr>
-                                                      <td>
-                                                        {{$SubControlInIII->designacao}}
-                                                      </td>
-                                                      <td>
-                                                        {{$SubControlInIII->nivelEnsino}}
-                                                      </td>
-                                                      <td>
-                                                        {{$SubControlInIII->localidade}}
-                                                      </td>
-                                                      <td>
-                                                        {{'N/D'}}
-                                                      </td>
-                                                      <td>
-                                                        {{$SubControlInIII->telefone}}
-                                                      </td>
-                                                      <td class=" text-success">
-                                                        Formulário Submetido
-                                                      </td>
+                                                      <th>Unidade Organica</th>
+                                                      <th>Nível de Ensino</th>
+                                                      <th>Localidade</th>
+                                                      <th>Director</th>
+                                                      <th>Telefone</th>
+                                                      <th>Status</th>
                                                     </tr>
-                                                  @endforeach
-                                                  @foreach($SubControlNonIIIs as $SubControlNonIII)
-                                                    <tr>
-                                                      <td>
-                                                        {{$SubControlNonIII->designacao}}
-                                                      </td>
-                                                      <td>
-                                                        {{$SubControlNonIII->nivelEnsino}}
-                                                      </td>
-                                                      <td>
-                                                        {{$SubControlNonIII->localidade}}
-                                                      </td>
-                                                      <td>
-                                                        {{'N/D'}}
-                                                      </td>
-                                                      <td>
-                                                        {{$SubControlNonIII->telefone}}
-                                                      </td>
-                                                      <td class=" text-danger">
-                                                        Não Submeteu o Formulário
-                                                      </td>
-                                                    </tr>
-                                                  @endforeach
-                                                </tbody>
-                                              </table>
+                                                  </thead>
+                                                  <tbody>
+                                                    @foreach($SubControlInIIIs as $SubControlInIII)
+                                                      <tr>
+                                                        <td>
+                                                          {{$SubControlInIII->designacao}}
+                                                        </td>
+                                                        <td>
+                                                          {{$SubControlInIII->nivelEnsino}}
+                                                        </td>
+                                                        <td>
+                                                          {{$SubControlInIII->localidade}}
+                                                        </td>
+                                                        <td>
+                                                          {{'N/D'}}
+                                                        </td>
+                                                        <td>
+                                                          {{$SubControlInIII->telefone}}
+                                                        </td>
+                                                        <td class=" text-success">
+                                                          Formulário Submetido
+                                                        </td>
+                                                      </tr>
+                                                    @endforeach
+                                                    @foreach($SubControlNonIIIs as $SubControlNonIII)
+                                                      <tr>
+                                                        <td>
+                                                          {{$SubControlNonIII->designacao}}
+                                                        </td>
+                                                        <td>
+                                                          {{$SubControlNonIII->nivelEnsino}}
+                                                        </td>
+                                                        <td>
+                                                          {{$SubControlNonIII->localidade}}
+                                                        </td>
+                                                        <td>
+                                                          {{'N/D'}}
+                                                        </td>
+                                                        <td>
+                                                          {{$SubControlNonIII->telefone}}
+                                                        </td>
+                                                        <td class=" text-danger">
+                                                          Não Submeteu o Formulário
+                                                        </td>
+                                                      </tr>
+                                                    @endforeach
+                                                  </tbody>
+                                                </table>
+                                              </div>
                                             </div>
                                           </div>
                                         </div>
@@ -524,65 +530,67 @@
                                                 Status de Submisão de Formuário por Unidade Orgânica 
                                               </h3>
                                             </div>
-                                            <div class="card-body w-100">
-                                              <table class="table table-hover  table-striped">
-                                                <thead>
-                                                  <tr>
-                                                    <th>Unidade Organica</th>
-                                                    <th>Nível de Ensino</th>
-                                                    <th>Localidade</th>
-                                                    <th>Director</th>
-                                                    <th>Telefone</th>
-                                                    <th>Status</th>
-                                                  </tr>
-                                                </thead>
-                                                <tbody>
-                                                  @foreach($SubControlInFinals as $SubControlInFinal)
+                                            <div class="card-body ">
+                                              <div class="table-responsive">
+                                                <table class="table table-hover table-bordered border-secondary table-striped" style="text-align:center;">
+                                                  <thead>
                                                     <tr>
-                                                      <td>
-                                                        {{$SubControlInFinal->designacao}}
-                                                      </td>
-                                                      <td>
-                                                        {{$SubControlInFinal->nivelEnsino}}
-                                                      </td>
-                                                      <td>
-                                                        {{$SubControlInFinal->localidade}}
-                                                      </td>
-                                                      <td>
-                                                        {{'N/D'}}
-                                                      </td>
-                                                      <td>
-                                                        {{$SubControlInFinal->telefone}}
-                                                      </td>
-                                                      <td class=" text-success">
-                                                        Formulário Submetido
-                                                      </td>
+                                                      <th>Unidade Organica</th>
+                                                      <th>Nível de Ensino</th>
+                                                      <th>Localidade</th>
+                                                      <th>Director</th>
+                                                      <th>Telefone</th>
+                                                      <th>Status</th>
                                                     </tr>
-                                                  @endforeach
-                                                  @foreach($SubControlNonFinals as $SubControlNonFinal)
-                                                    <tr>
-                                                      <td>
-                                                        {{$SubControlNonFinal->designacao}}
-                                                      </td>
-                                                      <td>
-                                                        {{$SubControlNonFinal->nivelEnsino}}
-                                                      </td>
-                                                      <td>
-                                                        {{$SubControlNonFinal->localidade}}
-                                                      </td>
-                                                      <td>
-                                                        {{'N/D'}}
-                                                      </td>
-                                                      <td>
-                                                        {{$SubControlNonFinal->telefone}}
-                                                      </td>
-                                                      <td class=" text-danger">
-                                                        Não Submeteu o Formulário
-                                                      </td>
-                                                    </tr>
-                                                  @endforeach
-                                                </tbody>
-                                              </table>
+                                                  </thead>
+                                                  <tbody>
+                                                    @foreach($SubControlInFinals as $SubControlInFinal)
+                                                      <tr>
+                                                        <td>
+                                                          {{$SubControlInFinal->designacao}}
+                                                        </td>
+                                                        <td>
+                                                          {{$SubControlInFinal->nivelEnsino}}
+                                                        </td>
+                                                        <td>
+                                                          {{$SubControlInFinal->localidade}}
+                                                        </td>
+                                                        <td>
+                                                          {{'N/D'}}
+                                                        </td>
+                                                        <td>
+                                                          {{$SubControlInFinal->telefone}}
+                                                        </td>
+                                                        <td class=" text-success">
+                                                          Formulário Submetido
+                                                        </td>
+                                                      </tr>
+                                                    @endforeach
+                                                    @foreach($SubControlNonFinals as $SubControlNonFinal)
+                                                      <tr>
+                                                        <td>
+                                                          {{$SubControlNonFinal->designacao}}
+                                                        </td>
+                                                        <td>
+                                                          {{$SubControlNonFinal->nivelEnsino}}
+                                                        </td>
+                                                        <td>
+                                                          {{$SubControlNonFinal->localidade}}
+                                                        </td>
+                                                        <td>
+                                                          {{'N/D'}}
+                                                        </td>
+                                                        <td>
+                                                          {{$SubControlNonFinal->telefone}}
+                                                        </td>
+                                                        <td class=" text-danger">
+                                                          Não Submeteu o Formulário
+                                                        </td>
+                                                      </tr>
+                                                    @endforeach
+                                                  </tbody>
+                                                </table>
+                                              </div>
                                             </div>
                                           </div>
                                         </div>
@@ -596,11 +604,7 @@
                 </div>
                   <!-- /.row -->
               </section>
-            </div>
-            <!-- /.row (main row) -->
-          </div><!-- /.container-fluid -->
-        </section>
-        <!-- /.content -->
+      
       </div>
       <!-- /.content-wrapper -->
     </div>

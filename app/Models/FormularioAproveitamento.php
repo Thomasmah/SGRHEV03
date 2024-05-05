@@ -33,6 +33,7 @@ class FormularioAproveitamento extends Model
                     'idDirector',
                     'idUnidadeOrganica',
                     'anoLectivo',
-                    'trimestre',              
+                    'trimestre', 
+                    'Request',             
     ];
 }
