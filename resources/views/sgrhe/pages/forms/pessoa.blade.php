@@ -43,21 +43,21 @@
                           
                               <label>Identificação</label>
                               <div class="form-group">
-                                <label for="nomeCompleto">Nome Completo</label>
+                                <label for="nomeCompleto"><span class="text-danger">*</span>Nome Completo</label>
                                 <input type="text" name="nomeCompleto" class="form-control" id="nomeCompleto" placeholder="Nome Completo" maxlength="250" required value="{{ isset($pessoa) ? $pessoa->nomeCompleto : ''}}">
-                                <label for="dataNascimento">Data de Nascimento</label>
+                                <label for="dataNascimento"><span class="text-danger">*</span>Data de Nascimento</label>
                                 <input type="date" name="dataNascimento" class="form-control" id="dataNascimento" placeholder="12-12-2000" required value="{{ isset($pessoa) ? $pessoa->dataNascimento : ''}}" >
                               </div>
                               <div class="form-group">
-                                <label for="numeroBI">Bilhete de Identidade "BI"</label>
+                                <label for="numeroBI"> <span class="text-danger">*</span> Bilhete de Identidade "BI"</label>
                                 <input type="text" name="numeroBI" class="form-control" id="numeroBI" maxlength="14" placeholder="002223421AE042" required value="{{ isset($pessoa) ? $pessoa->numeroBI : ''}}">
-                                <label for="validadeBI"> Validade do Bilhete de Identidade "BI"</label>
+                                <label for="validadeBI"><span class="text-danger">*</span> Validade do Bilhete de Identidade "BI"</label>
                                 <input type="date" name="validadeBI" class="form-control" id="validadeBI" placeholder="12-12-2000" required value="{{ isset($pessoa) ? $pessoa->validadeBI : ''}}">
                               </div>
                               
                               <label>Naturalidade</label>
                               <div  class="form-group">
-                              <label for="provincia">Escolha uma Província:</label>
+                              <label for="provincia"><span class="text-danger">*</span>Escolha uma Província:</label>
                                   <select name="provincia" id="provincia" onchange="carregarMunicipios()" class="form-control select2" style="width: 100%;" required>
                                       <option value="{{isset($naturalidade) ? $naturalidade->provincia : ''}}">{{isset($naturalidade) ? $naturalidade->provincia : 'Seleccione Uma Província'}}</option>
                                       <option value="Bengo">Bengo</option>
@@ -82,7 +82,7 @@
                                       <!-- Adicione mais opções de província aqui -->
                               
                                     </select>
-                                  <label for="municipio">Escolha um Município:</label>
+                                  <label for="municipio"><span class="text-danger">*</span>Escolha um Município:</label>
                                   <select id="municipio" name="municipio" class="form-control select2" style="width: 100%;" required>
                                       <option value="{{isset($naturalidade) ? $naturalidade->municipio : ''}}">{{isset($naturalidade) ? $naturalidade->municipio : 'Seleccione o Município'}}</option>
                                   </select>
@@ -90,7 +90,7 @@
 
 
                               <div class="form-group">
-                                <label for="genero">Genero</label>
+                                <label for="genero"><span class="text-danger">*</span>Genero</label>
                                   <select name="genero" class="form-control select2" style="width: 100%;" required>
                                       <option selected="{{isset($pessoa) ? $pessoa->genero : ''}}">{{isset($pessoa) ? $pessoa->genero : 'Seleccione o Sexo'}}</option>
                                       <option>Feminino</option>
@@ -100,14 +100,14 @@
                           
                               <label>Parentesco:</label>
                               <div class="form-group">
-                                <label for="nomePai">Nome do Pai</label>
+                                <label for="nomePai"><span class="text-danger">*</span>Nome do Pai</label>
                                 <input type="text" name="nomePai" class="form-control" id="nomePai" maxlength="250" placeholder="Nome Completo do Pai" value="{{ isset($parente) ? $parente->nomePai : ''}}" required>
-                                <label for="nomeMae">Nome da Mãe</label>
+                                <label for="nomeMae"><span class="text-danger">*</span>Nome da Mãe</label>
                                 <input type="text" name="nomeMae" class="form-control" id="nomeMae" maxlength="250" placeholder="Nome Completo do Mãe" value="{{ isset($parente) ? $parente->nomeMae : ''}}" required>
                               </div>
                               <div class="form-group">
                                 <label for="grupoSanguineo">Grupo Sanguineo</label>
-                                  <select name="grupoSanguineo" class="form-control select2" style="width: 100%;" required>
+                                  <select name="grupoSanguineo" class="form-control select2" style="width: 100%;">
                                       <option value="{{isset($pessoa) ? $pessoa->grupoSanguineo : ''}}"> {{ isset($pessoa) ? $pessoa->grupoSanguineo : 'Seleccione o Grupo Sanguíneo' }} </option>
                                       <option >A+</option>
                                       <option >A-</option>
@@ -120,12 +120,54 @@
                                   </select>
                               </div>
                               <div class="form-group">
-                                <label for="estadoCivil">Estado Civil</label>
-                                  <select name="estadoCivil" class="form-control select2" style="width: 100%;" required>
+                                <label for="estadoCivil"><span class="text-danger">*</span>Estado Civil</label>
+                                  <select name="estadoCivil" class="form-control select2" style="width: 100%;" >
                                       <option value="{{isset($pessoa) ? $pessoa->estadoCivil : ''}}">{{isset($pessoa) ? $pessoa->estadoCivil : 'Seleccione o Estado Cívil'}}</option>
                                       <option>Casados(a)</option>
                                       <option>Solteiro(a)</option>
                                   </select>
+                              </div>
+                              <div  class="form-group {{ isset($pessoa) ? 'd-none' : '' }}">
+                              <label>Endereço</label>
+                              <label for="provinciaEndereco">Escolha uma Província:</label>
+                                  <select name="provinciaEndereco" id="provinciaEndereco" onchange="carregarMunicipiosEndereco()" class="form-control select2" style="width: 100%;" >
+                                      <option value="{{isset($naturalidade) ? $naturalidade->provincia : ''}}">{{isset($naturalidade) ? $naturalidade->provincia : 'Seleccione Uma Província'}}</option>
+                                      <option value="Bengo">Bengo</option>
+                                      <option value="Benguela">Benguela</option>
+                                      <option value="Bié">Bié</option>
+                                      <option value="Cabinda">Cabinda</option>
+                                      <option value="Cuando Cubango">Cuando Cubango</option>
+                                      <option value="Cuanza Norte">Cuanza Norte</option>
+                                      <option value="Cuanza Sul">Cuanza Sul</option>
+                                      <option value="Cunene">Cunene</option>
+                                      <option value="Huambo">Huambo</option>
+                                      <option value="Huíla">Huíla</option>
+                                      <option value="Luanda">Luanda</option>
+                                      <option value="Lunda Norte">Lunda Norte</option>
+                                      <option value="Lunda Sul">Lunda Sul</option>
+                                      <option value="Malanje">Malanje</option>
+                                      <option value="Moxico">Moxico</option>
+                                      <option value="Namibe">Namibe</option>
+                                      <option value="Uíge">Uíge</option>
+                                      <option value="Zaire">Zaire</option>
+                                  
+                                      <!-- Adicione mais opções de província aqui -->
+                              
+                                    </select>
+                                  <label for="municipioEndereco">Escolha um Município:</label>
+                                  <select id="municipioEndereco" name="municipioEndereco" class="form-control select2" style="width: 100%;" >
+                                      <option value="{{isset($naturalidade) ? $naturalidade->municipio : ''}}">{{isset($naturalidade) ? $naturalidade->municipio : 'Seleccione o Município'}}</option>
+                                  </select>
+                                  <label for="bairro">Bairro</label>
+                                  <input type="text" name="bairro" class="form-control"  placeholder="Bairro Popular nº 2" maxlength="250"  value="{{ isset($pessoa) ? $pessoa->nomeCompleto : ''}}">
+                                  <label for="zona">Zona</label>
+                                  <input type="text" name="zona" class="form-control"  placeholder="Bairro Popular nº 2" maxlength="250"  value="{{ isset($pessoa) ? $pessoa->nomeCompleto : ''}}">
+                                  <label for="quarteirao">Quarteirão</label>
+                                  <input type="text" name="quarteirao" class="form-control"  placeholder="Quarteirão nº 2" maxlength="250"  value="{{ isset($pessoa) ? $pessoa->nomeCompleto : ''}}">
+                                  <label for="rua">Rua</label>
+                                  <input type="text" name="rua" class="form-control"  placeholder="Rua F " maxlength="100"  value="{{ isset($pessoa) ? $pessoa->nomeCompleto : ''}}">
+                                  <label for="casa">Casa</label>
+                                  <input type="text" name="casa" class="form-control"  placeholder="30" maxlength="10"  value="{{ isset($pessoa) ? $pessoa->nomeCompleto : ''}}">
                               </div>
                               <button type="submit" class="btn btn-primary" style="width: 100%;">{{ isset($pessoa) ? 'Actualizar Dados da Entidade Pessoa ' : 'Cadastrar Entidade Pessoa'}}</button>
                             </form>
@@ -149,7 +191,7 @@
         @endsection
     @section('scripts')
       <!--Sscripts para Popular o SelectOption das Procincias de Forma Dinamica-->
-      <script>
+          <script>
               function carregarMunicipios() {
                   const provincia = document.getElementById("provincia").value;
                   const municipioSelect = document.getElementById("municipio");
@@ -162,205 +204,422 @@
                       municipioSelect.innerHTML = "<option value=''>Selecione um município</option>";
                       switch (provincia) {
                           case "Bengo":
-                              municipioSelect.innerHTML += "<option value='Bengo'>Ambriz </option>";
-                              municipioSelect.innerHTML += "<option value='Bengo'>Bula Atumba </option>";
-                              municipioSelect.innerHTML += "<option value='Bengo'>Dande </option>";
-                              municipioSelect.innerHTML += "<option value='Bengo'>Nambuangongo </option>";
-                              municipioSelect.innerHTML += "<option value='Bengo'>Quibaxe </option>";
-                              municipioSelect.innerHTML += "<option value='Caxito </option>";
+                              municipioSelect.innerHTML += "<option value='Ambriz'>Ambriz </option>";
+                              municipioSelect.innerHTML += "<option value='Bula Atumba'>Bula Atumba </option>";
+                              municipioSelect.innerHTML += "<option value='Dande'>Dande </option>";
+                              municipioSelect.innerHTML += "<option value='Nambuangongo'>Nambuangongo </option>";
+                              municipioSelect.innerHTML += "<option value='Quibaxe'>Quibaxe </option>";
+                              municipioSelect.innerHTML += "<option value='Caxito'> Caxito </option>";
                               break;
                           case "Benguela":
-                              municipioSelect.innerHTML += "<option value='Benguela'>Baia Farta </option>";
-                              municipioSelect.innerHTML += "<option value='Benguela'>Balombo </option>";
+                              municipioSelect.innerHTML += "<option value='Baia Farta'>Baia Farta </option>";
+                              municipioSelect.innerHTML += "<option value='Balombo'>Balombo </option>";
                               municipioSelect.innerHTML += "<option value='Benguela'>Benguela </option>";
-                              municipioSelect.innerHTML += "<option value='Benguela'>Bocoio </option>";
-                              municipioSelect.innerHTML += "<option value='Benguela'>Caimbambo </option>";
-                              municipioSelect.innerHTML += "<option value='Benguela'>Chongoroi </option>";
-                              municipioSelect.innerHTML += "<option value='Benguela'>Cubal </option>";
-                              municipioSelect.innerHTML += "<option value='Benguela'>Ganda </option>";
-                              municipioSelect.innerHTML += "<option value='Benguela'>Lobito </option>";
-                              municipioSelect.innerHTML += "<option value='Benguela'>Vaváu </option>";
+                              municipioSelect.innerHTML += "<option value='Bocoio'>Bocoio </option>";
+                              municipioSelect.innerHTML += "<option value='Caimbambo'>Caimbambo </option>";
+                              municipioSelect.innerHTML += "<option value='Chongoroi'>Chongoroi </option>";
+                              municipioSelect.innerHTML += "<option value='Cubal'>Cubal </option>";
+                              municipioSelect.innerHTML += "<option value='Ganda'>Ganda </option>";
+                              municipioSelect.innerHTML += "<option value='Lobito'>Lobito </option>";
+                              municipioSelect.innerHTML += "<option value='Vaváu'>Vaváu </option>";
                               break;
                           case "Bié":
-                              municipioSelect.innerHTML += "<option value='Bié'>Andulo A</option>";
-                              municipioSelect.innerHTML += "<option value='Bié'>Camacupa A</option>";
-                              municipioSelect.innerHTML += "<option value='Bié'>Catabola A</option>";
-                              municipioSelect.innerHTML += "<option value='Bié'>Chinguar A</option>";
-                              municipioSelect.innerHTML += "<option value='Bié'>Chitembo A</option>";
-                              municipioSelect.innerHTML += "<option value='Bié'>Cuemba A</option>";
-                              municipioSelect.innerHTML += "<option value='Bié'>Huambo A</option>";
-                              municipioSelect.innerHTML += "<option value='Bié'>Cunhinga A</option>";
-                              municipioSelect.innerHTML += "<option value='Bié'>Kuito A</option>";
-                              municipioSelect.innerHTML += "<option value='Bié'>Nhârea A</option>";
+                              municipioSelect.innerHTML += "<option value='Andulo'>Andulo</option>";
+                              municipioSelect.innerHTML += "<option value='Camacupa'>Camacupa</option>";
+                              municipioSelect.innerHTML += "<option value='Catabola'>Catabola</option>";
+                              municipioSelect.innerHTML += "<option value='Chinguar'>Chinguar</option>";
+                              municipioSelect.innerHTML += "<option value='Chitembo'>Chitembo</option>";
+                              municipioSelect.innerHTML += "<option value='Cuemba'>Cuemba</option>";
+                              municipioSelect.innerHTML += "<option value='Huambo'>Huambo</option>";
+                              municipioSelect.innerHTML += "<option value='Cunhinga'>Cunhinga</option>";
+                              municipioSelect.innerHTML += "<option value='Kuito'>Kuito</option>";
+                              municipioSelect.innerHTML += "<option value='Nhârea'>Nhârea</option>";
                             
                               break;
                           case "Cabinda":
-                              municipioSelect.innerHTML += "<option value='Bié'>Belize </option>";
-                              municipioSelect.innerHTML += "<option value='Bié'>Buco-Zau </option>";
-                              municipioSelect.innerHTML += "<option value='Bié'>Cabinda </option>";
-                              municipioSelect.innerHTML += "<option value='Bié'>Cangongo </option>";
-                              municipioSelect.innerHTML += "<option value='Bié'>Dinge </option>";
-                              municipioSelect.innerHTML += "<option value='Bié'>Lândana </option>";
-                              municipioSelect.innerHTML += "<option value='Bié'>Luali </option>";
-                              municipioSelect.innerHTML += "<option value='Bié'>Massabi </option>";
-                              municipioSelect.innerHTML += "<option value='Bié'>Necuto </option>";
+                              municipioSelect.innerHTML += "<option value='Belize'>Belize </option>";
+                              municipioSelect.innerHTML += "<option value='Buco-Zau'>Buco-Zau </option>";
+                              municipioSelect.innerHTML += "<option value='Cabinda'>Cabinda </option>";
+                              municipioSelect.innerHTML += "<option value='Cangongo'>Cangongo </option>";
+                              municipioSelect.innerHTML += "<option value='Dinge'>Dinge </option>";
+                              municipioSelect.innerHTML += "<option value='Lândana'>Lândana </option>";
+                              municipioSelect.innerHTML += "<option value='Luali'>Luali </option>";
+                              municipioSelect.innerHTML += "<option value='Massabi'>Massabi </option>";
+                              municipioSelect.innerHTML += "<option value='Necuto'>Necuto </option>";
                             
                               break;
                           case "Cuando Cubango":
-                              municipioSelect.innerHTML += "<option value='Bié'>Calai </option>";
-                              municipioSelect.innerHTML += "<option value='Bié'>Cuangar </option>";
-                              municipioSelect.innerHTML += "<option value='Bié'>Cuchi </option>";
-                              municipioSelect.innerHTML += "<option value='Bié'>Cuito Cuanavale</option>";
-                              municipioSelect.innerHTML += "<option value='Bié'>Dirico </option>";
-                              municipioSelect.innerHTML += "<option value='Bié'>Longa </option>";
-                              municipioSelect.innerHTML += "<option value='Bié'>Menongue </option>";
-                              municipioSelect.innerHTML += "<option value='Bié'>Mavinga </option>";
-                              municipioSelect.innerHTML += "<option value='Bié'>NAncova </option>";
-                              municipioSelect.innerHTML += "<option value='Bié'>Rivungo </option>";
+                              municipioSelect.innerHTML += "<option value='Calai'>Calai </option>";
+                              municipioSelect.innerHTML += "<option value='Cuangar'>Cuangar </option>";
+                              municipioSelect.innerHTML += "<option value='Cuchi'>Cuchi </option>";
+                              municipioSelect.innerHTML += "<option value='Cuito'>Cuito Cuanavale</option>";
+                              municipioSelect.innerHTML += "<option value='Dirico'>Dirico </option>";
+                              municipioSelect.innerHTML += "<option value='Longa'>Longa </option>";
+                              municipioSelect.innerHTML += "<option value='Menongue'>Menongue </option>";
+                              municipioSelect.innerHTML += "<option value='Mavinga'>Mavinga </option>";
+                              municipioSelect.innerHTML += "<option value='NAncova'>NAncova </option>";
+                              municipioSelect.innerHTML += "<option value='Rivungo'>Rivungo </option>";
                             
                               break;
                           case "Cuanza Norte":
-                              municipioSelect.innerHTML += "<option value='Cuanza Norte'> Ambaca </option>";
-                              municipioSelect.innerHTML += "<option value='Cuanza Norte'> Banga </option>";
-                              municipioSelect.innerHTML += "<option value='Cuanza Norte'> Bolongongo </option>";
-                              municipioSelect.innerHTML += "<option value='Cuanza Norte'> Cambambe </option>";
-                              municipioSelect.innerHTML += "<option value='Cuanza Norte'> Golungo Alto </option>";
-                              municipioSelect.innerHTML += "<option value='Cuanza Norte'> Lucala </option>";
-                              municipioSelect.innerHTML += "<option value='Cuanza Norte'> Ngonguembo </option>";
-                              municipioSelect.innerHTML += "<option value='Cuanza Norte'> Quiculungo </option>";
-                              municipioSelect.innerHTML += "<option value='Cuanza Norte'> Samba Cajú </option>";
-                              municipioSelect.innerHTML += "<option value='Cuanza Norte'> Santa Isabel </option>";
+                              municipioSelect.innerHTML += "<option value='Ambaca'> Ambaca </option>";
+                              municipioSelect.innerHTML += "<option value='Banga'> Banga </option>";
+                              municipioSelect.innerHTML += "<option value='Bolongongo'> Bolongongo </option>";
+                              municipioSelect.innerHTML += "<option value='Cambambe'> Cambambe </option>";
+                              municipioSelect.innerHTML += "<option value='Golungo'> Golungo Alto </option>";
+                              municipioSelect.innerHTML += "<option value='Lucala'> Lucala </option>";
+                              municipioSelect.innerHTML += "<option value='Ngonguembo'> Ngonguembo </option>";
+                              municipioSelect.innerHTML += "<option value='Quiculungo'> Quiculungo </option>";
+                              municipioSelect.innerHTML += "<option value='Samba Cajú'> Samba Cajú </option>";
+                              municipioSelect.innerHTML += "<option value='Santa Isabel'> Santa Isabel </option>";
                             
                               break;
                           case "Cuanza Sul":
-                              municipioSelect.innerHTML += "<option value='Cuanza Sul'> Amboim  </option>";
-                              municipioSelect.innerHTML += "<option value='Cuanza Sul'> Cela  </option>";
-                              municipioSelect.innerHTML += "<option value='Cuanza Sul'> Conda  </option>";
-                              municipioSelect.innerHTML += "<option value='Cuanza Sul'> Ebo  </option>";
-                              municipioSelect.innerHTML += "<option value='Cuanza Sul'> Libolo  </option>";
-                              municipioSelect.innerHTML += "<option value='Cuanza Sul'> Mussende  </option>";
-                              municipioSelect.innerHTML += "<option value='Cuanza Sul'> Porto Amboim  </option>";
-                              municipioSelect.innerHTML += "<option value='Cuanza Sul'> Quibala  </option>";
-                              municipioSelect.innerHTML += "<option value='Cuanza Sul'> Quilenda  </option>";
-                              municipioSelect.innerHTML += "<option value='Cuanza Sul'> Seles  </option>";
-                              municipioSelect.innerHTML += "<option value='Cuanza Sul'> Sumbe </option>";
+                              municipioSelect.innerHTML += "<option value='Amboim'> Amboim  </option>";
+                              municipioSelect.innerHTML += "<option value='Cela'> Cela  </option>";
+                              municipioSelect.innerHTML += "<option value='Conda'> Conda  </option>";
+                              municipioSelect.innerHTML += "<option value='Ebo'> Ebo  </option>";
+                              municipioSelect.innerHTML += "<option value='Libolo'> Libolo  </option>";
+                              municipioSelect.innerHTML += "<option value='Mussende'> Mussende  </option>";
+                              municipioSelect.innerHTML += "<option value='Porto Amboim'> Porto Amboim  </option>";
+                              municipioSelect.innerHTML += "<option value='Quibala'> Quibala  </option>";
+                              municipioSelect.innerHTML += "<option value='Quilenda'> Quilenda  </option>";
+                              municipioSelect.innerHTML += "<option value='Seles'> Seles  </option>";
+                              municipioSelect.innerHTML += "<option value='Sumbe'> Sumbe </option>";
                               break;
                           case "Cunene":
-                              municipioSelect.innerHTML += "<option value='Cunene'> Cahama </option>";
-                              municipioSelect.innerHTML += "<option value='Cunene'> Kuanhama </option>";
-                              municipioSelect.innerHTML += "<option value='Cunene'> Kuvelai </option>";
-                              municipioSelect.innerHTML += "<option value='Cunene'> Namacunde </option>";
-                              municipioSelect.innerHTML += "<option value='Cunene'> Ombadja </option>";
-                              municipioSelect.innerHTML += "<option value='Cunene'> Ondjiva </option>";
+                              municipioSelect.innerHTML += "<option value='Cahama'> Cahama </option>";
+                              municipioSelect.innerHTML += "<option value='Kuanhama'> Kuanhama </option>";
+                              municipioSelect.innerHTML += "<option value='Kuvelai'> Kuvelai </option>";
+                              municipioSelect.innerHTML += "<option value='Namacunde'> Namacunde </option>";
+                              municipioSelect.innerHTML += "<option value='Ombadja'> Ombadja </option>";
+                              municipioSelect.innerHTML += "<option value='Ondjiva'> Ondjiva </option>";
                           case "Huambo":
-                              municipioSelect.innerHTML += "<option value='Huambo'> Bailundo </option>";
-                              municipioSelect.innerHTML += "<option value='Huambo'> Ekunha </option>";
+                              municipioSelect.innerHTML += "<option value='Bailundo'> Bailundo </option>";
+                              municipioSelect.innerHTML += "<option value='Ekunha'> Ekunha </option>";
                               municipioSelect.innerHTML += "<option value='Huambo'> Huambo </option>";
-                              municipioSelect.innerHTML += "<option value='Huambo'> Londuimbali </option>";
-                              municipioSelect.innerHTML += "<option value='Huambo'> Longonjo </option>";
-                              municipioSelect.innerHTML += "<option value='Huambo'> Mungo </option>";
-                              municipioSelect.innerHTML += "<option value='Huambo'> Tchicala Tcholoanga </option>";
-                              municipioSelect.innerHTML += "<option value='Huambo'> Ucuma </option>";
+                              municipioSelect.innerHTML += "<option value='Londuimbali'> Londuimbali </option>";
+                              municipioSelect.innerHTML += "<option value='Longonjo'> Longonjo </option>";
+                              municipioSelect.innerHTML += "<option value='Mungo'> Mungo </option>";
+                              municipioSelect.innerHTML += "<option value='Tchicala'> Tchicala Tcholoanga </option>";
+                              municipioSelect.innerHTML += "<option value='Ucuma'> Ucuma </option>";
                               break;
                           case "Huíla":
-                              municipioSelect.innerHTML += "<option value='Huíla'> Caconda </option>";
-                              municipioSelect.innerHTML += "<option value='Huíla'> Cacula </option>";
-                              municipioSelect.innerHTML += "<option value='Huíla'> Caluquembe </option>";
-                              municipioSelect.innerHTML += "<option value='Huíla'> Chicomba </option>";
-                              municipioSelect.innerHTML += "<option value='Huíla'> Chibia </option>";
-                              municipioSelect.innerHTML += "<option value='Huíla'> Chipindo </option>";
-                              municipioSelect.innerHTML += "<option value='Huíla'> Humpata </option>";
-                              municipioSelect.innerHTML += "<option value='Huíla'> Lubango </option>";
-                              municipioSelect.innerHTML += "<option value='Huíla'> Matala </option>";
-                              municipioSelect.innerHTML += "<option value='Huíla'> Quilengues </option>";
+                              municipioSelect.innerHTML += "<option value='Caconda'> Caconda </option>";
+                              municipioSelect.innerHTML += "<option value='Cacula'> Cacula </option>";
+                              municipioSelect.innerHTML += "<option value='Caluquembe'> Caluquembe </option>";
+                              municipioSelect.innerHTML += "<option value='Chicomba'> Chicomba </option>";
+                              municipioSelect.innerHTML += "<option value='Chibia'> Chibia </option>";
+                              municipioSelect.innerHTML += "<option value='Chipindo'> Chipindo </option>";
+                              municipioSelect.innerHTML += "<option value='Humpata'> Humpata </option>";
+                              municipioSelect.innerHTML += "<option value='Lubango'> Lubango </option>";
+                              municipioSelect.innerHTML += "<option value='Matala'> Matala </option>";
+                              municipioSelect.innerHTML += "<option value='Quilengues'> Quilengues </option>";
                               break;
                           case "Luanda":
-                              municipioSelect.innerHTML += "<option value='Luanda'> Belas </option>";
-                              municipioSelect.innerHTML += "<option value='Luanda'> Cacuaco </option>";
-                              municipioSelect.innerHTML += "<option value='Luanda'> Cazenga </option>";
-                              municipioSelect.innerHTML += "<option value='Luanda'> Icolo e Bengo </option>";
+                              municipioSelect.innerHTML += "<option value='Belas'> Belas </option>";
+                              municipioSelect.innerHTML += "<option value='Cacuaco'> Cacuaco </option>";
+                              municipioSelect.innerHTML += "<option value='Cazenga'> Cazenga </option>";
+                              municipioSelect.innerHTML += "<option value='Icolo e Bengo'> Icolo e Bengo </option>";
                               municipioSelect.innerHTML += "<option value='Luanda'> Luanda </option>";
-                              municipioSelect.innerHTML += "<option value='Luanda'> Quiçama </option>";
-                              municipioSelect.innerHTML += "<option value='Luanda'> Talatona </option>";
-                              municipioSelect.innerHTML += "<option value='Luanda'> Viana </option>";
+                              municipioSelect.innerHTML += "<option value='Quiçama'> Quiçama </option>";
+                              municipioSelect.innerHTML += "<option value='Talatona'> Talatona </option>";
+                              municipioSelect.innerHTML += "<option value='Viana'> Viana </option>";
                               break;
                           case "Lunda Norte":
-                              municipioSelect.innerHTML += "<option value='Lunda Norte'> Cambulo </option>";
-                              municipioSelect.innerHTML += "<option value='Lunda Norte'> Capenda Camulemba </option>";
-                              municipioSelect.innerHTML += "<option value='Lunda Norte'> Caungula </option>";
-                              municipioSelect.innerHTML += "<option value='Lunda Norte'> Chitato </option>";
-                              municipioSelect.innerHTML += "<option value='Lunda Norte'> Cuango </option>";
-                              municipioSelect.innerHTML += "<option value='Lunda Norte'> Lóvua </option>";
-                              municipioSelect.innerHTML += "<option value='Lunda Norte'> Lubalo </option>";
-                              municipioSelect.innerHTML += "<option value='Lunda Norte'> Lucapa </option>";
-                              municipioSelect.innerHTML += "<option value='Lunda Norte'> Xá Muteba </option>";
-                              municipioSelect.innerHTML += "<option value='Lunda Norte'> Cuilo </option>";
+                              municipioSelect.innerHTML += "<option value='Cambulo'> Cambulo </option>";
+                              municipioSelect.innerHTML += "<option value='Capenda'> Capenda Camulemba </option>";
+                              municipioSelect.innerHTML += "<option value='Caungula'> Caungula </option>";
+                              municipioSelect.innerHTML += "<option value='Chitato'> Chitato </option>";
+                              municipioSelect.innerHTML += "<option value='Cuango'> Cuango </option>";
+                              municipioSelect.innerHTML += "<option value='Lóvua'> Lóvua </option>";
+                              municipioSelect.innerHTML += "<option value='Lubalo'> Lubalo </option>";
+                              municipioSelect.innerHTML += "<option value='Lucapa'> Lucapa </option>";
+                              municipioSelect.innerHTML += "<option value='Xá Muteba'> Xá Muteba </option>";
+                              municipioSelect.innerHTML += "<option value='Cuilo'> Cuilo </option>";
                               break;
                           case "Lunda Sul":
-                              municipioSelect.innerHTML += "<option value='Lunda Sul'> Cacolo </option>";
-                              municipioSelect.innerHTML += "<option value='Lunda Sul'> Dala </option>";
-                              municipioSelect.innerHTML += "<option value='Lunda Sul'> Muconda </option>";
-                              municipioSelect.innerHTML += "<option value='Lunda Sul'> Saurimo </option>";
+                              municipioSelect.innerHTML += "<option value='Cacolo'> Cacolo </option>";
+                              municipioSelect.innerHTML += "<option value='Dala'> Dala </option>";
+                              municipioSelect.innerHTML += "<option value='Muconda'> Muconda </option>";
+                              municipioSelect.innerHTML += "<option value='Saurimo'> Saurimo </option>";
                               break;
                           case "Malanje":
-                              municipioSelect.innerHTML += "<option value='Malanje'> Cahombo </option>";
-                              municipioSelect.innerHTML += "<option value='Malanje'> Caculama </option>";
-                              municipioSelect.innerHTML += "<option value='Malanje'> Calandula </option>";
-                              municipioSelect.innerHTML += "<option value='Malanje'> Cangandala </option>";
-                              municipioSelect.innerHTML += "<option value='Malanje'> Kangandala </option>";
-                              municipioSelect.innerHTML += "<option value='Malanje'> Kunda dya Baze </option>";
-                              municipioSelect.innerHTML += "<option value='Malanje'> Luquembo </option>";
+                              municipioSelect.innerHTML += "<option value='Cahombo'> Cahombo </option>";
+                              municipioSelect.innerHTML += "<option value='Caculama'> Caculama </option>";
+                              municipioSelect.innerHTML += "<option value='Calandula'> Calandula </option>";
+                              municipioSelect.innerHTML += "<option value='Cangandala'> Cangandala </option>";
+                              municipioSelect.innerHTML += "<option value='Kangandala'> Kangandala </option>";
+                              municipioSelect.innerHTML += "<option value='Kunda'> Kunda dya Baze </option>";
+                              municipioSelect.innerHTML += "<option value='Luquembo'> Luquembo </option>";
                               municipioSelect.innerHTML += "<option value='Malanje'> Malanje </option>";
-                              municipioSelect.innerHTML += "<option value='Malanje'> Marimba </option>";
-                              municipioSelect.innerHTML += "<option value='Malanje'> Massango </option>";
-                              municipioSelect.innerHTML += "<option value='Malanje'> Mucari </option>";
-                              municipioSelect.innerHTML += "<option value='Malanje'> Quela </option>";
+                              municipioSelect.innerHTML += "<option value='Marimba'> Marimba </option>";
+                              municipioSelect.innerHTML += "<option value='Massango'> Massango </option>";
+                              municipioSelect.innerHTML += "<option value='Mucari'> Mucari </option>";
+                              municipioSelect.innerHTML += "<option value='Quela'> Quela </option>";
                               break;
                           case "Moxico":
-                              municipioSelect.innerHTML += "<option value='Moxico'> Alto Zambeze </option>";
-                              municipioSelect.innerHTML += "<option value='Moxico'> Bundas </option>";
-                              municipioSelect.innerHTML += "<option value='Moxico'> Camanongue </option>";
-                              municipioSelect.innerHTML += "<option value='Moxico'> Cameia </option>";
-                              municipioSelect.innerHTML += "<option value='Moxico'> Luacano </option>";
-                              municipioSelect.innerHTML += "<option value='Moxico'> Luchazes </option>";
-                              municipioSelect.innerHTML += "<option value='Moxico'> Luena </option>";
-                              municipioSelect.innerHTML += "<option value='Moxico'> Lumeje </option>";
-                              municipioSelect.innerHTML += "<option value='Moxico'> Luau </option>";
-                              municipioSelect.innerHTML += "<option value='Moxico'> Lutembo </option>";
+                              municipioSelect.innerHTML += "<option value='Alto Zambeze'> Alto Zambeze </option>";
+                              municipioSelect.innerHTML += "<option value='Bundas'> Bundas </option>";
+                              municipioSelect.innerHTML += "<option value='Camanongue'> Camanongue </option>";
+                              municipioSelect.innerHTML += "<option value='Cameia'> Cameia </option>";
+                              municipioSelect.innerHTML += "<option value='Luacano'> Luacano </option>";
+                              municipioSelect.innerHTML += "<option value='Luchazes'> Luchazes </option>";
+                              municipioSelect.innerHTML += "<option value='Luena'> Luena </option>";
+                              municipioSelect.innerHTML += "<option value='Lumeje'> Lumeje </option>";
+                              municipioSelect.innerHTML += "<option value='Luau'> Luau </option>";
+                              municipioSelect.innerHTML += "<option value='Lutembo'> Lutembo </option>";
                               municipioSelect.innerHTML += "<option value='Moxico'> Moxico </option>";
                               break;
                           case "Namibe":
-                              municipioSelect.innerHTML += "<option value='Namibe'> Bibala </option>";
-                              municipioSelect.innerHTML += "<option value='Namibe'> Camucuio </option>";
-                              municipioSelect.innerHTML += "<option value='Namibe'> Moçâmedes </option>";
+                              municipioSelect.innerHTML += "<option value='Bibala'> Bibala </option>";
+                              municipioSelect.innerHTML += "<option value='Camucuio'> Camucuio </option>";
+                              municipioSelect.innerHTML += "<option value='Moçâmedes'> Moçâmedes </option>";
                               municipioSelect.innerHTML += "<option value='Namibe'> Namibe </option>";
                               break;
                           case "Uíge":
-                              municipioSelect.innerHTML += "<option value='Uíge'> Bembe </option>";
-                              municipioSelect.innerHTML += "<option value='Uíge'> Buengas </option>";
-                              municipioSelect.innerHTML += "<option value='Uíge'> Bungo </option>";
-                              municipioSelect.innerHTML += "<option value='Uíge'> Damba </option>";
-                              municipioSelect.innerHTML += "<option value='Uíge'> Maquela do Zombo </option>";
-                              municipioSelect.innerHTML += "<option value='Uíge'> Milunga </option>";
-                              municipioSelect.innerHTML += "<option value='Uíge'> Negage </option>";
-                              municipioSelect.innerHTML += "<option value='Uíge'> Puri </option>";
-                              municipioSelect.innerHTML += "<option value='Uíge'> Quimbele </option>";
-                              municipioSelect.innerHTML += "<option value='Uíge'> Quitexe </option>";
-                              municipioSelect.innerHTML += "<option value='Uíge'> Sanza Pombo </option>";
-                              municipioSelect.innerHTML += "<option value='Uíge'> Songo </option>";
-                              municipioSelect.innerHTML += "<option value='Uíge'> Alto Cauale </option>";
+                              municipioSelect.innerHTML += "<option value='Bembe'> Bembe </option>";
+                              municipioSelect.innerHTML += "<option value='Buengas'> Buengas </option>";
+                              municipioSelect.innerHTML += "<option value='Bungo'> Bungo </option>";
+                              municipioSelect.innerHTML += "<option value='Damba'> Damba </option>";
+                              municipioSelect.innerHTML += "<option value='Maquela do Zombo'> Maquela do Zombo </option>";
+                              municipioSelect.innerHTML += "<option value='Milunga'> Milunga </option>";
+                              municipioSelect.innerHTML += "<option value='Negage'> Negage </option>";
+                              municipioSelect.innerHTML += "<option value='Puri'> Puri </option>";
+                              municipioSelect.innerHTML += "<option value='Quimbele'> Quimbele </option>";
+                              municipioSelect.innerHTML += "<option value='Quitexe'> Quitexe </option>";
+                              municipioSelect.innerHTML += "<option value='Sanza Pombo'> Sanza Pombo </option>";
+                              municipioSelect.innerHTML += "<option value='Songo'> Songo </option>";
+                              municipioSelect.innerHTML += "<option value='Alto Cauale'> Alto Cauale </option>";
                               municipioSelect.innerHTML += "<option value='Uíge'> Uíge </option>";
                               break;
                           case "Zaire":
-                              municipioSelect.innerHTML += "<option value='Zaire'> Cuimba </option>";
-                              municipioSelect.innerHTML += "<option value='Zaire'> M'banza-Kongo </option>";
-                              municipioSelect.innerHTML += "<option value='Zaire'> Nóqui </option>";
-                              municipioSelect.innerHTML += "<option value='Zaire'> N'zeto </option>";
-                              municipioSelect.innerHTML += "<option value='Zaire'> Soyo </option>";
+                              municipioSelect.innerHTML += "<option value='Cuimba'> Cuimba </option>";
+                              municipioSelect.innerHTML += "<option value='M'banza-Kongo'> M'banza-Kongo </option>";
+                              municipioSelect.innerHTML += "<option value='Nóqui'> Nóqui </option>";
+                              municipioSelect.innerHTML += "<option value='N'zeto'> N'zeto </option>";
+                              municipioSelect.innerHTML += "<option value='Soyo'> Soyo </option>";
                               break;  
                           // Adicione mais casos para outras províncias aqui
                           default:
                               municipioSelect.innerHTML += "<option value=''>Nenhum município disponível</option>";
+                      }
+                  }, 1000); // Simulando um atraso de 1 segundo para uma solicitação AJAX
+              }
+          </script>
+              <!--Sscripts para Popular o SelectOption das Procincias de Forma Dinamica-->
+              <script>
+              function carregarMunicipiosEndereco() {
+                  const provincia = document.getElementById("provinciaEndereco").value;
+                  const municipioSelectEndereco = document.getElementById("municipioEndereco");
+
+                  // Limpe os municípios anteriores
+                  municipioSelectEndereco.innerHTML = "<option value=''>Carregando...</option>";
+
+                  // Simule uma solicitação AJAX para obter municípios com base na província selecionada
+                  setTimeout(() => {
+                      municipioSelectEndereco.innerHTML = "<option value=''>Selecione um município</option>";
+                      switch (provincia) {
+                          case "Bengo":
+                              municipioSelectEndereco.innerHTML += "<option value='Ambriz'>Ambriz </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Bula Atumba'>Bula Atumba </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Dande'>Dande </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Nambuangongo'>Nambuangongo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Quibaxe'>Quibaxe </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Caxito'> Caxito </option>";
+                              break;
+                          case "Benguela":
+                              municipioSelectEndereco.innerHTML += "<option value='Baia Farta'>Baia Farta </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Balombo'>Balombo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Benguela'>Benguela </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Bocoio'>Bocoio </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Caimbambo'>Caimbambo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Chongoroi'>Chongoroi </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Cubal'>Cubal </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Ganda'>Ganda </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Lobito'>Lobito </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Vaváu'>Vaváu </option>";
+                              break;
+                          case "Bié":
+                              municipioSelectEndereco.innerHTML += "<option value='Andulo'>Andulo</option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Camacupa'>Camacupa</option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Catabola'>Catabola</option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Chinguar'>Chinguar</option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Chitembo'>Chitembo</option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Cuemba'>Cuemba</option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Huambo'>Huambo</option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Cunhinga'>Cunhinga</option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Kuito'>Kuito</option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Nhârea'>Nhârea</option>";
+                            
+                              break;
+                          case "Cabinda":
+                              municipioSelectEndereco.innerHTML += "<option value='Belize'>Belize </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Buco-Zau'>Buco-Zau </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Cabinda'>Cabinda </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Cangongo'>Cangongo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Dinge'>Dinge </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Lândana'>Lândana </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Luali'>Luali </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Massabi'>Massabi </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Necuto'>Necuto </option>";
+                            
+                              break;
+                          case "Cuando Cubango":
+                              municipioSelectEndereco.innerHTML += "<option value='Calai'>Calai </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Cuangar'>Cuangar </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Cuchi'>Cuchi </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Cuito'>Cuito Cuanavale</option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Dirico'>Dirico </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Longa'>Longa </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Menongue'>Menongue </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Mavinga'>Mavinga </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='NAncova'>NAncova </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Rivungo'>Rivungo </option>";
+                            
+                              break;
+                          case "Cuanza Norte":
+                              municipioSelectEndereco.innerHTML += "<option value='Ambaca'> Ambaca </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Banga'> Banga </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Bolongongo'> Bolongongo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Cambambe'> Cambambe </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Golungo'> Golungo Alto </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Lucala'> Lucala </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Ngonguembo'> Ngonguembo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Quiculungo'> Quiculungo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Samba Cajú'> Samba Cajú </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Santa Isabel'> Santa Isabel </option>";
+                            
+                              break;
+                          case "Cuanza Sul":
+                              municipioSelectEndereco.innerHTML += "<option value='Amboim'> Amboim  </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Cela'> Cela  </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Conda'> Conda  </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Ebo'> Ebo  </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Libolo'> Libolo  </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Mussende'> Mussende  </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Porto Amboim'> Porto Amboim  </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Quibala'> Quibala  </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Quilenda'> Quilenda  </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Seles'> Seles  </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Sumbe'> Sumbe </option>";
+                              break;
+                          case "Cunene":
+                              municipioSelectEndereco.innerHTML += "<option value='Cahama'> Cahama </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Kuanhama'> Kuanhama </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Kuvelai'> Kuvelai </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Namacunde'> Namacunde </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Ombadja'> Ombadja </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Ondjiva'> Ondjiva </option>";
+                          case "Huambo":
+                              municipioSelectEndereco.innerHTML += "<option value='Bailundo'> Bailundo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Ekunha'> Ekunha </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Huambo'> Huambo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Londuimbali'> Londuimbali </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Longonjo'> Longonjo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Mungo'> Mungo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Tchicala'> Tchicala Tcholoanga </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Ucuma'> Ucuma </option>";
+                              break;
+                          case "Huíla":
+                              municipioSelectEndereco.innerHTML += "<option value='Caconda'> Caconda </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Cacula'> Cacula </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Caluquembe'> Caluquembe </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Chicomba'> Chicomba </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Chibia'> Chibia </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Chipindo'> Chipindo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Humpata'> Humpata </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Lubango'> Lubango </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Matala'> Matala </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Quilengues'> Quilengues </option>";
+                              break;
+                          case "Luanda":
+                              municipioSelectEndereco.innerHTML += "<option value='Belas'> Belas </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Cacuaco'> Cacuaco </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Cazenga'> Cazenga </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Icolo e Bengo'> Icolo e Bengo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Luanda'> Luanda </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Quiçama'> Quiçama </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Talatona'> Talatona </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Viana'> Viana </option>";
+                              break;
+                          case "Lunda Norte":
+                              municipioSelectEndereco.innerHTML += "<option value='Cambulo'> Cambulo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Capenda'> Capenda Camulemba </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Caungula'> Caungula </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Chitato'> Chitato </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Cuango'> Cuango </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Lóvua'> Lóvua </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Lubalo'> Lubalo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Lucapa'> Lucapa </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Xá Muteba'> Xá Muteba </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Cuilo'> Cuilo </option>";
+                              break;
+                          case "Lunda Sul":
+                              municipioSelectEndereco.innerHTML += "<option value='Cacolo'> Cacolo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Dala'> Dala </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Muconda'> Muconda </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Saurimo'> Saurimo </option>";
+                              break;
+                          case "Malanje":
+                              municipioSelectEndereco.innerHTML += "<option value='Cahombo'> Cahombo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Caculama'> Caculama </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Calandula'> Calandula </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Cangandala'> Cangandala </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Kangandala'> Kangandala </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Kunda'> Kunda dya Baze </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Luquembo'> Luquembo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Malanje'> Malanje </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Marimba'> Marimba </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Massango'> Massango </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Mucari'> Mucari </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Quela'> Quela </option>";
+                              break;
+                          case "Moxico":
+                              municipioSelectEndereco.innerHTML += "<option value='Alto Zambeze'> Alto Zambeze </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Bundas'> Bundas </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Camanongue'> Camanongue </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Cameia'> Cameia </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Luacano'> Luacano </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Luchazes'> Luchazes </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Luena'> Luena </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Lumeje'> Lumeje </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Luau'> Luau </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Lutembo'> Lutembo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Moxico'> Moxico </option>";
+                              break;
+                          case "Namibe":
+                              municipioSelectEndereco.innerHTML += "<option value='Bibala'> Bibala </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Camucuio'> Camucuio </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Moçâmedes'> Moçâmedes </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Namibe'> Namibe </option>";
+                              break;
+                          case "Uíge":
+                              municipioSelectEndereco.innerHTML += "<option value='Bembe'> Bembe </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Buengas'> Buengas </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Bungo'> Bungo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Damba'> Damba </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Maquela do Zombo'> Maquela do Zombo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Milunga'> Milunga </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Negage'> Negage </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Puri'> Puri </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Quimbele'> Quimbele </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Quitexe'> Quitexe </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Sanza Pombo'> Sanza Pombo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Songo'> Songo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Alto Cauale'> Alto Cauale </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Uíge'> Uíge </option>";
+                              break;
+                          case "Zaire":
+                              municipioSelectEndereco.innerHTML += "<option value='Cuimba'> Cuimba </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='M'banza-Kongo'> M'banza-Kongo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Nóqui'> Nóqui </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='N'zeto'> N'zeto </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Soyo'> Soyo </option>";
+                              break;  
+                          // Adicione mais casos para outras províncias aqui
+                          default:
+                              municipioSelectEndereco.innerHTML += "<option value=''>Nenhum município disponível</option>";
                       }
                   }, 1000); // Simulando um atraso de 1 segundo para uma solicitação AJAX
               }

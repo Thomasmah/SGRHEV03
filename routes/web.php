@@ -55,7 +55,8 @@ Route::get('/formulario-habilitacao-form', function(){
 Route::get('/habilitacao-index', function(){
     return view('sgrhe/pages/forms/habilitacao-index');
 })->name('habilitacaos.index');
-Route::post('/formulario-habilitacao',[HabilitacaoController::class,'store'])->name('habilitacao.store');
+
+
 
 
 //Processamento de Codigo QR
@@ -213,8 +214,10 @@ Route::delete('/delete-cargo/{id}',[CargoController::class,'destroy'])->name('ca
 
 //Formulario Create e Edite the same form
 Route::any('/create-edit-arquivo/{id?}',[ArquivoController::class,'formulario'])->name('arquivos.form');
-//Armazenar arquivos 
-Route::post('/store-arquivo/BI/{idFuncionario}/{categoria}/{idPessoa}',[ArquivoController::class,'storeBI'])->name('arquivos.store');
+//Armazenar BI 
+Route::post('/store-arquivo/bi/{idFuncionario}/{categoria}/{idPessoa}',[ArquivoController::class,'storeBI'])->name('arquivos.store');
+//Armazenar Carta de Municipe 
+Route::post('/store-arquivo/cm/{idFuncionario}/{categoria}/{idPessoa}',[ArquivoController::class,'storeCM'])->name('arquivos.store.cm');
 //Habilitacoes
 Route::post('/store-arquivo/hablitacao/{idFuncionario}/{categoria}',[ArquivoController::class,'storeHabilitacao'])->name('arquivos.store.habilitacao');
 //Actualizar arquivos 

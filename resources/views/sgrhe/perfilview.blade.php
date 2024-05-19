@@ -41,6 +41,10 @@
               <!-- Scripts -->
         @endsection
         @section('conteudo_principal')
+                                                                                      @php
+                                                                                         $idEndereco = App\Models\Endereco::where('idPessoa',  $pessoa->id)->first();
+                                                                                         //echo($biArquivo->first()->caminho);
+                                                                                      @endphp
       <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
           <!-- Content Header (Page header) -->
@@ -300,6 +304,164 @@
                                                       </div>
                                                       <hr>
                                                     <!--/Item Funcionario Bilhete de Identidade-->                         
+                                                    
+                                                    <!--Item Funcionario Cartão de Munícipe-->
+                                                      <div class="intem-funcionario"> 
+                                                       <h6 class="card-header"><strong><i class="far fa-file-alt mr-1"></i>Cartão de Munícipe</strong></h6>
+                                                            <!--Solicitando a existencia do registro do arquivo no banco de dados-->
+                                                              @php
+                                                            
+                                                                $biArquivo = App\Models\Arquivo::where('idFuncionario',  $funcionario->id  )->where('categoria','CM');
+                                                                //echo($biArquivo->first()->caminho);
+                                                              @endphp 
+                                                              @if ($biArquivo->exists()) 
+                                                              @php
+                                                                $cartaoMunicipe = App\Models\CartaoMunicipe::where('idEndereco',$idEndereco->id);
+                                                                $validade = Carbon::now()->greaterThan($cartaoMunicipe->first()->validadeCM);
+                                                              @endphp
+                                                            <div class="btn btn-toggle " data-target="item-CM" style="text-align: left;">
+                                                            <p class="atrubutos-intem-funcionario"> Província: <span class="text-muted"> {{ $idEndereco->provincia}}</span></p>
+                                                            <p class="atrubutos-intem-funcionario"> Município: <span class="text-muted"> {{$idEndereco->municipio }}</span></p>
+                                                            <p class="atrubutos-intem-funcionario"> Zona: <span class="text-muted"> {{$idEndereco->zona }}</span></p>
+                                                            <p class="atrubutos-intem-funcionario"> Quarteirão: <span class="text-muted"> {{$idEndereco->quarteirao }}</span></p>
+                                                            <p class="atrubutos-intem-funcionario"> Rua: <span class="text-muted"> {{$idEndereco->rua }}</span></p>
+                                                            <p class="atrubutos-intem-funcionario"> Casa: <span class="text-muted"> {{$idEndereco->casa }}</span></p>
+
+                                                            <p class="atrubutos-intem-funcionario">Data de Validade: <span class="text-muted"> {{ $cartaoMunicipe->first()->validadeCM }}</span></p>
+                                  
+                                                                  @isset($validade)
+                                                                    @if ($validade)
+                                                                      <p class="atrubutos-intem-funcionario">Estado de Validação: <span class="text-danger"> Cartão de Munícipe Expirado !</span></p>
+                                                                    @else
+                                                                    <p class="atrubutos-intem-funcionario">Estado de Validação: <span class="text-success">Cartão de Munícipe Válido </span></p>
+                                                                    @endif
+                                                                  @endisset
+                                                 
+                                                          </div>
+                                                          <div id="item-CM" class="info-toggle">
+                                                            @if ( session()->only(['Cargo'])['Cargo']->permissoes === 'Admin' || session()->only(['Seccao'])['Seccao']->codNome === 'RHPE' )
+                                                              <!--BTN Modal de Add Arquivo -->
+                                                                <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addCM" data-form-action="{{ route('arquivos.store',['idFuncionario' => $funcionario->id, 'categoria' => 'BI', 'idPessoa' => $funcionario->idPessoa ]) }}">
+                                                                  <i class="fa fa-plus"></i>  Actualizar Cartão de Munícipe
+                                                                </button>
+                                                              <!--/BTN Modal de Add Arquivo -->
+                                                            @endif
+                                                            <!--BTN  de ver Arquivo -->
+                                                              <a class="btn btn-primary" href="{{ route('Exibir.Imagem', ['imagem' => base64_encode($biArquivo->first()->caminho)]) }}" target="_blank">
+                                                                <i class="far fa-file-alt mr-1"></i> Ver Arquivo
+                                                              </a>
+                                                            <!--/BTN de ver Arquivo -->
+                                                          
+                                                          </div>
+                                                                @else
+                                                          <div class="btn btn-toggle " data-target="item-CM" style="text-align: left;">
+                                                          <p class="text-danger">Não Actualizado</p>                                                         
+                                                          </div>
+                                                          <div id="item-CM" class="info-toggle">
+                                                          @if ( session()->only(['Cargo'])['Cargo']->permissoes === 'Admin' || session()->only(['Seccao'])['Seccao']->codNome === 'RHPE' )
+                                                            <!--BTN Modal de Add Arquivo -->
+                                                              <button class="btn btn-primary btn-modal-doc-edit" data-toggle="modal" data-target="#addCM" data-form-action="{{ route('arquivos.store.cm',['idFuncionario' => $funcionario->id, 'categoria' => 'CM',  'idPessoa' => $funcionario->idPessoa ]) }}">
+                                                                  <i class="fa fa-plus "></i> Adicionar Cartão de Munícipe
+                                                              </button>
+                                                            <!--/BTN Modal de Add Arquivo -->
+                                                          @endif
+                                                        
+                                                          </div>
+                                                                @endif
+                                                              <!--Modal de Add Arquivo -->
+                                                                <div class="modal fade" id="addCM" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                                                                  <div class="modal-dialog" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h6 class="modal-title" id="exampleModalLabel">Cartão de Munícipe</h6>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+
+                                                                                <!-- Formulário dentro da modal -->
+                                                                                <form method="POST" enctype="multipart/form-data">
+                                                                                    @csrf
+                                                                                    <div  class="form-group">
+                                                                                      <input type="hidden" name="idEndereco" value="{{ $idEndereco->id }}">
+                                                                                      <label>Endereço</label>
+                                                                                      <label for="provinciaEndereco">Escolha uma Província:</label>
+                                                                                          <select name="provinciaEndereco" id="provinciaEndereco" onchange="carregarMunicipiosEndereco()" class="form-control select2" style="width: 100%;" >
+                                                                                              <option value="{{isset($naturalidade) ? $naturalidade->provincia : ''}}">{{isset($idEndereco) ? $idEndereco->provincia : 'Seleccione Uma Província'}}</option>
+                                                                                              <option value="Bengo">Bengo</option>
+                                                                                              <option value="Benguela">Benguela</option>
+                                                                                              <option value="Bié">Bié</option>
+                                                                                              <option value="Cabinda">Cabinda</option>
+                                                                                              <option value="Cuando Cubango">Cuando Cubango</option>
+                                                                                              <option value="Cuanza Norte">Cuanza Norte</option>
+                                                                                              <option value="Cuanza Sul">Cuanza Sul</option>
+                                                                                              <option value="Cunene">Cunene</option>
+                                                                                              <option value="Huambo">Huambo</option>
+                                                                                              <option value="Huíla">Huíla</option>
+                                                                                              <option value="Luanda">Luanda</option>
+                                                                                              <option value="Lunda Norte">Lunda Norte</option>
+                                                                                              <option value="Lunda Sul">Lunda Sul</option>
+                                                                                              <option value="Malanje">Malanje</option>
+                                                                                              <option value="Moxico">Moxico</option>
+                                                                                              <option value="Namibe">Namibe</option>
+                                                                                              <option value="Uíge">Uíge</option>
+                                                                                              <option value="Zaire">Zaire</option>
+                                                                                          
+                                                                                              <!-- Adicione mais opções de província aqui -->
+                                                                                      
+                                                                                              </select>
+                                                                                          <label for="municipioEndereco">Escolha um Município:</label>
+                                                                                          <select id="municipioEndereco" name="municipioEndereco" class="form-control select2" style="width: 100%;" >
+                                                                                              <option value="{{isset($naturalidade) ? $naturalidade->municipio : ''}}">{{isset($idEndereco) ? $idEndereco->municipio : 'Seleccione o Município'}}</option>
+                                                                                          </select>
+                                                                                          <label for="bairro">Bairro</label>
+                                                                                          <input type="text" name="bairro" class="form-control"  placeholder="Bairro Popular nº 2" maxlength="250"  value="{{ isset($idEndereco) ? $idEndereco->bairro : ''}}">
+                                                                                          <label for="zona">Zona</label>
+                                                                                          <input type="text" name="zona" class="form-control"  placeholder="Zona nº 2" maxlength="20"  value="{{ isset($idEndereco) ? $idEndereco->zona : ''}}">
+                                                                                          <label for="quarteirao">Quarteirão</label>
+                                                                                          <input type="text" name="quarteirao" class="form-control"  placeholder="Quarteirão nº 2" maxlength="250"  value="{{ isset($idEndereco) ? $idEndereco->quarteirao : ''}}">
+                                                                                          <label for="rua">Rua</label>
+                                                                                          <input type="text" name="rua" class="form-control"  placeholder="Rua F " maxlength="100"  value="{{ isset($idEndereco) ? $idEndereco->rua : ''}}">
+                                                                                          <label for="casa">Casa</label>
+                                                                                          <input type="text" name="casa" class="form-control"  placeholder="30" maxlength="10"  value="{{ isset($idEndereco) ? $idEndereco->casa : ''}}">
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <label for="Área de Residência">Área de Residência</label>
+                                                                                        <input type="text" class="form-control" id="areaResidencia" name="areaResidencia" placeholder=" N3P-53JK-KJ">
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <label for="validadeCM" >Data de Validade / Válido até</label>
+                                                                                        <input type="date" class="form-control" id="validadeCM" name="validadeCM" placeholder="Password">
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <label for="arquivo">O Cartão de Munícipe deve estar no formato "pdf"</label>
+                                                                                        <div class="input-group">
+                                                                                            <div class="custom-file">
+                                                                                                <input type="file" class="custom-file-input" name="arquivo">
+                                                                                                <label class="custom-file-label" for="arquivo">Escolha um arquivo</label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+
+
+                                                                                    <div class="form-check">
+                                                                                        <input type="checkbox" name="confirmar" class="form-check-input">
+                                                                                        <label class="form-check-label" for="confirmar">Clique para Confirmar</label>
+                                                                                    </div>
+                                                                                    <div class="modal-footer">
+                                                                                          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                                                                          <button type="submit" class="btn btn-primary">Actualizar Cartão de Munícipe</button>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                  </div>
+                                                                </div>
+                                                              <!--/Modal de Add Arquivo -->
+                                                      </div>
+                                                      <hr>
+                                                    <!--/Item Funcionario Cartão de Munícipe-->                         
                                                     
                                                     
                                                     <!--Item Funcionario Habilitações -->
@@ -1023,27 +1185,246 @@
   </script>
 <!--Limitar a Data por 7 dias no Maximo no Formulario Modal Pedido de Licensa-->
 <!--Scripts de controolo de caracter da classe Texo-->
-<script>
-      // Seleciona o input de texto e o contador de caracteres
-    const textoInput = document.getElementById('texto');
-    const contadorCaracteres = document.getElementById('contadorCaracteres');
+  <script>
+        // Seleciona o input de texto e o contador de caracteres
+      const textoInput = document.getElementById('texto');
+      const contadorCaracteres = document.getElementById('contadorCaracteres');
 
-    // Define o limite de caracteres
-    const limiteCaracteres = 100;
+      // Define o limite de caracteres
+      const limiteCaracteres = 100;
 
-    // Adiciona um evento de input ao input de texto
-    textoInput.addEventListener('input', function() {
-        // Obtém o número de caracteres digitados
-        const numCaracteres = textoInput.value.length;
-        
-        // Atualiza o contador de caracteres
-        contadorCaracteres.textContent = numCaracteres + '/' + limiteCaracteres;
-        
-        // Verifica se o número de caracteres excede o limite
-        if (numCaracteres > limiteCaracteres) {
-            // Trunca o texto para o limite de caracteres
-            textoInput.value = textoInput.value.substring(0, limiteCaracteres);
-        }
-    });
-</script>
+      // Adiciona um evento de input ao input de texto
+      textoInput.addEventListener('input', function() {
+          // Obtém o número de caracteres digitados
+          const numCaracteres = textoInput.value.length;
+          
+          // Atualiza o contador de caracteres
+          contadorCaracteres.textContent = numCaracteres + '/' + limiteCaracteres;
+          
+          // Verifica se o número de caracteres excede o limite
+          if (numCaracteres > limiteCaracteres) {
+              // Trunca o texto para o limite de caracteres
+              textoInput.value = textoInput.value.substring(0, limiteCaracteres);
+          }
+      });
+  </script>
+
+        <!--Sscripts para Popular o SelectOption das Procincias de Forma Dinamica-->
+            <script>
+              function carregarMunicipiosEndereco() {
+                  const provincia = document.getElementById("provinciaEndereco").value;
+                  const municipioSelectEndereco = document.getElementById("municipioEndereco");
+
+                  // Limpe os municípios anteriores
+                  municipioSelectEndereco.innerHTML = "<option value=''>Carregando...</option>";
+
+                  // Simule uma solicitação AJAX para obter municípios com base na província selecionada
+                  setTimeout(() => {
+                      municipioSelectEndereco.innerHTML = "<option value=''>Selecione um município</option>";
+                      switch (provincia) {
+                          case "Bengo":
+                              municipioSelectEndereco.innerHTML += "<option value='Ambriz'>Ambriz </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Bula Atumba'>Bula Atumba </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Dande'>Dande </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Nambuangongo'>Nambuangongo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Quibaxe'>Quibaxe </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Caxito'> Caxito </option>";
+                              break;
+                          case "Benguela":
+                              municipioSelectEndereco.innerHTML += "<option value='Baia Farta'>Baia Farta </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Balombo'>Balombo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Benguela'>Benguela </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Bocoio'>Bocoio </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Caimbambo'>Caimbambo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Chongoroi'>Chongoroi </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Cubal'>Cubal </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Ganda'>Ganda </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Lobito'>Lobito </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Vaváu'>Vaváu </option>";
+                              break;
+                          case "Bié":
+                              municipioSelectEndereco.innerHTML += "<option value='Andulo'>Andulo</option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Camacupa'>Camacupa</option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Catabola'>Catabola</option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Chinguar'>Chinguar</option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Chitembo'>Chitembo</option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Cuemba'>Cuemba</option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Huambo'>Huambo</option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Cunhinga'>Cunhinga</option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Kuito'>Kuito</option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Nhârea'>Nhârea</option>";
+                            
+                              break;
+                          case "Cabinda":
+                              municipioSelectEndereco.innerHTML += "<option value='Belize'>Belize </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Buco-Zau'>Buco-Zau </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Cabinda'>Cabinda </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Cangongo'>Cangongo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Dinge'>Dinge </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Lândana'>Lândana </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Luali'>Luali </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Massabi'>Massabi </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Necuto'>Necuto </option>";
+                            
+                              break;
+                          case "Cuando Cubango":
+                              municipioSelectEndereco.innerHTML += "<option value='Calai'>Calai </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Cuangar'>Cuangar </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Cuchi'>Cuchi </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Cuito'>Cuito Cuanavale</option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Dirico'>Dirico </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Longa'>Longa </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Menongue'>Menongue </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Mavinga'>Mavinga </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='NAncova'>NAncova </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Rivungo'>Rivungo </option>";
+                            
+                              break;
+                          case "Cuanza Norte":
+                              municipioSelectEndereco.innerHTML += "<option value='Ambaca'> Ambaca </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Banga'> Banga </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Bolongongo'> Bolongongo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Cambambe'> Cambambe </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Golungo'> Golungo Alto </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Lucala'> Lucala </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Ngonguembo'> Ngonguembo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Quiculungo'> Quiculungo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Samba Cajú'> Samba Cajú </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Santa Isabel'> Santa Isabel </option>";
+                            
+                              break;
+                          case "Cuanza Sul":
+                              municipioSelectEndereco.innerHTML += "<option value='Amboim'> Amboim  </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Cela'> Cela  </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Conda'> Conda  </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Ebo'> Ebo  </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Libolo'> Libolo  </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Mussende'> Mussende  </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Porto Amboim'> Porto Amboim  </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Quibala'> Quibala  </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Quilenda'> Quilenda  </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Seles'> Seles  </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Sumbe'> Sumbe </option>";
+                              break;
+                          case "Cunene":
+                              municipioSelectEndereco.innerHTML += "<option value='Cahama'> Cahama </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Kuanhama'> Kuanhama </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Kuvelai'> Kuvelai </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Namacunde'> Namacunde </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Ombadja'> Ombadja </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Ondjiva'> Ondjiva </option>";
+                          case "Huambo":
+                              municipioSelectEndereco.innerHTML += "<option value='Bailundo'> Bailundo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Ekunha'> Ekunha </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Huambo'> Huambo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Londuimbali'> Londuimbali </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Longonjo'> Longonjo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Mungo'> Mungo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Tchicala'> Tchicala Tcholoanga </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Ucuma'> Ucuma </option>";
+                              break;
+                          case "Huíla":
+                              municipioSelectEndereco.innerHTML += "<option value='Caconda'> Caconda </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Cacula'> Cacula </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Caluquembe'> Caluquembe </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Chicomba'> Chicomba </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Chibia'> Chibia </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Chipindo'> Chipindo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Humpata'> Humpata </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Lubango'> Lubango </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Matala'> Matala </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Quilengues'> Quilengues </option>";
+                              break;
+                          case "Luanda":
+                              municipioSelectEndereco.innerHTML += "<option value='Belas'> Belas </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Cacuaco'> Cacuaco </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Cazenga'> Cazenga </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Icolo e Bengo'> Icolo e Bengo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Luanda'> Luanda </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Quiçama'> Quiçama </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Talatona'> Talatona </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Viana'> Viana </option>";
+                              break;
+                          case "Lunda Norte":
+                              municipioSelectEndereco.innerHTML += "<option value='Cambulo'> Cambulo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Capenda'> Capenda Camulemba </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Caungula'> Caungula </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Chitato'> Chitato </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Cuango'> Cuango </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Lóvua'> Lóvua </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Lubalo'> Lubalo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Lucapa'> Lucapa </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Xá Muteba'> Xá Muteba </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Cuilo'> Cuilo </option>";
+                              break;
+                          case "Lunda Sul":
+                              municipioSelectEndereco.innerHTML += "<option value='Cacolo'> Cacolo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Dala'> Dala </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Muconda'> Muconda </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Saurimo'> Saurimo </option>";
+                              break;
+                          case "Malanje":
+                              municipioSelectEndereco.innerHTML += "<option value='Cahombo'> Cahombo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Caculama'> Caculama </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Calandula'> Calandula </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Cangandala'> Cangandala </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Kangandala'> Kangandala </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Kunda'> Kunda dya Baze </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Luquembo'> Luquembo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Malanje'> Malanje </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Marimba'> Marimba </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Massango'> Massango </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Mucari'> Mucari </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Quela'> Quela </option>";
+                              break;
+                          case "Moxico":
+                              municipioSelectEndereco.innerHTML += "<option value='Alto Zambeze'> Alto Zambeze </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Bundas'> Bundas </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Camanongue'> Camanongue </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Cameia'> Cameia </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Luacano'> Luacano </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Luchazes'> Luchazes </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Luena'> Luena </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Lumeje'> Lumeje </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Luau'> Luau </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Lutembo'> Lutembo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Moxico'> Moxico </option>";
+                              break;
+                          case "Namibe":
+                              municipioSelectEndereco.innerHTML += "<option value='Bibala'> Bibala </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Camucuio'> Camucuio </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Moçâmedes'> Moçâmedes </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Namibe'> Namibe </option>";
+                              break;
+                          case "Uíge":
+                              municipioSelectEndereco.innerHTML += "<option value='Bembe'> Bembe </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Buengas'> Buengas </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Bungo'> Bungo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Damba'> Damba </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Maquela do Zombo'> Maquela do Zombo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Milunga'> Milunga </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Negage'> Negage </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Puri'> Puri </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Quimbele'> Quimbele </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Quitexe'> Quitexe </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Sanza Pombo'> Sanza Pombo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Songo'> Songo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Alto Cauale'> Alto Cauale </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Uíge'> Uíge </option>";
+                              break;
+                          case "Zaire":
+                              municipioSelectEndereco.innerHTML += "<option value='Cuimba'> Cuimba </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='M'banza-Kongo'> M'banza-Kongo </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Nóqui'> Nóqui </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='N'zeto'> N'zeto </option>";
+                              municipioSelectEndereco.innerHTML += "<option value='Soyo'> Soyo </option>";
+                              break;  
+                          // Adicione mais casos para outras províncias aqui
+                          default:
+                              municipioSelectEndereco.innerHTML += "<option value=''>Nenhum município disponível</option>";
+                      }
+                  }, 1000); // Simulando um atraso de 1 segundo para uma solicitação AJAX
+              }
+            </script>
+
  @endsection

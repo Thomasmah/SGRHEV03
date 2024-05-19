@@ -30,6 +30,7 @@ class PessoaController extends Controller
     }
     public function store(Request $request) 
     {
+        //dd($request->all());
         $request->validate([
             'nomeCompleto' => ['string', 'max:255','required'],
             'dataNascimento' => ['date','required','before:' .now()->subYears(18)->format('Y-m-d')],
@@ -82,6 +83,13 @@ class PessoaController extends Controller
                 if ($naturalidade) {
                     $endereco = Endereco::create([
                         'idPessoa' => $idPessoa,
+                        'provincia' => $request->input('provinciaEndereco'),
+                        'municipio' => $request->input('municipioEndereco'),
+                        'bairro' => $request->input('bairro'),
+                        'zona' => $request->input('zona'),
+                        'quarteirao' => $request->input('quarteirao'),
+                        'rua' => $request->input('rua'),
+                        'casa' => $request->input('casa'),
                     ]);
                     if ($endereco) {
                         DB::commit();

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 use App\Models\Arquivo;
 use App\Models\AvaliacaoDesempenhoFuncionario;
 use App\Models\BI;
+use App\Models\CartaoMunicipe;
+use App\Models\CM;
+use App\Models\Endereco;
 use App\Models\Habilitacao;
 use App\Models\Pessoa;
 use Illuminate\Http\Request;
@@ -120,7 +123,7 @@ class ArquivoController extends Controller
 
 
 
-         /* Remove the specified resource from storage.
+         /* Armazenar Bilhete de Identidade
      */
     public function storeBI(Request $request, string $idFuncionario, string $categoria, string $idPessoa)
     {
@@ -202,7 +205,101 @@ class ArquivoController extends Controller
             return redirect()->back()->withErrors($verificar);//Aplicar Rediret with erro end success  
     }
 
+    /*
+        Armazenar Cartão de Munícipe
+    */
 
+    public function storeCM(Request $request, string $idFuncionario, string $categoria, string $idPessoa)
+    {
+           // dd($request->all());
+            $verificar = $request->validate([
+                'areaResidencia' => ['required'],//, 'string', 'max:14', 'unique:pessoas,numeroBI'],
+                'validadeCM' => ['date','required','after_or_equal:'.now()],
+                'arquivo' => 'required|file|mimes:png,jpg,pdf|max:2048',
+                'confirmar' => 'required|accepted',
+            ], [
+                'areaResidencia' => ['O Código de Àrea de Residencia Necessaria '],//'O número de BI inserido ja está sendo utilizado por outro usuário!',
+                'validadeBI.after_or_equal' => 'Bilhete de Identidade com data de validade expirada!',
+            ]);
+
+            $arquivo = $request->file('arquivo');
+            $nomeArquivo = 'arquivoBI.'.$arquivo->extension();
+            $caminho = 'sgrhe/funcionarios/'.$idFuncionario.'/'.$categoria.'/'.$nomeArquivo;
+            // Armazenar o arquivo no subdiretório dentro da pasta 'local Especifico'
+            //Procurar um outro metodo para o put que guarada com nme personalizado
+            Storage::disk('local')->put($caminho, file_get_contents($arquivo));
+            $arquivo = Arquivo::where('idFuncionario',$idFuncionario)->where('categoria',$categoria);
+            $c_m_s  = CartaoMunicipe ::where('idEndereco',$request->idEndereco);
+            if ($arquivo->doesntExist()) {
+            DB::beginTransaction();
+            $arquivoToSave = Arquivo::create([
+                'titulo' => md5($nomeArquivo.date('d-m-y')),
+                'categoria' => $categoria,
+                'descricao' => 'Àrea de Residência: '.request('areaResidencia').'Valido até :'.request('validadeCM'),
+                'arquivo' => $nomeArquivo,
+                'caminho' => $caminho,
+                'idFuncionario' => $idFuncionario,
+            ]);
+            if ($arquivoToSave) {
+            $idArquivo = Arquivo::where('idFuncionario',$idFuncionario)->where('categoria',$categoria)->first();
+            $cmToSave = CartaoMunicipe ::create([
+                'idAquivo' => $idArquivo->id,
+                'areaResidencia' =>  $request->input('areaResidencia'),
+                'validadeCM' =>  $request->input('validadeCM'),
+                'idEndereco' => $request->input('idEndereco'),
+            ]);
+            if ($cmToSave) {
+                //Actualizar numero do Bilhete na Entidade Pessoa
+                $endereco = Endereco::where('id', $request->idEndereco)->first();
+                $endereco->idPessoa = $request->idPessoa;
+                $endereco->provincia = $request->provinciaEndereco;
+                $endereco->municipio = $request->municipioEndereco;
+                $endereco->bairro = $request->bairro;
+                $endereco->zona = $request->zona;
+                $endereco->quarteirao = $request->quarteirao;
+                $endereco->rua = $request->rua;
+                $endereco->casa = $request->casa;
+                $endereco->save();
+                DB::commit();
+                return redirect()->back()->with('success', 'BI Actualizado com sucesso!');
+            }else {
+               DB::rollBack();
+               return redirect()->back()->with('error', 'Erro ao actualizar BI!')->withErrors($verificar);
+            }
+        }else {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Erro ao actualizar o BI!')->withErrors($verificar);
+        }
+           
+          }
+             //Actualizar numero do Bilhete na Entidade Pessoa
+             $endereco = Endereco::where('id', $request->idEndereco)->first();
+             $endereco->idPessoa = $request->idPessoa;
+             $endereco->provincia = $request->provinciaEndereco;
+             $endereco->municipio = $request->municipioEndereco;
+             $endereco->bairro = $request->bairro;
+             $endereco->zona = $request->zona;
+             $endereco->quarteirao = $request->quarteirao;
+             $endereco->rua = $request->rua;
+             $endereco->casa = $request->casa;
+             $endereco->save();
+            // Atualizar simbolicamente o conteudo da coluna 'caminho'
+            $arquivo->update([
+                'titulo' => md5($nomeArquivo.date('d-m-y')),
+                'categoria' => $categoria,
+                'descricao' => 'Àrea de Residência: '.request('areaResidencia').'Valido até :'.request('validadeCM'),
+                'arquivo' => $nomeArquivo,
+                'caminho' => $caminho,
+                'idFuncionario' => $idFuncionario,
+            ]);
+            $c_m_s->update([
+                'areaResidencia' =>  $request->input('areaResidencia'),
+                'validadeCM' =>  $request->input('validadeCM'),
+                'idEndereco' => $request->input('idEndereco'),
+            ]);
+            DB::commit();
+            return redirect()->back()->with('success', 'Cartaão de Munícipe Actualizado com Sucesso!');
+    }
 
 
 

@@ -564,7 +564,7 @@
                   </div>
                 </div>
                   <!-- /.row -->
-              </section>
+            </section>
             <!-- /.content -->
         </div>
            <!-- /.content-wrapper -->
