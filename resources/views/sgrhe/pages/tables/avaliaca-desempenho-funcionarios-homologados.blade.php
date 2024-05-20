@@ -121,12 +121,3 @@
         });
       </script>
     @endsection
-
-
-<!--
-    <form action="{{ route('exibir.documento') }}" method="POST" style="display: inline;">
-                                                      @csrf
-                                                      @method('PUT')
-                                                      <input type="hidden" name="id" value="{{ $avaliacao->idArquivo }}">
-                                                      <button type="submit" class="btn btn-secondary">Baixar Avaliação</button>
-                                                    </form>

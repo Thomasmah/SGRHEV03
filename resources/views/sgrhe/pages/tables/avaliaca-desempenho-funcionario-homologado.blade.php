@@ -52,9 +52,8 @@
                               <tbody>
                               <!--Gerando a Tabela de forma Dinamica-->
                               @foreach ($dados as $avaliacao)
-                                            <tr>
-                                                <td>{{ $avaliacao->numeroAgente }}</td> <td>{{ $avaliacao->nomeCompleto }}</td> <td>{{ $avaliacao->numeroBI }}</td> <td>{{ $avaliacao->eqt }}</td> <td>{{ $avaliacao->categoriaFuncionario }}</td> <td>{{ $avaliacao->total }}</td> <td>{{ $avaliacao->periodoAvaliacao }}</td> <td>{{ $avaliacao->designacao_cargo }}</td>
-                                         
+                                    <tr>
+                                              <td>{{ $avaliacao->numeroAgente }}</td> <td>{{ $avaliacao->nomeCompleto }}</td> <td>{{ $avaliacao->numeroBI }}</td> <td>{{ $avaliacao->eqt }}</td> <td>{{ $avaliacao->categoriaFuncionario }}</td> <td>{{ $avaliacao->total }}</td> <td>{{ $avaliacao->periodoAvaliacao }}</td> <td>{{ $avaliacao->designacao_cargo }}</td>
                                                 <td>
                                                     <form action="{{ route('exibir.documento') }}" method="POST" style="display: inline;">
                                                       @csrf
@@ -63,7 +62,7 @@
                                                       <button type="submit" class="btn btn-secondary w-100 m-1">Baixar Avaliação</button>
                                                     </form>
                                                 </td>
-                                            </tr>
+                                    </tr>
                               @endforeach
                               </tbody>
                               <tfoot>
@@ -121,20 +120,3 @@
         });
       </script>
     @endsection
-
-                 <!--Gerando a Tabela de forma Dinamica
-                              @foreach ($dados as $avaliacao)
-                                            <tr>
-                                                <td>{{ $avaliacao->numeroAgente }}</td> <td>{{ $avaliacao->nomeCompleto }}</td> <td>{{ $avaliacao->numeroBI }}</td> <td>{{ $avaliacao->eqt }}</td> <td>{{ $avaliacao->categoria }}</td> <td>{{ $avaliacao->total }}</td> <td>{{ $avaliacao->designacao_cargo }}</td>
-                                         
-                                                <td>
-                                                  <form action="{{ route('exibir.documento') }}" method="POST" style="display: inline;">
-                                                      @csrf
-                                                      @method('PUT')
-                                                      <input type="hidden" name="id" value="{{ $avaliacao->idArquivo }}">
-                                                      <button type="submit" class="btn btn-secondary">Baixar Avaliação</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
-                              @endforeach
-                              -->
