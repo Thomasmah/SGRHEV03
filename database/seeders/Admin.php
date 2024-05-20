@@ -52,6 +52,10 @@ class Admin extends Seeder
             'nomeMae' =>  'N/D' ,
             'idPessoa' => '1',
         ]);
+        //parentes
+        DB::table('enderecos')->insert([
+                'idPessoa' => '1',
+        ]);
          //funcionario
          DB::table('funcionarios')->insert([
             'numeroAgente' => '12345678',

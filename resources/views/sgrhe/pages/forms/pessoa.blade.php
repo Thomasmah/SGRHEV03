@@ -129,6 +129,7 @@
                               </div>
                               <div  class="form-group {{ isset($pessoa) ? 'd-none' : '' }}">
                               <label>Endereço</label>
+                              <br>
                               <label for="provinciaEndereco">Escolha uma Província:</label>
                                   <select name="provinciaEndereco" id="provinciaEndereco" onchange="carregarMunicipiosEndereco()" class="form-control select2" style="width: 100%;" >
                                       <option value="{{isset($naturalidade) ? $naturalidade->provincia : ''}}">{{isset($naturalidade) ? $naturalidade->provincia : 'Seleccione Uma Província'}}</option>
