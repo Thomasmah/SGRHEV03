@@ -18,11 +18,16 @@ class CategoriaFuncionario extends Seeder
         DB::table('categoria_funcionarios')->insert([
             'categoria' => 'Professor do Ensino Primário e Secundário',
             'grau' => '13º',
-            'salariobase' => '90000',
+            'salariobase' => '123.000.00',
         ]);
         DB::table('categoria_funcionarios')->insert([
             'categoria' => 'Professor do Ensino Primário e Secundário',
             'grau' => '12º',
+            'salariobase' => '90000',
+        ]);
+        DB::table('categoria_funcionarios')->insert([
+            'categoria' => 'Professor do Ensino Primário e Secundário',
+            'grau' => '11º',
             'salariobase' => '90000',
         ]);
         DB::table('categoria_funcionarios')->insert([

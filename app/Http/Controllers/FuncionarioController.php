@@ -43,7 +43,7 @@ class FuncionarioController extends Controller
      }
 
         //Verificar a Existencia  Pessoa Pré cadastrada
-        public function verificarPessoa(Request $request){
+     public function verificarPessoa(Request $request){
         $validar = $request->validate([
             'numeroBI' => ['required'],
         ]);
@@ -55,6 +55,17 @@ class FuncionarioController extends Controller
             return redirect()->back()->with('aviso','Não foi possível encontrar a pessoa!');
            } 
         }
+
+        public function verificarPessoaFuncionario(Request $request, $numeroBI){
+          // dd($numeroBI);
+            // Verifique se o Numero de Bilhete de Identidade existe na tabela pessoa
+            $pessoa = Pessoa::where('numeroBI', $numeroBI)->first();
+            if ($pessoa) {
+                return view('sgrhe/pages/forms/funcionario', compact('pessoa'));//->with('feito', 'Pessoa encontrada com sucesso!');
+               }else{
+                return redirect()->back()->with('aviso','Não foi possível encontrar a pessoa!');
+               } 
+            }
 
 
      //Read

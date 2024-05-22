@@ -130,8 +130,9 @@ Route::PUT('/endereco/editar/{id}',[EnderecoController::class,'edit'])->name('en
 
 //Formulario Create e Edite the same form
 Route::any('/create-edit-funcionario/{id?}',[FuncionarioController::class,'formulario'])->name('funcionarios.form');
-//Rota para o controler Verificar Pessoa para cadastrar novo fucnionario 
+//Rotas para o controler Verificar Pessoa para cadastrar novo fucnionario 
 Route::any('/fucionario-verificarPessoa',[FuncionarioController::class,'verificarPessoa'])->name('funcionarios.verificarPessoa');
+Route::any('/fucionario-verificarPessoaFuncionario/{numeroBI}',[FuncionarioController::class,'verificarPessoaFuncionario'])->name('funcionarios.verificarPessoa.funcionario');
 //Armzenar Registros na Tabela Unidade Organica 
 Route::any('/store-fucionario',[FuncionarioController::class,'store'])->name('funcionarios.store');//->middleware('AcessoAdmin');
 //Mostrar Funcionarios

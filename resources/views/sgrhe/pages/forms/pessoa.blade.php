@@ -170,6 +170,13 @@
                                   <label for="casa">Casa</label>
                                   <input type="text" name="casa" class="form-control"  placeholder="30" maxlength="10"  value="{{ isset($pessoa) ? $pessoa->nomeCompleto : ''}}">
                               </div>
+                              <div  class="form-group {{ isset($pessoa) ? 'd-none' : '' }}">
+                                <input type="radio" name="cadastrar" value="cadastrarFunionario" class="" require>
+                                <label for="cadastrarFunionario">Prosseguir à Funcionário </label>
+                                <br>
+                                <input type="radio" name="cadastrar" value="cadastrarPessoa" class="" require>
+                                <label for="cadastrar">Cadastrar mais Pessoas</label>
+                              </div>
                               <button type="submit" class="btn btn-primary" style="width: 100%;">{{ isset($pessoa) ? 'Actualizar Dados da Entidade Pessoa ' : 'Cadastrar Entidade Pessoa'}}</button>
                             </form>
                             <!-- /form-->

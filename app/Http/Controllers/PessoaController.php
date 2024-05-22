@@ -30,7 +30,7 @@ class PessoaController extends Controller
     }
     public function store(Request $request) 
     {
-        //dd($request->all());
+       // dd($request->all());
         $request->validate([
             'nomeCompleto' => ['string', 'max:255','required'],
             'dataNascimento' => ['date','required','before:' .now()->subYears(18)->format('Y-m-d')],
@@ -93,8 +93,12 @@ class PessoaController extends Controller
                     ]);
                     if ($endereco) {
                         DB::commit();
-                        return redirect()->route('pessoas.form')->with('success','Pessoa Cadastrada com Sucesso!');
-
+                        if ($request->input('cadastrar') == 'cadastrarPessoa') {
+                            return redirect()->route('pessoas.form')->with('success','Pessoa Cadastrada com Sucesso!');
+                        }else {
+                            // 
+                            return redirect()->route('funcionarios.verificarPessoa.funcionario', ['numeroBI' => $request->input('numeroBI')]);
+                        }
                     }else {
                         DB::rollBack();
                         return redirect()->back()->with('error','Erro ao Adicionar Endereço');
