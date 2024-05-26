@@ -21,12 +21,12 @@ class ProcessoController extends Controller
 
     public function darParecer(Request $request)
     {
-       // dd($request->all());
+       //dd($request->all());
         if ($request->parecer === 'Favoravel') {
             $D = $request->Request;
             //Converetr o Request String Em Request Array
             parse_str($D, $Request);
-            //dd($Request);
+           // dd($Request);
             $Documento = $request->file('arquivo');
             //Nomear o Nome do Novo ficheiro PDF
             $fileName = date('dmYHis').'file.pdf';
@@ -60,6 +60,13 @@ class ProcessoController extends Controller
                         'deferimento' => $request->input('parecer'),
                         
                     ]);
+                    //Se Categoria for Transferencia Efectivara a Mudanca nesta Sec
+                    if ($Request['categoria']=="Transferencia") {
+                        $funcionario = Funcionario::find($Request['idFuncionarioSolicitante']);
+                       // dd($funcionario);
+                        $funcionario->idUnidadeOrganica = $Request['idUnidadeOrganica'];
+                        $funcionario->save();
+                    }
                     DB::commit();
                     return redirect()->back()->with('success', 'Ratificado com sucesso!');
                 }
