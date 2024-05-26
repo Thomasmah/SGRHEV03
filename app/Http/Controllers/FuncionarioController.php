@@ -74,7 +74,7 @@ class FuncionarioController extends Controller
           //Operacoes de join para varias tabelas relacionadas com funcionarios
           $dados = DB::select('
           select 
-          funcionarios.id as id_funcionario, pessoas.id as id_pessoas, unidade_organicas.id as id_unidade_organica, categoria_funcionarios.categoria as categoria_unidade_organica, cargos.designacao as nomeCargo, 
+          unidade_organicas.designacao as designacao_unidadeOrganica, funcionarios.id as id_funcionario, pessoas.id as id_pessoas, unidade_organicas.id as id_unidade_organica, categoria_funcionarios.categoria as categoria_unidade_organica, cargos.designacao as nomeCargo, 
           funcionarios.*, pessoas.*, categoria_funcionarios.*, unidade_organicas.*, cargos.*
               from funcionarios
               join pessoas on pessoas.id=funcionarios.idPessoa
@@ -90,7 +90,7 @@ class FuncionarioController extends Controller
           //Operacoes de join para varias tabelas relacionadas com funcionarios
           $dados = DB::select('
           select 
-          funcionarios.estado as estado_funcionario, funcionarios.id as id_funcionario, pessoas.id as id_pessoas, unidade_organicas.id as id_unidade_organica, categoria_funcionarios.categoria as categoria_unidade_organica, cargos.designacao as nomeCargo, 
+          unidade_organicas.designacao as designacao_unidadeOrganica, funcionarios.id as id_funcionario, pessoas.id as id_pessoas, unidade_organicas.id as id_unidade_organica, categoria_funcionarios.categoria as categoria_unidade_organica, cargos.designacao as nomeCargo, 
           funcionarios.*, pessoas.*, categoria_funcionarios.*, unidade_organicas.*, cargos.*
               from funcionarios
               join pessoas on pessoas.id=funcionarios.idPessoa
@@ -122,7 +122,7 @@ class FuncionarioController extends Controller
             //'numeroBI' => ['required','unique:funcionarios,numeroBI'],
             'dataAdmissao' => ['date','required','before_or_equal:now'],
             'iban' => ['string','required','unique:funcionarios,iban'],
-            'email' => ['email','max:255','nullable','unique:funcionarios,email'],
+            //'email' => ['email','max:255','nullable','unique:funcionarios,email'],
             'numeroTelefone' => ['between:9,14','unique:funcionarios,numeroTelefone'],    
             //'idPessoa'=> ['numeric','required','unique:funcionarios,idPessoa,except'.''],
             //'idUnidadeOrganica'=> ['numeric'],
@@ -137,7 +137,7 @@ class FuncionarioController extends Controller
                 'dataAdmissao.before' => 'A data de Admissão deve ser antes do dia de Hoje!', 
                 'dataAdmissao.required' => 'A data de Admissão é Obrigatória!',
                 'iban.unique' => 'O Iban ja está sendo utilizado por outro Funcionário!',
-                'email.unique' => 'O Email ja está sendo utilizado por outro Funcionário!', 
+                //'email.unique' => 'O Email ja está sendo utilizado por outro Funcionário!', 
                 'numeroTelefone.unique' => 'O Numero de Telefone já está sendo utilizado por outro Funcionário!',
             ]);
             DB::beginTransaction();
@@ -145,7 +145,7 @@ class FuncionarioController extends Controller
                 'numeroAgente' => $request->input('numeroAgente'),
                 'dataAdmissao' => $request->input('dataAdmissao'),
                 'iban' => $request->input('iban'),
-                'email' => $request->input('email'),
+                //'email' => $request->input('email'),
                 'idPessoa' => $request->input('idPessoa'),
                 'idUnidadeOrganica' => $request->input('idUnidadeOrganica'),
                 'idCargo' => $request->input('idCargo'), 
@@ -175,7 +175,7 @@ class FuncionarioController extends Controller
         //'numeroBI' => ['required','unique:funcionarios,numeroBI'],
         'dataAdmissao' => ['date','required','before_or_equal:now'],
         'iban' => ['string','required','unique:funcionarios,iban'],
-        'email' => ['email','max:255','nullable','unique:funcionarios,email'],
+        //'email' => ['email','max:255','nullable','unique:funcionarios,email'],
         'numeroTelefone' => ['between:9,14','unique:funcionarios,numeroTelefone'],    
         //'idPessoa'=> ['numeric','required','unique:funcionarios,idPessoa,except'.''],
         //'idUnidadeOrganica'=> ['numeric'],
@@ -190,7 +190,7 @@ class FuncionarioController extends Controller
             'dataAdmissao.before' => 'A data de Admissão deve ser antes do dia de Hoje!', 
             'dataAdmissao.required' => 'A data de Admissão é Obrigatória!',
             'iban.unique' => 'O Iban ja está sendo utilizado por outro Funcionário!',
-            'email.unique' => 'O Email ja está sendo utilizado por outro Funcionário!', 
+            //'email.unique' => 'O Email ja está sendo utilizado por outro Funcionário!', 
             'numeroTelefone.unique' => 'O Numero de Telefone já está sendo utilizado por outro Funcionário!',
         ]);
         DB::beginTransaction();
@@ -198,7 +198,7 @@ class FuncionarioController extends Controller
             'numeroAgente' => $request->input('numeroAgente'),
             'dataAdmissao' => $request->input('dataAdmissao'),
             'iban' => $request->input('iban'),
-            'email' => $request->input('email'),
+            //'email' => $request->input('email'),
             'idPessoa' => $request->input('idPessoa'),
             'idUnidadeOrganica' => $request->input('idUnidadeOrganica'),
             'idCargo' => $request->input('idCargo'), 
@@ -218,12 +218,10 @@ class FuncionarioController extends Controller
     }
         
     }
-
-
     //Update
     public function update(Request $request, string $id)
     { 
-           // dd($request->all());
+        // dd($request->all());
            //Verificar se o Cargo de Director da Escla esta Elegivel
            if ($request->idCargo == 4) {
                 $funcionario = Funcionario::where('idUnidadeOrganica', $request->idUnidadeOrganica)->where('idCargo', 4)->exists();
@@ -239,7 +237,7 @@ class FuncionarioController extends Controller
                     'numeroAgente' => ['numeric','required','unique:funcionarios,numeroAgente,'.$id],
                     'dataAdmissao' => ['date','required','before_or_equal:now'],
                     'iban' => ['string','required','unique:funcionarios,iban,'.$id], 
-                    'email' => ['email','max:255','nullable','unique:funcionarios,email,'.$id],
+                    //'email' => ['email','max:255','nullable','unique:funcionarios,email,'.$id],
                     'numeroTelefone' => ['between:9,14','unique:funcionarios,numeroTelefone,'.$id],    
                     ], [
                         'idCargo.unique' => 'O Cargo de Director Muninipal não está Disponível!',
@@ -249,7 +247,7 @@ class FuncionarioController extends Controller
                         'dataAdmissao.before_or_equal' => 'A data de Admissão deve ser antes do dia de Hoje!', 
                         'dataAdmissao.required' => 'A data de Admissão é Obrigatória!',
                         'iba.unique' => 'O Iban ja está sendo utilizado por outro usuário!',
-                        'email.unique' => 'O Email ja está sendo utilizado por outro usuário!', 
+                        //'email.unique' => 'O Email ja está sendo utilizado por outro usuário!', 
                         'numeroTelefone.unique' => 'O Numero de Telefone já está sendo utilizado por outro usuário!', 
                     ]);
                     DB::beginTransaction();
@@ -262,7 +260,7 @@ class FuncionarioController extends Controller
                     $funcionario->idSeccao = $request->idSeccao;
                     $funcionario->idUnidadeOrganica = $request->idUnidadeOrganica;
                     $funcionario->iban = $request->iban;
-                    $funcionario->email = $request->email;
+                    //$funcionario->email = $request->email;
                     $funcionario->dataAdmissao = $request->dataAdmissao;
                     $funcionario->numeroTelefone = $request->numeroTelefone;
                         // iniciando a transacao para as alterações no registro
@@ -284,7 +282,7 @@ class FuncionarioController extends Controller
             'numeroAgente' => ['numeric','required','unique:funcionarios,numeroAgente,'.$id],
             'dataAdmissao' => ['date','required','before_or_equal:now'],
             'iban' => ['string','required','unique:funcionarios,iban,'.$id], 
-            'email' => ['email','max:255','nullable','unique:funcionarios,email,'.$id],
+            //'email' => ['email','max:255','nullable','unique:funcionarios,email,'.$id],
             'numeroTelefone' => ['between:9,14','unique:funcionarios,numeroTelefone,'.$id],    
             ], [
                 'idCargo.unique' => 'O Cargo de Director Muninipal não está Disponível!',
@@ -294,7 +292,7 @@ class FuncionarioController extends Controller
                 'dataAdmissao.before_or_equal' => 'A data de Admissão deve ser antes do dia de Hoje!', 
                 'dataAdmissao.required' => 'A data de Admissão é Obrigatória!',
                 'iba.unique' => 'O Iban ja está sendo utilizado por outro usuário!',
-                'email.unique' => 'O Email ja está sendo utilizado por outro usuário!', 
+                //'email.unique' => 'O Email ja está sendo utilizado por outro usuário!', 
                 'numeroTelefone.unique' => 'O Numero de Telefone já está sendo utilizado por outro usuário!', 
             ]);
             DB::beginTransaction();
@@ -307,7 +305,7 @@ class FuncionarioController extends Controller
             $funcionario->idSeccao = $request->idSeccao;
             $funcionario->idUnidadeOrganica = $request->idUnidadeOrganica;
             $funcionario->iban = $request->iban;
-            $funcionario->email = $request->email;
+            //$funcionario->email = $request->email;
             $funcionario->dataAdmissao = $request->dataAdmissao;
             $funcionario->numeroTelefone = $request->numeroTelefone;
                 // iniciando a transacao para as alterações no registro
@@ -338,8 +336,6 @@ class FuncionarioController extends Controller
             return redirect()->route('pessoas.index')->with('error', 'Registro não encontrado, out erro de exclusao');
         }
     }
-
-
     public function formularioAvaliarDesempenhoFuncionario(Request $request)
     {
         //Blade com dados do funcionário
@@ -352,7 +348,6 @@ class FuncionarioController extends Controller
         return view('sgrhe\pages\forms\formulario-avaliacao-desempenho', compact('funcionarioCandidato','cargoCandidato','seccaoCandidato','pessoaCandidato','unidadeOrganicaCandidato','categoriaFuncionarioCandidato'));
 
     }
-
     public function estado(Request $request){
         $funcionario = Funcionario::find($request->id);
         $funcionario->estado = $request->estado;
@@ -362,6 +357,4 @@ class FuncionarioController extends Controller
             return redirect()->back()->with('error', 'Erro ao alterar o Estado do Funcionário!');
         }
     }
-
-
 }

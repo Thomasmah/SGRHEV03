@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('categoria');
             $table->string('grau');
-            $table->float('salariobase');
+            $table->decimal('salariobase',9,2);
             $table->timestamps();
         });
     }

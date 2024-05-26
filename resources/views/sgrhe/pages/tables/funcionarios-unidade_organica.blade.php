@@ -77,7 +77,7 @@
                                                     $class = $data->gt(now()) ? 'text-success' : 'text-danger';
                                                   @endphp
                                                   <td class="{{ $class }}">{{ \Carbon\Carbon::parse($funcionario->validadeBI)->format('d/m/Y') }}</td>
-                                                  <td>{{ $funcionario->designacao }}</td>
+                                                  <td>{{ $funcionario->designacao_unidadeOrganica }}</td>
                                                   <td>{{ $funcionario->categoria }}</td>
                                                   <td class="{{ ($funcionario->nomeCargo =='Director da Escola') ? 'font-weight-bolder' : '' }}" >{{ $funcionario->nomeCargo }}</td>
                                                   <td>{{ \Carbon\Carbon::parse($funcionario->dataAdmissao)->format('d/m/Y') }}</td>

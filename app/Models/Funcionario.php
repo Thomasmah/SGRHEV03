@@ -15,7 +15,7 @@ class Funcionario extends Model
         'dataAdmissao',
         'idSeccao',
         'iban',
-        'email',
+        //'email',
         'idPessoa', 
         'idUnidadeOrganica',
         'idCargo', 

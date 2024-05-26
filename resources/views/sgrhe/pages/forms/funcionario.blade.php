@@ -146,7 +146,7 @@
                                       <input type="text" name="iban" class="form-control" id="iban" value="{{ old('iban',$funcionario->iban ?? '') }}" maxlength="26" placeholder="0000.0000.0000.0000.0000.0" oninput="this.value = this.value.replace(/[^0-9]/g,'')" required>
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group d-none">
                                       <label for="email">Email address</label>
                                       <input type="email" name="email" class="form-control" id="email" value="{{ old('email',$funcionario->email ?? '') }}" placeholder="Introduza um email">
                                     </div>
@@ -158,7 +158,7 @@
                                     <div class="form-group mb-0">
                                       <div class="custom-control custom-checkbox">
                                         <input type="checkbox" name="terms" class="custom-control-input" id="exampleCheck1" required>
-                                        <label class="custom-control-label" for="exampleCheck1">Concordar em Cadastrar o Funcionario nos termos<a href="#"> Termos de Regulamento Interno da Direção Municipal da Educação do Púri</a>.</label>
+                                        <label class="custom-control-label" for="exampleCheck1">Concordar em Submeter os dados do Funcionario nos termos<a href="#"> Termos de Regulamento Interno da Direção Municipal da Educação do Púri</a>.</label>
                                       </div>
                                     </div>
                                   </div>

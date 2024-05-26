@@ -61,7 +61,7 @@ class Admin extends Seeder
             'numeroAgente' => '12345678',
             'dataAdmissao' => '1999-01-01',
             'iban' => 'AO06 0000 0000 0000 0000 0000 0',
-            'email' => 'admin@gmail.com',
+          //  'email' => 'admin@gmail.com',
             'idPessoa' => '1', 
             'idUnidadeOrganica' => '1',
             'idCargo' => '1', 

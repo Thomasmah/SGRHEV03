@@ -285,6 +285,16 @@ class ProcessoController extends Controller
 //Solicitar Processos Genericos 
     public function solicitar(Request $request)
     { 
+        
+        if (($request->categoria=="GozoFerias") && (isset($request->dataInicio))) {
+            $request->validate([
+                'dataInicio' => ['required', 'date', 'after_or_equal:today'],
+            ],[
+                //Menssagem personalizada 
+                'dataInicio.after_or_equal' => 'Não é possivel solicitar férias antes do dia de Hoje',
+    
+            ]);
+        }
         //dd('Solicitar');
         $request->validate([
             'categoria' => [

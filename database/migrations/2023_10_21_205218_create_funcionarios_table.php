@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('numeroAgente');
             $table->date('dataAdmissao');
             $table->string('iban');
-            $table->string('email');
+            // $table->string('email');
             $table->string('estado')->nullable();
             $table->string('avaliacaoCorrente')->nullable();
             $table->string('numeroTelefone')->nullable();
