@@ -143,17 +143,16 @@
         <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
         <!--Algoritmo interactivo no processo de delectar Objectos em SweetAlert 2-->
         <script src="{{ asset('plugins/sweetalert2/alerta-deletar.js') }}"></script>
-
         <script>
           $(function () {
             $("#example1").DataTable({
               "responsive": true, "lengthChange": false, "autoWidth": false,
-              "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+              "buttons": ["excel", "pdf", "colvis"]
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
             $('#example2').DataTable({
               "paging": true,
               "lengthChange": false,
-              "searching": false,
+              "searching": true,
               "ordering": true,
               "info": true,
               "autoWidth": false,

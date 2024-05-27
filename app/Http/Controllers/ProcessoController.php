@@ -67,6 +67,11 @@ class ProcessoController extends Controller
                         $funcionario->idUnidadeOrganica = $Request['idUnidadeOrganica'];
                         $funcionario->save();
                     }
+                    //Se Categoria for Licenca
+                    if ($Request['categoria']=="Lecenca") {
+                      dd('Licenca');
+                    }
+                    
                     DB::commit();
                     return redirect()->back()->with('success', 'Ratificado com sucesso!');
                 }
@@ -106,7 +111,7 @@ class ProcessoController extends Controller
 
     public function parecer(Request $request)
     {
-      // dd($request->all());
+       dd($request->all());
         //Compilando o Documento Ratificado
         //Reconversao do Submit do formularo armazenado no banco de dados
         $D = $request->Request;
