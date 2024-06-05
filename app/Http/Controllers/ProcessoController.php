@@ -254,7 +254,6 @@ class ProcessoController extends Controller
 
     public function preview(Request $request)
     {
-    
         //Reconversao do Submit do ormularo armazenado no banco de dados
         $D = $request->Request;
         parse_str($D, $Request);
@@ -269,10 +268,10 @@ class ProcessoController extends Controller
         $cargo =  Cargo::where('id', $funcionario->idCargo)->first();
         $categoriaFuncionario = categoriaFuncionario::where('id', $funcionario->idCategoriaFuncionario)->first();
         $unidadeOrganica = UnidadeOrganica::where('id', $funcionario->idUnidadeOrganica)->first();
-      
+        $unidadeOrganicaOndeVai = UnidadeOrganica::where('id', $Request['idUnidadeOrganica'])->first();
         $idProcesso = $request['idProcesso'];
         //Carregar a View
-        $Documento = PDF::loadView("sgrhe/modelos/$categoria",compact('Request','pessoa','funcionario','cargo','categoriaFuncionario','unidadeOrganica','idProcesso'));      
+        $Documento = PDF::loadView("sgrhe/modelos/$categoria",compact('unidadeOrganicaOndeVai','Request','pessoa','funcionario','cargo','categoriaFuncionario','unidadeOrganica','idProcesso'));      
         //Renderizar a View
         $Documento->render();
         //Nomear o Nome do Novo ficheiro PDF
@@ -348,6 +347,7 @@ class ProcessoController extends Controller
 
     public function gerarDocumento(Request $request, string $idFuncionarioSolicitante)
     {
+
         $funcionario = Funcionario::where('id', $idFuncionarioSolicitante)->first();
         $pessoa = Pessoa::where('id', $funcionario->idPessoa)->first();
         $cargo =  Cargo::where('id', $funcionario->idCargo)->first();

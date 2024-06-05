@@ -56,6 +56,7 @@
                                   <th>Validade do BI</th>
                                   <th>Unidade Orgânica</th>
                                   <th>Categoria Funcionário</th>
+                                  <th>Secção</th>
                                   <th>Cargo</th>
                                   <th>Data de Admissão</th>
                                   <th>Email</th>
@@ -82,6 +83,7 @@
                                                   <td class="{{ $class }}">{{ \Carbon\Carbon::parse($funcionario->validadeBI)->format('d/m/Y') }}</td>
                                                   <td>{{ $funcionario->designacao_unidadeOrganica }}</td>
                                                   <td>{{ $funcionario->categoria }}</td>
+                                                  <td>{{ $funcionario->designacao_seccao }}</td>
                                                   <td>{{ $funcionario->nomeCargo }}</td>
                                                   <td>{{ \Carbon\Carbon::parse($funcionario->dataAdmissao)->format('d/m/Y') }}</td>
                                                   <td>{{ $funcionario->email }}</td>
@@ -133,6 +135,7 @@
                                   <th>Validade do BI</th>
                                   <th>Unidade Orgânica</th>
                                   <th>Categoria Funcionário</th>
+                                  <th>Secção</th>
                                   <th>Cargo</th>
                                   <th>Data de Admissão</th>
                                   <th>Email</th>

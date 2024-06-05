@@ -14,6 +14,7 @@ use App\Models\Cargo;
 use App\Models\categoriaFuncionario;
 use App\Models\Seccao;
 use App\Models\UnidadeOrganica;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Symfony\Component\Console\Input\Input;
 use Illuminate\Support\Facades\Validator;
@@ -74,11 +75,12 @@ class FuncionarioController extends Controller
           //Operacoes de join para varias tabelas relacionadas com funcionarios
           $dados = DB::select('
           select 
-          unidade_organicas.designacao as designacao_unidadeOrganica, funcionarios.id as id_funcionario, pessoas.id as id_pessoas, unidade_organicas.id as id_unidade_organica, categoria_funcionarios.categoria as categoria_unidade_organica, cargos.designacao as nomeCargo, 
-          funcionarios.*, pessoas.*, categoria_funcionarios.*, unidade_organicas.*, cargos.*
+           seccaos.designacao as designacao_seccao, unidade_organicas.designacao as designacao_unidadeOrganica, funcionarios.id as id_funcionario, pessoas.id as id_pessoas, unidade_organicas.id as id_unidade_organica, categoria_funcionarios.categoria as categoria_unidade_organica, cargos.designacao as nomeCargo, 
+           funcionarios.*, pessoas.*, categoria_funcionarios.*, unidade_organicas.*, cargos.*, seccaos.*
               from funcionarios
               join pessoas on pessoas.id=funcionarios.idPessoa
               join categoria_funcionarios on categoria_funcionarios.id=funcionarios.idCategoriaFuncionario
+              join seccaos on seccaos.id=funcionarios.idSeccao
               join unidade_organicas on unidade_organicas.id=funcionarios.idUnidadeOrganica
               join cargos on cargos.id=funcionarios.idCargo 
           ');
@@ -90,11 +92,12 @@ class FuncionarioController extends Controller
           //Operacoes de join para varias tabelas relacionadas com funcionarios
           $dados = DB::select('
           select 
-          unidade_organicas.designacao as designacao_unidadeOrganica, funcionarios.id as id_funcionario, pessoas.id as id_pessoas, unidade_organicas.id as id_unidade_organica, categoria_funcionarios.categoria as categoria_unidade_organica, cargos.designacao as nomeCargo, 
-          funcionarios.*, pessoas.*, categoria_funcionarios.*, unidade_organicas.*, cargos.*
+           seccaos.designacao as designacao_seccao, unidade_organicas.designacao as designacao_unidadeOrganica, funcionarios.id as id_funcionario, pessoas.id as id_pessoas, unidade_organicas.id as id_unidade_organica, categoria_funcionarios.categoria as categoria_unidade_organica, cargos.designacao as nomeCargo, 
+           funcionarios.*, pessoas.*, categoria_funcionarios.*, unidade_organicas.*, cargos.*, seccaos.*
               from funcionarios
               join pessoas on pessoas.id=funcionarios.idPessoa
               join categoria_funcionarios on categoria_funcionarios.id=funcionarios.idCategoriaFuncionario
+              join seccaos on seccaos.id=funcionarios.idSeccao
               join unidade_organicas on unidade_organicas.id=funcionarios.idUnidadeOrganica
               join cargos on cargos.id=funcionarios.idCargo 
             where funcionarios.estado = "Inactivo"
@@ -356,5 +359,27 @@ class FuncionarioController extends Controller
         }else {
             return redirect()->back()->with('error', 'Erro ao alterar o Estado do Funcionário!');
         }
+    }
+    
+    public function fichaFuncionario(Request $request){
+
+        $categoria =$request->categoria; 
+        $funcionario = Funcionario::where('id', $request->idFuncionario)->first();
+        $pessoa = Pessoa::where('id', $funcionario->idPessoa)->first();
+        $cargo =  Cargo::where('id', $funcionario->idCargo)->first();
+        $categoriaFuncionario = categoriaFuncionario::where('id', $funcionario->idCategoriaFuncionario)->first();
+        $unidadeOrganica = UnidadeOrganica::where('id', $funcionario->idUnidadeOrganica)->first();
+        $idProcesso = $request['idProcesso'];
+        //Carregar a View
+        $Documento = PDF::loadView("sgrhe/modelos/$categoria",compact('pessoa','funcionario','cargo','categoriaFuncionario','unidadeOrganica','idProcesso'));      
+        //Renderizar a View
+        $Documento->render();
+        //Nomear o Nome do Novo ficheiro PDF
+        $fileName = 'file.pdf';
+        //Retornar o Domunento Gerado 
+       // return view("sgrhe/modelos/$categoria",compact('Request','pessoa','funcionario','cargo','categoriaFuncionario'));
+        return response($Documento->output(), 200, ['Content-Type' => 'application/pdf', 'Content-Disposition' => 'inline; filename="'.$fileName.'"']);
+
+    
     }
 }

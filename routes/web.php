@@ -145,9 +145,9 @@ Route::any('/updade-funcionario{id}',[FuncionarioController::class,'update'])->n
 Route::delete('/delete-funcionario{id}',[FuncionarioController::class,'destroy'])->name('funcionarios.delete');//->middleware('AcessoAdmin');
 
 //Alterar estado do Funcionario
-Route::any('/funcionario/estado/', [FuncionarioController::class, 'estado'])->name('estado.funcionario');
-
-
+Route::any('/funcionario/estado/', [FuncionarioController::class, 'estado'])->name('estado.funcionario');  
+//Ver Ficha de Fucnionario
+Route::any('/funcionario/ficha/', [FuncionarioController::class, 'fichaFuncionario'])->name('ver.ficha.funcionario'); 
 
 
 //QR Code

@@ -152,10 +152,11 @@
                               <p><b>Naturalidade (Província):</b> {{ $naturalidade->provincia }} </p> 
                               <p><b>Naturalidade (Município):</b> {{ $naturalidade->municipio }} </p> 
                               <p><b>Categoria:</b> {{ $categoriaFuncionario->categoria }} </p>
-                              <p><b>Data de Admissão:</b> {{ \Carbon\Carbon::parse($funcionario->dataAdmissao)->format('d/m/Y') }} </p>                     
-                              <p><b>Grau:</b> {{ $categoriaFuncionario->grau }} </p>                            
-                              <p><b>Cargo:</b> {{ $cargo->designacao }} </p>                            
+                              <p><b>Data de Admissão:</b> {{ \Carbon\Carbon::parse($funcionario->dataAdmissao)->format('d/m/Y') }} </p>          
                               <p><b>Unidade Orgânica:</b> {{ $unidadeOrganica->designacao }} </p>
+                              <p><b>Grau:</b> {{ $categoriaFuncionario->grau }} </p>    
+                              <p><b>Secção:</b> {{ $seccao->designacao }} </p>                            
+                              <p><b>Cargo:</b> {{ $cargo->designacao }} </p>    
                               <p><b>Telefone:</b> {{ $funcionario->numeroTelefone }} </p>
                             </li>
                             <li class="list-group-item d-none" style="text-align: center;">
@@ -178,6 +179,15 @@
                                   </div>
                                 </div>
                                 <button type="submit" class="btn btn-secondary  btn-block">Actualizar Ass.</button>
+                              </form>
+                            </li>
+                            <li>
+                              <form action="{{ route('ver.ficha.funcionario') }}" method="POST" >
+                                @csrf
+                                @method('POST')
+                                <input type="hidden" name="categoria" value="FichaFuncionario">
+                                <input type="hidden" name="idFuncionario" value="{{$funcionario->id}}">
+                                <input type="submit" class="btn btn-primary w-100" value="Ficha do Funcionário">
                               </form>
                             </li>
                           </ul>

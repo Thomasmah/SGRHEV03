@@ -1,18 +1,14 @@
-@php
-  setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'portuguese');
-@endphp
 <?php
-$dataI= new DateTime($Request['dataInicio']);
-$dataF= new DateTime($Request['dataFim']);
-
-
+//Dados Requisitos
+$parente = App\Models\Parente::where('idPessoa',$pessoa->id)->first();
+$naturalidade = App\Models\Naturalidade::where('idPessoa',$pessoa->id)->first();
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Apenso</title>
+        <title>Declaração de Efectividade</title>
        <style>
                 @page{
                         size: A4;
@@ -47,7 +43,7 @@ $dataF= new DateTime($Request['dataFim']);
                 }
                 .insignea > img{
                       /* border: 1px solid red;*/
-                        height: 3cm;
+                        height: 2.5cm;
                       
                 }
                 .repubica{
@@ -60,21 +56,26 @@ $dataF= new DateTime($Request['dataFim']);
                 }
                 .repubica > p:last-child {
                         padding: 0;
-                        margin: .2cm;
+                        margin: 0cm;
                         color: black;
                         font-weight: bold;
                         text-decoration: underline;
                 }
                 .titulo > p{
-                        text-align: left;
+                        text-align: center;
                         color: red;
                         position: relative;
-                        padding:0;
+                        padding:1.5;
                         margin: 1.5cm 0cm .5cm 0cm;
                         font-weight: bold;
+                        margin: 3px;
                 }
-                .introducao {
+                .corpo {
                         text-align: justify;
+                }
+                .corpo > p {
+                        margin-top: .5em;
+                        margin-bottom: .5em;
                 }
                 .conclusao {
                         text-align: justify;
@@ -100,7 +101,7 @@ $dataF= new DateTime($Request['dataFim']);
                 .rodape {
                         position: absolute;
                         white-space: nowrap;
-                        top: 270mm;
+                        bottom: 0;
                 }
                 .foot-esquerda{
                        /* border: 1px solid rgb(2,6,7); */
@@ -138,6 +139,14 @@ $dataF= new DateTime($Request['dataFim']);
                         transform: rotate(-60deg);
 
                 }
+                .tabela-classificacao {
+                       border-collapse: collapse;
+                       width: 100%;
+                }
+                .tabela-classificacao td, .tabela-classificacao th { 
+                        border: solid grey;
+                        padding: 10px;
+                }
                 
        </style>
 </head>
@@ -155,22 +164,36 @@ $dataF= new DateTime($Request['dataFim']);
                 </div>
         </div>
         <div class="corpo">
-                <div class="titulo">
-                        <p>Licença</p>
+                <div class="titulo ">
+                        <br>
+                        <p>Solicitacao de Tranferência </p>
+                        <br>
                         <p style="text-align: left;">#{{ $idProcesso }}/{{ date('Y') }}DME-PÚRI</p>
                 </div>
-                <div class="introducao">
-                        {{$pessoa->nomeCompleto}}, funcionári(a) desta Direcção, vem por meio deste, solicitar ao Senhor Director Municipal da Educação do Púri, se digne dispensá-lo num período de {{ ($dataI->diff($dataF))->format('%a') }} dias úteis, a partir de {{strftime('%d %B de %Y', strtotime(\Carbon\Carbon::parse($dataI))) }} à  {{strftime('%d %B de %Y', strtotime(\Carbon\Carbon::parse($dataF))) }}, {{ $Request['motivo']}}
-                </div>
-                <div class="preenchimento">
-                       # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # ###
-                </div>
-                <div class="conclusao">
-                     
+                <div class="corpo">
+                        <p>
+                        ALFREDO JOSÉ MÁRIO Director Municipal da Educaçcão, declaro por minha honra profissional que o senhor {{ $pessoa->nomeCompleto }}, solteiro de {{ $pessoa->dataNascimento }} anos de idade, filho de  {{ $parente->nomePai }}, e de {{ $parente->nomeMae }}, nascido aos {{ $pessoa->dataNascimento }}, natural de {{ $naturalidade->municipio }}, Município de  {{ $naturalidade->municipio }}, Província de {{ $naturalidade->provincia }}, portador do B.I. nº {{ $pessoa->numeroBI }}, passado pelo Sector de Identificação de Uíge aos 28 de Abril de {{ date('Y')}}
+                        </p>
+                        <p>
+                                É {{ $cargo->designacao }}, convertido na categoria de {{ $categoriaFuncionario->categoria.' do '.$categoriaFuncionario->grau }}, salario base de {{ $categoriaFuncionario->salariobase }} com o número de agente {{ $funcionario->numeroAgente }} colocado na Unidade Organica, {{ $unidadeOrganica->designacao }} 
+                        </p>
+                        <p>
+                               Texto
+                        </p>
+                        <div class="preenchimento">
+                       # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # ###  
+                        </div>
+                    
+                        <p>
+                               Venho por Este meio Solicitar a Transferencia ...... 
+                        </p>
                 </div>
                 <div class="data-local">
-                     
-                        <p>Direcção Municipal da Educação do Púri, {{ strftime('%d de %B de %Y', strtotime(\Carbon\Carbon::parse(date('d F Y')))) }}</p>
+                        <?php
+                        setlocale(LC_TIME, 'pt_BR' , 'pt_BR.utf-8', 'portuguese' );
+                        //Lembrar de Implementar  Arquivos de Localizacao em portugues no servidor PHP
+                        ?>
+                        <p>Direcção Municipal da Educação do Púri, _____/_______________/_______ </p>
                 </div>
                 <div class="autenticacao" style="position:relative; text-align:center;" >
                 <!--Importar a Imagem de assinatura do Funionario e posteriomente aolicar mecanismos de assinatura digital com verifcacao com codigo QR-->
@@ -179,13 +202,13 @@ $dataF= new DateTime($Request['dataFim']);
                                 $assinatura =  App\Models\Assinatura::where('idFuncionario', session()->only(['funcionario'])['funcionario']->id)->first()->assinatura;
                         @endphp
                                 <div style="position:absolute; width:100%; z-index:1; ">
-                                        <img src="data:image/png;base64,{{$assinatura}}"  alt="" style="height:129px; width: 200px;">
+                                       <!-- <img src="data:image/png;base64,{{$assinatura}}"  alt="" style="height:129px; width: 200px;"> -->
                                 </div>
                        @endif
                        <div style="position:absolute; z-index:2; width:100%;">
                         <p style="font-weight: bold;">O Director Municipal</p>
-                                <p>__________________________</p>
-                                <p>Tunga Tomás dos Santos</p>
+                                <p style="margin: 0; padding:0;">____________________________</p>
+                                <p style="margin: 0; padding:0;">Afredo José Mário</p>
                        </div>
 
                 </div>

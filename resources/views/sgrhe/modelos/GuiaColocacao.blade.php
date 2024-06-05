@@ -168,23 +168,21 @@ $naturalidade = App\Models\Naturalidade::where('idPessoa',$pessoa->id)->first();
                         <br>
                         <p>Guia de Colocação </p>
                         <br>
+                        <p style="text-align: left;">#{{ $idProcesso }}/{{ date('Y') }}DME-PÚRI</p>
                 </div>
                 <div class="corpo">
                         <p>
-                        ALFREDO JOSÉ MÁRIO Director Municipal da Educaçcão, declaro por minha honra profissional que o senhor {{ $pessoa->nomeCompleto }}, solteiro de {{ $pessoa->dataNascimento }} anos de idade, filho de  {{ $parente->nomePai }}, e de {{ $parente->nomeMae }}, nascido aos {{ $pessoa->dataNascimento }}, natural de {{ $naturalidade->municipio }}, Município de  {{ $naturalidade->municipio }}, Província de {{ $naturalidade->provincia }}, portador do B.I. nº {{ $pessoa->numeroBI }}, passado pelo Sector de Identificação de Uíge aos 28 de Abril de {{ date('Y')}}
-                        </p>
-                        <p>
-                                É {{ $cargo->designacao }}, convertido na categoria de {{ $categoriaFuncionario->categoria.' do '.$categoriaFuncionario->grau }}, salario base de {{ $categoriaFuncionario->salariobase }} com o número de agente {{ $funcionario->numeroAgente }} colocado na Unidade Organica, {{ $unidadeOrganica->designacao }} 
-                        </p>
-                        <p>
-                                {{ $Request['motivo'] }}
+                        Por esta Direcção Municipal, se faz constar as autoridades a quem p conhencimento desta competir que segue viagem para a {{ $unidadeOrganicaOndeVai->designacao }}, O Senhor <span style="font-weight: bold;">{{ $pessoa->nomeCompleto }}</span>, agente nº <span style="font-weight: bold;">{{ $funcionario->numeroAgente }} </span>, com a categoria de {{ $categoriaFuncionario->categoria.' do '.$categoriaFuncionario->grau }} , a fim de exercer as suas funções na mesma.
                         </p>
                         <div class="preenchimento">
                        # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # ###  
                         </div>
                     
                         <p>
-                               Venho por Este meio Solicitar a Transferencia ...... 
+                               E, para que se lhe não ponha inpedimento, passou-se a senguinte GUIA que por min vai assinada e autenticada com carimbo à óleo em uso nesta Direcção Municipal.
+                        </p>
+                        <p>
+                               Obs: Após a recepção da guia o Professor devera apresentar'se num prazo de 48 horas na instituição onde foi colocado.
                         </p>
                 </div>
                 <div class="data-local">
@@ -192,7 +190,7 @@ $naturalidade = App\Models\Naturalidade::where('idPessoa',$pessoa->id)->first();
                         setlocale(LC_TIME, 'pt_BR' , 'pt_BR.utf-8', 'portuguese' );
                         //Lembrar de Implementar  Arquivos de Localizacao em portugues no servidor PHP
                         ?>
-                        <p>Direcção Municipal da Educação do Púri, _____/_______________/_______ </p>
+                              <p>Direcção Municipal da Educação do Púri, {{ strftime('%d de %B de %Y', strtotime(\Carbon\Carbon::parse(date('d F Y')))) }}</p>
                 </div>
                 <div class="autenticacao" style="position:relative; text-align:center;" >
                 <!--Importar a Imagem de assinatura do Funionario e posteriomente aolicar mecanismos de assinatura digital com verifcacao com codigo QR-->
