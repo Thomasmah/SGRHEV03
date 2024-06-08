@@ -24,19 +24,23 @@ class FuncionarioController extends Controller
     //Mostrar Funcionarios Via Formulários
     public function  indexFuncionarios(Request $request)
     {
+       
         $estado = "";
         $unidadeOrganica = "";
+        $idUnidadeOrganica = "";
         if ($request->estado === "Todo") {
-            if(isset($request->idUnidadeOrganica)){
-                $unidadeOrganica="where unidade_organicas.id=".'"'.$request->idUnidadeOrganica.'"';
+            if(isset($request->idUnidadeOrganica) || $request->idUnidadeOrganica != "" ){
+                $idUnidadeOrganica = $request->idUnidadeOrganica;
+                $unidadeOrganica="where unidade_organicas.id=".$request->idUnidadeOrganica;
                 $estado="";  
             }else {
                 $estado="";
             }
         }else{
-            if(isset($request->idUnidadeOrganica)){
-                $unidadeOrganica="unidade_organicas.id=".'"'.$request->idUnidadeOrganica.'"';
+            if(isset($request->idUnidadeOrganica) || $request->idUnidadeOrganica != "" ){
                 $estado ="where funcionarios.estado=".'"'.$request->estado.'"';  
+                $idUnidadeOrganica = $request->idUnidadeOrganica;
+                $unidadeOrganica="And unidade_organicas.id=".$request->idUnidadeOrganica;
             }else {
                 $estado ="where funcionarios.estado=".'"'.$request->estado.'"';  
             }  
@@ -55,7 +59,7 @@ class FuncionarioController extends Controller
           '.$estado.$unidadeOrganica);
           $titulo = $request->titulo;
           $estado = $request->estado; 
-          return view('sgrhe/pages/tables/funcionarios',compact('dados','titulo','estado','unidadeOrganica'));
+          return view('sgrhe/pages/tables/funcionarios',compact('dados','titulo','estado','unidadeOrganica','idUnidadeOrganica'));
     }
     
     //Verificar Se criar ou Editar par Exibir funcionario

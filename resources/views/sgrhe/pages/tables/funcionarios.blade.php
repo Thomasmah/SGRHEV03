@@ -45,7 +45,7 @@
                                 <h3 class="card-title">{{ $titulo }} </h3>
                                 <br> 
                                 <select name="opcoes" id="opcoes" class="form-control text-secondary font-weight-bold" >
-                                  <option class="{{ if($unidadeOrganica) ?? 'd-none' : ''}}" <?php echo($estado=='Todo') ? 'selected' : '' ?> value="Todo">Todos</option>
+                                  <option <?php echo($estado=='Todo') ? 'selected' : '' ?> value="Todo">Todos</option>
                                   <option <?php echo($estado=='Activo') ? 'selected' : '' ?> value="Activo">Funcionários Activos</option>
                                   <option <?php echo($estado=='Licenca') ? 'selected' : '' ?> value="Licenca">Funcionários Em Licença</option>
                                   <option <?php echo($estado=='Aposentado') ? 'selected' : '' ?> value="Aposentado">Funcionários Aposentados </option>
@@ -59,30 +59,35 @@
                           @method('POST')
                               <input type="hidden" name="titulo" value="Funcionarios">
                               <input type="hidden" name="estado" value="Todo">
+                              <input type="hidden" name="idUnidadeOrganica" value="{{ isset($idUnidadeOrganica) ? $idUnidadeOrganica : '' }}">
                           </form>
                           <form id="Activo" action="{{ route('funcionarios') }}" style="display: none;">  
                           @csrf
                           @method('POST')
                               <input type="hidden" name="titulo" value="Funcionários Activos">
                               <input type="hidden" name="estado" value="Activo">
+                              <input type="hidden" name="idUnidadeOrganica" value="{{ isset($idUnidadeOrganica) ? $idUnidadeOrganica : '' }}">
                           </form>
                           <form id="Licenca" action="{{ route('funcionarios') }}" style="display: none;">  
                           @csrf
                           @method('POST')
                               <input type="hidden" name="titulo" value="Funcionários em Licença">
                               <input type="hidden" name="estado" value="Licenca">
+                              <input type="hidden" name="idUnidadeOrganica" value="{{ isset($idUnidadeOrganica) ? $idUnidadeOrganica : '' }}">
                           </form>
                           <form id="Aposentado" action="{{ route('funcionarios') }}" style="display: none;">  
                           @csrf
                           @method('POST')
                               <input type="hidden" name="titulo" value="Funcionários Aposentados">
                               <input type="hidden" name="estado" value="Aposentado">
+                              <input type="hidden" name="idUnidadeOrganica" value="{{ isset($idUnidadeOrganica) ? $idUnidadeOrganica : '' }}">
                           </form>
                           <form id="Falecido" action="{{ route('funcionarios') }}" style="display: none;">  
                           @csrf
                           @method('POST')
                               <input type="hidden" name="titulo" value="Funcionários Falecidos">
                               <input type="hidden" name="estado" value="Falecido">
+                              <input type="hidden" name="idUnidadeOrganica" value="{{ isset($idUnidadeOrganica) ? $idUnidadeOrganica : '' }}">
                           </form>
                           </div>
                         <!-- /.card-header -->
