@@ -39,24 +39,25 @@
                   <!-- Small boxes (Stat box) -->
                   <div class="row">
                     <!-- Funcionário -->
-                      <div class="col-lg-3 col-6">
-                          <div class="small-box bg-danger">
-                            <div class="inner">
-                              <h3>{{ $Funcionarios->count() }}</h3>
-                              <p>Número de Funcionários</p>
-                            </div>
-                            <div class="icon">
-                              <i class="ion ion-person-add"></i>
-                            </div>
-                           <form class="small-box-footer" action="{{ route('funcionarios.unidade_organica.index') }}">
-                            @csrf
-                            <input type="hidden" name="idUnidadeOrganica" value="{{ $unidadeOrganicaSelected->id }}">
-                            <input type="hidden" name="designacao" value="{{ $unidadeOrganicaSelected->designacao }}">
-                            <button type="submit">Ver mais  <i class="fas fa-arrow-circle-right"></i> </button>
-                           </form>
-                            
-                          </div>
+                    <div class="col-lg-3 col-6">
+                      <div class="small-box bg-primary">
+                        <div class="inner">
+                          <h3>{{ $Funcionarios->count() }}</h3>
+                          <p>Funcionários </p>
+                        </div>
+                        <div class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 56 56"><path fill="currentColor" d="M28 27.126c3.194 0 5.941-2.852 5.941-6.566c0-3.669-2.762-6.387-5.941-6.387s-5.942 2.778-5.942 6.417c0 3.684 2.748 6.536 5.942 6.536m-17.097.341c2.763 0 5.17-2.495 5.17-5.718c0-3.194-2.422-5.556-5.17-5.556c-2.763 0-5.199 2.421-5.184 5.585c0 3.194 2.406 5.69 5.184 5.69m34.194 0c2.778 0 5.184-2.495 5.184-5.689c0-3.164-2.421-5.585-5.184-5.585c-2.748 0-5.17 2.362-5.17 5.555c0 3.224 2.407 5.72 5.17 5.72M2.614 40.881h11.29c-1.545-2.243.341-6.759 3.535-9.225c-1.65-1.099-3.773-1.916-6.55-1.916C4.188 29.74 0 34.686 0 38.801c0 1.337.743 2.08 2.614 2.08m50.772 0c1.886 0 2.614-.743 2.614-2.08c0-4.115-4.189-9.061-10.888-9.061c-2.778 0-4.902.817-6.55 1.916c3.193 2.466 5.08 6.982 3.535 9.225Zm-34.73 0h18.672c2.332 0 3.164-.669 3.164-1.976c0-3.832-4.798-9.12-12.507-9.12c-7.694 0-12.492 5.288-12.492 9.12c0 1.307.832 1.976 3.164 1.976"/></svg>
+                        </div>
+                        <form action="{{ route('funcionarios') }}" class="text-center small-box-footer">
+                          @csrf
+                          @method('POST')
+                          <input type="hidden" name="idUnidadeOrganica" value="{{ $unidadeOrganicaSelected->id }}">
+                          <input type="hidden" name="titulo" value="Funcionários ">
+                          <input type="hidden" name="estado" value="Todo">
+                          <input type="submit" value="Ver mais "><i class="fas fa-arrow-circle-right"></i>
+                        </form>
                       </div>
+                    </div>
                     <!-- /Funcionário -->
                     <!-- Unidades Organicas -->
                       <div class="col-lg-3 col-6">

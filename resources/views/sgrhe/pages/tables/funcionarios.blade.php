@@ -45,7 +45,7 @@
                                 <h3 class="card-title">{{ $titulo }} </h3>
                                 <br> 
                                 <select name="opcoes" id="opcoes" class="form-control text-secondary font-weight-bold" >
-                                  <option <?php echo($estado=='Todo') ? 'selected' : '' ?> value="Todo">Todos</option>
+                                  <option class="{{ if($unidadeOrganica) ?? 'd-none' : ''}}" <?php echo($estado=='Todo') ? 'selected' : '' ?> value="Todo">Todos</option>
                                   <option <?php echo($estado=='Activo') ? 'selected' : '' ?> value="Activo">Funcionários Activos</option>
                                   <option <?php echo($estado=='Licenca') ? 'selected' : '' ?> value="Licenca">Funcionários Em Licença</option>
                                   <option <?php echo($estado=='Aposentado') ? 'selected' : '' ?> value="Aposentado">Funcionários Aposentados </option>

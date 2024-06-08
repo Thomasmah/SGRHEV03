@@ -24,11 +24,22 @@ class FuncionarioController extends Controller
     //Mostrar Funcionarios Via Formulários
     public function  indexFuncionarios(Request $request)
     {
-        $estado="";
+        $estado = "";
+        $unidadeOrganica = "";
         if ($request->estado === "Todo") {
-            $estado="";
+            if(isset($request->idUnidadeOrganica)){
+                $unidadeOrganica="where unidade_organicas.id=".'"'.$request->idUnidadeOrganica.'"';
+                $estado="";  
+            }else {
+                $estado="";
+            }
         }else{
-            $estado ="where funcionarios.estado=".'"'.$request->estado.'"';    
+            if(isset($request->idUnidadeOrganica)){
+                $unidadeOrganica="unidade_organicas.id=".'"'.$request->idUnidadeOrganica.'"';
+                $estado ="where funcionarios.estado=".'"'.$request->estado.'"';  
+            }else {
+                $estado ="where funcionarios.estado=".'"'.$request->estado.'"';  
+            }  
         }
           //Operacoes de join para varias tabelas relacionadas com funcionarios
           $dados = DB::select('
@@ -41,10 +52,10 @@ class FuncionarioController extends Controller
               join seccaos on seccaos.id=funcionarios.idSeccao
               join unidade_organicas on unidade_organicas.id=funcionarios.idUnidadeOrganica
               join cargos on cargos.id=funcionarios.idCargo            
-          '.$estado);
+          '.$estado.$unidadeOrganica);
           $titulo = $request->titulo;
           $estado = $request->estado; 
-          return view('sgrhe/pages/tables/funcionarios',compact('dados','titulo','estado'));
+          return view('sgrhe/pages/tables/funcionarios',compact('dados','titulo','estado','unidadeOrganica'));
     }
     
     //Verificar Se criar ou Editar par Exibir funcionario

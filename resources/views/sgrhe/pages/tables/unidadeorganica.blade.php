@@ -78,9 +78,9 @@
                             <table id="example1" class="table table-bordered table-striped">
                               <thead>
                               <tr>
-                                <th>Unidade Orgânica (id)</th>
-                                <th>Designacao</th>
-                                <th>Descricao</th>
+                                <th>Designação</th>
+                                <th>Nível de Ensino</th>
+                                <th>Descrição</th>
                                 <th>EQT</th>
                                 <th>Decreto Criação</th>
                                 <th>Localidade</th>
@@ -93,8 +93,8 @@
                               <!--Gerando a Tabela de forma Dinamica-->
                               @foreach ($dados as $unidadeOrganica)
                                             <tr>
-                                                <td>{{ $unidadeOrganica->id }}</td>
                                                 <td>{{ $unidadeOrganica->designacao }}</td>
+                                                <td>{{ $unidadeOrganica->nivelEnsino }}</td>
                                                 <td>{{ $unidadeOrganica->descricao }}</td>
                                                 <td>{{ $unidadeOrganica->eqt }}</td>
                                                 <td>{{ $unidadeOrganica->decretoCriacao }}</td>
@@ -125,9 +125,9 @@
                               </tbody>
                               <tfoot>
                               <tr>
-                              <th>Unidade Orgânica (id)</th>
-                                <th>Designacao</th>
-                                <th>Descricao</th>
+                                <th>Designação</th>
+                                <th>Nível de Ensino</th>
+                                <th>Descrição</th>
                                 <th>EQT</th>
                                 <th>Decreto Criação</th>
                                 <th>Localidade</th>
