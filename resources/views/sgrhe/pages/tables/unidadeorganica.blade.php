@@ -20,12 +20,12 @@
                 <div class="container-fluid">
                   <div class="row mb-2">
                     <div class="col-sm-6">
-                      <h1>Unidades Orgânicas </h1>
+                      <h1>{{ $titulo }} </h1>
                     </div>
                     <div class="col-sm-6">
                       <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Unidades Orgânicas  </li>
+                        <li class="breadcrumb-item active"> {{ $titulo }}  </li>
                       </ol>
                     </div>
                   </div>
@@ -39,7 +39,38 @@
                       <div style="background-color: #ffffff;" class="card card-primary">
 
                           <div class="card-header">
-                                <h3 class="card-title">Unidades Orgânicas </h3>  
+                                <h3 class="card-title">{{ $titulo }} </h3>
+                                <br> 
+                                <select name="opcoes" id="opcoes" class="form-control text-secondary font-weight-bold" >
+                                  <option <?php echo($nivelEnsino=='Todo') ? 'selected' : '' ?> value="Todo">Todas Unidades Orgânicas</option>
+                                  <option <?php echo($nivelEnsino=='Primário') ? 'selected' : 'Primário' ?> value="Primário">Ensino Primário</option>
+                                  <option <?php echo($nivelEnsino=='I Ciclo') ? 'selected' : 'I' ?> value="I Ciclo">I Ciclo do Ensino Secundário</option>
+                                  <option <?php echo($nivelEnsino=='II Ciclo') ? 'selected' : 'II' ?> value="II Ciclo">II Ciclo do Ensino Secundário </option>
+                                </select> 
+                                <form id="Todo" action="{{ route('unidades.organicas') }}" style="display: none;">  
+                                  @csrf
+                                  @method('POST')
+                                      <input type="hidden" name="titulo" value="Unidades Orgânicas">
+                                      <input type="hidden" name="nivelEnsino" value="Todo">
+                                </form> 
+                                <form id="Primário" action="{{ route('unidades.organicas') }}" style="display: none;">  
+                                  @csrf
+                                  @method('POST')
+                                      <input type="hidden" name="titulo" value="Escolas do Ensino Primário">
+                                      <input type="hidden" name="nivelEnsino" value="Primário">
+                                </form>
+                                <form id="I Ciclo" action="{{ route('unidades.organicas') }}" style="display: none;">  
+                                  @csrf
+                                  @method('POST')
+                                      <input type="hidden" name="titulo" value="Escolas do II Cilo">
+                                      <input type="hidden" name="nivelEnsino" value="I Ciclo">
+                                </form>
+                                <form id="II Ciclo" action="{{ route('unidades.organicas') }}" style="display: none;">  
+                                  @csrf
+                                  @method('POST')
+                                      <input type="hidden" name="titulo" value="Escolas do II Cilo">
+                                      <input type="hidden" name="nivelEnsino" value="II Ciclo">
+                                </form>
                           </div>
                         <!-- /.card-header -->
                         <!-- Card-body -->
@@ -160,5 +191,11 @@
             });
           });
         </script>
-        
+        <script>
+        //Select Optiom Submite, comando de Submiss]ao automatica //23121997
+        document.getElementById('opcoes').addEventListener('change', function() {
+            var selectedOption = this.value;
+            document.getElementById(selectedOption).submit();
+        });
+        </script>
   @endsection

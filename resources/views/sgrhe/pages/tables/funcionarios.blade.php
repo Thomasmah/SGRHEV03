@@ -1,7 +1,7 @@
 @php
   setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'portuguese');
 @endphp
-<!--Layout Principal-->
+<!--Layout Principal //23121997-->
 @extends('layouts.app')
   @section('titulo' , $titulo )
         @section('header')
@@ -15,7 +15,7 @@
           <link rel="stylesheet" href="../../resources/css/app.css">
         @endsection
         @section('conteudo_principal')
-          <!-- Content Wrapper. Contains page content -->
+          <!-- Content Wrapper. Contains page content //23121997 -->
             <div class="content-wrapper">
               <!-- Content Header (Page header) -->
               <section class="content-header">
@@ -42,7 +42,48 @@
                       <div style="background-color: #ffffff;" class="card card-primary">
 
                           <div class="card-header">
-                                <h3 class="card-title">{{ $titulo }} </h3>  
+                                <h3 class="card-title">{{ $titulo }} </h3>
+                                <br> 
+                                <select name="opcoes" id="opcoes" class="form-control text-secondary font-weight-bold" >
+                                  <option <?php echo($estado=='Todo') ? 'selected' : '' ?> value="Todo">Todos</option>
+                                  <option <?php echo($estado=='Activo') ? 'selected' : '' ?> value="Activo">Funcionários Activos</option>
+                                  <option <?php echo($estado=='Licenca') ? 'selected' : '' ?> value="Licenca">Funcionários Em Licença</option>
+                                  <option <?php echo($estado=='Aposentado') ? 'selected' : '' ?> value="Aposentado">Funcionários Aposentados </option>
+                                  <option <?php echo($estado=='Falecido') ? 'selected' : '' ?> value="Falecido">Funcionários Falecidos</option>
+                                </select>
+                          
+                          
+                         
+                          <form id="Todo" action="{{ route('funcionarios') }}" style="display: none;">  
+                          @csrf
+                          @method('POST')
+                              <input type="hidden" name="titulo" value="Funcionarios">
+                              <input type="hidden" name="estado" value="Todo">
+                          </form>
+                          <form id="Activo" action="{{ route('funcionarios') }}" style="display: none;">  
+                          @csrf
+                          @method('POST')
+                              <input type="hidden" name="titulo" value="Funcionários Activos">
+                              <input type="hidden" name="estado" value="Activo">
+                          </form>
+                          <form id="Licenca" action="{{ route('funcionarios') }}" style="display: none;">  
+                          @csrf
+                          @method('POST')
+                              <input type="hidden" name="titulo" value="Funcionários em Licença">
+                              <input type="hidden" name="estado" value="Licenca">
+                          </form>
+                          <form id="Aposentado" action="{{ route('funcionarios') }}" style="display: none;">  
+                          @csrf
+                          @method('POST')
+                              <input type="hidden" name="titulo" value="Funcionários Aposentados">
+                              <input type="hidden" name="estado" value="Aposentado">
+                          </form>
+                          <form id="Falecido" action="{{ route('funcionarios') }}" style="display: none;">  
+                          @csrf
+                          @method('POST')
+                              <input type="hidden" name="titulo" value="Funcionários Falecidos">
+                              <input type="hidden" name="estado" value="Falecido">
+                          </form>
                           </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -69,7 +110,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <!--Gerando a Tabela de forma Dinamica-->
+                                <!--Gerando a Tabela de forma Dinamica //23121997-->
                                 @foreach ($dados as $funcionario)
                                               <tr>
                                                   <td class="{{ ($funcionario->estado =='Activo') ? 'text-success' : '' }} {{ ($funcionario->estado =='Inactivo') ? 'text-danger' : '' }} {{ ($funcionario->estado =='Inactivo') ? 'text-danger' : '' }} {{ ($funcionario->estado =='Dispensado') ? 'text-warning' : '' }} {{ ($funcionario->estado =='Ferias') ? 'text-secondary' : '' }}" style="font-weight: bolder;">{{ $funcionario->estado }}</td>
@@ -179,7 +220,7 @@
       <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
       <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
       <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-      <!--Algoritmo interactivo no processo de delectar Objectos em SweetAlert 2-->
+      <!--Algoritmo interactivo no processo de delectar Objectos em SweetAlert 2 //23121997-->
       <script src="{{ asset('plugins/sweetalert2/alerta-deletar.js') }}"></script>
       <script>
         $(function () {
@@ -197,5 +238,12 @@
             "responsive": true,
           });
         });
+      </script>
+      <script>
+      //Select Optiom Submite, comando de Submiss]ao automatica //23121997
+      document.getElementById('opcoes').addEventListener('change', function() {
+          var selectedOption = this.value;
+          document.getElementById(selectedOption).submit();
+      });
       </script>
     @endsection

@@ -245,12 +245,16 @@
                           </a>
                           <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ route('funcionarios.index') }}"  class="nav-link {{ request()->routeIs('funcionarios.index') ? 'active' : ''}}">
-                                  <p class="item-2">
+                              <form action="{{ route('funcionarios') }}" class="nav-link {{ request()->routeIs('funcionarios.index') ? 'active' : ''}}" >
+                                @csrf
+                                @method('POST')
+                                <p class="item-2">
                                    <i class="bi bi-view-list"></i>
-                                    Funcionarios / Index
-                                  </p>
-                                </a>
+                                    <input type="hidden" name="titulo" value="Funcionários">
+                                    <input type="hidden" name="estado" value="Todo">
+                                    <input type="submit" value="Funcionários">
+                                </p>
+                              </form>
                             </li>
                             <li class="nav-item {{ ($permissoes === 'Admin' || $permissoes >= 5 ) ? '' : 'd-none' }}">
                                 <a href="{{route('funcionarios.form')}}"  class="nav-link {{ request()->routeIs('funcionarios.form') ? 'active' : ''}}">
@@ -339,12 +343,16 @@
                         </a>
                           <ul class="nav nav-treeview">
                             <li class="nav-item">
-                              <a href="{{route('unidadeorganicas.index') }}"  class="nav-link {{ request()->routeIs('unidadeorganicas.index') ? 'active' : ''}}">
+                              <form action="{{ route('unidades.organicas') }}" class="nav-link {{ request()->routeIs('unidadeorganicas.index') ? 'active' : ''}}" >
+                                @csrf
+                                @method('POST')
                                 <p class="item-2">
-                                 <i class="bi bi-view-list"></i>
-                                  Unidade Orgánica / Index 
+                                   <i class="bi bi-view-list"></i>
+                                    <input type="hidden" name="titulo" value="Unidades Orgânicas">
+                                    <input type="hidden" name="nivelEnsino" value="Todo">
+                                    <input type="submit" value="Unidades Orgânicas">
                                 </p>
-                              </a>
+                              </form>
                             </li>
                             <li class="nav-item {{ ($permissoes === 'Admin' || $permissoes >= 5) ? '' : 'd-none' }}">
                               <a href="{{route('unidadeorganicas.form')}}" class="nav-link {{ request()->routeIs('unidadeorganicas.form') ? 'active' : ''}}">

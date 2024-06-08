@@ -5,7 +5,6 @@ use App\Models\Arquivo;
 use App\Models\AvaliacaoDesempenhoFuncionario;
 use App\Models\BI;
 use App\Models\CartaoMunicipe;
-use App\Models\CM;
 use App\Models\Endereco;
 use App\Models\Habilitacao;
 use App\Models\Pessoa;
@@ -302,81 +301,6 @@ class ArquivoController extends Controller
     }
 
 
-
-    //Store Halilitacao
-
-
-
-
-    public function storehabilitacao(Request $request, string $idFuncionario, string $categoria)
-    {
-       // dd(request('numeroBI'));
-            // Define the validation rules
-            $verificar = $request->validate([
-                'nivel' => 'required',
-                'curso' => 'required',
-                'instituicao' => 'required',
-                'notaFinal' => 'nullable',
-                'anoConclusao' => 'nullable',
-                'status' => 'required',
-                'idFuncionario' => 'nullable',
-                'arquivo' => 'required|file|mimes:pdf|max:2048',
-            ]);
-
-            $arquivo = $request->file('arquivo');
-            $nomeArquivo = 'arquivoHabilitacao.'.$arquivo->extension();
-            $caminho = 'sgrhe/funcionarios/'.$idFuncionario.'/'.$categoria.'/'.$nomeArquivo;
-            // Armazenar o arquivo no subdiretório dentro da pasta 'local Especifico'
-            //Procurar um outro metodo para o put que guarada com nme personalizado
-            Storage::disk('local')->put($caminho, file_get_contents($arquivo));
-            $arquivo = Arquivo::where('idFuncionario',$idFuncionario)->where('categoria',$categoria);
-            $habilitacao  = Habilitacao::where('idFuncionario',$idFuncionario);
-            if ($arquivo->doesntExist()) {
-          // dd($arquivo->first());
-            Arquivo::create([
-                'titulo' => md5($nomeArquivo.date('d-m-y')),
-                'categoria' => $categoria,
-                'descricao' => 'N/D',
-                'arquivo' => $nomeArquivo,
-                'caminho' => $caminho,
-                'idFuncionario' => $idFuncionario,
-            ]);
-            $idArquivo = Arquivo::where('idFuncionario',$idFuncionario)->where('categoria',$categoria)->first();
-            //dd($idArquivo);
-            Habilitacao::create([
-                'nivel' => $request->input('nivel'),
-                'curso' => $request->input('curso'),
-                'instituicao' => $request->input('instituicao'),
-                'notaFinal'=> $request->input('notaFinal'),
-                'anoConclusao' => $request->input('anoConclusao'),
-                'status' => $request->input('status'),
-                'idFuncionario' => $idFuncionario,
-                'idArquivo' => $idArquivo->id 
-            ]);
-            return redirect()->back()->with('success', 'Actualizado com sucesso!');
-          }
-            // Atualizar simbolicamente o conteudo da coluna 'caminho'
-            $arquivo->update([
-                'titulo' => md5($nomeArquivo.date('d-m-y')),
-                'categoria' => $categoria,
-                'descricao' => 'N/D',
-                'arquivo' => $nomeArquivo,
-                'caminho' => $caminho,
-                'idFuncionario' => $idFuncionario,
-            ]);
-            $habilitacao->update([
-                'nivel' => $request->input('nivel'),
-                'curso' => $request->input('curso'),
-                'instituicao' => $request->input('instituicao'),
-                'notaFinal'=> $request->input('notaFinal'),
-                'anoConclusao' => $request->input('anoConclusao'),
-                'status' => $request->input('status'),
-                'idFuncionario' => $idFuncionario,
-            ]);
-            return redirect()->back()->with('success', 'Actualizado com sucesso!');
-      
-        return redirect()->back()->withErrors($verificar);//Aplicar Rediret with erro end success  
-    }
 
 
 

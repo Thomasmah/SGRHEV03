@@ -1,11 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\CategoriaFuncionario;
-
 use Illuminate\Http\Request;
-
 class CategoriaFuncionarioController extends Controller
 {
     //FOrmulario Create Edit

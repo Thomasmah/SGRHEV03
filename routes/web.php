@@ -138,6 +138,9 @@ Route::any('/store-fucionario',[FuncionarioController::class,'store'])->name('fu
 //Mostrar Funcionarios
 Route::any('/index-funcionarios/inativos',[FuncionarioController::class,'index'])->name('funcionarios.index');//->middleware('AcessoAdmin');funcionarios.index.inativos
 
+//Usando Formulário Selectivo por Tipologias de Funcionários
+Route::any('/funcionarios',[FuncionarioController::class,'indexFuncionarios'])->name('funcionarios');
+
 Route::any('/index-funcionarios',[FuncionarioController::class,'indexFuncionariosInativos'])->name('funcionarios.index.inativos');//->middleware('AcessoAdmin');
 //Actualizar um Registro da Entidade Funcionario
 Route::any('/updade-funcionario{id}',[FuncionarioController::class,'update'])->name('funcionarios.update');//->middleware('AcessoAdmin');
@@ -175,8 +178,11 @@ Route::delete('/delete-categoriafuncionario{id}',[CategoriaFuncionarioController
 Route::any('/create-edit-unidadeorganica/{id?}',[UnidadeOrganicaController::class,'formulario'])->name('unidadeorganicas.form');
 //Armzenar Registros na Tabela Unidade Organica 
 Route::any('/store-unidadeorganica',[UnidadeOrganicaController::class,'store'])->name('unidadeorganicas.store');//->middleware('AcessoAdmin');
-//Exibir Unidade Organicas
+//Exibir Unidade Organicas  
 Route::any('/index-unidadeorganica',[UnidadeOrganicaController::class,'index'])->name('unidadeorganicas.index');//->middleware('AcessoAdmin');
+//
+Route::any('/unidadesorganicas',[UnidadeOrganicaController::class,'indexUnidadesOrganicas'])->name('unidades.organicas');
+
 //Ver unidade Organica unidadeOrganica.show 
 Route::any('/sobre/unidadeorganica/{idUnidadeOrganica}',[UnidadeOrganicaController::class,'show'])->name('unidadeOrganica.show');//Definir Permissoes so para os directores
 Route::any('/dasboard/unidadeorganica/{idUnidadeOrganica}',[UnidadeOrganicaController::class,'dashboardUnidadeOrganicaShow'])->name('dashboard.unidade.organica.how');//Definir Permissoes so para os directores
@@ -192,6 +198,7 @@ Route::get('/funcionarios/unidade_organica/index/',[UnidadeOrganicaController::c
 Route::any('/add/fotos/uo/',[UnidadeOrganicaController::class,'AddFotosUO'])->name('add.foto.uo');
 //Ver u Listar as Imagens de Uma unidade Organica
 Route::any('/ver/fotos/{idUnidadeOrganica}',[UnidadeOrganicaController::class,'galeriaUnidadeOrganica'])->name('galeria.unidade.organica');
+
 
 //Dados Estatistios de Unidades Organicas
 Route::any('formulario/aproveitamento/', [UnidadeOrganicaDadosController::class,'cadastrarFormulario'])->name('cadastrar.formulario'); //So directores de Escola Podem Cadastrar dados com as suas contas
