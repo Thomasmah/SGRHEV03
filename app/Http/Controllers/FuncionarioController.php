@@ -6,18 +6,14 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\Models\Funcionario;
 use App\Models\Pessoa;
-use App\Models\Endereco;
 use App\Models\Naturalidade;
 use App\Models\Parente;
-use App\Models\Telefone;
 use App\Models\Cargo;
-use App\Models\categoriaFuncionario;
+use App\Models\CategoriaFuncionario;
 use App\Models\Seccao;
 use App\Models\UnidadeOrganica;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
-use Symfony\Component\Console\Input\Input;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
 
@@ -25,6 +21,46 @@ use Illuminate\Validation\Rule;
 class FuncionarioController extends Controller
 {
  
+    //Mostrar Funcionarios Via Formulários
+    public function  indexFuncionarios(Request $request)
+    {
+       
+        $estado = "";
+        $unidadeOrganica = "";
+        $idUnidadeOrganica = "";
+        if ($request->estado === "Todo") {
+            if(isset($request->idUnidadeOrganica) || $request->idUnidadeOrganica != "" ){
+                $idUnidadeOrganica = $request->idUnidadeOrganica;
+                $unidadeOrganica="where unidade_organicas.id=".$request->idUnidadeOrganica;
+                $estado="";  
+            }else {
+                $estado="";
+            }
+        }else{
+            if(isset($request->idUnidadeOrganica) || $request->idUnidadeOrganica != "" ){
+                $estado ="where funcionarios.estado=".'"'.$request->estado.'"';  
+                $idUnidadeOrganica = $request->idUnidadeOrganica;
+                $unidadeOrganica="And unidade_organicas.id=".$request->idUnidadeOrganica;
+            }else {
+                $estado ="where funcionarios.estado=".'"'.$request->estado.'"';  
+            }  
+        }
+          //Operacoes de join para varias tabelas relacionadas com funcionarios
+          $dados = DB::select('
+          select 
+           seccaos.designacao as designacao_seccao, unidade_organicas.designacao as designacao_unidadeOrganica, funcionarios.id as id_funcionario, pessoas.id as id_pessoas, unidade_organicas.id as id_unidade_organica, categoria_funcionarios.categoria as categoria_unidade_organica, cargos.designacao as nomeCargo, 
+           funcionarios.*, pessoas.*, categoria_funcionarios.*, unidade_organicas.*, cargos.*, seccaos.*
+              from funcionarios
+              join pessoas on pessoas.id=funcionarios.idPessoa
+              join categoria_funcionarios on categoria_funcionarios.id=funcionarios.idCategoriaFuncionario
+              join seccaos on seccaos.id=funcionarios.idSeccao
+              join unidade_organicas on unidade_organicas.id=funcionarios.idUnidadeOrganica
+              join cargos on cargos.id=funcionarios.idCargo            
+          '.$estado.$unidadeOrganica);
+          $titulo = $request->titulo;
+          $estado = $request->estado; 
+          return view('sgrhe/pages/tables/funcionarios',compact('dados','titulo','estado','unidadeOrganica','idUnidadeOrganica'));
+    }
     
     //Verificar Se criar ou Editar par Exibir funcionario
         public function formulario($id = null){
@@ -85,8 +121,9 @@ class FuncionarioController extends Controller
               join cargos on cargos.id=funcionarios.idCargo 
           ');
           $titulo = "Funcionários / Força de Trabalho";
-          return view('sgrhe\pages\tables\funcionarios',compact('dados','titulo'));
+          return view('sgrhe/pages/tables/funcionarios',compact('dados','titulo'));
     }
+   
     public function indexFuncionariosInativos()
     {
           //Operacoes de join para varias tabelas relacionadas com funcionarios
@@ -103,7 +140,7 @@ class FuncionarioController extends Controller
             where funcionarios.estado = "Inactivo"
           ');
           $titulo = "Funcionários em estado Inactivo";
-          return view('sgrhe\pages\tables\funcionarios',compact('dados','titulo'));
+          return view('sgrhe/pages/tables/funcionarios',compact('dados','titulo'));
     }
 
   
@@ -348,7 +385,7 @@ class FuncionarioController extends Controller
         $seccaoCandidato = Seccao::where('id', $funcionarioCandidato->idSeccao)->first();
         $unidadeOrganicaCandidato = UnidadeOrganica::where('id', $funcionarioCandidato->idUnidadeOrganica)->first();
         $categoriaFuncionarioCandidato = CategoriaFuncionario::where('id', $funcionarioCandidato->idCategoriaFuncionario)->first();
-        return view('sgrhe\pages\forms\formulario-avaliacao-desempenho', compact('funcionarioCandidato','cargoCandidato','seccaoCandidato','pessoaCandidato','unidadeOrganicaCandidato','categoriaFuncionarioCandidato'));
+        return view('sgrhe/pages/forms/formulario-avaliacao-desempenho', compact('funcionarioCandidato','cargoCandidato','seccaoCandidato','pessoaCandidato','unidadeOrganicaCandidato','categoriaFuncionarioCandidato'));
 
     }
     public function estado(Request $request){

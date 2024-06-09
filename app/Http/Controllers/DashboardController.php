@@ -1,37 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Http\Middleware\Permissoes;
-use App\Models\Arquivo;
 use App\Models\Cargo;
-use App\Models\categoriaFuncionario;
-use App\Models\Endereco;
 use App\Models\FormularioAproveitamento;
 use App\Models\Funcionario;
-use App\Models\Naturalidade;
-use App\Models\Parente;
-use App\Models\Pessoa;
 use App\Models\UnidadeOrganica;
-use App\Models\UnidadeOrganicaDado;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
-
-use App\Models\User;
-use Database\Seeders\Admin;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
 class DashboardController extends Controller
 {
-    //Mostrar Dados 
-    public function indexUnidadesOrganicas() {
-       
-       
-    }
-    public function indexFuncionarios() {
-
-    }
+ 
     public function index(){
         //Verificar Se O Usuario tem Perfil concluido
      

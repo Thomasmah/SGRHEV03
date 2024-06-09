@@ -26,7 +26,7 @@ class PessoaController extends Controller
     {
         $pessoas = Pessoa::all();
         //dd($pessoas->all());
-        return view('sgrhe\pages\tables\pessoas',compact('pessoas'));
+        return view('sgrhe/pages/tables/pessoas',compact('pessoas'));
     }
     public function store(Request $request) 
     {

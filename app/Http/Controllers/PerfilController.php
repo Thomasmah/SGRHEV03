@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Funcionario;
 use App\Models\Arquivo;
 use App\Models\Cargo;
-use App\Models\categoriaFuncionario;
+use App\Models\CategoriaFuncionario;
 use App\Models\Endereco;
 use App\Models\Naturalidade;
 use App\Models\Parente;

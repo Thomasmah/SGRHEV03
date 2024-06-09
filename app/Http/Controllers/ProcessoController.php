@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Arquivo;
 use App\Models\Cargo;
-use App\Models\categoriaFuncionario;
+use App\Models\CategoriaFuncionario;
 use App\Models\Funcionario;
 use App\Models\Pessoa;
 use App\Models\Processo;

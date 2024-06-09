@@ -1,17 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\Funcionario;
 use App\Models\MapaEfectividade;
 use App\Models\MapaEfectividadefalta;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Dompdf\Adapter\PDFLib;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\Exists;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class MapaEfectividadeController extends Controller
 {
@@ -25,7 +20,7 @@ class MapaEfectividadeController extends Controller
            return [$dado->getKey() => $dado];
        });
        //dd($dados->all());
-       return view('sgrhe\pages\tables\mapas-efectividade', compact('dados'));
+       return view('sgrhe/pages/tables/mapas-efectividade', compact('dados'));
     }
 
     /*
@@ -45,7 +40,7 @@ class MapaEfectividadeController extends Controller
         $faltas = MapaEfectividadefalta::where('idMapaEfectividade', $idMapaEfectividade)->get();
         $periodo = MapaEfectividade::find($idMapaEfectividade)->first()->dataPeriodo;
 
-        return view('sgrhe\pages\tables\form-mapa-efectividade', compact('funcionarios','idMapaEfectividade','faltas','periodo'));
+        return view('sgrhe/pages/tables/form-mapa-efectividade', compact('funcionarios','idMapaEfectividade','faltas','periodo'));
     }
 
     
@@ -117,7 +112,7 @@ class MapaEfectividadeController extends Controller
             join categoria_funcionarios on categoria_funcionarios.id=funcionarios.idCategoriaFuncionario
             join unidade_organicas on unidade_organicas.id=funcionarios.idUnidadeOrganica 
        '); 
-       return view('sgrhe\pages\tables\form-mapa-efectividade',compact('dados'));
+       return view('sgrhe/pages/tables/form-mapa-efectividade',compact('dados'));
     }
 
     /**
@@ -179,10 +174,6 @@ class MapaEfectividadeController extends Controller
         //Retornar o Domunento Gerado 
        // return view("sgrhe/modelos/$categoria",compact('Request','pessoa','funcionario','cargo','categoriaFuncionario'));
         return response($Documento->output(), 200, ['Content-Type' => 'application/pdf', 'Content-Disposition' => 'inline; filename="'.$fileName.'"']);
-
-      
-
- 
     }
     
 }

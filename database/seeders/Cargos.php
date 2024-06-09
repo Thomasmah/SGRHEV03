@@ -22,6 +22,12 @@ class Cargos extends Seeder
             'descrisao' => 'Admin'
         ]); 
         DB::table('cargos')->insert([
+            'codNome' => 'Operario',
+            'designacao' =>'Operário Qualificado',
+            'permissoes' => '1',
+            'descrisao' => 'Read, Solicitar, Emitir Documentos Como:'
+        ]);  
+        DB::table('cargos')->insert([
             'codNome' => 'Professor',
             'designacao' =>'Professor',
             'permissoes' => '1',
