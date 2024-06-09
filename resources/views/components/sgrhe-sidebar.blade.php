@@ -235,8 +235,8 @@
               @endif
               @if ($permissoes === 'Admin' || $permissoes >= 4 )
                       <!--Funcionários-->
-                        <li class="nav-item {{ request()->routeIs('funcionarios.index') || request()->routeIs('funcionarios.form') ? 'menu-open' : '' }}">
-                          <a href="#" class="nav-link {{ request()->routeIs('funcionarios.index') || request()->routeIs('funcionarios.form') ? 'active' : ''}}">
+                        <li class="nav-item {{ request()->routeIs('funcionarios') || request()->routeIs('funcionarios.form') ? 'menu-open' : '' }}">
+                          <a href="#" class="nav-link {{ request()->routeIs('funcionarios') || request()->routeIs('funcionarios.form') ? 'active' : ''}}">
                             <i class="fas fa-user-tie "></i>
                             <p class="item-1">
                               Funcionários
@@ -245,7 +245,7 @@
                           </a>
                           <ul class="nav nav-treeview">
                             <li class="nav-item">
-                              <form action="{{ route('funcionarios') }}" class="nav-link {{ request()->routeIs('funcionarios.index') ? 'active' : ''}}" >
+                              <form action="{{ route('funcionarios') }}" class="nav-link {{ request()->routeIs('funcionarios') ? 'active' : ''}}" >
                                 @csrf
                                 @method('POST')
                                 <p class="item-2">
@@ -333,8 +333,8 @@
               @endif
               @if ($permissoes === 'Admin' || $permissoes >= 4 )
                       <!--UnidadeOrganica-->
-                        <li class="nav-item {{ request()->routeIs('unidadeorganicas.index') || request()->routeIs('unidadeorganicas.form') ? 'menu-open' : '' }}">
-                        <a href="#" class="nav-link {{ request()->routeIs('unidadeorganicas.index') || request()->routeIs('unidadeorganicas.form') ? 'active' : '' }}">
+                        <li class="nav-item {{ request()->routeIs('unidades.organicas') || request()->routeIs('unidadeorganicas.form') ? 'menu-open' : '' }}">
+                        <a href="#" class="nav-link {{ request()->routeIs('unidades.organicas') || request()->routeIs('unidadeorganicas.form') ? 'active' : '' }}">
                           <i class="fas fa-building"></i>
                           <p class="item-1">
                           Unidade Orgânica
@@ -343,7 +343,7 @@
                         </a>
                           <ul class="nav nav-treeview">
                             <li class="nav-item">
-                              <form action="{{ route('unidades.organicas') }}" class="nav-link {{ request()->routeIs('unidadeorganicas.index') ? 'active' : ''}}" >
+                              <form action="{{ route('unidades.organicas') }}" class="nav-link {{ request()->routeIs('unidades.organicas') ? 'active' : ''}}" >
                                 @csrf
                                 @method('POST')
                                 <p class="item-2">

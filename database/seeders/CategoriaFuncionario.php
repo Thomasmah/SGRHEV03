@@ -111,5 +111,20 @@ class CategoriaFuncionario extends Seeder
             'grau' => '1º',
             'salariobase' => '90000',
         ]); 
+        DB::table('categoria_funcionarios')->insert([
+            'categoria' => 'Operário Qualifiado',
+            'grau' => '3º',
+            'salariobase' => '90000',
+        ]); 
+        DB::table('categoria_funcionarios')->insert([
+            'categoria' => 'Operário Qualifiado',
+            'grau' => '2º',
+            'salariobase' => '90000',
+        ]); 
+        DB::table('categoria_funcionarios')->insert([
+            'categoria' => 'Operário Qualifiado',
+            'grau' => '1º',
+            'salariobase' => '90000',
+        ]); 
     }
 }

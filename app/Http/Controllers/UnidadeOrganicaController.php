@@ -23,7 +23,7 @@ class UnidadeOrganicaController extends Controller
      {
     //Se o $id for nulo é a criacao de um novo registro se nao é edicao
         $UnidadeOrganica = $id ? UnidadeOrganica::find($id):null;
-        return view('sgrhe/pages/forms/UnidadeOrganica',compact('UnidadeOrganica'));
+        return view('sgrhe/pages/forms/unidadeorganica',compact('UnidadeOrganica'));
      }
     //Listar Unidades Organicas
     public function indexUnidadesOrganicas(Request $request)
@@ -260,7 +260,7 @@ class UnidadeOrganicaController extends Controller
         $UnidadeOrganica->nivelEnsino = $niveldeEnsino;
         // Salvando as Alteracoes do Registro
         if ($UnidadeOrganica->save()) {
-            return redirect()->route('unidadeorganicas.index')->with('success', 'Unidade Orgânica, '.$request->designacao.' foi atualizada com sucesso.');
+            return redirect()->back()->with('success', 'Unidade Orgânica, '.$request->designacao.' foi atualizada com sucesso.');
 
         }else {
             return redirect()->back()->with('error', 'Erro actualizar uma nova Unidade Orgânica '.$request->designacao.'!')->withErrors($request)->withInput();
@@ -320,7 +320,7 @@ class UnidadeOrganicaController extends Controller
                 return redirect()->back()->with('success', 'Foto Adicionada com sucesso!');
             }else {
                // DB::rollBack();
-                return redirect()->back()->with('error', 'Erro ao Adicionar foto!');
+                return redirect()->back()->back()->with('error', 'Erro ao Adicionar foto!');
             }
         }else {
             DB::rollBack();

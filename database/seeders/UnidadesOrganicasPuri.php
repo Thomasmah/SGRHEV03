@@ -275,7 +275,7 @@ class UnidadesOrganicasPuri extends Seeder
                 'decretoCriacao' => 'N/D',
                 'localidade' => 'QUIMALUNDO',
                 'telefone' => 'N/D',
-                'nivelEnsino' => 'Jardin de Infância',
+                'nivelEnsino' => 'Pré Escolar',
                 'email' => 'N/D',
             ]); 
             DB::table('unidade_organicas')->insert([
@@ -310,7 +310,7 @@ class UnidadesOrganicasPuri extends Seeder
             ]); 
             DB::table('unidade_organicas')->insert([
                 'designacao' => 'DIRECÇÃO MUNICIPAL DA EDUCAÇÃO DO PÚRI',
-                'descricao' => 'ESCOLA',
+                'descricao' => 'Direcção',
                 'eqt' => '[EQT] DIRECÇÃO MUNICIPAL DA EDUCAÇÃO DO PÚRI',
                 'decretoCriacao' => 'N/D',
                 'localidade' => 'PÚRI',
